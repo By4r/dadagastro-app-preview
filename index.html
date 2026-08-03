@@ -238,25 +238,25 @@
       <h2>En lezzetli videolar</h2>
       <p class="sub">Adım adım video tariflerle mutfakta yalnız kalma.</p>
     </div>
-    <a class="see-all" data-say="Video tarifler ekranı">Tümü <i class="fs i-arrow-right"></i></a>
+    <a class="see-all" data-open="video-mutfagi">Tümü <i class="fs i-arrow-right"></i></a>
   </div>
   <div class="rail">
-    <a class="vcard" data-say="Video oynatıcı">
+    <a class="vcard" data-open="video-oynatici">
       <div class="vthumb" style="background-image:url('assets/img/1418.webp')"><span class="vplay"><i class="fs i-play"></i></span><span class="vdur">4:12</span></div>
       <h4>Tavuk Suyu Çorbası Nasıl Yapılır?</h4>
       <div class="vmeta"><span class="av" style="background:var(--tomato)">AT</span><b>Ayşe Tülin</b><span class="views"><i class="fs i-eye"></i> 124B</span></div>
     </a>
-    <a class="vcard" data-say="Video oynatıcı">
+    <a class="vcard" data-open="video-oynatici">
       <div class="vthumb" style="background-image:url('assets/img/1452.webp')"><span class="vplay"><i class="fs i-play"></i></span><span class="vdur">8:30</span></div>
       <h4>Çıtır Çıtır Çiğ Börek Hamuru</h4>
       <div class="vmeta"><span class="av" style="background:var(--purple)">ZU</span><b>Zeynep Usta</b><span class="views"><i class="fs i-eye"></i> 89B</span></div>
     </a>
-    <a class="vcard" data-say="Video oynatıcı">
+    <a class="vcard" data-open="video-oynatici">
       <div class="vthumb" style="background-image:url('assets/img/1738.webp')"><span class="vplay"><i class="fs i-play"></i></span><span class="vdur">6:05</span></div>
       <h4>Kıvamında Tavuk Göğsü Tatlısı</h4>
       <div class="vmeta"><span class="av" style="background:var(--petrol)">MK</span><b>Mehmet K.</b><span class="views"><i class="fs i-eye"></i> 201B</span></div>
     </a>
-    <a class="vcard" data-say="Video oynatıcı">
+    <a class="vcard" data-open="video-oynatici">
       <div class="vthumb" style="background-image:url('assets/img/1796.webp')"><span class="vplay"><i class="fs i-play"></i></span><span class="vdur">3:48</span></div>
       <h4>10 Dakikada Akşam Yemeği</h4>
       <div class="vmeta"><span class="av" style="background:var(--green-deep)">AB</span><b>Arda Bozkurt</b><span class="views"><i class="fs i-eye"></i> 312B</span></div>
@@ -301,7 +301,7 @@
       <i class="fs i-arrow-right" style="color:rgba(255,255,255,.34);font-size:11px"></i>
       <span class="to" style="text-align:right">Bursa <span>Varış</span></span>
     </div>
-    <button class="btn" data-say="Dada Route — güzergâh planlayıcı"><i class="fs i-route"></i> Güzergâh Planla</button>
+    <button class="btn" data-open="route"><i class="fs i-route"></i> Güzergâh Planla</button>
   </div>
 </section>
 
@@ -643,8 +643,8 @@
     <div class="mtitle">Keşfet &amp; Pişir</div>
     <a class="mrow" data-go="puf-noktalari"><span class="ic"><i class="fs i-lightbulb"></i></span><b>Püf Noktaları</b><i class="fs i-chevron-right go"></i></a>
     <a class="mrow" data-open="ansiklopedi"><span class="ic"><i class="fs i-book-open"></i></span><b>Mutfak Ansiklopedisi</b><i class="fs i-chevron-right go"></i></a>
-    <a class="mrow" data-say="Video Mutfağı"><span class="ic"><i class="fs i-video"></i></span><b>Video Mutfağı</b><i class="fs i-chevron-right go"></i></a>
-    <a class="mrow" data-say="Dada Route"><span class="ic"><i class="fs i-location-dot"></i></span><b>Dada Route</b><i class="fs i-chevron-right go"></i></a>
+    <a class="mrow" data-open="video-mutfagi"><span class="ic"><i class="fs i-video"></i></span><b>Video Mutfağı</b><i class="fs i-chevron-right go"></i></a>
+    <a class="mrow" data-open="route"><span class="ic"><i class="fs i-location-dot"></i></span><b>Dada Route</b><i class="fs i-chevron-right go"></i></a>
   </div>
 
   <div class="mgroup">
@@ -1261,7 +1261,7 @@
 <section class="rd-hero">
   <div class="bg" style="background-image:url('assets/img/1425.webp')"></div>
   <div class="veil"></div>
-  <div class="rd-playwrap" data-say="Video oynatıcı — 04:32">
+  <div class="rd-playwrap" data-open="video-oynatici">
     <button class="rd-play"><i class="fs i-play"></i></button>
     <span class="rd-dur">04:32</span>
   </div>
@@ -2749,6 +2749,497 @@
   <div class="vw-pad vw-bar"></div>
 </section>
 
+<!-- ==================== FAZ 4 — VİDEO MUTFAĞI ==================== -->
+
+<!-- C10 · Video Mutfağı listesi — canlı: 33 video · 4 seri · 4,4Mn izlenme -->
+<section class="view pushed" id="vVideo" data-route="video-mutfagi" data-parent="ana-sayfa">
+  <header class="vbar">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <h2>Video Mutfağı</h2>
+    <button class="ab-btn" data-open="arama" aria-label="Ara"><i class="fs i-magnifying-glass"></i></button>
+  </header>
+
+  <div class="sx-b">
+    <h2>İzle &amp; Pişir</h2>
+    <p>Adım adım tarif videoları, şef teknikleri ve 30 saniyelik pratik fikirler — mutfakta hiç yalnız kalma.</p>
+    <div class="sx-n"><span><b>33</b>video</span><span><b>4</b>seri</span><span><b>4,4Mn</b>izlenme</span></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><span class="eyebrow">Haftanın videosu</span><h2>Bu hafta izlenen</h2></div></div>
+    <a class="vd-feat" data-open="video-oynatici" style="margin-top:0">
+      <span class="im" style="background-image:url('assets/img/1452.webp')"></span>
+      <span class="pl"><i class="fs i-play"></i></span>
+      <span class="bd">
+        <span class="kk"><i class="fs i-crown"></i> Haftanın videosu</span>
+        <h3>Tane Tane Pilav</h3>
+        <span class="mt"><span><i class="fs i-clock"></i> 05:24</span><span><i class="fs i-eye"></i> 178B izlenme</span><span><i class="fs i-calendar-days"></i> 3 hafta önce</span></span>
+      </span>
+    </a>
+    <div class="loadmore" style="margin-top:12px"><button class="btn block" data-open="video-oynatici"><i class="fs i-play"></i> Şimdi İzle</button></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><span class="eyebrow">4 seri</span><h2>Video serileri</h2>
+      <p class="sub">Her seri kendi düzeninde ilerler; kaldığın bölümden devam edersin.</p></div>
+      <button class="see-all" data-open="video-seriler">Tümü <i class="fs i-chevron-right"></i></button></div>
+    <a class="vd-s" data-open="seri-detay">
+      <span class="im" style="background-image:url('assets/img/1419.webp')"><span class="n">8 bölüm</span></span>
+      <span class="bd"><h4>10 Dakikada Yemekler</h4><p>Her Salı yeni bölüm · pratik akşam yemekleri</p>
+        <span class="pg"><span class="tr"><i style="width:38%"></i></span><span class="pgl">3 / 8 bölüm izlendi</span></span></span>
+    </a>
+    <a class="vd-s" data-open="seri-detay">
+      <span class="im" style="background-image:url('assets/img/1561.webp')"><span class="n">4 bölüm</span></span>
+      <span class="bd"><h4>Şef Teknikleri</h4><p>Temel mutfak teknikleri · bıçak, sos, mühür</p>
+        <span class="pg"><span class="tr"><i style="width:25%"></i></span><span class="pgl">1 / 4 bölüm izlendi</span></span></span>
+    </a>
+    <a class="vd-s" data-open="seri-detay">
+      <span class="im" style="background-image:url('assets/img/1483.webp')"><span class="n">4 bölüm</span></span>
+      <span class="bd"><h4>Yöresel Lezzetler</h4><p>Anadolu mutfağı ustalarından</p>
+        <span class="pg"><span class="tr"><i style="width:0%"></i></span><span class="pgl">Henüz başlamadın</span></span></span>
+    </a>
+    <a class="vd-s" data-open="seri-detay">
+      <span class="im" style="background-image:url('assets/img/1425.webp')"><span class="n">4 bölüm</span></span>
+      <span class="bd"><h4>Restoran Sırları</h4><p>Profesyonel mutfaktan ev tezgâhına</p>
+        <span class="pg"><span class="tr"><i style="width:0%"></i></span><span class="pgl">Henüz başlamadın</span></span></span>
+    </a>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><span class="eyebrow">27 video</span><h2>Tüm videolar</h2></div></div>
+    <div class="rail catchips" style="margin-top:0">
+      <div class="fopts">
+        <button class="fopt on">Tümü 33</button><button class="fopt">Tarif 18</button>
+        <button class="fopt">Teknik 7</button><button class="fopt">Seri 20</button><button class="fopt">Kısa 8</button>
+      </div>
+    </div>
+    <div class="vd-grid" style="margin-top:16px">
+      <a class="vd-c" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1749.webp')"><span class="kk">Tarif</span><span class="pl"><i class="fs i-play"></i></span><span class="dur">08:12</span></span>
+        <span class="bd"><h4>Çıtır Çıtır Çiğ Börek Hamuru</h4>
+          <span class="ch"><span class="av" style="background:var(--purple)">ZU</span><b>Zeynep Usta</b></span>
+          <span class="vw"><i class="fs i-eye"></i> 96B izlenme</span></span>
+      </a>
+      <a class="vd-c" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1436.webp')"><span class="kk">Tarif</span><span class="pl"><i class="fs i-play"></i></span><span class="dur">12:40</span></span>
+        <span class="bd"><h4>Tam Kıvamında Karnıyarık</h4>
+          <span class="ch"><span class="av" style="background:var(--tomato)">AB</span><b>Arda Bozkurt</b></span>
+          <span class="vw"><i class="fs i-eye"></i> 143B izlenme</span></span>
+      </a>
+      <a class="vd-c" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1410.webp')"><span class="kk">Tarif</span><span class="pl"><i class="fs i-play"></i></span><span class="dur">06:55</span></span>
+        <span class="bd"><h4>Tavuk Suyu Çorbası Nasıl Yapılır?</h4>
+          <span class="ch"><span class="av" style="background:var(--ink)">AT</span><b>Ayşe Tülin</b></span>
+          <span class="vw"><i class="fs i-eye"></i> 72B izlenme</span></span>
+      </a>
+      <a class="vd-c" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1419.webp')"><span class="kk tk">Teknik</span><span class="pl"><i class="fs i-play"></i></span><span class="dur">04:32</span></span>
+        <span class="bd"><h4>Beşamel Sos — Topaksız Kıvam</h4>
+          <span class="ch"><span class="av" style="background:var(--petrol)">MK</span><b>Mehmet K.</b></span>
+          <span class="vw"><i class="fs i-eye"></i> 210B izlenme</span></span>
+      </a>
+      <a class="vd-c" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1593.webp')"><span class="kk">Tarif</span><span class="pl"><i class="fs i-play"></i></span><span class="dur">14:08</span></span>
+        <span class="bd"><h4>Ekşi Mayalı Ekmek Yapımı</h4>
+          <span class="ch"><span class="av" style="background:var(--purple)">ZU</span><b>Zeynep Usta</b></span>
+          <span class="vw"><i class="fs i-eye"></i> 88B izlenme</span></span>
+      </a>
+      <a class="vd-c" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1561.webp')"><span class="kk tk">Teknik</span><span class="pl"><i class="fs i-play"></i></span><span class="dur">03:47</span></span>
+        <span class="bd"><h4>Bıçak Bileme — Evdeki Yöntemler</h4>
+          <span class="ch"><span class="av" style="background:var(--green-deep)">AB</span><b>Arda Bozkurt</b></span>
+          <span class="vw"><i class="fs i-eye"></i> 124B izlenme</span></span>
+      </a>
+      <a class="vd-c" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1406.webp')"><span class="kk">Tarif</span><span class="pl"><i class="fs i-play"></i></span><span class="dur">09:30</span></span>
+        <span class="bd"><h4>Yoğurt Çorbası — 10 Dakikada</h4>
+          <span class="ch"><span class="av" style="background:var(--ink)">AT</span><b>Ayşe Tülin</b></span>
+          <span class="vw"><i class="fs i-eye"></i> 54B izlenme</span></span>
+      </a>
+      <a class="vd-c" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1483.webp')"><span class="kk">Tarif</span><span class="pl"><i class="fs i-play"></i></span><span class="dur">07:21</span></span>
+        <span class="bd"><h4>Pratik Köfte — Izgara Tadında</h4>
+          <span class="ch"><span class="av" style="background:var(--tomato)">KD</span><b>Kaan Demir</b></span>
+          <span class="vw"><i class="fs i-eye"></i> 167B izlenme</span></span>
+      </a>
+    </div>
+    <div class="loadmore"><button class="btn ghost block" data-toast="12 video daha yüklendi">Daha Fazla Video <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button></div>
+  </div>
+  <div class="vw-pad"></div>
+</section>
+
+
+<!-- C11 · Video oynatıcı — modal, tam ekran koyu -->
+<section class="view sheet" id="vPlayer" data-route="video-oynatici" data-parent="video-mutfagi" data-status="dark">
+  <div class="vd-play">
+    <header class="vbar" style="background:#141210;border-bottom-color:rgba(255,255,255,.10);margin-top:44px">
+      <button class="ab-btn" data-close aria-label="Kapat" style="background:#2A2521;color:#FFF;box-shadow:none"><i class="fs i-chevron-left"></i></button>
+      <h2 style="color:#FFF">Video Mutfağı</h2>
+      <button class="ab-btn" data-bsheet="shrSheet" aria-label="Paylaş" style="background:#2A2521;color:#FFF;box-shadow:none"><i class="fs i-share-nodes"></i></button>
+    </header>
+
+    <div class="vd-stage">
+      <span class="im" style="background-image:url('assets/img/1452.webp')"></span>
+      <button class="pl" id="vdPlay"><i class="fs i-play"></i></button>
+      <div class="vd-bar">
+        <span class="tr"><i id="vdTr" style="width:0%"></i></span>
+        <span class="rw">
+          <button data-toast="10 saniye geri"><i class="fs i-arrow-rotate-left"></i></button>
+          <button id="vdPlay2"><i class="fs i-play"></i></button>
+          <button data-toast="Ses kapatıldı"><i class="fs i-bolt"></i></button>
+          <span class="tm" id="vdTm">00:00 / 05:24</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="vd-info">
+      <h1>Tane Tane Pilav</h1>
+      <div class="mt">
+        <span><i class="fs i-eye"></i> 178B izlenme</span>
+        <span><i class="fs i-calendar-days"></i> 3 hafta önce</span>
+        <span><i class="fs i-layer-group"></i> 10 Dakikada Yemekler · Bölüm 4</span>
+      </div>
+      <p>Pirinci yıkamaktan demlemeye kadar altı adım. Su oranını ve demleme süresini doğru tutturursan pilav her seferinde tane tane çıkar — videoda üç yaygın hatayı da tek tek gösteriyoruz.</p>
+    </div>
+
+    <div class="vd-acts">
+      <button class="save" data-toast="Videoyu kaydettin"><i class="fr i-heart"></i> Kaydet</button>
+      <button data-toast="Beğenildi"><i class="fs i-star"></i> Beğen</button>
+      <button data-bsheet="shrSheet"><i class="fs i-share-nodes"></i> Paylaş</button>
+    </div>
+
+    <div style="padding:20px var(--gutter) 0">
+      <button class="btn block" data-open="tarif-detay"><i class="fs i-bowl-food"></i> Bu Videonun Tarifine Git</button>
+    </div>
+
+    <div class="vd-next">
+      <div class="kit-lab" style="padding:0 0 10px;color:#7D7368">Sıradaki</div>
+      <a class="vd-nr" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1418.webp')"><span class="d">06:12</span></span>
+        <span class="tx"><b>Bulgur Pilavı — Domatesli</b><span>10 Dakikada Yemekler · Bölüm 5 · 64B izlenme</span></span>
+      </a>
+      <a class="vd-nr" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1419.webp')"><span class="d">04:32</span></span>
+        <span class="tx"><b>Beşamel Sos — Topaksız Kıvam</b><span>Şef Teknikleri · Bölüm 2 · 210B izlenme</span></span>
+      </a>
+      <a class="vd-nr" data-open="video-oynatici">
+        <span class="im" style="background-image:url('assets/img/1593.webp')"><span class="d">14:08</span></span>
+        <span class="tx"><b>Ekşi Mayalı Ekmek Yapımı</b><span>Yöresel Lezzetler · Bölüm 1 · 88B izlenme</span></span>
+      </a>
+    </div>
+    <div class="vw-pad"></div>
+  </div>
+</section>
+
+
+<!-- C12 · Video serileri listesi -->
+<section class="view pushed" id="vSeries" data-route="video-seriler" data-parent="video-mutfagi">
+  <header class="vbar">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <h2>Video Serileri</h2>
+  </header>
+
+  <div class="sx-b">
+    <h2>4 seri, 20 bölüm</h2>
+    <p>Seriler haftalık yayınlanır. Kaldığın bölüm hatırlanır, listeye dönünce oradan devam edersin.</p>
+    <div class="sx-n"><span><b>4</b>seri</span><span><b>20</b>bölüm</span><span><b>4</b>izlediğin</span></div>
+  </div>
+
+  <div class="kit-lab">Devam ettiklerin</div>
+  <a class="vd-s" data-open="seri-detay">
+    <span class="im" style="background-image:url('assets/img/1419.webp')"><span class="n">8 bölüm</span></span>
+    <span class="bd"><h4>10 Dakikada Yemekler</h4><p>Her Salı yeni bölüm · pratik akşam yemekleri</p>
+      <span class="pg"><span class="tr"><i style="width:38%"></i></span><span class="pgl">3 / 8 bölüm · sıradaki: Tane Tane Pilav</span></span></span>
+  </a>
+  <a class="vd-s" data-open="seri-detay">
+    <span class="im" style="background-image:url('assets/img/1561.webp')"><span class="n">4 bölüm</span></span>
+    <span class="bd"><h4>Şef Teknikleri</h4><p>Temel mutfak teknikleri · bıçak, sos, mühür</p>
+      <span class="pg"><span class="tr"><i style="width:25%"></i></span><span class="pgl">1 / 4 bölüm · sıradaki: Beşamel Sos</span></span></span>
+  </a>
+
+  <div class="kit-lab">Henüz başlamadıkların</div>
+  <a class="vd-s" data-open="seri-detay">
+    <span class="im" style="background-image:url('assets/img/1483.webp')"><span class="n">4 bölüm</span></span>
+    <span class="bd"><h4>Yöresel Lezzetler</h4><p>Anadolu mutfağı ustalarından · her ay yeni yöre</p>
+      <span class="pg"><span class="tr"><i style="width:0%"></i></span><span class="pgl">4 bölüm · toplam 48 dakika</span></span></span>
+  </a>
+  <a class="vd-s" data-open="seri-detay">
+    <span class="im" style="background-image:url('assets/img/1425.webp')"><span class="n">4 bölüm</span></span>
+    <span class="bd"><h4>Restoran Sırları</h4><p>Profesyonel mutfaktan ev tezgâhına</p>
+      <span class="pg"><span class="tr"><i style="width:0%"></i></span><span class="pgl">4 bölüm · toplam 39 dakika</span></span></span>
+  </a>
+
+  <div class="ar-note">
+    <span class="ar-k"><i class="fs i-bell"></i> Yeni bölüm bildirimi</span>
+    <p>Takip ettiğin serinin yeni bölümü yayınlandığında haber verelim mi? <b>Ayarlar ▸ Bildirimler</b>'den açabilirsin.</p>
+  </div>
+  <div class="vw-pad"></div>
+</section>
+
+
+<!-- C13 · Seri detay — bölüm listesi -->
+<section class="view pushed" id="vSeriesDet" data-route="seri-detay" data-parent="video-seriler" data-bar="#barSeries">
+  <header class="vbar overlay">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <span class="vtitle">10 Dakikada Yemekler</span>
+    <button class="ab-btn save" aria-label="Kaydet"><i class="fr i-heart"></i></button>
+  </header>
+
+  <div class="ar-hero" style="background-image:url('assets/img/1419.webp')"><span class="ar-k">Seri</span></div>
+  <div class="ar-title"><h1>10 Dakikada Yemekler</h1></div>
+  <div class="ar-meta">
+    <span><i class="fs i-layer-group"></i> 8 bölüm</span>
+    <span><i class="fs i-clock"></i> toplam 62 dakika</span>
+    <span><i class="fs i-calendar-days"></i> Her Salı yeni bölüm</span>
+  </div>
+
+  <div style="height:20px"></div>
+  <div class="ar-b">
+    <p>Akşam eve geç kalınca ne pişireceğini düşünmek zorunda kalma. Bu seride tek tencerede, on dakikada biten sekiz yemek var — hepsi dolapta zaten bulunan malzemelerle.</p>
+  </div>
+
+  <div class="sx-b">
+    <h2>3 / 8 bölüm izlendi</h2>
+    <p>Kaldığın yer: <b>Bölüm 4 — Tane Tane Pilav</b></p>
+    <div class="sx-n"><span><b>%38</b>ilerleme</span><span><b>5</b>kalan bölüm</span><span><b>41</b>kalan dakika</span></div>
+  </div>
+
+  <div class="kit-lab">Bölümler</div>
+  <a class="vd-ep on" data-open="video-oynatici"><span class="n"><i class="fs i-check"></i></span>
+    <span class="im" style="background-image:url('assets/img/1406.webp')"></span>
+    <span class="tx"><b>Yoğurt Çorbası</b><span>Bölüm 1 · 09:30 · izlendi</span></span><i class="fs i-chevron-right go"></i></a>
+  <a class="vd-ep on" data-open="video-oynatici"><span class="n"><i class="fs i-check"></i></span>
+    <span class="im" style="background-image:url('assets/img/1970.webp')"></span>
+    <span class="tx"><b>Ton Balıklı Akdeniz Salatası</b><span>Bölüm 2 · 05:48 · izlendi</span></span><i class="fs i-chevron-right go"></i></a>
+  <a class="vd-ep on" data-open="video-oynatici"><span class="n"><i class="fs i-check"></i></span>
+    <span class="im" style="background-image:url('assets/img/1608.webp')"></span>
+    <span class="tx"><b>Hızlı Kaşarlı Omlet</b><span>Bölüm 3 · 04:10 · izlendi</span></span><i class="fs i-chevron-right go"></i></a>
+  <div class="kit-lab">Kaldığın yerden</div>
+  <a class="vd-ep" data-open="video-oynatici"><span class="n">4</span>
+    <span class="im" style="background-image:url('assets/img/1452.webp')"></span>
+    <span class="tx"><b>Tane Tane Pilav</b><span>Bölüm 4 · 05:24 · sıradaki</span></span><i class="fs i-chevron-right go"></i></a>
+  <a class="vd-ep" data-open="video-oynatici"><span class="n">5</span>
+    <span class="im" style="background-image:url('assets/img/1418.webp')"></span>
+    <span class="tx"><b>Bulgur Pilavı — Domatesli</b><span>Bölüm 5 · 06:12</span></span><i class="fs i-chevron-right go"></i></a>
+  <a class="vd-ep" data-open="video-oynatici"><span class="n">6</span>
+    <span class="im" style="background-image:url('assets/img/1483.webp')"></span>
+    <span class="tx"><b>Pratik Köfte</b><span>Bölüm 6 · 07:21</span></span><i class="fs i-chevron-right go"></i></a>
+  <div class="ar-note">
+    <span class="ar-k"><i class="fs i-calendar-days"></i> Yayın düzeni</span>
+    <p>Son iki bölüm <b>her Salı 20:00</b>'de yayınlanıyor. Seriyi kaydedersen yeni bölüm çıktığında bildirim gelir.</p>
+  </div>
+
+  <a class="vd-ep" data-open="video-oynatici"><span class="n">7</span>
+    <span class="im" style="background-image:url('assets/img/1451.webp')"></span>
+    <span class="tx"><b>Sebzeli Penne</b><span>Bölüm 7 · 08:05</span></span><i class="fs i-chevron-right go"></i></a>
+  <a class="vd-ep" data-open="video-oynatici"><span class="n">8</span>
+    <span class="im" style="background-image:url('assets/img/1388.webp')"></span>
+    <span class="tx"><b>Tarhana Çorbası</b><span>Bölüm 8 · 15:10 · yeni</span></span><i class="fs i-chevron-right go"></i></a>
+  <div class="vw-pad vw-bar"></div>
+</section>
+
+
+<!-- ==================== FAZ 5 — DADA ROUTE ==================== -->
+
+<!-- D1 · Rota planlayıcı — canlı /yol-guzergahim -->
+<section class="view pushed" id="vRoute" data-route="route" data-parent="ana-sayfa" data-bar="#barRoute">
+  <header class="vbar">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <h2>Dada Route</h2>
+  </header>
+
+  <div class="sx-b">
+    <h2>Yol üstü lezzet rotanı oluştur</h2>
+    <p>Kalkış ve varışı yaz, güzergâhının üstündeki denenmiş durakları çıkaralım — sapma payını sen belirle.</p>
+    <div class="sx-n"><span><b>1.240</b>kayıtlı durak</span><span><b>81</b>il</span><span><b>12 km</b>maks. sapma</span></div>
+  </div>
+
+  <div class="rt-form">
+    <div class="rt-f"><span class="dot"><i class="fs i-location-dot"></i></span>
+      <input type="text" value="İstanbul, Kadıköy" placeholder="Nereden?" /></div>
+    <div class="rt-line"></div>
+    <div class="rt-f"><span class="dot"><i class="fs i-flag-checkered"></i></span>
+      <input type="text" value="Bolu, Merkez" placeholder="Nereye?" /></div>
+    <button class="rt-swap" id="rtSwap" aria-label="Başlangıç ve varışı değiştir"><i class="fs i-arrow-rotate-left"></i></button>
+  </div>
+  <div style="padding:0 var(--gutter)">
+    <button class="rt-stop" data-toast="Ara durak alanı eklendi"><i class="fs i-plus"></i> Ara Durak Ekle</button>
+  </div>
+
+  <div class="fm-wrap">
+    <div class="fm-f"><span class="fm-lb">Sapma toleransı <i>güzergâhtan en fazla</i></span>
+      <input type="range" class="rng" id="rtKm" min="0" max="4" value="2" />
+      <div class="rng-ends"><span>Tam yol üstü</span><span id="rtKmV">10 km</span><span>12 km</span></div></div>
+    <div class="fm-f"><span class="fm-lb">Ne arıyorsun? <i>birden çok seçebilirsin</i></span>
+      <div class="fopts" data-chips>
+        <button class="fopt on">Kahvaltı</button><button class="fopt">Öğle</button><button class="fopt">Akşam</button>
+        <button class="fopt on">Kahve</button><button class="fopt">Tatlı</button><button class="fopt">Yöresel</button>
+        <button class="fopt">Hızlı Mola</button><button class="fopt">Aileye Uygun</button></div></div>
+    <div class="fm-f"><span class="fm-lb">Rota adı <i>isteğe bağlı</i></span>
+      <input class="fm-in" type="text" placeholder="ör. Bolu Kahvaltı Turu" /></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><span class="eyebrow">Kayıtlı güzergâhların</span><h2>Daha önce oluşturduklarım</h2></div></div>
+    <button class="lrow ic-lead" data-open="route-sonuc"><span class="ic"><i class="fs i-route"></i></span>
+      <span class="tx"><b>Ege Sahil Turu</b><span>İzmir → Bodrum · 6 durak · 312 km</span></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-open="route-sonuc"><span class="ic"><i class="fs i-route"></i></span>
+      <span class="tx"><b>Karadeniz Yaylaları</b><span>Trabzon → Rize · 4 durak · 148 km</span></span><i class="fs i-chevron-right go"></i></button>
+  </div>
+  <div class="vw-pad vw-bar"></div>
+</section>
+
+
+<!-- D2 · Rota sonuç & durak listesi -->
+<section class="view pushed" id="vRouteRes" data-route="route-sonuc" data-parent="route" data-bar="#barRouteRes">
+  <header class="vbar">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <h2>Kadıköy → Bolu</h2>
+    <button class="ab-btn" data-toast="Cihazın harita uygulaması açılır"><i class="fs i-location-dot"></i></button>
+  </header>
+
+  <div class="rt-strip">
+    <div class="hd"><b>Güzergâhın</b><span>262 km · 3 sa 10 dk</span></div>
+    <div class="rt-n"><span class="mk"><i></i><span class="ln"></span></span>
+      <span class="tx"><b>İstanbul, Kadıköy</b><span>Kalkış · 09:00</span></span></div>
+    <div class="rt-n stop"><span class="mk"><i></i><span class="ln"></span></span>
+      <span class="tx"><b>Şile Gözleme Evi</b><span>48. km · yol üstü · kahvaltı molası 40 dk</span></span></div>
+    <div class="rt-n stop"><span class="mk"><i></i><span class="ln"></span></span>
+      <span class="tx"><b>Sapanca Göl Kahvesi</b><span>132. km · 6 dk sapma · kahve molası 25 dk</span></span></div>
+    <div class="rt-n"><span class="mk"><i></i></span>
+      <span class="tx"><b>Bolu, Merkez</b><span>Varış · tahmini 13:15</span></span></div>
+    <div class="rt-sum">
+      <span><b>262</b>kilometre</span><span><b>3.10</b>saat sürüş</span><span><b>2</b>seçili durak</span>
+    </div>
+  </div>
+
+  <div class="filterbar" style="margin-top:16px">
+    <span class="chip on">Tümü 34</span><span class="chip">Tam Yol Üstü 11</span><span class="chip">5 dk sapma 8</span>
+    <span class="chip">10 dk sapma 9</span><span class="chip">20 dk sapma 6</span><span class="chip">Dada Öneriyor 7</span>
+    <span class="chip">Şu An Açık 22</span><span class="chip">Kahvaltı 12</span><span class="chip">Öğle 9</span>
+    <span class="chip">Akşam 7</span><span class="chip">Kahve 10</span><span class="chip">Tatlı 6</span>
+    <span class="chip">Yöresel 8</span><span class="chip">Hızlı Mola 14</span><span class="chip">Aileye Uygun 13</span>
+  </div>
+
+  <div class="lmeta">
+    <span class="cnt"><b>34</b> durak bulundu</span>
+    <button class="sortbtn" data-bsheet="rtSort">Yol sırasına göre <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
+  </div>
+
+  <div class="kit-lab">Tam yol üstünde</div>
+  <a class="rt-c" data-open="durak-detay">
+    <span class="im" style="background-image:url('assets/img/1414.webp')"></span>
+    <span class="bd">
+      <span class="tp"><h4>Şile Gözleme Evi</h4><span class="rt"><i class="fs i-star"></i> 4,8</span></span>
+      <span class="mt"><span><i class="fs i-route"></i> 48. km</span><span><i class="fs i-location-dot"></i> Tam yol üstü</span><span class="op">Şu an açık</span></span>
+      <span class="mt"><span><i class="fs i-utensils"></i> Kahvaltı · Yöresel</span></span>
+      <span class="ad on"><i class="fs i-check"></i> Güzergâhta</span>
+    </span>
+  </a>
+  <a class="rt-c" data-open="durak-detay">
+    <span class="im" style="background-image:url('assets/img/1762.webp')"></span>
+    <span class="bd">
+      <span class="tp"><h4>Sapanca Göl Kahvesi</h4><span class="rt"><i class="fs i-star"></i> 4,6</span></span>
+      <span class="mt"><span><i class="fs i-route"></i> 132. km</span><span><i class="fs i-location-dot"></i> 6 dk sapma</span><span class="op">Şu an açık</span></span>
+      <span class="mt"><span><i class="fs i-utensils"></i> Kahve · Tatlı</span></span>
+      <span class="ad on"><i class="fs i-check"></i> Güzergâhta</span>
+    </span>
+  </a>
+  <div class="kit-lab">Kısa sapmayla ulaşılan</div>
+  <a class="rt-c" data-open="durak-detay">
+    <span class="im" style="background-image:url('assets/img/1483.webp')"></span>
+    <span class="bd">
+      <span class="tp"><h4>Düzce Mangal Bahçe</h4><span class="rt"><i class="fs i-star"></i> 4,7</span></span>
+      <span class="mt"><span><i class="fs i-route"></i> 198. km</span><span><i class="fs i-location-dot"></i> 4 dk sapma</span><span class="op">Şu an açık</span></span>
+      <span class="mt"><span><i class="fs i-utensils"></i> Öğle · Aileye uygun</span></span>
+      <span class="ad"><i class="fs i-plus"></i> Güzergâha Ekle</span>
+    </span>
+  </a>
+  <a class="rt-c" data-open="durak-detay">
+    <span class="im" style="background-image:url('assets/img/1587.webp')"></span>
+    <span class="bd">
+      <span class="tp"><h4>Abant Yayla Sofrası</h4><span class="rt"><i class="fs i-star"></i> 4,9</span></span>
+      <span class="mt"><span><i class="fs i-route"></i> 246. km</span><span><i class="fs i-location-dot"></i> 18 dk sapma</span><span class="op sh">17:00'de açılır</span></span>
+      <span class="mt"><span><i class="fs i-utensils"></i> Akşam · Yöresel</span></span>
+      <span class="ad"><i class="fs i-plus"></i> Güzergâha Ekle</span>
+    </span>
+  </a>
+  <a class="rt-c" data-open="durak-detay">
+    <span class="im" style="background-image:url('assets/img/1593.webp')"></span>
+    <span class="bd">
+      <span class="tp"><h4>Bolu Fırın &amp; Simit</h4><span class="rt"><i class="fs i-star"></i> 4,4</span></span>
+      <span class="mt"><span><i class="fs i-route"></i> 259. km</span><span><i class="fs i-location-dot"></i> Tam yol üstü</span><span class="op">Şu an açık</span></span>
+      <span class="mt"><span><i class="fs i-utensils"></i> Hızlı mola · Kahvaltı</span></span>
+      <span class="ad"><i class="fs i-plus"></i> Güzergâha Ekle</span>
+    </span>
+  </a>
+
+  <div class="loadmore"><button class="btn ghost block" data-toast="12 durak daha yüklendi">Daha Fazla Durak <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button></div>
+  <div class="vw-pad vw-bar"></div>
+</section>
+
+
+<!-- D3 · Durak detay -->
+<section class="view pushed" id="vStop" data-route="durak-detay" data-parent="route-sonuc" data-bar="#barStop">
+  <header class="vbar overlay">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <span class="vtitle">Şile Gözleme Evi</span>
+    <button class="ab-btn save" aria-label="Kaydet"><i class="fr i-heart"></i></button>
+    <button class="ab-btn" data-bsheet="shrSheet" aria-label="Paylaş"><i class="fs i-share-nodes"></i></button>
+  </header>
+
+  <div class="ar-hero" style="background-image:url('assets/img/1414.webp')"><span class="ar-k">Dada Öneriyor</span></div>
+  <div class="ar-title"><h1>Şile Gözleme Evi</h1></div>
+  <div class="ar-meta">
+    <span><i class="fs i-star"></i> 4,8 · 214 değerlendirme</span>
+    <span><i class="fs i-route"></i> Güzergâhın 48. km'si</span>
+    <span><i class="fs i-location-dot"></i> Tam yol üstü</span>
+  </div>
+
+  <div style="height:20px"></div>
+  <div class="rt-facts">
+    <div><span class="ic"><i class="fs i-clock"></i></span><b>07:00 – 20:00</b><span>Her gün açık · şu an açık</span></div>
+    <div><span class="ic"><i class="fs i-utensils"></i></span><b>Kahvaltı · Yöresel</b><span>Gözleme, kuymak, tereyağlı bal</span></div>
+    <div><span class="ic"><i class="fs i-users"></i></span><b>Aileye uygun</b><span>Bahçe oturma · çocuk alanı</span></div>
+    <div><span class="ic"><i class="fs i-basket-shopping"></i></span><b>Orta segment</b><span>Kişi başı ₺₺</span></div>
+  </div>
+
+  <div style="height:24px"></div>
+  <div class="ar-b">
+    <h3>Neden bu durak?</h3>
+    <p>Yol kenarında, sapma gerektirmeden girilen ender yerlerden. Gözlemeler <b>tezgâhta açılıyor</b> — hazır yufka kullanılmıyor. Sabah 09:00–11:00 arası yoğun; kalabalıktan kaçmak istiyorsan erken uğra.</p>
+    <ul>
+      <li><b>Kıymalı gözleme</b> — kıyma günlük çekiliyor, harç gevşek.</li>
+      <li><b>Kuymak</b> — Karadeniz usulü, tereyağı ağırlıklı; iki kişiye yeter.</li>
+      <li><b>Park</b> — 20 araçlık ücretsiz otopark, tır girişine uygun değil.</li>
+    </ul>
+  </div>
+
+  <div class="ar-note">
+    <span class="ar-k"><i class="fs i-lightbulb"></i> Topluluk notu</span>
+    <p>“Bayram dönüşü saat 14:00'te uğradık, 10 dakika bekledik ama gözleme sıcak geldi. Otoparkı yolun karşısında, dikkatli geçin.” — <b>Kaan Demir</b>, 2 hafta önce</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><span class="eyebrow">Bildirim</span><h2>Bilgilerde hata mı var?</h2></div></div>
+    <button class="lrow ic-lead" data-toast="Bildirimin alındı — ekibimiz kontrol edecek"><span class="ic"><i class="fs i-location-dot"></i></span><span class="tx"><b>Konum yanlış</b></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-toast="Bildirimin alındı — ekibimiz kontrol edecek"><span class="ic"><i class="fs i-clock"></i></span><span class="tx"><b>Çalışma saatleri değişmiş</b></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-toast="Bildirimin alındı — ekibimiz kontrol edecek"><span class="ic"><i class="fs i-xmark"></i></span><span class="tx"><b>İşletme kapanmış</b></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-toast="Bildirimin alındı — ekibimiz kontrol edecek"><span class="ic"><i class="fs i-ellipsis"></i></span><span class="tx"><b>Diğer</b></span><i class="fs i-chevron-right go"></i></button>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><span class="eyebrow">Yakındakiler</span><h2>Bu durağa yakın</h2></div>
+      <a class="see-all" data-open="route-sonuc">Tümü <i class="fs i-arrow-right"></i></a></div>
+    <div class="rail">
+      <span class="chip" data-open="durak-detay">Sapanca Göl Kahvesi</span>
+      <span class="chip" data-open="durak-detay">Düzce Mangal Bahçe</span>
+      <span class="chip" data-open="durak-detay">Bolu Fırın &amp; Simit</span>
+    </div>
+  </div>
+  <div class="vw-pad vw-bar"></div>
+</section>
+
 <section class="view pushed" id="vKit" data-route="kit" data-parent="ana-sayfa">
   <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>Komponentler</h2></header>
   <div class="kit-sec"><span class="eyebrow">FAZ 0</span><h2>Ortak komponent seti</h2><p>46 ekranın tamamında tekrar eder. Her biri mevcut token’lardan türetildi — yeni renk, yeni radius, yeni gölge yok.</p></div>
@@ -2953,6 +3444,19 @@
   <div class="bs-foot"><button class="btn" data-bsheet-close>Uygula</button></div>
 </div>
 
+<div class="bsheet" id="rtSort">
+  <div class="bs-grab"></div>
+  <div class="bs-head"><b>Durakları sırala</b>
+    <button class="ab-btn" data-bsheet-close aria-label="Kapat"><i class="fs i-xmark"></i></button></div>
+  <div class="bs-body">
+    <div class="fgrp"><div class="fopts" data-single="1">
+      <button class="fopt on">Yol sırasına göre</button><button class="fopt">En az sapma</button>
+      <button class="fopt">En yüksek puan</button><button class="fopt">Şu an açık olanlar</button>
+      <button class="fopt">Dada Öneriyor</button></div></div>
+  </div>
+  <div class="bs-foot"><button class="btn" data-bsheet-close>Uygula</button></div>
+</div>
+
 <div class="bsheet" id="traySheet">
   <div class="bs-grab"></div>
   <div class="bs-head"><b>Menü Tepsisi</b>
@@ -3074,6 +3578,22 @@
       <button class="icobtn" data-bsheet="shrSheet" aria-label="Paylaş"><i class="fs i-share-nodes"></i></button>
       <button class="btn" data-open="sofra-duzeni"><i class="fs i-utensils"></i> Diğer Sofralar</button>
     </div>
+    <div class="actionbar scrbar" id="barSeries">
+      <button class="icobtn save" aria-label="Kaydet"><i class="fr i-heart"></i></button>
+      <button class="btn" data-open="video-oynatici"><i class="fs i-play"></i> Bölüm 4'ten Devam Et</button>
+    </div>
+    <div class="wz-foot scrbar" id="barRoute">
+      <button class="nb next" id="rtGo">Rotamı Oluştur <i class="fs i-chevron-right"></i></button>
+    </div>
+    <div class="actionbar scrbar" id="barRouteRes">
+      <button class="icobtn" data-toast="Güzergâh kaydedildi" aria-label="Kaydet"><i class="fs i-bookmark"></i></button>
+      <button class="icobtn" data-toast="Cihazın harita uygulaması açılır" aria-label="Haritada gör"><i class="fs i-location-dot"></i></button>
+      <button class="btn" data-toast="Güzergâhın kaydedildi — 2 durak">Güzergâhımı Kaydet</button>
+    </div>
+    <div class="actionbar scrbar" id="barStop">
+      <button class="icobtn" data-toast="Ziyaret ettin olarak işaretlendi" aria-label="Ziyaret ettim"><i class="fs i-circle-check"></i></button>
+      <button class="btn" data-toast="Şile Gözleme Evi güzergâha eklendi"><i class="fs i-plus"></i> Bu Mekânı Durak Yap</button>
+    </div>
     <div class="fr-foot scrbar" id="barFridge">
       <span class="fr-fn"><b id="frFn">0</b> tarif bulundu</span>
       <button class="btn" id="frShow">Tarifleri Göster</button>
@@ -3105,8 +3625,8 @@
               <div class="dw-sep"></div>
               <div class="dw-t">Keşfet &amp; Pişir</div>
               <a class="dw-row" data-drawer-go="puf-noktalari"><span class="ic"><i class="fs i-lightbulb"></i></span><b>Püf Noktaları</b></a>
-              <a class="dw-row" data-say="Video Mutfağı"><span class="ic"><i class="fs i-video"></i></span><b>Video Mutfağı</b></a>
-              <a class="dw-row" data-say="Dada Route"><span class="ic"><i class="fs i-location-dot"></i></span><b>Dada Route</b></a>
+              <a class="dw-row" data-drawer-go="video-mutfagi"><span class="ic"><i class="fs i-video"></i></span><b>Video Mutfağı</b></a>
+              <a class="dw-row" data-drawer-go="route"><span class="ic"><i class="fs i-location-dot"></i></span><b>Dada Route</b></a>
               <a class="dw-row" data-drawer-go="dolapta"><span class="ic"><i class="fs i-carrot"></i></span><b>Dolapta Ne Var?</b></a>
               <div class="dw-sep"></div>
               <div class="dw-t">Uygulama</div>

@@ -35,6 +35,7 @@
 .i-ellipsis:before{content:"\f141"}
 .i-eye:before{content:"\f06e"}
 .i-fire:before{content:"\f06d"}
+.i-flag-checkered:before{content:"\f11e"}
 .i-flask:before{content:"\f0c3"}
 .i-gauge-simple:before{content:"\f629"}
 .i-graduation-cap:before{content:"\f19d"}
@@ -1958,3 +1959,189 @@ table.t tr:last-child td{border-bottom:0}
 .sd-fig .lg span i{font-size:10px;color:var(--tomato)}
 /* arama süzgeci sonrası boş durum */
 .lst-empty{font-family:"GilroyLt";font-weight:300;font-size:12.5px;line-height:1.55;color:var(--muted)}
+
+/* ============================================================
+   FAZ 4 — VİDEO MUTFAĞI   ·   FAZ 5 — DADA ROUTE
+   ============================================================ */
+
+/* ---------- HAFTANIN VİDEOSU ---------- */
+.vd-feat{display:block;position:relative;margin:16px var(--gutter) 0;border-radius:var(--r-xl);overflow:hidden;
+  background:var(--ink);aspect-ratio:16/10}
+.vd-feat .im{position:absolute;inset:0;background-size:cover;background-position:center}
+.vd-feat .im::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,18,12,.18) 34%,rgba(20,18,12,.86))}
+.vd-feat .pl{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:3;
+  width:56px;height:56px;border-radius:var(--r-circle);background:#FFF;color:var(--tomato);
+  display:grid;place-items:center;font-size:19px;padding-left:4px;box-shadow:0 8px 26px rgba(0,0,0,.32)}
+.vd-feat .bd{position:absolute;left:16px;right:16px;bottom:16px;z-index:2}
+.vd-feat .kk{display:inline-flex;align-items:center;gap:6px;font-family:"GilroyXB";font-size:9.5px;
+  letter-spacing:.10em;text-transform:uppercase;color:#FFF;background:var(--tomato);
+  padding:5px 9px;border-radius:var(--r-sm)}
+.vd-feat h3{margin-top:10px;font-size:19px;line-height:1.2;letter-spacing:-.01em;color:#FFF}
+.vd-feat .mt{display:flex;flex-wrap:wrap;gap:12px;margin-top:9px}
+.vd-feat .mt span{display:inline-flex;align-items:center;gap:5px;font-family:"GilroyLt";font-weight:300;
+  font-size:11.5px;color:rgba(255,255,255,.76)}
+.vd-feat .mt span i{font-size:10px}
+
+/* ---------- VİDEO KARTI (ızgara) ---------- */
+.vd-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:0 var(--gutter)}
+.vd-c{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;
+  display:flex;flex-direction:column}
+.vd-c .im{position:relative;height:96px;background-size:cover;background-position:center;background-color:var(--line)}
+.vd-c .im::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,18,12,0) 52%,rgba(20,18,12,.46))}
+.vd-c .pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;width:34px;height:34px;
+  border-radius:var(--r-circle);background:rgba(255,255,255,.94);color:var(--tomato);display:grid;
+  place-items:center;font-size:11px;padding-left:2px}
+.vd-c .dur{position:absolute;right:7px;bottom:7px;z-index:2;font-family:"GilroyXB";font-size:9.5px;
+  color:#FFF;background:rgba(20,18,12,.80);padding:3px 6px;border-radius:6px}
+.vd-c .kk{position:absolute;left:7px;top:7px;z-index:2;font-family:"GilroyXB";font-size:9px;
+  letter-spacing:.04em;color:#FFF;background:var(--tomato);padding:3px 6px;border-radius:6px}
+.vd-c .kk.tk{background:var(--petrol)}
+.vd-c .bd{flex:1;display:flex;flex-direction:column;padding:11px}
+.vd-c h4{font-size:12.5px;line-height:1.32;color:var(--ink);min-height:33px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vd-c .ch{display:flex;align-items:center;gap:7px;margin-top:10px}
+.vd-c .ch .av{width:20px;height:20px;border-radius:var(--r-circle);display:grid;place-items:center;
+  color:#FFF;font-family:"GilroyXB";font-size:8.5px;flex:none}
+.vd-c .ch b{font-family:"Gilroy";font-weight:500;font-size:10.5px;color:var(--ink-2);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vd-c .vw{margin-top:10px;font-family:"GilroyLt";font-weight:300;font-size:10.5px;color:var(--muted);
+  display:inline-flex;align-items:center;gap:5px}
+.vd-c .vw i{font-size:9px}
+
+/* ---------- SERİ KARTI ---------- */
+.vd-s{display:flex;gap:12px;padding:12px;margin:0 var(--gutter) 12px;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-lg)}
+.vd-s .im{flex:none;width:92px;height:92px;border-radius:var(--r-md);background-size:cover;
+  background-position:center;position:relative;background-color:var(--line)}
+.vd-s .im .n{position:absolute;left:6px;bottom:6px;font-family:"GilroyXB";font-size:9.5px;color:#FFF;
+  background:rgba(20,18,12,.80);padding:3px 6px;border-radius:6px}
+.vd-s .bd{flex:1;min-width:0;display:flex;flex-direction:column}
+.vd-s h4{font-size:14.5px;line-height:1.28;color:var(--ink)}
+.vd-s p{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:11.5px;line-height:1.45;
+  color:var(--muted)}
+.vd-s .pg{display:block;margin-top:auto;padding-top:12px}
+.vd-s .tr{display:block;height:5px;border-radius:3px;background:var(--line);overflow:hidden}
+.vd-s .tr i{display:block;height:100%;border-radius:3px;background:var(--tomato)}
+.vd-s .pgl{display:block;margin-top:7px;font-family:"GilroyXB";font-size:10px;color:var(--ink-2)}
+
+/* ---------- OYNATICI (koyu) ---------- */
+.vd-play{background:#141210;color:#FFF;min-height:100%}
+.vd-stage{position:relative;background:#000;aspect-ratio:16/9;margin-top:0}
+.vd-stage .im{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.62}
+.vd-stage .pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;
+  width:62px;height:62px;border-radius:var(--r-circle);background:rgba(255,255,255,.94);color:var(--tomato);
+  display:grid;place-items:center;font-size:21px;padding-left:4px}
+.vd-bar{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:12px 14px;
+  background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.72))}
+.vd-bar .tr{display:block;height:3px;border-radius:2px;background:rgba(255,255,255,.26);overflow:hidden}
+.vd-bar .tr i{display:block;height:100%;background:var(--tomato);border-radius:2px}
+.vd-bar .rw{display:flex;align-items:center;gap:14px;margin-top:10px}
+.vd-bar .rw button{color:#FFF;font-size:13px}
+.vd-bar .tm{margin-left:auto;font-family:"GilroyXB";font-size:10.5px;color:rgba(255,255,255,.74)}
+.vd-info{padding:20px var(--gutter) 0}
+.vd-info h1{font-family:"GilroyXB";font-size:20px;line-height:1.2;letter-spacing:-.015em;color:#FFF}
+.vd-info .mt{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+.vd-info .mt span{display:inline-flex;align-items:center;gap:5px;font-family:"GilroyLt";font-weight:300;
+  font-size:11.5px;color:#9C9186}
+.vd-info p{margin-top:16px;font-family:"GilroyLt";font-weight:300;font-size:13.5px;line-height:1.62;
+  color:rgba(255,255,255,.76)}
+.vd-acts{display:flex;gap:8px;padding:16px var(--gutter) 0}
+.vd-acts button{flex:1;height:42px;border-radius:var(--r-md);background:#2A2521;color:#FFF;
+  font-family:"GilroyXB";font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.vd-next{padding:24px var(--gutter) 0}
+.vd-nr{display:flex;gap:11px;padding:10px 0}
+.vd-nr+.vd-nr{border-top:1px solid rgba(255,255,255,.10)}
+.vd-nr .im{flex:none;width:104px;height:60px;border-radius:var(--r-md);background-size:cover;
+  background-position:center;position:relative;background-color:#26221E}
+.vd-nr .im .d{position:absolute;right:5px;bottom:5px;font-family:"GilroyXB";font-size:9px;color:#FFF;
+  background:rgba(0,0,0,.72);padding:2px 5px;border-radius:5px}
+.vd-nr .tx{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.vd-nr .tx b{font-family:"GilroyXB";font-size:12.5px;line-height:1.3;color:#FFF}
+.vd-nr .tx span{margin-top:6px;font-family:"GilroyLt";font-weight:300;font-size:10.5px;color:#9C9186}
+
+/* ---------- BÖLÜM SATIRI (seri detay) ---------- */
+.vd-ep{display:flex;gap:12px;align-items:center;padding:12px var(--gutter);background:var(--paper);
+  border-bottom:1px solid var(--line)}
+.vd-ep .n{flex:none;width:30px;height:30px;border-radius:var(--r-sm);background:var(--bg);
+  font-family:"GilroyXB";font-size:12px;color:var(--ink-2);display:grid;place-items:center}
+.vd-ep.on .n{background:var(--green);color:#FFF}
+.vd-ep .im{flex:none;width:76px;height:48px;border-radius:var(--r-md);background-size:cover;
+  background-position:center;background-color:var(--line)}
+.vd-ep .tx{flex:1;min-width:0}
+.vd-ep .tx b{display:block;font-family:"GilroyXB";font-size:13px;line-height:1.3;color:var(--ink)}
+.vd-ep .tx span{display:block;margin-top:5px;font-family:"GilroyLt";font-weight:300;font-size:10.5px;
+  color:var(--muted)}
+.vd-ep .go{flex:none;color:#C9C4BC;font-size:12px}
+
+/* ============================================================
+   DADA ROUTE
+   ============================================================ */
+.rt-form{margin:16px var(--gutter) 0;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:14px;position:relative}
+.rt-f{display:flex;align-items:center;gap:11px;height:48px}
+.rt-f .dot{flex:none;width:22px;display:grid;place-items:center;color:var(--tomato);font-size:12px}
+.rt-f input{flex:1;min-width:0;border:0;outline:0;background:none;font-family:"Gilroy";font-weight:500;
+  font-size:13.5px;color:var(--ink)}
+.rt-f input::placeholder{font-family:"GilroyLt";font-weight:300;color:#ABA79F}
+.rt-line{height:1px;background:var(--line);margin-left:33px}
+.rt-swap{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:36px;height:36px;
+  border-radius:var(--r-md);background:var(--bg);border:1px solid var(--line);color:var(--ink-2);
+  display:grid;place-items:center;font-size:12px}
+.rt-stop{display:flex;align-items:center;gap:8px;width:100%;height:42px;margin-top:12px;
+  border-radius:var(--r-md);border:1.5px dashed #D8D4CD;background:var(--paper);
+  justify-content:center;font-family:"GilroyXB";font-size:12.5px;color:var(--tomato)}
+
+/* güzergâh şeridi — dikey zaman çizelgesi (harita yerine mobil-yerel gösterim) */
+.rt-strip{margin:0 var(--gutter);background:var(--ink);border-radius:var(--r-xl);padding:18px}
+.rt-strip .hd{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.rt-strip .hd b{flex:1;font-family:"GilroyXB";font-size:14px;color:#FFF}
+.rt-strip .hd span{font-family:"GilroyLt";font-weight:300;font-size:11px;color:rgba(255,255,255,.62)}
+.rt-n{display:flex;gap:12px;position:relative}
+.rt-n+.rt-n{margin-top:2px}
+.rt-n .mk{flex:none;width:22px;display:flex;flex-direction:column;align-items:center}
+.rt-n .mk i{width:10px;height:10px;border-radius:var(--r-circle);background:var(--tomato);margin-top:5px;flex:none}
+.rt-n .mk .ln{flex:1;width:2px;background:rgba(255,255,255,.20);margin:5px 0 0}
+.rt-n:last-child .mk .ln{display:none}
+.rt-n .tx{flex:1;min-width:0;padding-bottom:16px}
+.rt-n .tx b{display:block;font-family:"GilroyXB";font-size:13px;color:#FFF;line-height:1.3}
+.rt-n .tx span{display:block;margin-top:5px;font-family:"GilroyLt";font-weight:300;font-size:11px;
+  color:rgba(255,255,255,.60)}
+.rt-n.stop .mk i{background:var(--on-dark)}
+.rt-sum{display:flex;gap:8px;margin-top:4px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
+.rt-sum span{flex:1;font-family:"GilroyLt";font-weight:300;font-size:10.5px;line-height:1.35;
+  color:rgba(255,255,255,.62)}
+.rt-sum span b{display:block;font-family:"GilroyXB";font-weight:800;font-size:16px;color:#FFF;margin-bottom:4px}
+
+/* durak kartı */
+.rt-c{display:flex;gap:12px;padding:12px;margin:0 var(--gutter) 12px;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-lg)}
+.rt-c .im{flex:none;width:84px;height:84px;border-radius:var(--r-md);background-size:cover;
+  background-position:center;background-color:var(--line)}
+.rt-c .bd{flex:1;min-width:0;display:flex;flex-direction:column}
+.rt-c .tp{display:flex;align-items:center;gap:8px}
+.rt-c h4{flex:1;min-width:0;font-size:14px;line-height:1.28;color:var(--ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rt-c .rt{flex:none;font-family:"GilroyXB";font-size:12px;color:var(--ink);display:inline-flex;
+  align-items:center;gap:4px}
+.rt-c .rt i{color:var(--yellow);font-size:10px}
+.rt-c .mt{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.rt-c .mt span{display:inline-flex;align-items:center;gap:5px;font-family:"GilroyLt";font-weight:300;
+  font-size:11px;color:var(--muted)}
+.rt-c .mt span i{font-size:9.5px;color:#C9C4BC}
+.rt-c .op{font-family:"GilroyXB";font-size:10px;color:var(--green-deep);
+  background:rgba(59,183,126,.12);padding:4px 7px;border-radius:var(--r-sm)}
+.rt-c .op.sh{color:var(--muted);background:var(--bg)}
+.rt-c .ad{margin-top:12px;height:34px;border-radius:var(--r-md);background:var(--tomato-tint);
+  color:var(--tomato);font-family:"GilroyXB";font-size:11.5px;display:inline-flex;align-items:center;
+  justify-content:center;gap:6px}
+.rt-c .ad.on{background:var(--tomato);color:#FFF}
+
+/* durak detay künyesi */
+.rt-facts{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 var(--gutter)}
+.rt-facts div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:12px}
+.rt-facts .ic{width:30px;height:30px;border-radius:var(--r-md);background:var(--tomato-tint);
+  color:var(--tomato);display:grid;place-items:center;font-size:12px;margin-bottom:10px}
+.rt-facts b{display:block;font-family:"GilroyXB";font-size:13px;color:var(--ink)}
+.rt-facts span{display:block;font-family:"GilroyLt";font-weight:300;font-size:11px;color:var(--muted);margin-top:5px}

@@ -1176,6 +1176,59 @@
     });
   });
 
+
+  /* ================= VİDEO OYNATICI (C11) ================= */
+  var vdRun = false, vdInt = null, vdSec = 0, VD_TOP = 324;   // 05:24
+  function vdMMSS(n) { return pad(Math.floor(n / 60)) + ':' + pad(n % 60); }
+  function vdSync() {
+    if (!el('vdTr')) return;
+    el('vdTr').style.width = (vdSec / VD_TOP * 100) + '%';
+    el('vdTm').textContent = vdMMSS(vdSec) + ' / ' + vdMMSS(VD_TOP);
+    var ik = vdRun ? 'i-xmark' : 'i-play';
+    ['vdPlay', 'vdPlay2'].forEach(function (id) {
+      if (el(id)) el(id).innerHTML = '<i class="fs ' + ik + '"></i>';
+    });
+  }
+  function vdToggle() {
+    vdRun = !vdRun;
+    clearInterval(vdInt);
+    if (vdRun) {
+      vdInt = setInterval(function () {
+        if (vdSec < VD_TOP) { vdSec++; vdSync(); }
+        else { vdRun = false; clearInterval(vdInt); vdSync(); say('Video bitti — sıradaki bölüm hazır'); }
+      }, 1000);
+    }
+    vdSync();
+  }
+  ['vdPlay', 'vdPlay2'].forEach(function (id) {
+    if (el(id)) el(id).addEventListener('click', vdToggle);
+  });
+  vdSync();
+
+  /* ================= DADA ROUTE (D1) ================= */
+  var RT_KM = ['Tam yol üstü', '5 km', '10 km', '12 km', '20 km'];
+  if (el('rtKm')) el('rtKm').addEventListener('input', function () {
+    el('rtKmV').textContent = RT_KM[this.value] || RT_KM[2];
+  });
+  if (el('rtSwap')) el('rtSwap').addEventListener('click', function () {
+    var f = all('#vRoute .rt-f input');
+    if (f.length < 2) return;
+    var t = f[0].value; f[0].value = f[1].value; f[1].value = t;
+    say('Kalkış ve varış değiştirildi');
+  });
+  if (el('rtGo')) el('rtGo').addEventListener('click', function () { open('route-sonuc'); });
+
+  /* durak kartındaki "Güzergâha Ekle" gerçekten ekliyor */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.rt-c .ad');
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    var ekli = b.classList.toggle('on');
+    b.innerHTML = ekli ? '<i class="fs i-check"></i> Güzergâhta' : '<i class="fs i-plus"></i> Güzergâha Ekle';
+    var ad = (b.closest('.rt-c').querySelector('h4') || {}).textContent || 'Durak';
+    say(ekli ? ad + ' güzergâha eklendi' : ad + ' güzergâhtan çıkarıldı');
+  }, true);
+
   /* ================= KLAVYE (masaüstü önizleme) ================= */
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;

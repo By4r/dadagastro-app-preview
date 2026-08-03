@@ -21,39 +21,34 @@ Geliştirme: `python3 -m http.server 8000` → `http://localhost:8000`
 | **2** | **Püf Noktaları** kök sekme olarak kuruldu | ✅ |
 | — | Performans: 2018 KB → 741 KB, yavaş 3G ilk boyama 8196 → 3388 ms | ✅ |
 | — | `vqa.js` görsel öz-denetim aracı (13 kontrol) | ✅ |
+| **2** | Tarif akışı: arama · kategori dizini (33 + 50 mutfak) · kategori sonucu · tüm yorumlar · yorum yaz · **Tarif Ekle** 5 adımlı sihirbaz | ✅ |
+| **3** | Mutfak Sırları: püf detay · **Ansiklopedi** (A–Z, 26 kategori) · **Sözlük** (A–Z, 20 kategori) · **Ölçü Birimleri** (4 sekme, çalışan dönüştürücü) · Sofra Düzeni + detay | ✅ |
+| **4** | Video Mutfağı · oynatıcı (çalışan zamanlayıcı) · seriler · seri detay | ✅ |
+| **5** | Dada Route: planlayıcı · sonuç + 15 filtre · durak detay | ✅ |
+| — | **Sınıf adı sözleşmesi + `lint-css.js`** — önek zorunluluğu, durum sözlüğü koruması, öksüz sınıf taraması | ✅ |
 
 ---
 
 ## 2. Ne kaldı
 
-**46 ekranın 12'si bitti, 34 kaldı.**
+**46 ekranın 33'ü bitti, 13 kaldı.**
 
-Sıradaki blok — **B3–B9, tarif akışı (7 ekran)**:
-
-| # | Ekran | Not |
-|---|---|---|
-| B3 | Arama sonuçları | Boş durum + son aramalar. Canlı: `/tarifler?q=…`, "2057 tarif bulundu", "sayfa 1 / 69" |
-| B4 | Kategori dizini | 33 kategori. **Dünya mutfakları buranın 2. sekmesi** — canlıda ayrı sayfası yok |
-| B5 | Kategori sonuç listesi | Canlı: `/tarifler/kategori/corba`, H1 = kategori adı |
-| B6 | *(B4'e birleşti)* | — |
-| B7 | Tüm yorumlar | **Tarif detayı içinde genişleyen liste** — canlıda `/yorumlar` yok |
-| B8 | Yorum yaz (modal) | Puan + metin + fotoğraf |
-| B9 | Tarif Ekle | Çok adımlı sihirbaz |
-
-Sonrası: Mutfak Sırları'nın 5 modülü · Video Mutfağı + serileri · Dada Route ·
-Topluluk (şefler, liderlik, onur listesi, rozetler) · Hesap & sistem (10 ekran) ·
-Kurumsal (6 ekran) · en sonda Mutfağa Giriş.
+| Faz | Ekranlar |
+|---|---|
+| **6 — Topluluk** | Şefler listesi · Şef profili · Canlı Liderlik · Onur Listesi · Rozetlerim |
+| **7 — Hesap & sistem** | Profili Düzenle · Tarif Defterim · Alışveriş Listem · Tariflerim · Bildirimler · Ayarlar · Giriş · Üye Ol · Şifremi Unuttum · Onboarding |
+| **8 — Kurumsal** | Hakkımızda · SSS · İletişim · Gizlilik · KVKK · Reklam Ver |
+| **9 — Süpürme** | Kalan `data-say` → ekran · `#/kit-*` rotalarını sil · uçtan uca akış testleri |
+| **10** | Mutfağa Giriş — **canlıda `/mutfaga-giris` 404 döndü (3 Ağustos 2026), atlandı** |
 
 > ⚠️ **Her ekrandan önce canlı denetim tablosu zorunlu.** Canlıdaki ekranı aç,
 > her kontrolü listele, prototipte karşılığı olduğunu doğrula, rapora tabloyu koy.
-
----
 
 ## 3. Sayaçlar
 
 | | Değer |
 |---|---|
-| `data-say` (**borç** — ekranı olmayan buton) | **97** |
+| `data-say` (**borç** — ekranı olmayan buton) | **40** |
 | `data-toast` (gerçek geri bildirim) | 12 |
 | `data-open` (çalışan gezinme) | 21 |
 | DOM düğümü (ana sayfa açılışı) | ~3.500 |
