@@ -1,7 +1,7 @@
 # DadaGastro Mobil Prototipi — DURUM
 
 > **Yeni bir oturum bu dosyayla tek başına devam edebilmeli.**
-> Kurallar `CLAUDE.md`'de, yapılacak ekran listesi `EKRAN-ENVANTERI.md`'de.
+> Kurallar `CLAUDE.md`'de, ekran listesi `EKRAN-ENVANTERI.md`'de.
 > Bu dosya: nerede kaldık, ne karar verildi, sırada ne var.
 
 Canlı: **https://by4r.github.io/dadagastro-app-preview/**
@@ -9,59 +9,75 @@ Geliştirme: `python3 -m http.server 8000` → `http://localhost:8000`
 
 ---
 
-## 1. Ne bitti
+## 1. Durum: prototip tamamlandı
+
+**50 ekran · 0 ölü buton · 16 uçtan uca akış geçiyor.**
 
 | Faz | İş | Durum |
 |---|---|---|
 | **0** | Router iskeleti: `data-route` ile kendini kaydeden ekranlar, sınırsız derinlikte push/pop, `#/ekran` hash yönlendirme, tam olay delegasyonu | ✅ |
-| **0** | Ortak komponent seti: liste satırı · A–Z harf dizini · akordeon · boş durum · yükleme iskeleti · onay diyaloğu · paylaş sheet | ✅ |
-| **1** | Sağlık sekmesi ve tüm izleri kaldırıldı, ana sayfa canlının bölüm sırasına dizildi, hero sayaçları/kategoriler/filtre taksonomisi canlıdan | ✅ |
-| **2** | **Ne Pişirsem** yeniden yazıldı: 4 adımlı sihirbaz + 20 yemek modu + menü kurucu + hazır menüler + menü tepsisi sheet'i | ✅ |
-| **2** | **Dolapta Ne Var**: 5 sekme, 185 malzeme, besin & vakit filtreleri | ✅ |
-| **2** | **Püf Noktaları** kök sekme olarak kuruldu | ✅ |
-| — | Performans: 2018 KB → 741 KB, yavaş 3G ilk boyama 8196 → 3388 ms | ✅ |
-| — | `vqa.js` görsel öz-denetim aracı (13 kontrol) | ✅ |
-| **2** | Tarif akışı: arama · kategori dizini (33 + 50 mutfak) · kategori sonucu · tüm yorumlar · yorum yaz · **Tarif Ekle** 5 adımlı sihirbaz | ✅ |
-| **3** | Mutfak Sırları: püf detay · **Ansiklopedi** (A–Z, 26 kategori) · **Sözlük** (A–Z, 20 kategori) · **Ölçü Birimleri** (4 sekme, çalışan dönüştürücü) · Sofra Düzeni + detay | ✅ |
-| **4** | Video Mutfağı · oynatıcı (çalışan zamanlayıcı) · seriler · seri detay | ✅ |
-| **5** | Dada Route: planlayıcı · sonuç + 15 filtre · durak detay | ✅ |
-| — | **Sınıf adı sözleşmesi + `lint-css.js`** — önek zorunluluğu, durum sözlüğü koruması, öksüz sınıf taraması | ✅ |
+| **0** | Ortak komponent seti: liste satırı · A–Z dizini · akordeon · boş durum · iskelet · onay diyaloğu · paylaş sheet | ✅ |
+| **1** | Sağlık sekmesi kaldırıldı, ana sayfa canlının bölüm sırasına dizildi, sayaçlar/kategoriler/filtreler canlıdan | ✅ |
+| **2** | Ne Pişirsem (4 adım + menü kurucu) · Dolapta Ne Var (5 sekme, 185 malzeme) · Püf Noktaları kök sekmesi | ✅ |
+| **2** | **Tarif akışı:** arama · kategori dizini (33 kategori + 50 mutfak) · kategori sonucu · tüm yorumlar · yorum yaz · Tarif Ekle (5 adım) | ✅ |
+| **3** | **Mutfak Sırları:** püf detay · Ansiklopedi (A–Z, 26 kategori) · Sözlük (A–Z, 20 kategori) · **Ölçü Birimleri** (4 sekme, çalışan dönüştürücü) · Sofra Düzeni + detay | ✅ |
+| **4** | **Video Mutfağı:** liste · oynatıcı (çalışan sayaç) · seriler · seri detay | ✅ |
+| **5** | **Dada Route:** planlayıcı · sonuç + 15 filtre · durak detay | ✅ |
+| **6** | **Topluluk:** Şefler · Şef profili · Canlı Liderlik · Onur Listesi · Rozetlerim | ✅ |
+| **7** | **Hesap & sistem:** Profili Düzenle · Tarif Defterim · Alışveriş Listem · Tariflerim · Bildirimler · Ayarlar · Giriş · Üye Ol · Şifremi Unuttum · Onboarding | ✅ |
+| **8** | **Kurumsal:** Hakkımızda · SSS · İletişim · Gizlilik · KVKK · Reklam Ver | ✅ |
+| **9** | Süpürme: borç 97 → **0** · `#/kit-*` vitrin rotaları silindi · 16 akış testi yazıldı | ✅ |
+| **10** | Mutfağa Giriş — **kapsam dışı bırakıldı**, gerekçe § 4.9 | ⛔ |
 
 ---
 
-## 2. Ne kaldı
+## 2. Sayaçlar
 
-**46 ekranın 33'ü bitti, 13 kaldı.**
+| | Değer | Not |
+|---|---|---|
+| Ekran | **50** | `data-route` taşıyan bölüm sayısı |
+| `data-say` (**borç**) | **0** | 97'den indi — hedefe ulaşıldı |
+| `data-toast` (gerçek geri bildirim) | 87 | "Bağlantı kopyalandı" gibi; borç değil |
+| `data-open` (çalışan gezinme) | 420 | |
+| DOM düğümü (açılış) | 8.866 | Eşik 6.000'i aştı — § 7 |
+| `index.html` / `app.css` / `app.js` | 348 / 148 / 64 KB | gzip: **61 / 28 / 18 KB** |
+| İlk açılış (gzip'li metin + font + ana sayfa görselleri) | ~800 KB | 12 ekranlıyken 741 KB'ydi |
+| FCP (yerel) | 60 ms | |
 
-| Faz | Ekranlar |
-|---|---|
-| **6 — Topluluk** | Şefler listesi · Şef profili · Canlı Liderlik · Onur Listesi · Rozetlerim |
-| **7 — Hesap & sistem** | Profili Düzenle · Tarif Defterim · Alışveriş Listem · Tariflerim · Bildirimler · Ayarlar · Giriş · Üye Ol · Şifremi Unuttum · Onboarding |
-| **8 — Kurumsal** | Hakkımızda · SSS · İletişim · Gizlilik · KVKK · Reklam Ver |
-| **9 — Süpürme** | Kalan `data-say` → ekran · `#/kit-*` rotalarını sil · uçtan uca akış testleri |
-| **10** | Mutfağa Giriş — **canlıda `/mutfaga-giris` 404 döndü (3 Ağustos 2026), atlandı** |
+**Borcun anlamı:** `data-say` = "bu butonun ekranı henüz yok". `data-toast` = işlem
+gerçekten oldu, ekran gerekmiyor. İkisi de toast gösterir; ayrım kabul testi içindir.
 
-> ⚠️ **Her ekrandan önce canlı denetim tablosu zorunlu.** Canlıdaki ekranı aç,
-> her kontrolü listele, prototipte karşılığı olduğunu doğrula, rapora tabloyu koy.
+---
 
-## 3. Sayaçlar
+## 3. Denetim araçları — her değişiklikten sonra çalıştır
 
-| | Değer |
-|---|---|
-| `data-say` (**borç** — ekranı olmayan buton) | **40** |
-| `data-toast` (gerçek geri bildirim) | 12 |
-| `data-open` (çalışan gezinme) | 21 |
-| DOM düğümü (ana sayfa açılışı) | ~3.500 |
-| `index.html` / `app.css` / `app.js` | 148 KB / 102 KB / 37 KB (gzip: 26 / 21 / 11 KB) |
-| İlk açılış aktarımı | 741 KB |
-| Yavaş 3G ilk boyama (canlı, gzip'li) | 3.388 ms |
+```bash
+node .tools/lint-css.js   # sınıf adı sözleşmesi + öksüz sınıf taraması
+node .tools/vqa.js        # 15 görsel kontrol × 50 ekran (rota otomatik keşfedilir)
+node .tools/faz0.js       # derin link · yığın · alt çubuk · borç sayacı
+node .tools/faz1.js       # kaldırılan modül izi · bölüm sırası · sekme
+node .tools/akis.js       # 16 uçtan uca kullanıcı akışı
+node .tools/cap.js <rota> # tam sayfa render (rota#paneId ile sekme seçilebilir)
+```
 
-**Borcun anlamı:** `data-say` = "bu butonun ekranı henüz yok". Hedef 0.
-`data-toast` = işlem gerçekten oldu, ekran gerekmiyor ("Bağlantı kopyalandı").
-İkisi de toast gösterir; ayrım yalnız kabul testi içindir.
+### `vqa.js` — 15 kontrol
 
-DOM eşiği: 6.000'i geçerse gizli sekme içeriği tembel üretime geçecek.
-Faz 5 sonunda tekrar ölçülecek.
+1–13: satır yüksekliği · taşma · yapışıklık · ray hizası · boşluk ölçeği · buton hizası ·
+ritim · görsel çıpa · boş alan · segmented control · çip stili · kardeş boşluğu ·
+kapsayıcı iç boşluğu.
+
+**14 — kardeş kutuları geometrik çakışması** ve **15 — metin kontrastı** (< 2,2:1) bu turda
+eklendi. 15. kontrol yazılır yazılmaz **iki gerçek hata yakaladı**: püf detaydaki görünmez
+yazar alt metni (1,21:1) ve porsiyon sayacının renksiz `+/−` butonları (1,21:1).
+Foto üstü beyaz yazı ve kasten soluk durumlar (devre dışı harf, pasif fiyat işareti) muaf.
+
+### `lint-css.js`
+
+- Yeni **tek başına** sınıf seçicisi 2–3 harfli önek taşımıyorsa kırmızı döner
+- Router/durum sözlüğündeki ad (`on in behind top done off fin …`) komponent sınıfı olamaz
+- **Öksüz sınıf:** HTML'de geçip CSS'te kuralı olmayan sınıf → kırmızı
+  (`.tblwrap` böyle kaçmıştı: yeniden adlandırma CSS'e uygulandı, HTML'e değil)
+- Faz 2 öncesi 347 sınıf grandfathered — onaylanmış tasarım sistemi, dokunulmuyor
 
 ---
 
@@ -69,86 +85,59 @@ Faz 5 sonunda tekrar ölçülecek.
 
 ### 4.1 Kapsam dışı modüller — "olmayan modül görünmez"
 
-Canlıda çalışmayan modül uygulamada **hiç** yer almaz: yakında ekranı yok,
-rozeti yok, teaser yok, drawer satırı yok.
-
 | Modül | Sebep |
 |---|---|
 | Sağlık / Diyetisyen / Hesaplayıcılar | Canlıda "çok yakında", alt sayfalar 404. **Kök sekme dahil kaldırıldı** |
 | Haftalık Menü Pro | Sağlık modülüne bağlı |
-| DadaGourmet | `/gurme` 404, "çok yakında" |
-| DadaStore | `/store` 404 — tarif detayındaki ürün rayı dahil kaldırıldı |
-| Dada Akademi / DadaCampus | Sayfa yok (404) |
-| Topluluk akışı | Sayfa yok (404) — "Topluluğa Katıl" yalnız CTA |
+| DadaGourmet | `/gurme` 404 |
+| DadaStore | `/store` 404 — tarif detayındaki ürün rayı dahil |
+| Dada Akademi / DadaCampus | Sayfa yok |
+| Topluluk akışı | Sayfa yok — "Topluluğa Katıl" yalnız CTA |
+| **Mutfağa Giriş** | § 4.9 |
 
 **Dada Route kapsam içinde** — `/yol-guzergahim` canlıda çalışıyor.
 
+> `faz1.js` iz taraması iki **belgelenmiş istisna** tanır: `/giris`'teki "Diyetisyen"
+> hesap tipi çipi ve `/reklam-ver`'deki "Haftalık Menü ve Alışveriş Sponsorluğu" paket adı.
+> İkisi de canlıdan geliyor, kaldırılan modülle ilgisi yok.
+
 ### 4.2 Renk istisnaları
 
-- **Yeşil `#3BB77E` kapsam dışı DEĞİL** — onay/tamamlandı **durum rengi**.
-  Çalıştığı yerler: `.match` eşleşme rozeti · `.ig.done` işaretli malzeme
-  (zemin `#F4F9F6`, kenar `rgba(59,183,126,.32)`) · `.step.done .num` ·
-  `.cook-nav .next.fin` ("Tarifi Bitir").
-- **Petrol `#006072` ve mor `#B14FC5` kapsam dışı DEĞİL** — avatar rotasyonunun
-  parçası (domates · petrol · mor · koyu yeşil · ink). Modül rengi değil, **kişi
-  ayırt edici**.
-- **Tarif kartındaki "Yeni" şeridi petrol** (`.gcard .rib.new`) — korunuyor.
-  Yeşil "tamamlandı" anlamını bulandırır, ink kart kromuna karışır, domates
-  zaten "Şefin Tercihi"nde.
-- **Gerçekten kapsam dışı tek renk: `#009D4F` (DadaFit)** — hiç kullanılmıyor.
-- Canlının malzeme kategori renkleri (`#F2A33C` turuncu-sarı, `#4A7FA8` /
-  `#5B8DBE` açık mavi) **marka yasak listesinde** — kullanılmadı, onun yerine
-  canlının kendi kategori ikonları kullanıldı.
+- **Yeşil `#3BB77E`** — onay/tamamlandı durum rengi. `.match` · `.ig.done` · `.step.done .num` ·
+  `.cook-nav .next.fin` · `.sl-r.on` (alışveriş listesi) · `.vd-ep.on` (izlenen bölüm)
+- **Petrol `#006072` / mor `#B14FC5`** — avatar rotasyonu, kişi ayırt edici.
+  Tarif kartındaki "Yeni" şeridi de petrol
+- **Gerçekten kapsam dışı tek renk: `#009D4F` (DadaFit)** — hiç kullanılmıyor
 
 ### 4.3 Krem — yüzey yasağı, metin değil
 
-`#EFE5D3` ve `#F7F1E6` **hiçbir yerde `background` olamaz**.
-Koyu panel üzerindeki metin sıcak beyaz kalır: tek token **`--on-dark: #FFF6EA`**.
-`#F2ECE2` ve `#FFF8EE` varyantları bu token'a çekildi.
+`#EFE5D3` ve `#F7F1E6` hiçbir yerde `background` olamaz. Koyu panel üzerindeki metin
+tek token: **`--on-dark: #FFF6EA`**.
 
-### 4.4 Modül hiyerarşisi (canlı navigasyondan doğrulandı)
+### 4.4 Modül hiyerarşisi (canlı navigasyondan)
 
-**Üst seviye 5 modül:** Tarifler · Ne Pişirsem? · Dolapta Ne Var? ·
-**Püf Noktaları** · Mutfak Sırları
+**Üst seviye:** Tarifler · Ne Pişirsem? · Dolapta Ne Var? · **Püf Noktaları** · Mutfak Sırları
+**Mutfak Sırları'nın altında:** Mutfak Ansiklopedisi · Sözlük · Ölçü Birimleri · Sofra Düzeni
+*(Mutfağa Giriş § 4.9 gereği çıkarıldı — beşten dörde indi.)*
 
-**Mutfak Sırları'nın altında tam olarak 5 modül:**
-Mutfağa Giriş `/mutfaga-giris` · Mutfak Ansiklopedisi `/mutfak-ansiklopedisi` ·
-Sözlük `/mutfak-sozlugu` · Ölçü Birimleri `/olcu-birimleri` ·
-Sofra Düzeni `/sofra-duzeni`
+Püf Noktaları, Video Mutfağı ve Dada Route **üst seviyedir**, Mutfak Sırları'nın çocuğu değil.
 
-> Püf Noktaları **üst seviyedir**, Mutfak Sırları'nın çocuğu değil.
-> Video Mutfağı ve Dada Route da değil — onlar footer'daki "Keşfet & Pişir"
-> grubunda yaşıyor. Kardeş modülü kendi içine alma.
-
-**Mutfak Sırları'nın canlıda sayfası yok** (üst menüde `href="#"`, yalnız açılır
-menü başlığı) — o yüzden sekme almadı.
-
-### 4.5 Alt sekme çubuğu — 4. yuva kararı: **Püf Noktaları**
+### 4.5 Alt sekme çubuğu
 
 ```
 Ana Sayfa · Tarifler · [FAB: Ne Pişirsem?] · Püf Noktaları · Hesap
 ```
 
-İkon `lightbulb` ("ipucu"nun karşılığı). Etiket 78px'e sığıyor; bu sekmede
-yazı boyu 9px — kısaltma uydurulmadı.
-
-Sekme almayanlar nerede yaşıyor:
-- **Mutfak Sırları'nın 5 modülü** → ana sayfadaki "Mutfak Sırları" bölümü + drawer grubu
-- **Dolapta Ne Var** → ana sayfa bölümü + drawer + Tarifler içinden (FAB'daki Ne Pişirsem ile aynı işi yaptığı için sekme verilmedi)
-- **Video Mutfağı · Dada Route** → ana sayfa bölümleri + drawer "Keşfet & Pişir"
-
-### 4.6 Drawer (grup adları canlıdan)
+### 4.6 Drawer (16 satır, hepsi çalışıyor — `akis.js drawer` doğruluyor)
 
 | Grup | Satırlar |
 |---|---|
 | Mutfağım | Profilim · Tarif Defterim · Alışveriş Listem · Tariflerim |
-| Mutfak Sırları | Mutfağa Giriş · Mutfak Ansiklopedisi · Sözlük · Ölçü Birimleri · Sofra Düzeni |
+| Mutfak Sırları | Mutfak Ansiklopedisi · Sözlük · Ölçü Birimleri · Sofra Düzeni |
 | Keşfet & Pişir | Püf Noktaları · Video Mutfağı · Dada Route · Dolapta Ne Var? |
 | Uygulama | Bildirimler · Ayarlar · Yardım & Destek · Hakkımızda · Gizlilik & KVKK |
 
 ### 4.7 Dikey boşluk doktrini
-
-Ölçek doğru olması yetmiyor, **bağlamda doğru** olması gerekiyor.
 
 | İlişki | Boşluk |
 |---|---|
@@ -158,123 +147,113 @@ Sekme almayanlar nerede yaşıyor:
 | Alt bölüm ↔ alt bölüm | 20–24 |
 | Bölüm ↔ bölüm | 30 |
 
-Komponent içi: kart dolgusu her kenardan eşit · son öğe ↔ CTA **min 12** ·
-CTA ↔ kart alt kenarı **kart dolgusu kadar, asla 0**.
+⚠️ Boşluğu **dolguyla** vermek `vqa` 12. kontrolünü yanıltır (kardeş kutuları bitişik ölçülür).
+Bloklar arası boşluk **margin** ile verilecek — `#raSteps` ve `.fm-wrap` bu yüzden düzeltildi.
 
-⚠️ **`margin-top:auto` tuzağı:** kart içerik boyundayken `auto` **0'a düşer** ve
-buton üstündeki satıra yapışır. Auto'yu bir üstteki bloğa ver, butona sabit
-`margin-top` bırak.
+### 4.8 Sınıf adı sözleşmesi — **çakışma dört kez çıktı**
 
-### 4.8 Segmented control — uygulamada TEK tip
+`.sec` · `.ig-group` · `.gmeta` · **`.in`** (router durum sınıfı `.view.pushed.in`).
+Dördü de yeni bir komponentin, zaten anlamı olan bir adı ikinci kez kullanmasıydı.
 
-`.segs` ve `.rdtabs` aynı CSS bloğunu paylaşır: **tam genişlik (390)**,
-sekmeler eşit paylaşır (1fr), aktif olan domates metin + 2px domates alt çizgi.
-5 sekmeli varyant (`.segs-scroll`) kapsayıcı yine tam genişlik, sekmeler kaydırılır.
+**Yeni komponent sınıfı tek başına seçiciyse 2–3 harfli önek taşır.**
+Önekler: `sr-` arama · `ra-` tarif ekle · `fm-` form · `kt-` kategori kutucuğu ·
+`rv-` yorumlar · `rw-` yorum yaz · `ar-` makale · `cv-` dönüştürücü · `tb-` tablo ·
+`sx-` sayı paneli · `sd-` sofra düzeni · `vd-` video · `rt-` route · `lb-` liderlik ·
+`bg-` rozet · `bk-` defter · `sl-` alışveriş · `nt-` bildirim · `st-` ayarlar ·
+`au-` giriş/kayıt · `ob-` onboarding · `vw-` ekran iskeleti.
 
-### 4.9 FontAwesome alt kümesi — **yeni ikon eklerken YENİLE**
+`node .tools/lint-css.js` bunu denetler. Kırmızı dönerse commit etme.
 
-`fa-solid-900.woff2` 156 KB → **8.4 KB** (1393 glif → 75).
-`fa-regular-400.woff2` 25 KB → **2.7 KB**.
-Orijinaller `fa-*-full.woff2` adıyla repoda, **silme**.
+### 4.9 Mutfağa Giriş — kapsam dışı
 
-Alt küme `app.css`'te `.i-*` olarak **tanımlı tüm** kod noktalarını taşır
-(yalnız kullanılanları değil) — mevcut bir ikon sınıfını yeni ekranda kullanmak
-font yenilemeyi gerektirmez. Yalnız **yeni bir FA glifi** eklerken yenile:
+`https://dadagastro.com/mutfaga-giris` **3 Ağustos 2026'da 404 döndü.** Canlının ana
+sayfasında 6 modül listeleniyor ama hiçbiri açılmıyor.
 
-```bash
-cd deploy
-python3 - <<'EOF' > /tmp/uni.txt
-import io, re
-css = io.open('css/app.css', encoding='utf-8').read()
-cps = re.findall(r'\.i-[a-z0-9-]+:before\{content:"\\([0-9a-f]{4,5})"\}', css)
-print(','.join('U+' + c.upper() for c in sorted(set(cps))))
-EOF
-cd assets/fonts
-for f in fa-solid-900 fa-regular-400; do
-  python3 -m fontTools.subset "$f-full.woff2" --unicodes="$(cat /tmp/uni.txt)" \
-    --flavor=woff2 --layout-features= --no-hinting --desubroutinize \
-    --output-file="$f.woff2"
-done
+TEMEL KURAL ("canlıda çalışmayan modül görünmez") gereği **tüm giriş noktaları kaldırıldı**:
+ana sayfa bölümü · hızlı erişim kutucuğu · drawer satırı. "Yakında" toast'ı da bırakılmadı —
+o da kural ihlali olurdu.
+
+- Ana sayfadaki bölüm tek konuya indi: **"Mutfak Sırları → Ustaların küçük sırları"**,
+  sekme şeridi kalktı, 4 püf noktası kartı kaldı
+- Boşalan hızlı erişim kutucuğuna **Video Mutfağı** kondu
+- Tasarım verilirse geri eklenebilir; `EKRAN-ENVANTERI.md` § I hâlâ duruyor
+
+### 4.10 Ortak komponent — ekrana özel kopya yazılmaz
+
+Bu hata üç kez çıktı: `.gmeta` · `.cf-r` · püf detaydaki yazar satırı.
+
+**Kişi satırı = `.author`** (tarif detay · püf detay · şefler · ansiklopedi/sözlük yazarı ·
+video · şef kartı). İç yapısı birebir:
+
+```html
+<div class="author">
+  <span class="av">ZU</span>
+  <span class="txt"><b>Ad</b><span class="sub">alt metin</span></span>
+  <button class="follow">+ Takip Et</button>
+</div>
 ```
 
-Gerekli: `pip3 install fonttools brotli`. Komut çalıştırılıp aynı md5'i ürettiği
-doğrulandı. Yenileme sonrası her ekranda `offsetWidth === 0` olan `.fs`/`.fr`
-var mı bak.
+`.txt` yerine `.tx` yazılınca `flex:1;min-width:0` uygulanmadı ve alt metin butonun altına
+girdi; `.sub` yazılmayınca metin `body` rengini miras alıp beyaz kartta görünmez oldu.
+**Dış sınıfı alıp içini uydurmak da kopya sayılır.** Komponent artık kendini savunuyor:
+`flex:none` (buton), `min-width:0` (metin), ellipsis ve renk ata seçicide tanımlı.
 
-### 4.10 Diğer varlık kararları
+### 4.11 Görsel yükleme
 
-- Malzeme ikonları PNG 200px → **WebP 128px** (636 KB → 52 KB)
-- Gilroy fontları TTF/OTF → **woff2** (254 KB → 99 KB)
-- Kapalı ekranlara `content-visibility:hidden` — o ekranların arka plan
-  görselleri ilk açılışta inmiyor
-- Pakette 15 gerçek malzeme fotoğrafı var, 185 gerekiyor. Eksikler için
-  **canlının kendi kategori ikonu** (carrot/apple-whole/bacon/drumstick-bite/
-  fish/cheese/wheat-awn/mortar-pestle) `--ink-2` tonunda
+Kapalı ekranların arka plan görselleri **kaynakta `data-bg`** olarak duruyor; ekran ilk
+açıldığında `style`'a taşınıyor (`bgUyan`). JS'te temizlemek geç kalıyordu — ayrıştırıcı
+stili görür görmez indiriyor. **Ana sayfa dokunulmadı**, görselleri eager kalır ki ilk
+boyamada boşluk olmasın. Malzeme fotoğrafları `loading="lazy"`.
 
----
+### 4.12 Diğer varlık kararları
 
-## 5. `vqa.js` — görsel öz-denetim
-
-`node .tools/vqa.js [rota ...]` — rota verilmezse hepsini gezer.
-Her ekranda **tüm sekme kombinasyonlarını** dolaşır (hatalar genelde gizli sekmede).
-
-13 kontrol:
-
-1. Aynı satırdaki kartlar eşit yükseklikte mi
-2. Metin kırpılıyor / taşıyor mu
-3. Kelimeler birbirine yapışmış mı (`412B` gibi Türkçe kısaltmalar muaf)
-4. Yatay raylar gutter'a hizalı mı, son öğe kırpık mı
-5. Dikey boşluklar ölçekte mi (4·8·12·16·20·24·30)
-6. Butonlar aynı hizada mı
-7. Üst üste 3'ten fazla **aynı zeminde** aynı tip blok var mı
-8. Görsel çıpa var mı (fotoğraf, panel, ikon bloğu)
-9. Ekranın sonu boş mu (>220px)
-10. Segmented control tam genişlik ve sekmeler eşit mi
-11. Çip/butonların zemin ve kenarlığı **computed style ile** gerçekten var mı
-12. **Kardeş blok boşluğu** — farklı komponent tipleri arasında <16px
-13. **Kapsayıcı iç boşluğu** — ilk/son çocuk kenara yapışmış mı, CTA ↔ son öğe <12px
-
-Araç iki kez kalibre edildi ve **enjekte hatayla körleşmediği doğrulandı**.
-Yanlış alarmlar kapatıldı: kaydırılabilir ata içindeki taşma, Türkçe `B`/`Mn`
-kısaltmaları, kenarlıklı kapsayıcıda çocuk ölçümü, yatay flex'te CTA kontrolü,
-homojen liste komponentlerinin tekrarı, kapalı katmanların içi.
-
-**Diğer test paketleri:** `node .tools/faz0.js` (rota + yığın + regresyon),
-`node .tools/faz1.js` (kaldırılan modül izi + bölüm sırası + sekme).
+- Malzeme ikonları WebP 128px · Gilroy woff2 (99 KB) · FA alt kümesi 11 KB
+- **Yeni FA glifi eklerken alt kümeyi yenile** (bkz. `CLAUDE.md`). Bu turda `flag-checkered`
+  eklendi ve yenilendi
+- Pakette 15 gerçek malzeme fotoğrafı var, 185 gerekiyor; eksikler kategori ikonuyla
 
 ---
 
-## 6. Çalışan rotalar
+## 5. Çalışan rotalar (50)
 
-Hepsi `https://by4r.github.io/dadagastro-app-preview/#/<rota>` ile açılır.
+`https://by4r.github.io/dadagastro-app-preview/#/<rota>`
 
-### Uygulama
-
-| Rota | Ekran |
+| Grup | Rotalar |
 |---|---|
-| `#/ana-sayfa` | Kök sekme. Hero · hızlı erişim · kategoriler · dolapta · öne çıkanlar · mutfak sırları (tint bant) · videolar · günün tarifi · dada route (koyu panel) · şefler · topluluk |
-| `#/tarifler` | Kök sekme. Yapışkan arama + kategori çipleri · sonuç sayacı · aktif filtre pilleri · editör seçkisi · 2 kolonlu ızgara · filtre çekmecesi (8 grup, canlı sayılarla) |
-| `#/puf-noktalari` | **Kök sekme (4. yuva).** Koyu sayı paneli (591/11/3,7B) · fotoğraflı öne çıkan · 12 kategori çipi · sıralama · kartlar |
-| `#/hesap` | Kök sekme. Kapak + avatar · seviye · rozetler · sayaçlar · kaydettiklerin · paylaştıkların · menü grupları |
-| `#/ne-pisirsem` | Modal. 4 adımlı sihirbaz (Öğün → Süre → Zorluk → Damak) · sonuç → Tarifler'e filtre piliyle · 20 yemek modu · menü kurucu (34 kategori) · 4 hazır menü · menü tepsisi sheet'i |
-| `#/dolapta` | İtilen. 5 sekme · 185 malzeme (8 akordeon) · malzeme arama · seçilenler şeridi · kalori kaydırıcısı · protein/süre/zorluk |
-| `#/tarif-detay` | İtilen. Hero 352 · yazar · künye · sekmeler (Malzemeler/Yapılışı/Yorumlar) · porsiyon · topluluk · benzerler · alt eylem çubuğu |
-| `#/pisirme-modu` | Modal. Tam ekran koyu · adım adım · zamanlayıcı · malzeme çekmecesi |
+| **Kök sekmeler** | `ana-sayfa` · `tarifler` · `puf-noktalari` · `hesap` |
+| **Tarif akışı** | `arama` · `kategoriler` · `kategori` · `tarif-detay` · `yorumlar` · `yorum-yaz` · `tarif-ekle` · `pisirme-modu` |
+| **Ne Pişirsem / Dolapta** | `ne-pisirsem` · `dolapta` |
+| **Mutfak Sırları** | `puf-detay` · `ansiklopedi` · `ansiklopedi-detay` · `sozluk` · `sozluk-detay` · `olcu-birimleri` · `sofra-duzeni` · `sofra-detay` |
+| **Video** | `video-mutfagi` · `video-oynatici` · `video-seriler` · `seri-detay` |
+| **Dada Route** | `route` · `route-sonuc` · `durak-detay` |
+| **Topluluk** | `sefler` · `sef-profil` · `liderlik` · `onur-listesi` · `rozetlerim` |
+| **Hesap & sistem** | `profil-duzenle` · `defterim` · `alisveris` · `tariflerim` · `bildirimler` · `ayarlar` · `giris` · `uye-ol` · `sifremi-unuttum` · `onboarding` |
+| **Kurumsal** | `hakkimizda` · `sss` · `iletisim` · `gizlilik` · `kvkk` · `reklam-ver` |
 
-### Komponent vitrini (geliştirme aracı — sevkiyatta silinecek)
+Bilinmeyen rota ana sayfaya düşer. `#/kit-*` vitrin rotaları **silindi**.
 
-| Rota | İçerik |
+---
+
+## 6. Gerçekten çalışan etkileşimler
+
+Bunlar sahte değil — akış testleri doğruluyor:
+
+| Ekran | Ne çalışıyor |
 |---|---|
-| `#/kit` | Vitrin dizini |
-| `#/kit-liste` | Liste satırı: ikon · avatar · görsel · anahtar varyantları |
-| `#/kit-az` | A–Z harf dizini (29 harf, kaydırmayla senkron) |
-| `#/kit-akordeon` | Akordeon (tek açık kalır) |
-| `#/kit-bos` | Boş durum — 3 varyant |
-| `#/kit-iskelet` | Yükleme iskeleti — satır + kart ızgarası |
-| `#/kit-dialog` | Onay diyaloğu |
-| `#/kit-paylas` | Paylaş sheet |
-
-Bilinmeyen ya da kaldırılmış rota (eski `#/saglik` linki) ana sayfaya düşer.
+| Ölçü Birimleri | **Dönüştürücü gerçekten çeviriyor** — 11 kategori, 100+ malzeme, canlıdaki gram değerleriyle. Bardakla ölçülmeyen malzemede uyarı verir |
+| Arama | Yazdıkça süzüyor, eşleşmeyi kalın gösteriyor, sonuçsuzda boş durum |
+| Ansiklopedi / Sözlük / SSS | Arama süzgeci + A–Z dizini + boş durum |
+| Dolapta | Malzeme seçimi sayacı, sonuç ızgarası eşleşme rozetiyle üretiliyor |
+| Ne Pişirsem | 4 adımlı sihirbaz → seçimler Tarifler'e filtre pili olarak düşüyor |
+| Menü kurucu | Tepsiye ekle/çıkar, isim ver, kaydet |
+| Pişirme modu | Adım adım + zamanlayıcı; son adımda "Tarifi Bitir" |
+| Video oynatıcı | Oynat/duraklat, ilerleme çubuğu ve sayaç işliyor |
+| Dada Route | Kalkış/varış değiştirme, sapma kaydırıcısı, "Güzergâha Ekle" gerçekten ekliyor |
+| Alışveriş listesi | İşaretleme sayacı + ilerleme çubuğu, elle madde ekleme, alınanları temizleme |
+| Yorum yaz | Puansız gönderim engellenir, karakter sayacı işler |
+| Tarif Ekle | 5 adımlı sihirbaz, adım çipleri tıklanabilir |
+| Bildirimler | "Tümünü okundu işaretle" |
+| Tarifler | Üst bardaki görünüm anahtarı 2 kolon ↔ tek kolon |
 
 ---
 
@@ -282,25 +261,41 @@ Bilinmeyen ya da kaldırılmış rota (eski `#/saglik` linki) ana sayfaya düşe
 
 | Açık | Not |
 |---|---|
-| **97 ölü buton** | `data-say` taşıyan her buton, ekranı yapılınca `data-open`'a çevrilecek |
-| Ne Pişirsem adım ekranında 240px boşluk | **Bilinçli.** Karar ekranı; altına içerik doldurmak seçimle yarışır. `vqa.js` bunu bulgu olarak gösteriyor — kabul edilmiş istisna |
-| Yavaş 3G'de 3.4 sn ilk boyama | Kalan darboğaz gecikme (2 gidiş-dönüş). CSS'i HTML'e gömmek 3.0'a indirirdi ama "derleme adımı yok" ilkesi tercih edildi |
-| Şef ve tarif adları uydurma | Canlıdaki gerçek şefler (Ebru Tütüncü, Rüya Aydan, Berk Özdenak…) ve tarifler henüz aktarılmadı |
-| `#/kit-*` ekranları sevkiyatta | ~300 DOM düğümü ve 8 rota; teslimden önce silinecek |
-| Mutfağa Giriş | Canlıda `/mutfaga-giris` **404**. Yalnız ana sayfadaki 6 modül var. En sona bırakıldı |
+| **DOM 8.866 düğüm** | Eşik 6.000'di. Tek sayfada 50 ekran duruyor. Flutter'a geçişte konu kendiliğinden kapanıyor (`IndexedStack` + lazy route). HTML'de kalınacaksa gizli ekranların içeriği `<template>`'e alınmalı |
+| Ne Pişirsem adımında 240px boşluk | **Bilinçli.** Karar ekranı; altına içerik doldurmak seçimle yarışır. `vqa` bunu bulgu gösteriyor — kabul edilmiş istisna, kalan tek bulgu bu (2 sekme kombinasyonunda) |
+| Şef ve tarif adları kısmen uydurma | Canlıdaki gerçek şefler (Rüya, Burcu, Ece, Şahnur Yetkiner…) ve liderlik tablosu aktarıldı; tarif adları ve bazı avatar baş harfleri temsilî |
+| Dünya mutfağı sayıları | İlk 8'i canlıdan (Türk 1204, İtalyan 92…). Kalan 42'nin sayısı canlıda listelenmiyor, bölgesel dağılım temsilî |
+| Harita yok | Dada Route'ta harita yerine **dikey güzergâh şeridi** var (mobil-yerel, dış servise bağımlı değil). "Haritada gör" cihaz haritasına devreder |
+| Sponsorluk paket fiyatları | Canlıda da yazmıyor ("sabit ücret" / "komisyon bazlı" olarak geçiyor) |
+| Mutfağa Giriş | § 4.9 — canlıda 404, kaldırıldı |
 
 ---
 
-## 8. Bu turda düzeltilen, tekrar etmemesi gereken hatalar
+## 8. Tekrar etmemesi gereken hatalar
 
 | Hata | Ders |
 |---|---|
-| `.gmeta` diye stilsiz sınıf uydurma | Yeni kart yaparken **mevcut komponenti kullan**, yenisini uydurma |
-| Python `'fopt%s' % None` → `class="foptNone"` | Üretilen markup'ı **render'da doğrula**, 33 çip stilsiz kalmıştı |
-| Regex `</div>` dengesini kırdı | Yapısal markup değişikliğinde `div`/`section` dengesini say |
-| İç içe sekmede dış sekme iç paneli söndürdü | Sekme kapsamı `closest('[data-tabs]')` ile sınırlanmalı |
-| `margin-top:auto` 0'a düştü | Bkz. 4.7 |
-| `.ig-group` sınıf adı çakışması | Komponent sınıflarına önek ver |
+| `.in` router durum sınıfını ezdi | Yeni sınıfa **önek ver**; `lint-css.js` denetliyor |
+| `.tblwrap` yalnız CSS'te yeniden adlandırıldı | Öksüz sınıf taraması eklendi |
+| `data-tabs` `.segs`'in üstündeydi | Kapsam pane'leri görmüyordu, iki pane üst üste kalıyordu. `data-tabs` **segs + pane'leri saran** kapsayıcıda olacak |
+| `.vd-feat` `<a>` inline kaldı | `aspect-ratio` uygulanmadı, kart 16px'e çöktü. Kart/kutu ise `display:block` ver |
+| İlerleme çubuğu `<span>` yazıldı | Inline öğede `height` yutulur. Yapısal öğe `<div>` ya da açık `display` |
+| `.author` içine `.tx` yazıldı | Ortak komponentin **iç yapısı da** kopyalanacak (§ 4.10) |
+| Yazar alt metni `body` rengini miras aldı | `vqa` 15. kontrolü artık yakalıyor |
+| `open()` yığındaki ekranı açmıyordu | Giriş ⇄ Üye Ol gibi çapraz bağlantılar ölü görünüyordu; artık oraya geri sarıyor |
+| `#barTray` `.on` sınıfını hiç almıyordu | `.scrbar` görünürlüğü `.on`'a bağlı — menü tepsisi çubuğuna dokunulamıyordu |
+| `margin-top:auto` 0'a düştü | Auto'yu bir üstteki bloğa ver |
+| Boşluk dolguyla verildi | Kardeş boşluğu **margin** ile (§ 4.7) |
 
-**Ortak ders:** bu altı hatanın hiçbiri koddan görünmüyordu, hepsi render'a
-bakınca çıktı. `vqa.js` bunun için var, ama araç da gözün yerine geçmiyor.
+**Ortak ders:** bu hataların hiçbiri koddan görünmüyordu, hepsi render'a bakınca çıktı.
+Araçlar bunun için var — ama araç da gözün yerine geçmiyor.
+
+---
+
+## 9. Sırada ne var
+
+Prototip tarafında iş kalmadı. Sonraki adım **patron onayı**, ardından:
+
+1. Flutter'a çevirme (bkz. `CLAUDE.md` § 7) — token'lar ve ölçüler birebir taşınabilir hâlde
+2. Gerçek içerik aktarımı: canlıdaki 2.057 tarif, 591 püf noktası, 1.200 ansiklopedi maddesi
+3. Mutfağa Giriş — canlıda yayına girerse

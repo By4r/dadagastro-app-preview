@@ -119,16 +119,26 @@ Hepsi aynı griyse ekran tek bir hamur gibi okunur.
 
 ### 5. Öz-denetim — her ekran sonunda ÇALIŞTIR
 
-`node .tools/vqa.js <rota>` çalıştır **ve tam sayfa render'a kendin bak.**
-Raporda şu yedi soruyu yanıtla:
+```bash
+node .tools/lint-css.js      # sınıf adı + öksüz sınıf denetimi
+node .tools/vqa.js           # 15 görsel kontrol, tüm ekranlar (rota otomatik keşfedilir)
+node .tools/faz0.js          # rota · yığın · alt çubuk · borç sayacı
+node .tools/faz1.js          # kaldırılan modül izi · bölüm sırası · sekme
+node .tools/akis.js          # 16 uçtan uca kullanıcı akışı
+```
 
-1. Görsel çıpa var mı? Nerede?
-2. Aşırı dolu / aşırı boş bölge var mı?
-3. Aynı satırdaki kartlar eşit yükseklikte mi?
-4. Metin kırpılıyor, taşıyor ya da birbirine yapışıyor mu?
-5. Yatay raylar gutter'a hizalı mı, son öğe kırpık mı?
-6. Boşluklar ölçekte mi?
-7. Üst üste 3'ten fazla aynı tip blok var mı?
+`vqa.js` 15 kontrol yapar. Son ikisi bu turda eklendi:
+
+| # | Kontrol |
+|---|---|
+| 1–13 | satır yüksekliği · taşma · yapışıklık · ray hizası · boşluk ölçeği · buton hizası · ritim · görsel çıpa · boş alan · segmented control · çip stili · kardeş boşluğu · kapsayıcı iç boşluğu |
+| **14** | **Kardeş kutuları geometrik olarak çakışıyor mu** |
+| **15** | **Metin zeminine göre okunuyor mu** (kontrast < 2,2:1 → bulgu) |
+
+15. kontrol yazılır yazılmaz iki gerçek hata yakaladı: püf detaydaki görünmez
+yazar alt metni (1,21:1) ve porsiyon sayacının renksiz `+/−` butonları (1,21:1).
+Foto üstü beyaz yazı ve kasten soluk durumlar (devre dışı harf, pasif fiyat
+işareti) muaf.
 
 **"Render aldım" yetmez. Bakıp değerlendireceksin.**
 
@@ -386,6 +396,37 @@ node .tools/lint-css.js --kaydet # onaylanan sınıfları grandfathered listeye 
 Mevcut 347 sınıf (`.btn` `.chip` `.lrow` `.sec` …) **onaylanmış tasarım sistemidir**,
 grandfathered listede duruyor — dokunulmuyor. Denetim yalnız **yeni** eklenenleri yakalar.
 Kırmızı dönerse commit etme, önce öneki ver.
+
+### ⚠️ ORTAK KOMPONENT — ekrana özel kopya YAZILMAZ
+
+Bu hata üç kez çıktı: `.gmeta` · `.cf-r` · püf detaydaki yazar satırı.
+Hepsinde **zaten var olan bir komponentin ekrana özel kopyası** yazıldı ve
+kopya, aslının koruma kurallarını (flex, min-width, renk) taşımadı.
+
+**Yeni ekran yazarken sıra:**
+1. Bu kalıp zaten var mı? → `css/app.css`'te ara, **varsa onu kullan**
+2. Kullanırken **iç yapısını birebir kopyala** — dış sınıfı alıp içini
+   uydurmak da kopya sayılır ve aynı hatayı üretir
+3. Gerçekten yeni bir kalıpsa 2–3 harfli önekle yaz (bkz. sınıf adı sözleşmesi)
+
+**Kişi satırı = `.author`.** Tarif detay · püf detay · şefler listesi ·
+ansiklopedi/sözlük yazarı · video · şef kartı — hepsi bu:
+
+```html
+<div class="author">
+  <span class="av">ZU</span>
+  <span class="txt"><b>Ad</b><span class="sub">alt metin</span></span>
+  <button class="follow">+ Takip Et</button>
+</div>
+```
+
+`.txt` yerine `.tx` yazılınca `flex:1;min-width:0` uygulanmadı, alt metin
+butonun altına girdi; `.sub` yazılmayınca metin `body` rengini (`#EFE9DF`)
+miras alıp **beyaz kartta görünmez oldu**. İkisi de tek satırlık sapmaydı.
+
+**Komponent kendini savunmalı:** ata seçicide `flex:none` (buton),
+`min-width:0` (metin), `overflow:hidden;text-overflow:ellipsis` ve renk
+tanımı bulunsun ki iç markup sapsa bile ekran bozulmasın.
 
 ### ⚠️ Yatay ray hizalaması
 

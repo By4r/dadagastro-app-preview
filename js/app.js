@@ -43,6 +43,22 @@
 
   function topEl() { return stack.length ? el(stack[stack.length - 1]) : el(curRoot); }
 
+
+  /* ================= GÖRSEL TEMBELLEŞTİRME =================
+     50 ekranın arka plan görselleri açılışta topluca iniyordu
+     (content-visibility:hidden fetch'i durdurmuyor, JS'te temizlemek de geç
+     kalıyor). Kapalı ekranlarda görsel KAYNAKTA data-bg olarak duruyor;
+     ekran ilk açıldığında style'a taşınıyor. Ana sayfa dokunulmadı. */
+  function bgUyan(view) {
+    if (!view || view._bgOk) return;
+    view._bgOk = true;
+    all('[data-bg]', view).forEach(function (e) {
+      e.style.backgroundImage = e.dataset.bg;
+      e.removeAttribute('data-bg');
+    });
+  }
+  all('.view').forEach(function (v) { if (v.classList.contains('on')) v._bgOk = true; });
+
   /* ================= ÜST BAR / DURUM ÇUBUĞU =================
      KURAL: şeffaf bar yalnız scrollTop = 0'da. 4px kaydırma → anında solid. */
   function bindBar(view) {
@@ -127,6 +143,7 @@
   function goRoot(route, silent) {
     var v = viewOf(route);
     if (!v || !isRoot(v)) return;
+    bgUyan(v);
     if (v.id === curRoot && !stack.length) {
       v.scrollTo({ top: 0, behavior: 'smooth' });   // aktif sekmeye tekrar dokun → başa sar
       return;
@@ -141,6 +158,7 @@
   function push(route, silent, instant) {
     var v = viewOf(route);
     if (!v || v.classList.contains('on')) return;
+    bgUyan(v);
     var below = topEl();
     v.scrollTop = 0;
     v.classList.add('on');
@@ -193,6 +211,10 @@
     if (!v) return;
     closeLayers();
     if (isRoot(v)) { popAll(); goRoot(route); return; }
+    /* Hedef zaten yığındaysa push() sessizce düşüyordu (giriş ⇄ üye ol gibi
+       çapraz bağlantılarda buton ölü görünüyordu). Oraya kadar geri sar. */
+    var i = stack.indexOf(v.id);
+    if (i > -1) { while (stack.length - 1 > i) pop(); return; }
     push(route);
   }
 
@@ -634,6 +656,37 @@
     if (el('frEmpty')) el('frEmpty').style.display = n ? 'none' : 'flex';
     if (el('frResults')) el('frResults').style.display = n ? 'block' : 'none';
     if (n && el('frRn')) { el('frRn').textContent = Math.max(3, 240 - n * 11); el('frRm').textContent = n; }
+    frGrid(n, adlar);
+  }
+
+  /* Sonuç ızgarası boş bir kabuktu — eşleşme rozetiyle gerçek kart üretiliyor.
+     Eşleşme sayısı seçilen malzeme adediyle birlikte artar. */
+  var FR_TARIF = [
+    ['Ezogelin Çorbası', '1410', 30, 'Kolay', '6 kişilik', 11, 'AT', 'Ayşe Tülin', 'ink', '4,9'],
+    ['Köz Patlıcanlı Tavuk Sote', '2615', 40, 'Orta', '4 kişilik', 9, 'AB', 'Arda Bozkurt', 'tomato', '4,8'],
+    ['Beşamelli Fırın Makarna', '1419', 45, 'Kolay', '6 kişilik', 10, 'AB', 'Arda Bozkurt', 'tomato', '4,9'],
+    ['Akdeniz Mevsim Salatası', '1970', 15, 'Kolay', '2 kişilik', 7, 'SA', 'Selin Aydın', 'green-deep', '4,7'],
+    ['Fırında Kıymalı Pide', '1494', 65, 'Orta', '4 kişilik', 12, 'KD', 'Kaan Demir', 'petrol', '4,7'],
+    ['Yayla Çorbası — Naneli', '1406', 40, 'Kolay', '6 kişilik', 8, 'ZU', 'Zeynep Usta', 'purple', '4,7']
+  ];
+  function frGrid(n, adlar) {
+    var g = el('frGrid');
+    if (!g) return;
+    if (!n) { g.innerHTML = ''; return; }
+    g.innerHTML = FR_TARIF.map(function (r, i) {
+      var var_ = Math.min(r[5], n + 2 + i % 2);       // elindeki malzeme sayısı arttıkça eşleşme artar
+      return '<a class="gcard" data-open="tarif-detay">' +
+        '<div class="im" style="background-image:url(\'assets/img/' + r[1] + '.webp\')">' +
+        '<span class="tchip"><i class="fs i-clock"></i> ' + r[2] + ' dk</span></div>' +
+        '<div class="bd"><h4>' + r[0] + '</h4>' +
+        '<div class="match" style="position:static;margin:0 0 8px"><i class="fs i-check"></i> ' +
+        var_ + '/' + r[5] + ' malzemen var</div>' +
+        '<div class="gsub"><span>' + r[4] + '</span></div>' +
+        '<div class="gchef"><span class="av" style="background:var(--' + r[8] + ')">' + r[6] +
+        '</span><b>' + r[7] + '</b></div>' +
+        '<div class="gstat"><span class="rate"><i class="fs i-star"></i> ' + r[9] +
+        '</span><span class="dif">' + r[3] + '</span></div></div></a>';
+    }).join('');
   }
   function frTemizle() {
     frSel = {};
@@ -818,7 +871,14 @@
     var mod = document.querySelector('#npTabs .pane.on');
     var modda = mod && mod.id === 'npMod';
     if (el('barWizard')) el('barWizard').style.display = (modda || wzAdim >= 5) ? 'none' : '';
-    if (el('barTray')) el('barTray').hidden = !(modda && tray.length);
+    /* .scrbar görünürlüğü .on sınıfına bağlı; barTray data-bar ile eşleşmediği
+       için hiç açılmıyordu — tepsi çubuğuna dokunulamıyordu. */
+    var tb = el('barTray');
+    if (tb) {
+      var ac = !!(modda && tray.length);
+      tb.hidden = !ac;
+      tb.classList.toggle('on', ac);
+    }
   }
 
   /* ================= FİLTRE ÇEKMECESİ ================= */
@@ -1228,6 +1288,97 @@
     var ad = (b.closest('.rt-c').querySelector('h4') || {}).textContent || 'Durak';
     say(ekli ? ad + ' güzergâha eklendi' : ad + ' güzergâhtan çıkarıldı');
   }, true);
+
+
+  /* ================= ALIŞVERİŞ LİSTESİ (F4) ================= */
+  function slSync() {
+    if (!el('slDone')) return;
+    var hepsi = all('#vShop [data-sl]');
+    var alinan = hepsi.filter(function (r) { return r.classList.contains('on'); }).length;
+    el('slDone').textContent = alinan;
+    el('slAll').textContent = hepsi.length;
+    el('slTr').style.width = (hepsi.length ? alinan / hepsi.length * 100 : 0) + '%';
+  }
+  document.addEventListener('click', function (e) {
+    var r = e.target.closest('#vShop [data-sl]');
+    if (!r) return;
+    r.classList.toggle('on');
+    slSync();
+  });
+  if (el('slAddBtn')) el('slAddBtn').addEventListener('click', function () {
+    var v = (el('slAdd').value || '').trim();
+    if (!v) { say('Önce malzeme adı yaz'); return; }
+    var d = document.createElement('div');
+    d.className = 'sl-r';
+    d.setAttribute('data-sl', '');
+    d.innerHTML = '<span class="bx"><i class="fs i-check"></i></span><span class="tx"><b>' + v +
+                  '</b><span>Elle eklendi</span></span><span class="qt">1 adet</span>';
+    el('slList').appendChild(d);
+    el('slAdd').value = '';
+    slSync(); say(v + ' listeye eklendi');
+  });
+  if (el('slDoneBtn')) el('slDoneBtn').addEventListener('click', function () {
+    var n = all('#vShop [data-sl].on');
+    if (!n.length) { say('Henüz işaretlenmiş madde yok'); return; }
+    n.forEach(function (r) { r.remove(); });
+    slSync(); say(n.length + ' madde listeden çıkarıldı');
+  });
+  slSync();
+
+  /* ================= BİLDİRİMLER (F6) ================= */
+  if (el('ntRead')) el('ntRead').addEventListener('click', function () {
+    var n = all('#vNotif .nt-r.unread');
+    if (!n.length) { say('Okunmamış bildirim yok'); return; }
+    n.forEach(function (x) { x.classList.remove('unread'); });
+    say(n.length + ' bildirim okundu olarak işaretlendi');
+  });
+
+  /* ================= PROFİL / GİRİŞ / ÜYE OL ================= */
+  if (el('peSave')) el('peSave').addEventListener('click', function () {
+    pop(); setTimeout(function () { say('Profilin güncellendi'); }, 420);
+  });
+  if (el('loginGo')) el('loginGo').addEventListener('click', function () {
+    pop(); setTimeout(function () { say('Hoş geldin Elif — defterin hazır'); }, 420);
+  });
+  if (el('signupGo')) el('signupGo').addEventListener('click', function () {
+    popAll(); open('onboarding');
+  });
+  if (el('ctSend')) el('ctSend').addEventListener('click', function () {
+    pop(); setTimeout(function () { say('Mesajın gönderildi — 1 iş günü içinde dönüş yapacağız'); }, 420);
+  });
+  if (el('chFollow')) el('chFollow').addEventListener('click', function () {
+    var on = this.classList.toggle('on');
+    this.textContent = on ? '✓ Takiptesin' : '+ Takip Et';
+    say(on ? 'Zeynep Usta takip ediliyor' : 'Takipten çıkıldı');
+  });
+
+  /* ================= ONBOARDING (F11) ================= */
+  var obAdim = 1, OB_SON = 4;
+  function obGoster(k) {
+    obAdim = k;
+    all('#vOnboard .ob-s').forEach(function (s2) {
+      s2.classList.toggle('on', +s2.dataset.ob === k);
+    });
+    if (el('obPrev')) el('obPrev').classList.toggle('off', k === 1);
+    if (el('obNext')) el('obNext').innerHTML = (k === OB_SON ? 'Mutfağa Başla' : 'Devam') +
+      ' <i class="fs i-chevron-right"></i>';
+    if (el('obSkip')) el('obSkip').style.display = k === OB_SON ? 'none' : '';
+    var v = el('vOnboard'); if (v) v.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function obBitir() {
+    popAll();
+    goRoot('ana-sayfa');
+    setTimeout(function () { say('Hoş geldin! Mutfak seni bekliyor'); obGoster(1); }, 420);
+  }
+  if (el('obNext')) el('obNext').addEventListener('click', function () {
+    if (obAdim === OB_SON) { obBitir(); return; }
+    obGoster(obAdim + 1);
+  });
+  if (el('obPrev')) el('obPrev').addEventListener('click', function () {
+    if (obAdim > 1) obGoster(obAdim - 1);
+  });
+  if (el('obSkip')) el('obSkip').addEventListener('click', obBitir);
+  obGoster(1);
 
   /* ================= KLAVYE (masaüstü önizleme) ================= */
   document.addEventListener('keydown', function (e) {

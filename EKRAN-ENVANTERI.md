@@ -30,7 +30,7 @@ Bir şey yoksa **yok**.
 ## Durum
 
 ✅ = prototipte var, dokunma (sadece gerekirse iyileştir)
-🔨 = yapılacak
+🔨 = yapılacak · ⛔ = kapsam dışı (gerekçesi DURUM.md § 4.9)
 ⏸ = tasarımı sonra verilecek
 
 ---
@@ -87,13 +87,13 @@ Popüler çipler: `zeytinyağlı · kahvaltılık · misafir yemeği · vegan ·
 |---|---|---|---|
 | B1 | Tarif Detay | ✅ | **DadaStore ürün rayı kaldırılacak** |
 | B2 | Pişirme Modu | ✅ | |
-| B3 | Arama sonuçları | 🔨 | Boş durum + öneri + son aramalar dahil |
-| B4 | Kategori dizini | 🔨 | 33 kategori, her birinde tarif sayısı |
-| B5 | Kategori sonuç listesi | 🔨 | Tarifler ekranının filtreli hali |
-| B6 | Dünya Mutfakları dizini | 🔨 | 50 mutfak |
-| B7 | Tüm yorumlar | 🔨 | Detaydaki "Tüm yorumları gör" buraya |
-| B8 | Yorum yaz (modal) | 🔨 | Puan + metin + fotoğraf ekle |
-| B9 | Tarif Ekle | 🔨 | Çok adımlı: temel bilgi → malzeme → adımlar → görsel → önizleme |
+| B3 | Arama sonuçları | ✅ | Boş durum + öneri + son aramalar dahil |
+| B4 | Kategori dizini | ✅ | 33 kategori, her birinde tarif sayısı |
+| B5 | Kategori sonuç listesi | ✅ | Tarifler ekranının filtreli hali |
+| B6 | Dünya Mutfakları dizini | ✅ | Kategori dizininin 2. sekmesi — canlıda da ayrı sayfası yok |
+| B7 | Tüm yorumlar | ✅ | Detaydaki "Tüm yorumları gör" buraya |
+| B8 | Yorum yaz (modal) | ✅ | Puan + metin + fotoğraf ekle |
+| B9 | Tarif Ekle | ✅ | Çok adımlı: temel bilgi → malzeme → adımlar → görsel → önizleme |
 
 ### Filtre taksonomisi (canlıdan, birebir)
 
@@ -122,20 +122,20 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 
 | # | Ekran | Durum | Kaynak / ölçü |
 |---|---|---|---|
-| C1 | Püf Noktaları listesi | 🔨 | `/puf-noktalari` — 591 madde · 11 kategori · sıralama: En Yeni / En Çok Okunan |
-| C2 | Püf Noktası detay | 🔨 | Okunma sayısı · kategori etiketi |
-| C3 | Mutfak Ansiklopedisi listesi | 🔨 | `/mutfak-ansiklopedisi` — 1.200 madde · 26 kategori · A–Z harf dizini |
-| C4 | Ansiklopedi madde detay | 🔨 | Nedir · ne işe yarar · faydaları · ilgili tarifler |
-| C5 | **Mutfak Sözlüğü listesi** | 🔨 | `/mutfak-sozlugu` — 765 terim · 20 kategori · A–Z. **Ansiklopediden ayrı ekran** |
-| C6 | Sözlük terim detay | 🔨 | Tanım · örnek kullanım · ilgili tarifler |
-| C7 | **Ölçü Birimleri** | 🔨 | `/olcu-birimleri` — 4 sekme: Dönüştürücü · Dönüşüm Tabloları · Standart Ölçüler · Fırın Rehberi. 90+ malzeme. **Gerçekten çevirsin** |
-| C8 | **Sofra Düzeni listesi** | 🔨 | `/sofra-duzeni` — 11 kategori · 61 ipucu |
-| C9 | Sofra Düzeni rehber detay | 🔨 | Açıklama + pratik ipuçları |
-| C10 | Video Mutfağı listesi | 🔨 | `/video-mutfagi` — 33 video · 4 seri · haftanın videosu · sıradaki seçki |
-| C11 | Video oynatıcı | 🔨 | Tam ekran, altında tarif bağlantısı |
-| C12 | **Video serileri listesi** | 🔨 | 4 seri · "N bölüm · her Salı yeni bölüm" |
-| C13 | Seri detay (bölümler) | 🔨 | Bölüm bölüm liste, kaldığın yerden devam |
-| C14 | Dolapta Ne Var | 🔨 | `/dolapta-ne-var` — Dolaptakiler / Hariç Tuttuklarım sekmeleri · kategorili malzeme seçimi |
+| C1 | Püf Noktaları listesi | ✅ | `/puf-noktalari` — 591 madde · 11 kategori · sıralama: En Yeni / En Çok Okunan |
+| C2 | Püf Noktası detay | ✅ | Okunma sayısı · kategori etiketi |
+| C3 | Mutfak Ansiklopedisi listesi | ✅ | `/mutfak-ansiklopedisi` — 1.200 madde · 26 kategori · A–Z harf dizini |
+| C4 | Ansiklopedi madde detay | ✅ | Nedir · ne işe yarar · faydaları · ilgili tarifler |
+| C5 | **Mutfak Sözlüğü listesi** | ✅ | `/mutfak-sozlugu` — 765 terim · 20 kategori · A–Z. **Ansiklopediden ayrı ekran** |
+| C6 | Sözlük terim detay | ✅ | Tanım · örnek kullanım · ilgili tarifler |
+| C7 | **Ölçü Birimleri** | ✅ | `/olcu-birimleri` — 4 sekme: Dönüştürücü · Dönüşüm Tabloları · Standart Ölçüler · Fırın Rehberi. 90+ malzeme. **Gerçekten çevirsin** |
+| C8 | **Sofra Düzeni listesi** | ✅ | `/sofra-duzeni` — 11 kategori · 61 ipucu |
+| C9 | Sofra Düzeni rehber detay | ✅ | Açıklama + pratik ipuçları |
+| C10 | Video Mutfağı listesi | ✅ | `/video-mutfagi` — 33 video · 4 seri · haftanın videosu · sıradaki seçki |
+| C11 | Video oynatıcı | ✅ | Tam ekran, altında tarif bağlantısı |
+| C12 | **Video serileri listesi** | ✅ | 4 seri · "N bölüm · her Salı yeni bölüm" |
+| C13 | Seri detay (bölümler) | ✅ | Bölüm bölüm liste, kaldığın yerden devam |
+| C14 | Dolapta Ne Var | ✅ | `/dolapta-ne-var` — Dolaptakiler / Hariç Tuttuklarım sekmeleri · kategorili malzeme seçimi |
 
 > `Ölçü Birimleri` canlıda **Mutfak Sırları** altında duruyor, sağlık aracı değil — bu yüzden Mutfak sekmesinde.
 
@@ -145,9 +145,9 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 
 | # | Ekran | Durum | Not |
 |---|---|---|---|
-| D1 | Rota planlayıcı | 🔨 | `/yol-guzergahim` — kalkış/varış · ara durak ekle · yön değiştir · harita |
-| D2 | Rota sonuç & durak listesi | 🔨 | 9 hızlı filtre: Tümü · Tam Yol Üstü · 5/10/20 dk sapma · Dada Öneriyor · Şu An Açık · Kahvaltı · Öğle · Akşam · Kahve · Tatlı · Yöresel · Hızlı Mola · Aileye Uygun. Mesafe + tahmini süre |
-| D3 | Durak detay | 🔨 | Duraklar tıklanabilir olmalı — yoksa ölü buton olur |
+| D1 | Rota planlayıcı | ✅ | `/yol-guzergahim` — kalkış/varış · ara durak ekle · yön değiştir · harita |
+| D2 | Rota sonuç & durak listesi | ✅ | 9 hızlı filtre: Tümü · Tam Yol Üstü · 5/10/20 dk sapma · Dada Öneriyor · Şu An Açık · Kahvaltı · Öğle · Akşam · Kahve · Tatlı · Yöresel · Hızlı Mola · Aileye Uygun. Mesafe + tahmini süre |
+| D3 | Durak detay | ✅ | Duraklar tıklanabilir olmalı — yoksa ölü buton olur |
 
 ---
 
@@ -155,11 +155,11 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 
 | # | Ekran | Durum | Not |
 |---|---|---|---|
-| E1 | Şefler listesi | 🔨 | `/sefler` — 265 üye · isim araması · rütbe (Çırak, Çömez Aşçı…) · N tarif · puan · Takip Et |
-| E2 | Şef profili | 🔨 | Tarifleri · takipçi · rozet · mutfak defteri |
-| E3 | Canlı Liderlik | 🔨 | `/liderlik` — Sezon 2026 · katkı puanı sıralaması |
-| E4 | Onur Listesi | 🔨 | `/onur-listesi` — **boş durumuyla**: "Henüz kapanmış bir sezon yok" |
-| E5 | Rozetlerim | 🔨 | Giriş sonrası |
+| E1 | Şefler listesi | ✅ | `/sefler` — 265 üye · isim araması · rütbe (Çırak, Çömez Aşçı…) · N tarif · puan · Takip Et |
+| E2 | Şef profili | ✅ | Tarifleri · takipçi · rozet · mutfak defteri |
+| E3 | Canlı Liderlik | ✅ | `/liderlik` — Sezon 2026 · katkı puanı sıralaması |
+| E4 | Onur Listesi | ✅ | `/onur-listesi` — **boş durumuyla**: "Henüz kapanmış bir sezon yok" |
+| E5 | Rozetlerim | ✅ | Giriş sonrası |
 
 ---
 
@@ -168,16 +168,16 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 | # | Ekran | Durum |
 |---|---|---|
 | F1 | Profil | ✅ |
-| F2 | Profili Düzenle | 🔨 |
-| F3 | Tarif Defterim (koleksiyonlar) | 🔨 |
-| F4 | Alışveriş Listem | 🔨 |
-| F5 | Paylaştığım Tarifler | 🔨 |
-| F6 | Bildirimler | 🔨 |
-| F7 | Ayarlar (bildirim, dil, tema, hesap) | 🔨 |
-| F8 | Giriş Yap | 🔨 | `/giris` — 4 hesap tipi: Kullanıcı · Antrenör · Diyetisyen · İşletme. Google / Facebook / e-posta / telefon |
-| F9 | Üye Ol | 🔨 |
-| F10 | Şifremi Unuttum | 🔨 |
-| F11 | Onboarding (3-4 slayt + izinler) | 🔨 |
+| F2 | Profili Düzenle | ✅ |
+| F3 | Tarif Defterim (koleksiyonlar) | ✅ |
+| F4 | Alışveriş Listem | ✅ |
+| F5 | Paylaştığım Tarifler | ✅ |
+| F6 | Bildirimler | ✅ |
+| F7 | Ayarlar (bildirim, dil, tema, hesap) | ✅ |
+| F8 | Giriş Yap | ✅ | `/giris` — 4 hesap tipi: Kullanıcı · Antrenör · Diyetisyen · İşletme. Google / Facebook / e-posta / telefon |
+| F9 | Üye Ol | ✅ |
+| F10 | Şifremi Unuttum | ✅ |
+| F11 | Onboarding (3-4 slayt + izinler) | ✅ |
 
 ---
 
@@ -185,12 +185,12 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 
 | # | Ekran | Durum |
 |---|---|---|
-| G1 | Hakkımızda | 🔨 |
-| G2 | SSS (akordeon) | 🔨 |
-| G3 | İletişim (form) | 🔨 |
-| G4 | Gizlilik Politikası | 🔨 |
-| G5 | KVKK Aydınlatma Metni | 🔨 |
-| G6 | Reklam Ver | 🔨 |
+| G1 | Hakkımızda | ✅ |
+| G2 | SSS (akordeon) | ✅ |
+| G3 | İletişim (form) | ✅ |
+| G4 | Gizlilik Politikası | ✅ |
+| G5 | KVKK Aydınlatma Metni | ✅ |
+| G6 | Reklam Ver | ✅ |
 
 > G4–G6 uzun metin ekranları — sade tipografi, yapışkan başlık, içindekiler.
 
@@ -200,14 +200,14 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 
 | # | İş | Durum |
 |---|---|---|
-| H1 | **Hiçbir ölü buton kalmayacak** — her `data-say` gerçek bir ekrana bağlanacak | 🔨 |
-| H2 | Boş durumlar (arama sonucu yok, liste boş, bağlantı yok) | 🔨 |
-| H3 | Yükleniyor iskeletleri (skeleton) | 🔨 |
-| H4 | Paylaş sheet | 🔨 |
-| H5 | Onay diyalogları (sil, çıkış) | 🔨 |
+| H1 | **Hiçbir ölü buton kalmayacak** — her `data-say` gerçek bir ekrana bağlanacak | ✅ |
+| H2 | Boş durumlar (arama sonucu yok, liste boş, bağlantı yok) | ✅ |
+| H3 | Yükleniyor iskeletleri (skeleton) | ✅ |
+| H4 | Paylaş sheet | ✅ |
+| H5 | Onay diyalogları (sil, çıkış) | ✅ |
 | H6 | Toast / snackbar standardı | ✅ |
-| H7 | Geri yığını her ekranda tutarlı | 🔨 |
-| H8 | Drawer güncellemesi — Store, Gourmet, Akademi, Sağlık satırları çıkar | 🔨 |
+| H7 | Geri yığını her ekranda tutarlı | ✅ |
+| H8 | Drawer güncellemesi — Store, Gourmet, Akademi, Sağlık satırları çıkar | ✅ |
 
 ### Drawer'ın son hâli
 
@@ -222,15 +222,17 @@ En altta: Çıkış Yap + sürüm
 
 | # | Ekran | Durum | Not |
 |---|---|---|---|
-| I1 | Mutfağa Giriş modül listesi | ⏸ | Canlıda `/mutfaga-giris` **404** — yalnız ana sayfadaki 6 modül var |
-| I2 | Modül detay (bölüm listesi) | ⏸ | |
-| I3 | Ders ekranı | ⏸ | |
+| I1 | Mutfağa Giriş modül listesi | ⛔ | Canlıda `/mutfaga-giris` **404** — yalnız ana sayfadaki 6 modül var |
+| I2 | Modül detay (bölüm listesi) | ⛔ | |
+| I3 | Ders ekranı | ⛔ | |
 
 Ana sayfadaki 6 modül (canlıdan): 01 Mutfak Düzeni ve Çalışma Alanı (3 bölüm) ·
 02 Temel Bıçak Türleri ve Kullanımları (4) · 03 Sebze ve Meyve Hazırlama Teknikleri (4) ·
 04 Haşlama: Sudan Fazlası (5) · 05 Tavada Pişirme Teknikleri (4) · 06 Fırında Pişirme Teknikleri (4)
 
-> Bütün diğer ekranlar bittikten sonra ele alınacak. Tasarım verilirse yapılır.
+> **KAPSAM DIŞI.** `/mutfaga-giris` 3 Ağustos 2026'da 404 döndü; TEMEL KURAL gereği
+> tüm giriş noktaları (ana sayfa bölümü, hızlı erişim kutucuğu, drawer satırı)
+> kaldırıldı. Canlıda yayına girerse geri eklenir. Ayrıntı: DURUM.md § 4.9.
 
 ---
 
@@ -255,7 +257,7 @@ o ekranın `data-say`'ini sil ve butonu `data-open` ile bağla.
 
 Bu liste **boş** olmalı.
 
-**Borç sayacı:** Faz 0 sonu 107 → ayrım sonrası **97**
+**Borç sayacı:** Faz 0 sonu 107 → ayrım sonrası 97 → **0 (tamamlandı)**
 
 İkinci test — kaldırılan modüllerden hiçbir iz kalmamalı:
 
@@ -264,3 +266,25 @@ Bu liste **boş** olmalı.
 ['Sağlık','Diyetisyen','Kalori','Gourmet','Store','Akademi','Yakında']
   .map(k => [k, document.body.innerHTML.split(k).length - 1])
 ```
+
+
+---
+
+## Tamamlanma — 3 Ağustos 2026
+
+**50 ekran üretildi** (46 planlanan + 4 ek). Eklenenler, çünkü liste satırı ölü kalmasın:
+
+| Ekran | Neden eklendi |
+|---|---|
+| `sozluk-detay` | C6 zaten listedeydi, ayrı ekran olarak üretildi |
+| `seri-detay` | C13 listedeydi |
+| `route-sonuc` | D2 listedeydi — planlayıcıdan ayrı ekran |
+| `durak-detay` | D3 listedeydi |
+
+Kabul kriterleri:
+
+- `data-say` borç sayacı: **0**
+- `vqa.js`: 50 ekran, **2 bilinçli istisna** dışında temiz
+- `akis.js`: **16 / 16** uçtan uca akış geçiyor
+- `lint-css.js`: temiz (sınıf adı + öksüz sınıf)
+- `#/kit-*` vitrin rotaları silindi

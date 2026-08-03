@@ -470,12 +470,39 @@ table.t tr:last-child td{border-bottom:0}
 .rd-meta .rate i{color:var(--yellow)}
 
 /* yazar şeridi */
-.author{display:flex;align-items:center;gap:11px;padding:14px var(--gutter);background:var(--paper);border-bottom:1px solid var(--line)}
-.author .av{width:42px;height:42px;font-size:14px}
-.author .txt{flex:1;min-width:0}
-.author b{display:block;font-family:"GilroyXB";font-size:14px;color:var(--ink)}
-.author .sub{display:block;font-family:"GilroyLt";font-size:11px;color:var(--muted);margin-top:2px}
-.author .follow{width:auto;padding:0 14px;margin:0;height:34px}
+/* ============================================================
+   .author — KİŞİ SATIRI, TEK ORTAK KOMPONENT
+   Kullanıldığı yerler: tarif detay · püf detay · şefler listesi ·
+   ansiklopedi/sözlük yazarı · video · şef kartı.
+   Ekrana özel yazar satırı YAZILMAZ — .gmeta ve .cf-r hatası buydu.
+
+   Yapı (birebir):
+     <div class="author">
+       <span class="av">ZU</span>
+       <span class="txt"><b>Ad</b><span class="sub">alt metin</span></span>
+       <button class="follow">+ Takip Et</button>
+     </div>
+   ============================================================ */
+.author{display:flex;align-items:center;gap:12px;padding:14px var(--gutter);
+  background:var(--paper);border-bottom:1px solid var(--line)}
+.author .av{width:42px;height:42px;font-size:14px;flex:none}
+/* metin bloğu daralabilir olmalı; min-width:0 olmadan flex çocuğu küçülmez
+   ve uzun alt metin butonun altına girer */
+.author .txt,.author .tx{flex:1;min-width:0;display:block}
+.author b{display:block;font-family:"GilroyXB";font-size:14px;color:var(--ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.author .sub,.author .txt>span,.author .tx>span{display:block;font-family:"GilroyLt";font-weight:300;
+  font-size:11.5px;color:var(--muted);margin-top:4px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* buton asla daralmaz ve metne yapışmaz */
+.author .follow{flex:none;width:auto;padding:0 14px;margin:0 0 0 12px;height:34px}
+/* rütbe çipi (şefler listesi) — alt metnin altında, kendi satırında */
+/* .author .txt>span kuralı alt metin içindi; rütbe çipi onun altında kalmasın
+   diye seçici bilerek daha özel yazıldı (aksi hâlde display:block'a düşüp
+   satırı baştan sona kaplıyor) */
+.author .txt>span.au-rank,.author .au-rank{display:inline-block;width:auto;margin-top:7px;
+  font-family:"GilroyXB";font-size:9.5px;letter-spacing:.04em;color:var(--tomato);
+  background:var(--tomato-tint);padding:4px 7px;border-radius:var(--r-sm);white-space:nowrap}
 
 /* künye ızgarası */
 .kunye{display:flex;overflow-x:auto;scrollbar-width:none;background:var(--paper);
@@ -503,6 +530,9 @@ table.t tr:last-child td{border-bottom:0}
 .portion .txt{flex:1}
 .portion b{display:block;font-family:"GilroyXB";font-size:13.5px;color:var(--ink)}
 .portion span{display:block;font-family:"GilroyLt";font-size:11px;color:var(--muted);margin-top:2px}
+/* +/- butonları renk tanımı olmadan body rengini miras alıyor ve beyaz kartta
+   görünmez oluyordu (vqa kontrast kontrolü yakaladı) */
+.portion button{color:var(--ink)}
 .stepper{display:flex;align-items:center;gap:4px;background:var(--bg);border-radius:var(--r-md);padding:4px}
 .stepper button{width:32px;height:32px;border-radius:var(--r-sm);background:var(--paper);color:var(--ink);
   display:grid;place-items:center;font-size:12px;box-shadow:var(--sh-sm)}
@@ -866,7 +896,7 @@ table.t tr:last-child td{border-bottom:0}
 .gsub>span{font-family:"GilroyLt";font-weight:300;font-size:10.5px;color:var(--muted)}
 .gsub .pr{margin-left:auto;letter-spacing:.5px}
 .gsub .pr b{font-family:"GilroyXB";font-weight:800;color:var(--ink)}
-.gsub .pr span{color:#D6D1C9}
+.gsub .pr span{color:#BDB8B0}
 .gstat .rate .n{font-family:"GilroyLt";font-weight:300;font-style:normal;font-size:10px;color:var(--muted)}
 .gchef{display:flex;align-items:center;gap:6px;margin-top:9px}
 .gchef .av{width:18px;height:18px;font-size:8px;display:grid;place-items:center;color:#FFF;margin-top:0}
@@ -1119,7 +1149,7 @@ table.t tr:last-child td{border-bottom:0}
 .azb-rail::-webkit-scrollbar{height:0}
 .azl{flex:none;width:44px;height:44px;display:grid;place-items:center;position:relative;background:none;
   border:0;font-family:"GilroyXB";font-size:12.5px;color:var(--ink-2);-webkit-tap-highlight-color:transparent}
-.azl.off{color:#D6D1C9;pointer-events:none}
+.azl.off{color:#BDB8B0;pointer-events:none}
 .azl.on{color:var(--tomato)}
 /* marka tiresi — eyebrow'daki 16×2 domates tire, burada aktif harfin altında */
 .azl.on::after{content:"";position:absolute;bottom:6px;left:50%;margin-left:-8px;
@@ -1130,7 +1160,7 @@ table.t tr:last-child td{border-bottom:0}
   color:var(--tomato);border-bottom:1px solid var(--line)}
 
 /* ---- 3. akordeon ----------------------------------------- */
-.acc{background:var(--paper);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:10px}
+.acc{background:var(--paper);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:12px}
 .acc-h{display:flex;align-items:center;gap:10px;width:100%;min-height:54px;padding:15px 14px;
   text-align:left;background:none;border:0;-webkit-tap-highlight-color:transparent}
 .acc-h .dash{flex:none;width:0;height:2px;border-radius:2px;background:var(--tomato);
@@ -1625,7 +1655,7 @@ table.t tr:last-child td{border-bottom:0}
 .vw-pad.vw-bar{height:96px}          /* alt eylem çubuğu olan ekranlar: 48 buton + 2×12 dolgu + safe */
 
 /* ---------- ORTAK FORM ---------- */
-.fm-wrap{padding:16px var(--gutter) 0}
+.fm-wrap{margin-top:16px;padding:0 var(--gutter)}
 .fm-f+.fm-f{margin-top:20px}                       /* alt bölüm ↔ alt bölüm */
 .fm-f .fm-lb{display:block;font-family:"GilroyXB";font-size:11px;letter-spacing:.06em;
   text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
@@ -2143,5 +2173,182 @@ table.t tr:last-child td{border-bottom:0}
 .rt-facts div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:12px}
 .rt-facts .ic{width:30px;height:30px;border-radius:var(--r-md);background:var(--tomato-tint);
   color:var(--tomato);display:grid;place-items:center;font-size:12px;margin-bottom:10px}
-.rt-facts b{display:block;font-family:"GilroyXB";font-size:13px;color:var(--ink)}
+.rt-facts b{display:block;font-family:"GilroyXB";font-size:13px;color:var(--ink);
+  overflow-wrap:anywhere}
 .rt-facts span{display:block;font-family:"GilroyLt";font-weight:300;font-size:11px;color:var(--muted);margin-top:5px}
+
+/* ============================================================
+   FAZ 6 — TOPLULUK   ·   FAZ 7 — HESAP & SİSTEM
+   ============================================================ */
+
+/* ---------- LİDERLİK ---------- */
+.lb-pod{display:flex;align-items:flex-end;gap:9px;margin:16px var(--gutter) 0;padding:18px 14px 16px;
+  background:var(--ink);border-radius:var(--r-xl)}
+.lb-pod .p{flex:1;min-width:0;text-align:center}
+.lb-pod .av{width:52px;height:52px;margin:0 auto;border-radius:var(--r-circle);display:grid;
+  place-items:center;color:#FFF;font-family:"GilroyXB";font-size:17px}
+.lb-pod .p.one .av{width:64px;height:64px;font-size:21px;box-shadow:0 0 0 3px var(--yellow)}
+.lb-pod .rk{display:block;margin-top:10px;font-family:"GilroyXB";font-size:10px;letter-spacing:.10em;
+  color:var(--yellow)}
+/* uzun isim üç noktayla kesilmesin — podyum sütununda iki satıra insin */
+.lb-pod b{display:block;margin-top:7px;font-family:"GilroyXB";font-size:12px;line-height:1.25;color:#FFF;
+  overflow-wrap:anywhere}
+.lb-pod span.pt{display:block;margin-top:5px;font-family:"GilroyLt";font-weight:300;font-size:11px;
+  color:rgba(255,255,255,.62)}
+.lb-r{display:flex;align-items:center;gap:11px;padding:12px var(--gutter);background:var(--paper);
+  border-bottom:1px solid var(--line)}
+.lb-r .rk{flex:none;width:26px;text-align:center;font-family:"GilroyXB";font-size:14px;color:var(--muted)}
+.lb-r .av{flex:none;width:38px;height:38px;border-radius:var(--r-circle);display:grid;place-items:center;
+  color:#FFF;font-family:"GilroyXB";font-size:13px}
+.lb-r .tx{flex:1;min-width:0}
+.lb-r .tx b{display:block;font-family:"GilroyXB";font-size:13.5px;line-height:1.3;color:var(--ink);
+  white-space:normal;overflow-wrap:anywhere}
+.lb-r .tx span{display:block;margin-top:5px;font-family:"GilroyLt";font-weight:300;font-size:11px;
+  color:var(--muted)}
+.lb-r .pt{flex:none;font-family:"GilroyXB";font-size:14px;color:var(--tomato);white-space:nowrap}
+.lb-r.me{background:var(--tomato-tint)}
+.lb-r.me .rk{color:var(--tomato)}
+
+/* ---------- ROZETLER ---------- */
+.bg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;padding:0 var(--gutter)}
+.bg-t{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 8px;
+  text-align:center}
+.bg-t .ic{width:46px;height:46px;margin:0 auto 10px;border-radius:var(--r-lg);display:grid;
+  place-items:center;font-size:18px;background:var(--tomato-tint);color:var(--tomato)}
+.bg-t b{display:block;font-family:"GilroyXB";font-size:11.5px;line-height:1.28;color:var(--ink)}
+.bg-t span{display:block;margin-top:6px;font-family:"GilroyLt";font-weight:300;font-size:10px;
+  line-height:1.35;color:var(--muted)}
+.bg-t.off{opacity:.55}
+.bg-t.off .ic{background:var(--bg);color:#C9C4BC}
+.bg-t .tr{display:block;height:4px;border-radius:2px;background:var(--line);margin-top:9px;overflow:hidden}
+.bg-t .tr i{display:block;height:100%;border-radius:2px;background:var(--tomato)}
+
+  border-bottom:1px solid var(--line)}
+  color:#FFF;font-family:"GilroyXB";font-size:16px}
+  color:var(--muted)}
+  color:var(--tomato);background:var(--tomato-tint);padding:4px 7px;border-radius:var(--r-sm)}
+
+/* ---------- KOLEKSİYON (tarif defteri) ---------- */
+.bk-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:0 var(--gutter)}
+.bk-c{display:block;position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--ink);
+  aspect-ratio:1/.78}
+.bk-c .im{position:absolute;inset:0;background-size:cover;background-position:center}
+.bk-c .im::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,18,12,.06) 40%,rgba(20,18,12,.80))}
+.bk-c .tx{position:absolute;left:12px;right:12px;bottom:11px;z-index:2}
+.bk-c .tx b{display:block;font-family:"GilroyXB";font-size:13.5px;line-height:1.24;color:#FFF}
+.bk-c .tx span{display:block;margin-top:4px;font-family:"GilroyLt";font-weight:300;font-size:11px;
+  color:rgba(255,255,255,.76)}
+.bk-new{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  aspect-ratio:1/.78;border-radius:var(--r-lg);border:1.5px dashed #D8D4CD;background:var(--paper);
+  color:var(--tomato);font-family:"GilroyXB";font-size:12px}
+.bk-new i{font-size:17px}
+
+/* ---------- ALIŞVERİŞ LİSTESİ ---------- */
+.sl-r{display:flex;align-items:center;gap:12px;padding:12px var(--gutter);background:var(--paper);
+  border-bottom:1px solid var(--line)}
+.sl-r .bx{flex:none;width:24px;height:24px;border-radius:7px;border:1.5px solid #D8D4CD;
+  background:var(--paper);display:grid;place-items:center;color:transparent;font-size:10px}
+.sl-r.on .bx{background:var(--green);border-color:var(--green);color:#FFF}
+.sl-r.on .tx b{text-decoration:line-through;color:var(--muted)}
+.sl-r .tx{flex:1;min-width:0}
+.sl-r .tx b{display:block;font-family:"Gilroy";font-weight:500;font-size:14px;color:var(--ink)}
+.sl-r .tx span{display:block;margin-top:4px;font-family:"GilroyLt";font-weight:300;font-size:11px;
+  color:var(--muted)}
+.sl-r .qt{flex:none;font-family:"GilroyXB";font-size:12px;color:var(--ink-2)}
+.sl-bar{display:flex;align-items:center;gap:12px;margin:16px var(--gutter) 0;padding:14px 16px;
+  background:var(--ink);border-radius:var(--r-lg)}
+.sl-bar .tx{flex:1;min-width:0}
+.sl-bar b{display:block;font-family:"GilroyXB";font-size:15px;color:#FFF}
+.sl-bar span{display:block;margin-top:6px;font-family:"GilroyLt";font-weight:300;font-size:11.5px;
+  color:rgba(255,255,255,.62)}
+.sl-bar .tr{display:block;height:5px;border-radius:3px;background:rgba(255,255,255,.18);
+  margin-top:10px;overflow:hidden}
+.sl-bar .tr i{display:block;height:100%;border-radius:3px;background:var(--green)}
+
+/* ---------- BİLDİRİM ---------- */
+.nt-r{display:flex;gap:12px;padding:14px var(--gutter);background:var(--paper);
+  border-bottom:1px solid var(--line);position:relative}
+.nt-r.unread{background:var(--tomato-tint)}
+.nt-r .ic{flex:none;width:38px;height:38px;border-radius:var(--r-md);display:grid;place-items:center;
+  background:var(--bg);color:var(--ink);font-size:14px}
+.nt-r.unread .ic{background:var(--paper);color:var(--tomato)}
+.nt-r .av{flex:none;width:38px;height:38px;border-radius:var(--r-circle);display:grid;place-items:center;
+  color:#FFF;font-family:"GilroyXB";font-size:13px}
+.nt-r .tx{flex:1;min-width:0}
+.nt-r .tx b{font-family:"GilroyXB";font-size:13.5px;line-height:1.35;color:var(--ink)}
+.nt-r .tx p{margin-top:6px;font-family:"GilroyLt";font-weight:300;font-size:12px;line-height:1.5;
+  color:var(--ink-2)}
+.nt-r .tx .tm{display:block;margin-top:7px;font-family:"GilroyLt";font-weight:300;font-size:10.5px;
+  color:var(--muted)}
+.nt-r .th{flex:none;width:44px;height:44px;border-radius:var(--r-md);background-size:cover;
+  background-position:center;background-color:var(--line);align-self:center}
+
+/* ---------- AYARLAR ---------- */
+.st-g{margin-top:20px;background:var(--paper);border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line)}
+.st-g .st-t{font-family:"GilroyXB";font-size:10.5px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--muted);padding:14px var(--gutter) 8px;background:var(--bg)}
+.st-r{display:flex;align-items:center;gap:12px;padding:13px var(--gutter);min-height:56px}
+.st-r+.st-r{border-top:1px solid var(--line)}
+.st-r .ic{flex:none;width:32px;height:32px;border-radius:var(--r-md);background:var(--bg);
+  display:grid;place-items:center;color:var(--ink);font-size:13px}
+.st-r .tx{flex:1;min-width:0}
+.st-r .tx b{display:block;font-family:"Gilroy";font-weight:500;font-size:14px;color:var(--ink)}
+.st-r .tx span{display:block;margin-top:4px;font-family:"GilroyLt";font-weight:300;font-size:11px;
+  line-height:1.4;color:var(--muted)}
+.st-r .v{flex:none;font-family:"GilroyXB";font-size:12px;color:var(--muted)}
+.st-r .go{flex:none;color:#C9C4BC;font-size:12px}
+.st-r.danger .tx b{color:var(--tomato)}
+.st-r.danger .ic{background:var(--tomato-tint);color:var(--tomato)}
+
+/* ---------- GİRİŞ / ÜYE OL ---------- */
+.au-hero{padding:30px var(--gutter) 0;text-align:center}
+.au-hero .mk{width:56px;height:56px;margin:0 auto 18px;border-radius:var(--r-lg);background:var(--tomato);
+  color:#FFF;display:grid;place-items:center;font-size:22px;box-shadow:0 8px 22px rgba(225,72,39,.30)}
+.au-hero h1{font-family:"GilroyXB";font-size:25px;line-height:1.14;letter-spacing:-.02em;color:var(--ink)}
+.au-hero p{margin-top:10px;font-family:"GilroyLt";font-weight:300;font-size:13px;line-height:1.55;
+  color:var(--muted)}
+.au-soc{display:flex;flex-direction:column;gap:10px;padding:24px var(--gutter) 0}
+.au-soc button{display:flex;align-items:center;justify-content:center;gap:10px;height:48px;
+  border-radius:var(--r-md);background:var(--paper);border:1px solid var(--line);
+  font-family:"GilroyXB";font-size:13.5px;color:var(--ink)}
+.au-or{display:flex;align-items:center;gap:12px;padding:20px var(--gutter) 0}
+.au-or i{flex:1;height:1px;background:var(--line)}
+.au-or span{font-family:"GilroyLt";font-weight:300;font-size:11.5px;color:var(--muted)}
+.au-alt{padding:20px var(--gutter) 0;text-align:center;font-family:"GilroyLt";font-weight:300;
+  font-size:12.5px;color:var(--muted)}
+.au-alt b{font-family:"GilroyXB";font-weight:800;color:var(--tomato)}
+.au-feat{margin:24px var(--gutter) 0;padding:16px;background:var(--ink);border-radius:var(--r-lg)}
+.au-feat div{display:flex;align-items:flex-start;gap:10px}
+.au-feat div+div{margin-top:12px}
+.au-feat i{flex:none;margin-top:1px;color:var(--green);font-size:12px}
+.au-feat span{font-family:"GilroyLt";font-weight:300;font-size:12.5px;line-height:1.5;
+  color:rgba(255,255,255,.80)}
+
+/* ---------- ONBOARDING ---------- */
+.ob-s{display:none;min-height:100%;flex-direction:column}
+.ob-s.on{display:flex}
+.ob-fig{position:relative;height:340px;background-size:cover;background-position:center;
+  background-color:var(--ink)}
+.ob-fig::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,18,12,.10) 46%,var(--bg))}
+.ob-bd{padding:0 24px;text-align:center;margin-top:-24px;position:relative;z-index:2}
+.ob-bd h1{font-family:"GilroyXB";font-size:28px;line-height:1.12;letter-spacing:-.025em;color:var(--ink)}
+.ob-bd p{margin-top:12px;font-family:"GilroyLt";font-weight:300;font-size:14px;line-height:1.6;
+  color:var(--ink-2)}
+.ob-dots{display:flex;justify-content:center;gap:7px;padding:24px 0 0}
+.ob-dots i{width:7px;height:7px;border-radius:var(--r-circle);background:#D8D4CD}
+.ob-dots i.on{width:20px;border-radius:4px;background:var(--tomato)}
+.ob-perm{margin:24px var(--gutter) 0}
+.ob-p{display:flex;align-items:center;gap:12px;padding:14px;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-lg)}
+.ob-p+.ob-p{margin-top:12px}
+.ob-p .ic{flex:none;width:38px;height:38px;border-radius:var(--r-md);background:var(--tomato-tint);
+  color:var(--tomato);display:grid;place-items:center;font-size:14px}
+.ob-p .tx{flex:1;min-width:0}
+.ob-p .tx b{display:block;font-family:"GilroyXB";font-size:13.5px;color:var(--ink)}
+.ob-p .tx span{display:block;margin-top:5px;font-family:"GilroyLt";font-weight:300;font-size:11px;
+  line-height:1.45;color:var(--muted)}
+.ob-skip{position:absolute;top:56px;right:16px;z-index:60;font-family:"GilroyXB";font-size:12.5px;
+  color:var(--ink-2);background:rgba(255,255,255,.86);padding:8px 12px;border-radius:var(--r-md)}
