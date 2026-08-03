@@ -7,6 +7,105 @@
 Canlı: **https://by4r.github.io/dadagastro-app-preview/**
 Geliştirme: `python3 -m http.server 8000` → `http://localhost:8000`
 
+
+---
+
+## 0. DEVİR — bir sonraki oturum buradan başlasın
+
+**Son tur (3 Ağustos 2026) ne değişti:**
+
+1. **Dolapta Ne Var iki katmanlı yapıya döndü.** Tek şeritli 5 sekme silindi.
+   Birincil ikili toggle (`Dolaptakiler | Hariç Tuttuklarım`) + Hariç seçiliyken
+   altında dört mod kartı. Her modun kendi açıklaması, kendi arama placeholder'ı
+   ve **kendi seçim durumu** var. Hassasiyetim Var'ın 11 maddesi ve iki durumu
+   (Kesinlikle gösterme / Uyararak göster) korundu.
+2. **Malzeme fotoğrafları 15 → 75/185 (%41).** Canlıdan indirildi, 96px WebP,
+   toplam 102 KB. Canlının kendisi 77/185 (%42) — parite sağlandı.
+3. **15 modül ekranına görselli hero eklendi** (`.mh-` bileşeni). Sayaçlar
+   canlıdan; canlıda sayaç olmayan 4 modülde sayaç satırı hiç basılmıyor.
+
+### 🔨 AÇIK İŞ — sıradaki oturumun işi
+
+**(a) Modül hero'ları hâlâ KART formatında.**
+`.mh-hero` şu an `margin:16px var(--gutter) 0` + `border-radius:var(--r-xl)`
+ile kart gibi duruyor. Yapılmadı:
+- **tam kanama** (full-bleed) — kenardan kenara, radius yok
+- **app bar hero'nun ÜSTÜNDE yüzsün** — `.vbar.overlay` ile, scroll'da solidleşerek
+
+Ana sayfa hero'su zaten böyle çalışıyor; kalıp orada hazır (`#vHome` →
+`.vbar.overlay` + `.hero`). Modül ekranlarına taşınacak.
+Dokunulacak yerler: `deploy/css/app.css` içindeki `.mh-hero` bloğu (`margin`,
+`border-radius`, `padding-top`) · her modül ekranının `<header class="vbar">`
+satırına `overlay` sınıfı · `.tools/mhero.py` içindeki `hero_html()`.
+
+**(b) Ansiklopedi/Sözlük/Püf detayları TEK ŞABLON.**
+Ekranlar var ve çalışıyor (`ansiklopedi-detay` · `sozluk-detay` · `puf-detay`)
+ama **liste satırlarının hepsi aynı tek içeriği açıyor**:
+ansiklopedide 24 satır → hep "Domates", sözlükte 18 satır → hep "Al Dente",
+püf noktalarında → hep "Pilav neden tane tane olmaz?".
+Yapılacak: satır başına içerik + `data-open` yerine içerik anahtarı taşıyan
+bir mekanizma (ör. `data-ans="domates"` → JS detayı doldurur).
+Dokunulacak yerler: `deploy/index.html` içindeki `#vEnc` / `#vGloss` / `#vTips`
+liste blokları ve `#vEncDet` / `#vGlossDet` / `#vTipDet` şablon ekranları ·
+doldurma mantığı için `deploy/js/app.js`.
+
+### Dosya haritası — hangi iş nerede
+
+| İş | Dosya / yer |
+|---|---|
+| **Modül hero bileşeni (CSS)** | `deploy/css/app.css` → `.mh-hero`, `.mh-bg`, `.mh-veil`, `.mh-grain`, `.mh-eyebrow`, `.mh-stat` (dosya sonuna yakın, "MODÜL HERO" yorum bloğu) |
+| **Modül hero verisi + üretici** | `.tools/mhero.py` → `HERO` sözlüğü (rota → görsel, eyebrow, başlık, alt başlık, sayaçlar) ve `hero_html()`. Değiştirip `python3 .tools/mhero.py` çalıştır |
+| **Ana sayfa hero'su (tam kanama örneği)** | `deploy/css/app.css` → `.hero`, `.hero-bg`, `.hero-veil`, `.hero-grain` |
+| **Ansiklopedi listesi** | `deploy/index.html` → `<section id="vEnc" data-route="ansiklopedi">`, satırlar `#encList` içinde. **Part dosyası yok — index.html tek dosya** |
+| **Ansiklopedi detay şablonu** | `deploy/index.html` → `<section id="vEncDet" data-route="ansiklopedi-detay">` |
+| **Sözlük listesi / detayı** | `#vGloss` / `#vGlossDet` (aynı dosya) |
+| **Scroll'da app bar opaklaşma** | `deploy/js/app.js` → **`bindBar(view)` fonksiyonu**. `.vbar.overlay` taşıyan bara `scrollTop > 4` olunca `.solid` ekler, durum çubuğu rengini `screen.classList` ile çevirir. Her `.view` için açılışta bağlanır |
+| **Dolapta iki katmanlı mantık** | `deploy/js/app.js` → "DOLAPTA NE VAR" bloğu: `frState` (mod başına seçim), `frKatmanGoster()`, `frModGoster()`, `frBoya()`, `frRender()` |
+| **Malzeme → fotoğraf eşlemesi** | `.tools/malzeme-esleme.json` (malzeme adı → dosya adı), görseller `deploy/assets/ing/tmdb-*.webp` |
+
+### Build zinciri — **derleme adımı YOK**
+
+`deploy/index.html` **tek dosyadır**, part dosyası birleştirilmiyor.
+Python araçları dosyayı yerinde düzenler:
+
+| Komut | Ne yapar |
+|---|---|
+| `python3 .tools/insert.py <fragman.html>` | Yeni ekran bölümlerini `index.html`'e sokar (aynı id varsa değiştirir — tekrar çalıştırmak güvenli) |
+| `python3 .tools/mhero.py` | `HERO` sözlüğünden modül hero'larını üretip yerine koyar |
+
+**Deploy:** `deploy/` klasörünün kendisi bir git deposu ve GitHub Pages kaynağı.
+
+```bash
+cd deploy && git add -A && git commit -m "…" && git push origin HEAD
+```
+
+Push'tan ~1–2 dakika sonra canlıya düşer. Doğrulama:
+
+```bash
+curl -s "https://by4r.github.io/dadagastro-app-preview/index.html?cb=$(date +%s)" | grep -c 'mh-hero'
+```
+
+### Test komutları
+
+```bash
+cd deploy && python3 -m http.server 8000 &     # araçlar localhost:8000 bekler
+
+node .tools/lint-css.js        # sınıf adı · öksüz sınıf · önek kapsamı
+node .tools/vqa.js             # 15 görsel kontrol × 50 ekran (rota otomatik)
+node .tools/vqa.js dolapta     # tek ekran
+node .tools/akis.js            # 18 uçtan uca akış
+node .tools/akis.js dolapta-katman modul-hero    # tek akış
+node .tools/faz0.js            # derin link · yığın · alt çubuk · data-say
+node .tools/faz1.js            # kaldırılan modül izi
+node .tools/carpi.js           # kapat/sil butonlarının eylemi var mı
+node .tools/cap.js <rota>      # tam sayfa render → deploy/outputs/<rota>.png
+node .tools/cap.js "olcu-birimleri#unTb"   # sekmeli ekranda pane seçerek
+node .tools/canli-hero.js      # CANLI modül hero'larını ölçer (referans)
+```
+
+**Kabul çizgisi:** `data-say` = 0 · `lint-css` temiz · `akis` 18/18 ·
+`vqa` yalnız 2 bilinçli istisna (Ne Pişirsem 240px, § 7).
+
 ---
 
 ## 1. Durum: prototip tamamlandı
@@ -289,6 +388,8 @@ Bunlar sahte değil — akış testleri doğruluyor:
 | Harita yok | Dada Route'ta harita yerine **dikey güzergâh şeridi** var (mobil-yerel, dış servise bağımlı değil). "Haritada gör" cihaz haritasına devreder |
 | Sponsorluk paket fiyatları | Canlıda da yazmıyor ("sabit ücret" / "komisyon bazlı" olarak geçiyor) |
 | Mutfağa Giriş | § 4.9 — canlıda 404, kaldırıldı |
+| **Modül hero'ları kart formatında** | Tam kanama + app bar'ın hero üstünde yüzmesi yapılmadı — § 0 (a) |
+| **Detay ekranları tek şablon** | Ansiklopedi/Sözlük/Püf listelerinin bütün satırları aynı içeriği açıyor — § 0 (b) |
 
 ---
 
@@ -318,6 +419,7 @@ Araçlar bunun için var — ama araç da gözün yerine geçmiyor.
 
 Prototip tarafında iş kalmadı. Sonraki adım **patron onayı**, ardından:
 
+0. **Önce § 0'daki iki açık iş** — hero tam kanama · detay şablonlarının içeriklendirilmesi
 1. Flutter'a çevirme (bkz. `CLAUDE.md` § 7) — token'lar ve ölçüler birebir taşınabilir hâlde
 2. Gerçek içerik aktarımı: canlıdaki 2.057 tarif, 591 püf noktası, 1.200 ansiklopedi maddesi
 3. Mutfağa Giriş — canlıda yayına girerse

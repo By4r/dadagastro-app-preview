@@ -460,6 +460,30 @@ miras alıp **beyaz kartta görünmez oldu**. İkisi de tek satırlık sapmaydı
 `min-width:0` (metin), `overflow:hidden;text-overflow:ellipsis` ve renk
 tanımı bulunsun ki iç markup sapsa bile ekran bozulmasın.
 
+### ⚠️ ŞABLON EKRAN ≠ BİTMİŞ EKRAN
+
+`ansiklopedi-detay`, `sozluk-detay`, `puf-detay` ekranları var ve açılıyor —
+ama liste satırlarının **hepsi aynı içeriği** açıyor (24 ansiklopedi satırı hep
+"Domates"). Ekranın var olması yeterli değil; **liste satırı kendi içeriğini
+açmıyorsa iş bitmemiştir.**
+
+Detay ekranı yaparken listeyi de bağla: satır bir anahtar taşısın
+(`data-ans="domates"`), JS şablonu o anahtarla doldursun. Tek örnek içerikle
+"detay ekranı bitti" denmez — envanterde 🔨 kalır.
+
+### ⚠️ Kapat/sil butonu toast'la geçiştirilmez
+
+Kart köşesindeki çarpı gerçekten silmeli, "ekle" gerçekten eklemeli.
+`data-rm` / `data-add` kalıbını kullan. `node .tools/carpi.js` eylemsiz
+kapat/sil butonu bırakılmasını engeller.
+
+### ⚠️ Kontrastı ölç, tahmin etme
+
+Koyu perde üzerindeki metnin okunurluğu göz kararıyla onaylanmaz.
+`vqa.js` 15. kontrolü (< 2,2:1) bariz görünmezliği yakalar; hero gibi
+fotoğraf üstü metinlerde render'dan **piksel örnekle** ve oranı raporda yaz.
+Bu turda modül hero'ları böyle ölçüldü: alt başlık 7,85–8,44:1.
+
 ### ⚠️ Yatay ray hizalaması
 
 `scroll-snap-type: x proximity` + `padding-left: 16` kullanıyorsan `scroll-padding-left: 16` de ver,

@@ -123,11 +123,11 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 | # | Ekran | Durum | Kaynak / ölçü |
 |---|---|---|---|
 | C1 | Püf Noktaları listesi | ✅ | `/puf-noktalari` — 591 madde · 11 kategori · sıralama: En Yeni / En Çok Okunan |
-| C2 | Püf Noktası detay | ✅ | Okunma sayısı · kategori etiketi |
+| C2 | Püf Noktası detay | 🔨 | Okunma sayısı · kategori etiketi  · Aynı sorun: bütün kartlar hep aynı püf noktasını açıyor |
 | C3 | Mutfak Ansiklopedisi listesi | ✅ | `/mutfak-ansiklopedisi` — 1.200 madde · 26 kategori · A–Z harf dizini |
-| C4 | Ansiklopedi madde detay | ✅ | Nedir · ne işe yarar · faydaları · ilgili tarifler |
+| C4 | Ansiklopedi madde detay | 🔨 | Nedir · ne işe yarar · faydaları · ilgili tarifler  · **Ekran var ama TEK ŞABLON** — 24 satırın hepsi aynı içeriği (Domates) açıyor. Satır başına içerik gerekiyor |
 | C5 | **Mutfak Sözlüğü listesi** | ✅ | `/mutfak-sozlugu` — 765 terim · 20 kategori · A–Z. **Ansiklopediden ayrı ekran** |
-| C6 | Sözlük terim detay | ✅ | Tanım · örnek kullanım · ilgili tarifler |
+| C6 | Sözlük terim detay | 🔨 | Tanım · örnek kullanım · ilgili tarifler  · Aynı sorun: 18 satır hep "Al Dente" |
 | C7 | **Ölçü Birimleri** | ✅ | `/olcu-birimleri` — 4 sekme: Dönüştürücü · Dönüşüm Tabloları · Standart Ölçüler · Fırın Rehberi. 90+ malzeme. **Gerçekten çevirsin** |
 | C8 | **Sofra Düzeni listesi** | ✅ | `/sofra-duzeni` — 11 kategori · 61 ipucu |
 | C9 | Sofra Düzeni rehber detay | ✅ | Açıklama + pratik ipuçları |
@@ -288,3 +288,27 @@ Kabul kriterleri:
 - `akis.js`: **16 / 16** uçtan uca akış geçiyor
 - `lint-css.js`: temiz (sınıf adı + öksüz sınıf)
 - `#/kit-*` vitrin rotaları silindi
+
+
+---
+
+## Son tur — 3 Ağustos 2026 (devir)
+
+### ✅ Bu turda tamamlanan
+
+| İş | Durum |
+|---|---|
+| **Dolapta Ne Var — iki katmanlı yapı** | ✅ Birincil ikili toggle + dört mod kartı · mod başına ayrı state · 4 ayrı açıklama ve placeholder · hassasiyetin 11 maddesi ve iki durumu |
+| **Malzeme fotoğrafları** | ✅ 15 → **75/185 (%41)** · canlının kendisi %42 · 96px WebP, 102 KB |
+| **Modül hero'ları — görsel + sayaç** | ✅ 15 ekran, tek `.mh-` bileşeni · sayaçlar canlıdan · canlıda sayaç yoksa satır da yok |
+| `data-say` borç sayacı | ✅ **0** |
+| Uçtan uca akış | ✅ **18/18** (`dolapta-katman` ve `modul-hero` eklendi) |
+
+### 🔨 Açık iş — sıradaki oturum
+
+| # | İş | Not |
+|---|---|---|
+| **A** | **Modül hero'ları tam kanama olacak** | Şu an kart: `margin` + `border-radius` var. Ayrıca **app bar hero'nun üstünde yüzmeli** (`.vbar.overlay`, scroll'da solid). Ana sayfada kalıp hazır |
+| **B** | **Detay ekranlarının içeriklendirilmesi** | `ansiklopedi-detay` · `sozluk-detay` · `puf-detay` ekranları VAR ama tek şablon; her liste satırı aynı içeriği açıyor |
+
+Ayrıntı, dosya haritası ve komutlar: **`DURUM.md` § 0 (DEVİR)**.
