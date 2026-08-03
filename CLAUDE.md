@@ -90,9 +90,35 @@ Gerekçeler ve tam liste: `EKRAN-ENVANTERI.md`.
 | Muted metin | `#7E7E7E` | |
 | Puan yıldızı | `#FAC045` | **Yalnız yıldız ikonu.** Zemin/buton olarak asla |
 
-Kurumsal kılavuzda olan ama **bu uygulamada kullanılmayan** modül renkleri — modülleri kapsam dışı
-olduğu için hiçbir ekranda geçmez: Sağlık aksanı `#3BB77E` · Akademi `#006072` · Gourmet `#B14FC5` ·
-DadaFit `#009D4F`. Yeni bir yerde yeşil/mor/petrol görüyorsan hatadır.
+### Yeşil `#3BB77E` — durum rengi, kapsam dışı DEĞİL
+
+`#3BB77E` / koyu `#2C9963` = **onay / tamamlandı** durum rengi. Sağlık modülü kapsam dışı
+ama **bu renk kalır**. Çalışan yerler:
+
+| Yer | Kural |
+|---|---|
+| Tarifler — "8/11 malzemen var" eşleşme rozeti | `.match` |
+| Tarif detay — işaretlenmiş malzeme satırı | `.ig.done` — zemin `#F4F9F6`, kenar `rgba(59,183,126,.32)` |
+| Tarif detay — tamamlanmış adım kartı | `.step.done .num` — numara yeşil dolu |
+| Pişirme modu — son adımdaki "Tarifi Bitir" | `.cook-nav .next.fin` |
+
+Faz 1'de **silinecek** yeşil kullanımları (bunlar Sağlık modülüne ait, durum rengi değil):
+`.htile .ic` hesaplayıcı kutuları · `.dyt .eyebrow` diyetisyen paneli · `.btn.green` diyetisyen CTA'sı.
+
+### Petrol `#006072` ve mor `#B14FC5` — kişi rengi, kapsam dışı DEĞİL
+
+İkisi de **avatar rotasyonunun** parçası: domates · petrol · mor · koyu yeşil · ink.
+Yan yana düşen avatarlar birbirinden ayrılsın diye. Marka modül rengi olarak değil,
+**kişi ayırt edici** olarak kullanılıyorlar — 29 avatarda geçiyor (petrol 8, mor 6).
+
+Tarif kartındaki **"Yeni" şeridi** de petrol (`.gcard .rib.new`) — **korunuyor**.
+
+### Gerçekten kapsam dışı
+
+`#009D4F` (DadaFit) — hiçbir yerde kullanılmıyor. **Bunu görüyorsan hatadır.**
+
+**Yeni ekranlarda kural:** yeşili yalnız onay/tamamlandı için kullan; petrol ve moru yalnız
+avatar rotasyonunda. Bu renklere yeni bir anlam yükleme — tek baskın aksan domates.
 
 ### 🚫 KREM KULLANILMIYOR
 
