@@ -6,36 +6,78 @@
 
 ---
 
+## 🚫 TEMEL KURAL — olmayan modül görünmez
+
+Canlı sitede **çalışmayan** hiçbir modül uygulamada yer almaz.
+**"Yakında" ekranı yok · "yakında" rozeti yok · teaser yok · drawer satırı yok · ana sayfa bölümü yok.**
+Bir şey yoksa **yok**.
+
+### Bu kural gereği kapsam dışı
+
+| Modül | Canlıdaki durum | Sonuç |
+|---|---|---|
+| Sağlık / Diyetisyen / Hesaplayıcılar | "Sağlık & Diyetisyen çok yakında" örtüsü · tüm alt sayfalar 404 | **Kök sekme dahil tamamen kaldırıldı** |
+| Haftalık Menü Pro | Sağlık modülüne bağlı | Kaldırıldı |
+| DadaGourmet (mekânlar, gurme yazıları) | "DadaGourmet çok yakında" · `/gurme` 404 | Kaldırıldı |
+| DadaStore | "Dada Store çok yakında" · `/store` 404 | Kaldırıldı — tarif detayındaki ürün rayı dahil |
+| Dada Akademi / DadaCampus | Sayfa yok (404) | Kaldırıldı |
+| Topluluk akışı | Sayfa yok (404) | Kaldırıldı — "Topluluğa Katıl" yalnız CTA olarak kalır |
+
+> **Dada Route kapsam içinde**: `/yol-guzergahim` canlıda çalışıyor, üzerinde "yakında" yok.
+
+---
+
 ## Durum
 
 ✅ = prototipte var, dokunma (sadece gerekirse iyileştir)
 🔨 = yapılacak
-⏸ = şimdilik yer tutucu
+⏸ = tasarımı sonra verilecek
 
 ---
 
 ## A. Kök sekmeler (TabBar)
 
-| # | Ekran | Durum |
-|---|---|---|
-| A1 | Ana Sayfa | ✅ (bölüm sırası canlı siteye göre güncellenecek) |
-| A2 | Tarifler | ✅ |
-| A3 | Ne Pişirsem (FAB → modal) | ✅ |
-| A4 | Sağlık | ✅ |
-| A5 | Hesap | ✅ |
+**Yeni alt çubuk:** `Ana Sayfa · Tarifler · [FAB: Ne Pişirsem?] · Keşfet · Hesap`
 
-### A1 — Ana sayfa bölüm sırası (canlı siteden, birebir)
+| # | Ekran | Durum | Not |
+|---|---|---|---|
+| A1 | Ana Sayfa | ✅ | Bölüm sırası canlıya göre güncellenecek |
+| A2 | Tarifler | ✅ | Filtre taksonomisi gerçek sayılara bağlanacak |
+| A3 | Ne Pişirsem (FAB → modal) | ✅ | Canlıdaki 4 adımlı sihirbaza yükseltilecek |
+| A4 | **Keşfet** | 🔨 | **YENİ** — Sağlık sekmesinin yerine |
+| A5 | Hesap | ✅ | |
 
-1. Haftanın Tarifi 🔨 *(prototipte "Günün Tarifi" var, canlıya göre düzelt)*
-2. Kategoriler & Dünya Mutfakları ✅
-3. Tariflerimiz ✅
-4. **Mutfak Sırları** 🔨 *(prototipte yok — püf noktaları + ansiklopedi + video girişi)*
-5. Sağlıklı Yaşam & Hesaplama ✅
+### A1 — Ana sayfa bölüm sırası (canlıdan, birebir)
+
+1. Hero + **Hızlı Erişim kartları** 🔨 *(canlıda var, prototipte yok)*
+2. Kategoriler & Dünya Mutfakları ✅ *(33 gerçek kategori + sayıları)*
+3. Tarif bul — elindekiyle (Dolapta Ne Var) ✅
+4. Bu hafta öne çıkanlar ✅
+5. **Mutfak Sırları — Mutfağa Giriş & Püf Noktaları** 🔨 *(prototipte yok)*
 6. İzle & Pişir ✅
-7. **DadaGourmet** 🔨 *(prototipte yok)*
-8. **DadaStore** 🔨 *(prototipte yok)*
+7. **Günün Tarifi** 🔨 *(canlıda videolardan sonra küçük bant)*
+8. **Dada Route** 🔨 *(prototipte yok)*
 9. Şefler & Yazarlar ✅
 10. Topluluğa Katıl ✅
+
+> **Kaldırılacak prototip bölümleri:** "Sağlıklı Yaşam" bölümü · diyetisyen paneli · "Haftanı tek ekranda planla" Pro bandı.
+
+### A4 — Keşfet sekmesi içeriği
+
+Sekme ikonu: `compass` (FA6 `\f14e`). Alt çubukta 9.5px etiketle okunması gereken tek glif —
+`magnifying-glass-location` bu boyutta bulanıklaşıyor.
+
+Bölümler: **Püf Noktaları · Mutfak Ansiklopedisi · Mutfak Sözlüğü · Ölçü Birimleri ·
+Sofra Düzeni · Video Mutfağı · Dada Route · Dolapta Ne Var**
+
+Ana sayfadaki "Mutfak Sırları" bölümünün `Tümü ›` bağlantısı buraya düşer.
+
+### Hero sayaçları — canlıdan, birebir
+
+`2.057 denenmiş tarif · 266 topluluk üyesi · 591 püf noktası`
+*(Prototipte `48.200+ / 1.2M / 320+` yazıyor — yanlış, düzeltilecek.)*
+
+Popüler çipler: `zeytinyağlı · kahvaltılık · misafir yemeği · vegan · fırın`
 
 ---
 
@@ -43,153 +85,152 @@
 
 | # | Ekran | Durum | Not |
 |---|---|---|---|
-| B1 | Tarif Detay | ✅ | |
+| B1 | Tarif Detay | ✅ | **DadaStore ürün rayı kaldırılacak** |
 | B2 | Pişirme Modu | ✅ | |
 | B3 | Arama sonuçları | 🔨 | Boş durum + öneri + son aramalar dahil |
-| B4 | Kategori index | 🔨 | 33 kategori, her birinde tarif sayısı |
+| B4 | Kategori dizini | 🔨 | 33 kategori, her birinde tarif sayısı |
 | B5 | Kategori sonuç listesi | 🔨 | Tarifler ekranının filtreli hali |
-| B6 | Dünya Mutfakları index | 🔨 | 50 mutfak |
+| B6 | Dünya Mutfakları dizini | 🔨 | 50 mutfak |
 | B7 | Tüm yorumlar | 🔨 | Detaydaki "Tüm yorumları gör" buraya |
 | B8 | Yorum yaz (modal) | 🔨 | Puan + metin + fotoğraf ekle |
 | B9 | Tarif Ekle | 🔨 | Çok adımlı: temel bilgi → malzeme → adımlar → görsel → önizleme |
 
 ### Filtre taksonomisi (canlıdan, birebir)
 
-- **Kategori** (33): Sebze 215 · Kırmızı Et 160 · Tatlı 126 · Atıştırmalık 125 · Meze 121 · Çorba 115 · Zeytinyağlılar 115 · Kahvaltılık 114 · Bakliyat 113 · Tavuk ve Hindi 110 · Balık ve Deniz Ürünleri 108 · Hamur İşi 104 · Salata 94 · Pilav 92 …
-- **Mutfak** (50): Türk Mutfağı 1204 · İtalyan 92 · Fransız 56 …
+- **Kategori** (33): Sebze 215 · Kırmızı Et 160 · Tatlı 126 · Atıştırmalık 125 · Meze 121 · Çorba 115 ·
+  Zeytinyağlılar 115 · Kahvaltılık 114 · Bakliyat 113 · Tavuk ve Hindi 110 · Balık ve Deniz Ürünleri 108 ·
+  Hamur İşi 104 · Salata 94 · Pilav 92 · Köfte ve Kebap 89 · Meyve Tarifleri 89 · Makarna 76 ·
+  Sandviç Burger ve Dürüm 71 · Kek ve Pasta 70 · Ekmek 69 · Dondurma ve Soğuk Tatlılar 62 ·
+  Yumurta Tarifleri 61 · İçecek 59 · Dolma ve Sarma 58 · Sakatat 58 · Sos 58 · Kurabiye 57 ·
+  Pizza ve Pide 54 · Mantı ve Dolgulu Hamurlar 53 · Turşu ve Konserve 51 · Çocuk Tarifleri 50 ·
+  Bebek Tarifleri 49 · Reçel 49
+- **Mutfak** (50): Türk Mutfağı 1204 · İtalyan 92 · Fransız 56 · İngiliz 22 · Alman 15 · İspanyol 15 ·
+  Portekiz 11 · Avusturya 9 …
 - **Yemek Modu**: Günlük Pratik 706 · Fırın Yemekleri 403 · Hızlı ve Kolay 389 · Tek Tencere 158 · Airfryer 5
 - **Öğün**: Kahvaltı · Brunch · Öğle Yemeği · Akşam Yemeği · Ara Öğün · İkindi ve Çay Saati
 - **Süre**: 15 dakikadan az → 2 saatten uzun
 - **Zorluk**: Çok Kolay → Ustalık Gerektirir
 - **Beslenme**: Vejetaryen 1079 · Glutensiz 941 · Vegan 591 · Protein Ağırlıklı 477 · Pesketaryen 109 · Düşük Kalorili 58
 - **Sıralama**: Önerilen · En Yeni · En Çok Puanlanan · En Hızlı
-- Toplam: **2057 tarif · sayfa 1 / 69**
+- Toplam: **2.057 tarif · 33 kategori · 50 dünya mutfağı**
 
-Tarif kartı alanları: süre · zorluk · porsiyon · maliyet (₺) · şef adı · puan · yorum sayısı
+Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yorum sayısı
 
 ---
 
-## C. Keşfet & Pişir
+## C. Keşfet & Mutfak Sırları
 
-| # | Ekran | Durum | Kaynak |
+| # | Ekran | Durum | Kaynak / ölçü |
 |---|---|---|---|
-| C1 | Püf Noktaları listesi | 🔨 | /puf-noktalari |
-| C2 | Püf Noktası detay | 🔨 | |
-| C3 | Mutfak Ansiklopedisi listesi | 🔨 | /mutfak-ansiklopedisi · alfabetik + arama |
-| C4 | Ansiklopedi terim detay | 🔨 | |
-| C5 | Video Mutfağı listesi | 🔨 | /video-mutfagi |
-| C6 | Video oynatıcı | 🔨 | Tam ekran, altında tarif bağlantısı |
-| C7 | Dolapta Ne Var | 🔨 | /dolapta-ne-var — sihirbazdan ayrı, kalıcı ekran |
-| C8 | **Mutfağa Giriş** | ⏸ | Yer tutucu — tasarımı sonra verilecek |
+| C1 | Püf Noktaları listesi | 🔨 | `/puf-noktalari` — 591 madde · 11 kategori · sıralama: En Yeni / En Çok Okunan |
+| C2 | Püf Noktası detay | 🔨 | Okunma sayısı · kategori etiketi |
+| C3 | Mutfak Ansiklopedisi listesi | 🔨 | `/mutfak-ansiklopedisi` — 1.200 madde · 26 kategori · A–Z harf dizini |
+| C4 | Ansiklopedi madde detay | 🔨 | Nedir · ne işe yarar · faydaları · ilgili tarifler |
+| C5 | **Mutfak Sözlüğü listesi** | 🔨 | `/mutfak-sozlugu` — 765 terim · 20 kategori · A–Z. **Ansiklopediden ayrı ekran** |
+| C6 | Sözlük terim detay | 🔨 | Tanım · örnek kullanım · ilgili tarifler |
+| C7 | **Ölçü Birimleri** | 🔨 | `/olcu-birimleri` — 4 sekme: Dönüştürücü · Dönüşüm Tabloları · Standart Ölçüler · Fırın Rehberi. 90+ malzeme. **Gerçekten çevirsin** |
+| C8 | **Sofra Düzeni listesi** | 🔨 | `/sofra-duzeni` — 11 kategori · 61 ipucu |
+| C9 | Sofra Düzeni rehber detay | 🔨 | Açıklama + pratik ipuçları |
+| C10 | Video Mutfağı listesi | 🔨 | `/video-mutfagi` — 33 video · 4 seri · haftanın videosu · sıradaki seçki |
+| C11 | Video oynatıcı | 🔨 | Tam ekran, altında tarif bağlantısı |
+| C12 | **Video serileri listesi** | 🔨 | 4 seri · "N bölüm · her Salı yeni bölüm" |
+| C13 | Seri detay (bölümler) | 🔨 | Bölüm bölüm liste, kaldığın yerden devam |
+| C14 | Dolapta Ne Var | 🔨 | `/dolapta-ne-var` — Dolaptakiler / Hariç Tuttuklarım sekmeleri · kategorili malzeme seçimi |
+
+> `Ölçü Birimleri` canlıda **Mutfak Sırları** altında duruyor, sağlık aracı değil — bu yüzden Keşfet'te.
 
 ---
 
-## D. DadaGourmet
+## D. Dada Route
+
+| # | Ekran | Durum | Not |
+|---|---|---|---|
+| D1 | Rota planlayıcı | 🔨 | `/yol-guzergahim` — kalkış/varış · ara durak ekle · yön değiştir · harita |
+| D2 | Rota sonuç & durak listesi | 🔨 | 9 hızlı filtre: Tümü · Tam Yol Üstü · 5/10/20 dk sapma · Dada Öneriyor · Şu An Açık · Kahvaltı · Öğle · Akşam · Kahve · Tatlı · Yöresel · Hızlı Mola · Aileye Uygun. Mesafe + tahmini süre |
+| D3 | Durak detay | 🔨 | Duraklar tıklanabilir olmalı — yoksa ölü buton olur |
+
+---
+
+## E. Topluluk
+
+| # | Ekran | Durum | Not |
+|---|---|---|---|
+| E1 | Şefler listesi | 🔨 | `/sefler` — 265 üye · isim araması · rütbe (Çırak, Çömez Aşçı…) · N tarif · puan · Takip Et |
+| E2 | Şef profili | 🔨 | Tarifleri · takipçi · rozet · mutfak defteri |
+| E3 | Canlı Liderlik | 🔨 | `/liderlik` — Sezon 2026 · katkı puanı sıralaması |
+| E4 | Onur Listesi | 🔨 | `/onur-listesi` — **boş durumuyla**: "Henüz kapanmış bir sezon yok" |
+| E5 | Rozetlerim | 🔨 | Giriş sonrası |
+
+---
+
+## F. Hesap & sistem
 
 | # | Ekran | Durum |
 |---|---|---|
-| D1 | Gourmet ana | 🔨 |
-| D2 | Mekânlar listesi + harita/liste geçişi | 🔨 |
-| D3 | Mekân detay | 🔨 |
-| D4 | Gurme yazı listesi | 🔨 |
-| D5 | Gurme yazı detay | 🔨 |
-| D6 | Dada Route — rota listesi | 🔨 |
-| D7 | Rota detay (duraklar, ziyaret işaretleme) | 🔨 |
+| F1 | Profil | ✅ |
+| F2 | Profili Düzenle | 🔨 |
+| F3 | Tarif Defterim (koleksiyonlar) | 🔨 |
+| F4 | Alışveriş Listem | 🔨 |
+| F5 | Paylaştığım Tarifler | 🔨 |
+| F6 | Bildirimler | 🔨 |
+| F7 | Ayarlar (bildirim, dil, tema, hesap) | 🔨 |
+| F8 | Giriş Yap | 🔨 | `/giris` — 4 hesap tipi: Kullanıcı · Antrenör · Diyetisyen · İşletme. Google / Facebook / e-posta / telefon |
+| F9 | Üye Ol | 🔨 |
+| F10 | Şifremi Unuttum | 🔨 |
+| F11 | Onboarding (3-4 slayt + izinler) | 🔨 |
 
 ---
 
-## E. DadaStore
+## G. Kurumsal
 
 | # | Ekran | Durum |
 |---|---|---|
-| E1 | Mağaza ana + kategoriler | 🔨 |
-| E2 | Ürün listesi | 🔨 |
-| E3 | Ürün detay | 🔨 |
-| E4 | Sepet | 🔨 |
-| E5 | Sipariş özeti (adres/ödeme — sadece arayüz) | 🔨 |
+| G1 | Hakkımızda | 🔨 |
+| G2 | SSS (akordeon) | 🔨 |
+| G3 | İletişim (form) | 🔨 |
+| G4 | Gizlilik Politikası | 🔨 |
+| G5 | KVKK Aydınlatma Metni | 🔨 |
+| G6 | Reklam Ver | 🔨 |
+
+> G4–G6 uzun metin ekranları — sade tipografi, yapışkan başlık, içindekiler.
 
 ---
 
-## F. Sağlık & Diyet
-
-| # | Ekran | Durum |
-|---|---|---|
-| F1 | Kalori Hesaplayıcı | 🔨 |
-| F2 | Vücut Kitle İndeksi | 🔨 |
-| F3 | Bazal Metabolizma | 🔨 |
-| F4 | Vücut Tipi Testi | 🔨 |
-| F5 | Besin Kalori Cetveli (aranabilir liste) | 🔨 |
-| F6 | Ölçü Birimleri Çevirici | 🔨 |
-| F7 | Diyetisyen listesi + filtre | 🔨 |
-| F8 | Diyetisyen profili | 🔨 |
-| F9 | Randevu al (takvim + saat) | 🔨 |
-| F10 | Haftalık Menü Pro — planlayıcı | 🔨 |
-| F11 | Menüden alışveriş listesi üret | 🔨 |
-
-> Hesaplayıcılar **gerçekten hesaplasın** — formüller basit, sahte sonuç gösterme.
-> Kalori: Mifflin-St Jeor. VKİ: kg/m². Bazal metabolizma: Harris-Benedict.
-
----
-
-## G. Topluluk
-
-| # | Ekran | Durum |
-|---|---|---|
-| G1 | Şefler listesi | 🔨 |
-| G2 | Şef profili (tarifleri, takipçi, rozet) | 🔨 |
-| G3 | Canlı Liderlik | 🔨 |
-| G4 | Onur Listesi | 🔨 |
-| G5 | Topluluk akışı | 🔨 |
-| G6 | Rozetlerim | 🔨 |
-| G7 | Dada Akademi — kurs listesi | 🔨 |
-| G8 | Kurs detay | 🔨 |
-
----
-
-## H. Hesap & sistem
-
-| # | Ekran | Durum |
-|---|---|---|
-| H1 | Profil | ✅ |
-| H2 | Profili Düzenle | 🔨 |
-| H3 | Tarif Defterim (koleksiyonlar) | 🔨 |
-| H4 | Alışveriş Listem | 🔨 |
-| H5 | Paylaştığım Tarifler | 🔨 |
-| H6 | Bildirimler | 🔨 |
-| H7 | Ayarlar (bildirim, dil, tema, hesap) | 🔨 |
-| H8 | Giriş Yap | 🔨 |
-| H9 | Üye Ol | 🔨 |
-| H10 | Şifremi Unuttum | 🔨 |
-| H11 | Onboarding (3-4 slayt + izinler) | 🔨 |
-
----
-
-## I. Kurumsal
-
-| # | Ekran | Durum |
-|---|---|---|
-| I1 | Hakkımızda | 🔨 |
-| I2 | SSS (akordeon) | 🔨 |
-| I3 | İletişim (form) | 🔨 |
-| I4 | Gizlilik Politikası | 🔨 |
-| I5 | KVKK Aydınlatma Metni | 🔨 |
-| I6 | Reklam Ver | 🔨 |
-
-> I4–I6 uzun metin ekranları — sade tipografi, yapışkan başlık, içindekiler.
-
----
-
-## J. Global davranışlar
+## H. Global davranışlar
 
 | # | İş | Durum |
 |---|---|---|
-| J1 | **Hiçbir ölü buton kalmayacak** — her `data-say` gerçek bir ekrana bağlanacak | 🔨 |
-| J2 | Boş durumlar (arama sonucu yok, liste boş, bağlantı yok) | 🔨 |
-| J3 | Yükleniyor iskeletleri (skeleton) | 🔨 |
-| J4 | Paylaş sheet | 🔨 |
-| J5 | Onay diyalogları (sil, çıkış) | 🔨 |
-| J6 | Toast / snackbar standardı | ✅ |
-| J7 | Geri yığını her ekranda tutarlı | 🔨 |
+| H1 | **Hiçbir ölü buton kalmayacak** — her `data-say` gerçek bir ekrana bağlanacak | 🔨 |
+| H2 | Boş durumlar (arama sonucu yok, liste boş, bağlantı yok) | 🔨 |
+| H3 | Yükleniyor iskeletleri (skeleton) | 🔨 |
+| H4 | Paylaş sheet | 🔨 |
+| H5 | Onay diyalogları (sil, çıkış) | 🔨 |
+| H6 | Toast / snackbar standardı | ✅ |
+| H7 | Geri yığını her ekranda tutarlı | 🔨 |
+| H8 | Drawer güncellemesi — Store, Gourmet, Akademi, Sağlık satırları çıkar | 🔨 |
+
+### Drawer'ın son hâli
+
+**Mutfağım:** Profilim · Tarif Defterim · Alışveriş Listem · Tariflerim
+**Keşfet:** Püf Noktaları · Mutfak Ansiklopedisi · Video Mutfağı · Dada Route
+**Uygulama:** Ayarlar · Yardım · Hakkımızda
+En altta: Çıkış Yap + sürüm
+
+---
+
+## I. Mutfağa Giriş — en sonda
+
+| # | Ekran | Durum | Not |
+|---|---|---|---|
+| I1 | Mutfağa Giriş modül listesi | ⏸ | Canlıda `/mutfaga-giris` **404** — yalnız ana sayfadaki 6 modül var |
+| I2 | Modül detay (bölüm listesi) | ⏸ | |
+| I3 | Ders ekranı | ⏸ | |
+
+Ana sayfadaki 6 modül (canlıdan): 01 Mutfak Düzeni ve Çalışma Alanı (3 bölüm) ·
+02 Temel Bıçak Türleri ve Kullanımları (4) · 03 Sebze ve Meyve Hazırlama Teknikleri (4) ·
+04 Haşlama: Sudan Fazlası (5) · 05 Tavada Pişirme Teknikleri (4) · 06 Fırında Pişirme Teknikleri (4)
+
+> Bütün diğer ekranlar bittikten sonra ele alınacak. Tasarım verilirse yapılır.
 
 ---
 
@@ -204,3 +245,11 @@ o ekran yapılmamış demektir. Bitirmeden önce şu testi çalıştır:
 ```
 
 Bu liste **boş** olmalı (ya da yalnız gerçekten bilgilendirme amaçlı olanlar kalmalı).
+
+İkinci test — kaldırılan modüllerden hiçbir iz kalmamalı:
+
+```js
+// hepsi 0 dönmeli
+['Sağlık','Diyetisyen','Kalori','Gourmet','Store','Akademi','Yakında']
+  .map(k => [k, document.body.innerHTML.split(k).length - 1])
+```

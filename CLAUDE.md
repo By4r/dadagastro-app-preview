@@ -41,7 +41,7 @@ EKRAN-ENVANTERI.md  yapılacaklar listesi — buradan ilerle
 ## 0. İlk 10 dakikada yapılacaklar (sırayla)
 
 1. `python3 -m http.server 8000` çalıştır, prototipi **tarayıcıda gez** — onaylanmış tasarım budur
-2. `EKRAN-ENVANTERI.md` oku — yapılacak 60+ ekranın listesi
+2. `EKRAN-ENVANTERI.md` oku — yapılacak 46 ekranın listesi + **kapsam dışı modüller**
 3. `css/app.css` içindeki `:root` token bloğunu oku
 4. **Canlı siteyi gez:** https://dadagastro.com — içerik, etiket ve bölüm listesi için **tek doğru kaynak**
 5. `frontend-design` skill'ini oku ve **her ekran üretiminde kullan**
@@ -49,11 +49,23 @@ EKRAN-ENVANTERI.md  yapılacaklar listesi — buradan ilerle
 > ⚠️ Prototip **onaylanmış görsel dildir** ama **eksiktir**. Çelişki olursa:
 > **görsel dil → prototip**, **içerik ve bölüm listesi → canlı site**.
 
+## 🚫 TEMEL KURAL — olmayan modül görünmez
+
+Canlı sitede **çalışmayan** hiçbir modül uygulamada yer almaz.
+**"Yakında" ekranı yok · "yakında" rozeti yok · teaser yok · drawer satırı yok · ana sayfa bölümü yok.**
+Bir şey yoksa **yok**.
+
+Kapsam dışı: **Sağlık / Diyetisyen / Hesaplayıcılar** (kök sekme dahil) · **Haftalık Menü Pro** ·
+**DadaGourmet** · **DadaStore** · **Dada Akademi / DadaCampus** · **Topluluk akışı**.
+Gerekçeler ve tam liste: `EKRAN-ENVANTERI.md`.
+
+**Dada Route kapsam içinde** — `/yol-guzergahim` canlıda çalışıyor.
+
 ## 1. Proje kuralları
 
 - **frontend-design skill ZORUNLU** — her yeni ekran/komponent bu skill ile üretilir. Generic AI estetiğinden kaçınmak için.
 - Plan onaylanmadan implement YOK.
-- Bir ekran onaylanmadan bir sonrakine geçilmez.
+- Onay ritmi: **faz sonu toplu onay** — bir fazın ekranları birlikte sunulur, faz onaylanmadan sonrakine geçilmez.
 - Her değişiklik sonrası **Playwright ile 390×844 render** al, **kendin değerlendir**, kısa yazılı rapor ver.
 - Ekran görüntülerini `outputs/` altında tut (gitignore'lu). "Şu SS'e bak" deme; yazılı raporla.
 - **CROP YAPMA.** Tek öğe doğrulaman gerekiyorsa grep/kod ile teyit et.
@@ -76,11 +88,11 @@ EKRAN-ENVANTERI.md  yapılacaklar listesi — buradan ilerle
 | Hairline | `#ECECEC` | |
 | İkincil metin | `#56514A` | |
 | Muted metin | `#7E7E7E` | |
-| Sağlık aksanı | `#3BB77E` (koyu `#2C9963`) | Yalnız sağlık/diyet modülü |
-| Akademi | `#006072` (petrol) | |
-| Gourmet | `#B14FC5` (mor) | |
-| DadaFit | `#009D4F` | |
 | Puan yıldızı | `#FAC045` | **Yalnız yıldız ikonu.** Zemin/buton olarak asla |
+
+Kurumsal kılavuzda olan ama **bu uygulamada kullanılmayan** modül renkleri — modülleri kapsam dışı
+olduğu için hiçbir ekranda geçmez: Sağlık aksanı `#3BB77E` · Akademi `#006072` · Gourmet `#B14FC5` ·
+DadaFit `#009D4F`. Yeni bir yerde yeşil/mor/petrol görüyorsan hatadır.
 
 ### 🚫 KREM KULLANILMIYOR
 
@@ -185,7 +197,9 @@ Flutter'da `DecorationImage(fit: BoxFit.cover)`. **Esnetme yok, kırp.**
 
 ### Kök sekmeler (TabBar)
 
-`Ana Sayfa · Tarifler · [FAB: Ne Pişirsem?] · Sağlık · Hesap`
+`Ana Sayfa · Tarifler · [FAB: Ne Pişirsem?] · Keşfet · Hesap`
+
+Keşfet sekmesi ikonu: FA6 `compass` (`\f14e`). Sağlık sekmesi kaldırıldı, yerine bu geldi.
 
 Her sekme **kendi scroll konumunu korur**. Aktif sekmeye tekrar dokunmak başa sarar.
 
@@ -204,6 +218,11 @@ Sağ üstteki hamburger → **sağdan** açılır (304px). Üstte koyu kullanıc
 altında **Mutfağım / Keşfet / Uygulama** grupları, en altta çıkış + sürüm.
 TabBar birincil, drawer **ikincil/yönetim** katmanı.
 
+Drawer içeriği — Store, Gourmet, Akademi, Sağlık satırları **yok**:
+**Mutfağım:** Profilim · Tarif Defterim · Alışveriş Listem · Tariflerim
+**Keşfet:** Püf Noktaları · Mutfak Ansiklopedisi · Video Mutfağı · Dada Route
+**Uygulama:** Ayarlar · Yardım · Hakkımızda
+
 ### Alt çekmece (bottom sheet)
 
 Filtreler, malzeme listesi. Max %82 yükseklik, üstte tutamak, dışına dokunma kapatır.
@@ -216,12 +235,12 @@ Filtreler, malzeme listesi. Max %82 yükseklik, üstte tutamak, dışına dokunm
 
 | Ekran | Tip | Not |
 |---|---|---|
-| Ana Sayfa | kök | Hero (arama kartı + sayaç) · kategori rayı · günün tarifi · öne çıkanlar · dolapta ne var · sağlık · videolar · Pro bandı · şefler · topluluk |
+| Ana Sayfa | kök | Hero (arama kartı + sayaç) · hızlı erişim · kategori rayı · öne çıkanlar · dolapta ne var · mutfak sırları · videolar · günün tarifi · route · şefler · topluluk |
 | Tarifler | kök | Yapışkan arama + kategori rayı · sonuç sayacı + sıralama · aktif filtre pilleri · editör seçkisi geniş kartı · **2 kolonlu ızgara** · filtre çekmecesi |
-| Sağlık | kök | 6 hesaplayıcı · diyetisyen paneli · Pro menü planlayıcı |
+| Keşfet | kök | 🔨 **YENİ** — Sağlık sekmesinin yerine. Püf Noktaları · Ansiklopedi · Sözlük · Ölçü Birimleri · Sofra Düzeni · Video Mutfağı · Dada Route · Dolapta Ne Var |
 | Hesap | kök | Kapak + taşkın avatar · bio · **tek** "Profili Düzenle" butonu · seviye çubuğu · rozet rayı · 3 sayaç · kaydettiklerin rayı · paylaştıkların ızgarası · menü grupları |
-| Tarif Detay | push | Hero 352 · yazar · künye tek satır şerit · sekmeler (Malzemeler/Yapılışı/Yorumlar) · topluluk · ürünler · benzerler · alt eylem çubuğu |
-| Ne Pişirsem | modal | 12 malzeme ızgarası · min 3 seçim · sonuç Tarifler'e düşer |
+| Tarif Detay | push | Hero 352 · yazar · künye tek satır şerit · sekmeler (Malzemeler/Yapılışı/Yorumlar) · topluluk · benzerler · alt eylem çubuğu. **DadaStore ürün rayı kaldırılacak** |
+| Ne Pişirsem | modal | Canlıdaki 4 adımlı sihirbaza yükseltilecek: Öğün/Kap → Süre → Zorluk → Damak + Yemek Modu sekmesi |
 | Pişirme Modu | modal | Tam ekran koyu `#141210` · adım başlığı 25px · metin 15px · zamanlayıcı · malzeme çekmecesi |
 
 ### 🆕 Canlı sitede var, prototipte YOK — sen tasarlayacaksın
@@ -230,24 +249,30 @@ Canlı siteyi gezip içeriği oradan al:
 
 | Ekran | Kaynak |
 |---|---|
-| **Mutfağa Giriş** | https://dadagastro.com/mutfaga-giris — **öncelikli**, patron özellikle istedi |
-| Mutfak Ansiklopedisi | https://dadagastro.com/mutfak-ansiklopedisi |
-| Video Mutfağı | https://dadagastro.com/video-mutfagi |
-| Püf Noktaları | https://dadagastro.com/puf-noktalari |
+| Püf Noktaları | https://dadagastro.com/puf-noktalari — 591 madde · 11 kategori |
+| Mutfak Ansiklopedisi | https://dadagastro.com/mutfak-ansiklopedisi — 1.200 madde · 26 kategori · A–Z |
+| Mutfak Sözlüğü | https://dadagastro.com/mutfak-sozlugu — 765 terim · 20 kategori. **Ansiklopediden ayrı** |
+| Ölçü Birimleri | https://dadagastro.com/olcu-birimleri — 4 sekmeli tam sayfa |
+| Sofra Düzeni | https://dadagastro.com/sofra-duzeni — 11 kategori · 61 ipucu |
+| Video Mutfağı | https://dadagastro.com/video-mutfagi — 33 video · 4 seri |
 | Dolapta Ne Var | https://dadagastro.com/dolapta-ne-var |
-| DadaGourmet | https://dadagastro.com/dada-gourmet |
 | Dada Route | https://dadagastro.com/yol-guzergahim |
-| Tarif Ekle | https://dadagastro.com/tarif-ekle |
-| Mutfak Defterim | https://dadagastro.com/mutfak-defterim |
+| Şefler / Liderlik / Onur Listesi | /sefler · /liderlik · /onur-listesi |
+| Tarif Ekle | https://dadagastro.com/tarif-ekle (giriş gerektirir) |
+| Mutfak Defterim | https://dadagastro.com/mutfak-defterim (giriş gerektirir) |
 | Rozetlerim | canlı sitede giriş sonrası |
-| Haftalık Menü Pro | canlı sitede |
-| Giriş / Üye Ol | https://dadagastro.com/giris |
+| Giriş / Üye Ol | https://dadagastro.com/giris — 4 hesap tipi |
+| Kurumsal | /hakkimizda · /sss · /iletisim · /reklam-ver · /yasal/kvkk |
 
-Canlı sitenin ana sayfa bölüm sırası: Haftanın Tarifi · Kategoriler & Dünya Mutfakları · Tariflerimiz ·
-Mutfak Sırları · Sağlıklı Yaşam & Hesaplama · İzle & Pişir · DadaGourmet · DadaStore · Şefler & Yazarlar · Topluluğa Katıl.
+Canlı sitenin ana sayfa bölüm sırası (**kapsam dışı modüller çıkarılmış hâliyle**):
+Hero + Hızlı Erişim · Kategoriler & Dünya Mutfakları · Tarif bul — elindekiyle ·
+Bu hafta öne çıkanlar · Mutfak Sırları · İzle & Pişir · Günün Tarifi · Dada Route ·
+Şefler & Yazarlar · Topluluğa Katıl.
 
-> Prototipteki ana sayfa bu listeyle **tam örtüşmüyor** (Mutfak Sırları eksik, DadaStore ayrı).
-> Canlı siteyi esas al, prototipin görsel dilini uygula.
+> Canlıdaki "Sağlıklı Yaşam & Hesaplama", "DadaGourmet" ve "DadaStore" bölümleri
+> **alınmayacak** — üçü de "çok yakında" durumunda. Temel kurala bak.
+> Ayrıca canlıda **"Haftanın Tarifi" başlığı yok**; `Bu hafta öne çıkanlar` (prototipte zaten var)
+> ve videolardan sonra küçük bir `GÜNÜN TARİFİ` bandı var.
 
 ---
 
@@ -296,12 +321,12 @@ aynı kod telefona da çıksın. Tek kaynak, iki çıktı.
 
 ## 8. Çalışma döngüsü
 
-1. Ekranı planla → onay al
+1. Fazı planla → onay al
 2. `frontend-design` skill ile üret
-3. `flutter analyze` temiz olmalı
-4. Playwright/`flutter run` ile 390×844 render al, **kendin değerlendir**
+3. Playwright ile 390×844 render al, **kendin değerlendir**
+4. Kabul testlerini çalıştır: kalan `data-say` sayısı + kaldırılan modül izi taraması
 5. Kısa yazılı rapor: ne değiştin + kontrol sonucu
-6. Onaylanmadan sonraki ekrana geçme
+6. Faz onaylanmadan sonrakine geçme
 
 ### Soru sorma kuralı
 
@@ -310,15 +335,18 @@ Hızlı karar vermeyi sağlar.
 
 ---
 
-## 9. Öncelik sırası
+## 9. Faz sırası (HTML prototipi)
 
-1. `app_theme.dart` + token'lar + `pubspec.yaml` + font/asset kurulumu
-2. Uygulama kabuğu: TabBar + Navigator yığınları + drawer
-3. Ana Sayfa (canlı sitenin bölüm sırasıyla)
-4. Tarifler + filtre çekmecesi
-5. Tarif Detay
-6. Pişirme Modu
-7. Hesap
-8. Sağlık
-9. **Mutfağa Giriş** (patron özellikle istedi)
-10. Kalan canlı site ekranları
+0. **İskelet** — genel ekran kaydı · sınırsız derinlikte push/pop · `#/ekran` hash yönlendirme · tam olay delegasyonu · ortak komponent seti
+1. **Kök ekranları canlıya hizala** — sayaçlar · 33 kategori · Mutfak Sırları bölümü · Hızlı Erişim · **Sağlık sekmesini kaldır, Keşfet'i koy** · kaldırılan modüllerin izlerini temizle
+2. Tarif akışı (arama · kategori dizini · yorumlar · Tarif Ekle)
+3. Keşfet & Mutfak Sırları — iki fazda
+4. Ne Pişirsem yükseltmesi + Dolapta Ne Var
+5. Dada Route
+6. Topluluk (şefler · liderlik · onur listesi · rozetler)
+7. Hesap & sistem (giriş · üye ol · ayarlar · defter · liste)
+8. Kurumsal
+9. Süpürme — ölü buton avı · boş durumlar · iskeletler · paylaş · onay diyalogları
+10. **Mutfağa Giriş** — en sonda, tasarım verilirse
+
+Detaylı ekran listesi: `EKRAN-ENVANTERI.md`.
