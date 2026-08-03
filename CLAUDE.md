@@ -61,6 +61,33 @@ Gerekçeler ve tam liste: `EKRAN-ENVANTERI.md`.
 
 **Dada Route kapsam içinde** — `/yol-guzergahim` canlıda çalışıyor.
 
+## 📐 MOBİLE UYARLAMA — birleştirme serbest, DÜŞÜRME yasak
+
+Canlıda **iki seviyeli** olan bir yapıyı mobilde **tek seviyeye** indirmek
+"mobil uyarlama" değil, **özellik kaybıdır**.
+
+Dolapta Ne Var bunun canlı örneğiydi: canlıda birincil seçim
+(**Dolaptakiler | Hariç Tuttuklarım**) ve onun altında dört mod kartı
+(**Sevmiyorum · Tüketmiyorum · Alerjim Var · Hassasiyetim Var**) var.
+Prototipte beşi tek şeride dizilmişti — hiyerarşi yok oldu, her modun kendi
+açıklaması ve kendi seçim listesi kayboldu.
+
+**Yer sıkıntısı varsa çözüm katmanı silmek değildir.** Sırayla dene:
+
+| Sıra | Çözüm |
+|---|---|
+| 1 | **Segmented + alt segment** — birincil şerit, altında ikincil kartlar |
+| 2 | **Akordeon** — ikinci seviye açılır kapanır |
+| 3 | **Alt çekmece** (bottom sheet) — ikinci seviye üstten gelir |
+| 4 | **İkinci ekrana push** — seviye kendi ekranını alır |
+
+> Bir seviyeyi silmeden önce **dur ve sor.** "Mobilde sığmıyor" gerekçesi
+> tek başına yeterli değil; yukarıdaki dördü de denenmemişse düşürme sayılır.
+
+Her seviyenin kendi **durumu** da korunur: Sevmiyorum'a eklenen malzeme
+Alerjim Var'da işaretli görünmez. Tek liste + tek state ile "birleştirdim"
+demek de düşürmedir.
+
 ## ⚖️ HİÇBİR EKRAN CANLI SİTEDEN GERİ KALMAZ
 
 Bir ekranı yapmadan **önce** canlıdaki karşılığını aç ve üzerindeki **her kontrolü** listele:

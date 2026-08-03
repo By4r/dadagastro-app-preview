@@ -345,21 +345,19 @@
       return;
     }
 
-    /* --- dolapta: malzeme seç --- */
+    /* --- dolapta: malzeme seç — AKTİF MODUN listesine yazılır --- */
     if ((n = t.closest('[data-mz]'))) {
       e.preventDefault();
       var ad = n.dataset.mz;
-      if (n.classList.contains('on')) { n.classList.remove('on'); delete frSel[ad]; }
-      else { n.classList.add('on'); frSel[ad] = frAktifMod(); }
+      if (frState[frMod][ad]) delete frState[frMod][ad];
+      else frState[frMod][ad] = 1;
       frRender();
       return;
     }
-    /* --- dolapta: seçilen çipten çıkar --- */
+    /* --- dolapta: seçilen çipten çıkar — hangi moda aitse oradan --- */
     if ((n = t.closest('[data-frx]'))) {
       e.preventDefault();
-      var a2 = n.dataset.frx;
-      delete frSel[a2];
-      all('.mz').forEach(function (m) { if (m.dataset.mz === a2) m.classList.remove('on'); });
+      delete frState[n.dataset.frxm || frMod][n.dataset.frx];
       frRender();
       return;
     }
@@ -622,44 +620,45 @@
   ckRender();
 
   /* ================= DOLAPTA NE VAR =================
-     185 malzeme 5 sekmede tekrar etmesin diye tek listede duruyor;
-     aktif sekme seçimin hangi listeye gittiğini belirliyor. */
-  var frSel = {};                     // { malzeme: mod }
-  var FR_MOD = { fpHave: 'Dolaptakiler', fpSev: 'Sevmiyorum', fpTuk: 'Tüketmiyorum',
-                 fpAlj: 'Alerjim Var', fpHas: 'Hassasiyetim Var' };
-  function frAktifMod() {
-    var on = document.querySelector('#frTabs .pane.on');
-    return on ? on.id : 'fpHave';
-  }
-  function frRender() {
-    var adlar = Object.keys(frSel);
-    var n = adlar.length;
-    if (el('frN')) el('frN').textContent = n;
-    if (el('frFn')) el('frFn').textContent = n ? Math.max(3, 240 - n * 11) : 0;
+     Canlıdaki iki katmanlı yapı:
+       birincil  Dolaptakiler | Hariç Tuttuklarım
+       ikincil   Hariç seçiliyken 4 mod (sevmiyorum · tüketmiyorum · alerjim · hassasiyet)
+     HER MODUN KENDİ SEÇİM DURUMU VAR — Sevmiyorum'a eklenen malzeme
+     Alerjim Var'da işaretli görünmez. 185 karo tek yerde duruyor, mod
+     değişince .on sınıfları aktif modun durumundan yeniden boyanıyor. */
+  var FR_MOD = { dolap: 'Dolaptakiler', sevmiyorum: 'Sevmiyorum', tuketmiyorum: 'Tüketmiyorum',
+                 alerjim: 'Alerjim Var', hassasiyet: 'Hassasiyetim Var' };
+  var FR_PH = {
+    dolap: 'Dolabındaki malzeme — örn. yumurta, patates…',
+    sevmiyorum: 'Sevmediğin malzeme — örn. kişniş, karides…',
+    tuketmiyorum: 'Tüketmediğin ürün — örn. domuz eti, alkol…',
+    alerjim: 'Alerjin olan malzeme — örn. fındık, kabuklu deniz ürünü…',
+    hassasiyet: 'Hassasiyet duyduğun içerik — örn. laktoz, gluten…'
+  };
+  var frState = { dolap: {}, sevmiyorum: {}, tuketmiyorum: {}, alerjim: {}, hassasiyet: {} };
+  var frPref = {};                 // hassasiyet: { madde: 'kesin' | 'uyar' }
+  var frMod = 'dolap';             // aktif mod
+  var frKat = 'dolap';             // aktif birincil katman: dolap | haric
 
-    var wrap = el('frChips');
-    if (wrap) {
-      wrap.innerHTML = n ? adlar.map(function (a) {
-        return '<button class="fr-chip" data-frx="' + a + '">' + a +
-               ' <i class="fs i-xmark"></i></button>';
-      }).join('') :
-      '<span class="fr-empty">Henüz seçim yok — Dolaptakiler\'den malzeme işaretle ' +
-      'ya da Hariç Tuttuklarım\'ı doldur.</span>';
-    }
+  function frHaricTop() {
+    return ['sevmiyorum', 'tuketmiyorum', 'alerjim', 'hassasiyet']
+      .reduce(function (a, k) { return a + Object.keys(frState[k]).length; }, 0);
+  }
+
+  /* aktif modun seçimlerini karolara boya */
+  function frBoya() {
+    var sec = frState[frMod] || {};
+    all('.mz').forEach(function (m) { m.classList.toggle('on', !!sec[m.dataset.mz]); });
     all('.mzcat').forEach(function (c) {
-      var top = all('.mz.on', c).length;
-      var lbl = c.querySelector('.mh-n');
-      var tum = all('.mz', c).length;
-      if (lbl) lbl.textContent = top + '/' + tum;
-      c.classList.toggle('has-sel', top > 0);
+      var n = all('.mz.on', c).length, tum = all('.mz', c).length;
+      var lbl = c.querySelector('.mzc-n');
+      if (lbl) lbl.textContent = n + '/' + tum;
+      c.classList.toggle('has-sel', n > 0);
     });
-    if (el('frEmpty')) el('frEmpty').style.display = n ? 'none' : 'flex';
-    if (el('frResults')) el('frResults').style.display = n ? 'block' : 'none';
-    if (n && el('frRn')) { el('frRn').textContent = Math.max(3, 240 - n * 11); el('frRm').textContent = n; }
-    frGrid(n, adlar);
   }
 
-  /* Sonuç ızgarası boş bir kabuktu — eşleşme rozetiyle gerçek kart üretiliyor.
+
+  /* Sonuç ızgarası — eşleşme rozetiyle gerçek kart üretir.
      Eşleşme sayısı seçilen malzeme adediyle birlikte artar. */
   var FR_TARIF = [
     ['Ezogelin Çorbası', '1410', 30, 'Kolay', '6 kişilik', 11, 'AT', 'Ayşe Tülin', 'ink', '4,9'],
@@ -669,18 +668,18 @@
     ['Fırında Kıymalı Pide', '1494', 65, 'Orta', '4 kişilik', 12, 'KD', 'Kaan Demir', 'petrol', '4,7'],
     ['Yayla Çorbası — Naneli', '1406', 40, 'Kolay', '6 kişilik', 8, 'ZU', 'Zeynep Usta', 'purple', '4,7']
   ];
-  function frGrid(n, adlar) {
+  function frGrid(n) {
     var g = el('frGrid');
     if (!g) return;
     if (!n) { g.innerHTML = ''; return; }
     g.innerHTML = FR_TARIF.map(function (r, i) {
-      var var_ = Math.min(r[5], n + 2 + i % 2);       // elindeki malzeme sayısı arttıkça eşleşme artar
+      var v = Math.min(r[5], n + 2 + i % 2);
       return '<a class="gcard" data-open="tarif-detay">' +
         '<div class="im" style="background-image:url(\'assets/img/' + r[1] + '.webp\')">' +
         '<span class="tchip"><i class="fs i-clock"></i> ' + r[2] + ' dk</span></div>' +
         '<div class="bd"><h4>' + r[0] + '</h4>' +
         '<div class="match" style="position:static;margin:0 0 8px"><i class="fs i-check"></i> ' +
-        var_ + '/' + r[5] + ' malzemen var</div>' +
+        v + '/' + r[5] + ' malzemen var</div>' +
         '<div class="gsub"><span>' + r[4] + '</span></div>' +
         '<div class="gchef"><span class="av" style="background:var(--' + r[8] + ')">' + r[6] +
         '</span><b>' + r[7] + '</b></div>' +
@@ -688,9 +687,87 @@
         '</span><span class="dif">' + r[3] + '</span></div></div></a>';
     }).join('');
   }
+
+  function frRender() {
+    var dolapN = Object.keys(frState.dolap).length;
+    var haricN = frHaricTop();
+
+    if (el('frnDolap')) el('frnDolap').textContent = dolapN;
+    if (el('frnHaric')) el('frnHaric').textContent = haricN;
+    ['sevmiyorum', 'tuketmiyorum', 'alerjim', 'hassasiyet'].forEach(function (k) {
+      var e = el('frn-' + k);
+      if (e) e.textContent = Object.keys(frState[k]).length;
+    });
+    if (el('frN')) el('frN').textContent = dolapN;
+    if (el('frHx')) el('frHx').textContent = haricN;
+    if (el('frFn')) el('frFn').textContent = dolapN ? Math.max(3, 240 - dolapN * 11) : 0;
+    if (el('frMode')) el('frMode').textContent = FR_MOD[frMod];
+    if (el('frQ')) el('frQ').placeholder = FR_PH[frMod];
+
+    /* seçilen çipleri: aktif katmanın tamamı (dolap ya da dört hariç modu birden) */
+    var wrap = el('frChips');
+    if (wrap) {
+      var liste = [];
+      if (frKat === 'dolap') {
+        Object.keys(frState.dolap).forEach(function (a) { liste.push([a, 'dolap']); });
+      } else {
+        ['sevmiyorum', 'tuketmiyorum', 'alerjim', 'hassasiyet'].forEach(function (k) {
+          Object.keys(frState[k]).forEach(function (a) { liste.push([a, k]); });
+        });
+      }
+      wrap.innerHTML = liste.length ? liste.map(function (x) {
+        return '<button class="fr-chip" data-frx="' + x[0] + '" data-frxm="' + x[1] + '">' +
+               x[0] + ' <i class="fs i-xmark"></i></button>';
+      }).join('') :
+      '<span class="fr-empty">Henüz seçim yok — Dolaptakiler\'den malzeme işaretle ' +
+      'ya da Hariç Tuttuklarım\'ı doldur.</span>';
+    }
+    if (el('frEmpty')) el('frEmpty').style.display = dolapN ? 'none' : 'flex';
+    if (el('frResults')) el('frResults').style.display = dolapN ? 'block' : 'none';
+    if (dolapN && el('frRn')) { el('frRn').textContent = Math.max(3, 240 - dolapN * 11); el('frRm').textContent = dolapN; }
+    frGrid(dolapN, Object.keys(frState.dolap));
+    frBoya();
+  }
+
+  /* birincil katman: Dolaptakiler | Hariç Tuttuklarım */
+  function frKatmanGoster(k) {
+    frKat = k;
+    all('#frMode2 .fr-m').forEach(function (b) { b.classList.toggle('on', b.dataset.frm === k); });
+    if (el('frLayDolap')) el('frLayDolap').classList.toggle('on', k === 'dolap');
+    if (el('frLayHaric')) el('frLayHaric').classList.toggle('on', k === 'haric');
+    /* dört mod kartı yalnız Hariç katmanına ait — Dolaptakiler'de görünmez */
+    frMod = (k === 'dolap') ? 'dolap' : (frMod === 'dolap' ? 'sevmiyorum' : frMod);
+    frRender();
+  }
+
+  /* ikincil katman: dört mod */
+  function frModGoster(m) {
+    frMod = m;
+    all('#frEx .fr-e').forEach(function (b) { b.classList.toggle('on', b.dataset.fre === m); });
+    all('.fr-exd').forEach(function (d) { d.classList.toggle('on', d.dataset.fred === m); });
+    frRender();
+  }
+
+  document.addEventListener('click', function (e) {
+    var n;
+    if ((n = e.target.closest('#frMode2 .fr-m'))) { e.preventDefault(); frKatmanGoster(n.dataset.frm); return; }
+    if ((n = e.target.closest('#frEx .fr-e'))) { e.preventDefault(); frModGoster(n.dataset.fre); return; }
+    /* hassasiyet: kesinlikle gösterme / uyararak göster */
+    if ((n = e.target.closest('.hs-opt .fopt'))) {
+      e.preventDefault();
+      var kap = n.closest('.hs-opt');
+      all('.fopt', kap).forEach(function (x) { x.classList.remove('on'); });
+      n.classList.add('on');
+      var ad = (kap.previousElementSibling || {}).textContent || '';
+      frPref[ad] = /Kesinlikle/.test(n.textContent) ? 'kesin' : 'uyar';
+      say(ad + ' — ' + n.textContent.trim().toLocaleLowerCase('tr'));
+      return;
+    }
+  }, true);
+
   function frTemizle() {
-    frSel = {};
-    all('.mz.on').forEach(function (m) { m.classList.remove('on'); });
+    Object.keys(frState).forEach(function (k) { frState[k] = {}; });
+    frPref = {};
     frRender();
   }
 
@@ -706,7 +783,7 @@
         if (ok) gorunen++;
       });
       c.style.display = gorunen ? '' : 'none';
-      if (q && gorunen) c.classList.add('on');       // arama varken kategoriyi aç
+      if (q && gorunen) c.classList.add('on');
       bulunan += gorunen;
     });
     if (el('frNoRes')) el('frNoRes').style.display = bulunan ? 'none' : 'flex';
@@ -719,18 +796,17 @@
   });
   if (el('frReset')) el('frReset').addEventListener('click', function () {
     all('#vFridge .fopt.on').forEach(function (x) {
-      if (!x.closest('.hs-opt')) x.classList.remove('on');
+      if (!x.closest('.hs-opt') && !x.closest('.fr-qs')) x.classList.remove('on');
     });
     if (el('frKcal')) { el('frKcal').value = 1; el('frKcalV').textContent = KCAL[1]; }
     say('Filtreler sıfırlandı');
   });
   if (el('frClear')) el('frClear').addEventListener('click', function () {
-    if (!Object.keys(frSel).length) { say('Dolabın zaten boş'); return; }
-    frTemizle(); say('Dolap sıfırlandı');
+    if (!Object.keys(frState.dolap).length && !frHaricTop()) { say('Dolabın zaten boş'); return; }
+    frTemizle(); say('Dolap ve hariç listeleri sıfırlandı');
   });
   if (el('frShow')) el('frShow').addEventListener('click', function () {
-    var n = Object.keys(frSel).length;
-    if (!n) { say('Önce dolabından birkaç malzeme işaretle'); return; }
+    if (!Object.keys(frState.dolap).length) { say('Önce dolabından birkaç malzeme işaretle'); return; }
     el('frResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
@@ -1478,7 +1554,7 @@
 
   /* ================= AÇILIŞ =================
      #/ekran ile gelen link doğrudan o ekranı açar. */
-  frRender(); trayRender(); trayList(); if (el('wzNext')) wzGoster(1);
+  frKatmanGoster('dolap'); trayRender(); trayList(); if (el('wzNext')) wzGoster(1);
   if (el('raNext')) raGoster(1);
 
   var boot = readHash();

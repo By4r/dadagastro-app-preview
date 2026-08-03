@@ -488,16 +488,14 @@
   </header>
 
   <section class="sec">
-    <div class="mk-hero">
-      <span class="eyebrow">Mutfak sırları</span>
-      <h2>Ustaların küçük sırları</h2>
-      <p>Pilav neden tane tane olur, hamur neden kabarmaz, et neden sertleşir? Şeflerden ve toplulukta denenmiş püf noktaları.</p>
-      <div class="mk-stats">
-        <div><b>591</b><span>Püf noktası</span></div>
-        <div><b>11</b><span>Kategori</span></div>
-        <div><b>3,7B</b><span>Toplam okunma</span></div>
-      </div>
-    </div>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1561.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Mutfak Sırları</span>
+    <h2>Püf Noktaları — ustaların küçük sırları</h2>
+    <p>Pilav neden tane tane olur, hamur neden kabarmaz, et neden sertleşir? Şeflerden ve toplulukta denenmiş 591 püf noktası — kategorilere ayrılmış, tek tek açıklanmış.</p>
+    <div class="mh-stat"><span><b>591</b>Püf noktası</span><span><b>11</b>Kategori</span><span><b>3,9B</b>Toplam okunma</span></div>
+  </div>
   </section>
 
   <section class="sec">
@@ -883,190 +881,170 @@
     <button class="ab-btn" id="frClear" aria-label="Dolabı sıfırla"><i class="fs i-arrow-rotate-left"></i></button>
   </header>
 
-  <div class="sec" style="margin-top:20px">
-    <div class="sec-head"><div>
-      <span class="eyebrow">Dolapta ne var?</span>
-      <h2>Dolabındaki malzemeyle pişir</h2>
-      <p class="sub">Daha az israf: elindekini değerlendir, bozulmadan sofraya gelsin.</p>
-    </div></div>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1451.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Dolapta Ne Var?</span>
+    <h2>Dolabındaki malzemeyle pişir</h2>
+    <p>Dolabındaki malzemeleri işaretle — sana yapabileceğin tarifleri anında listeleyelim. Eksik bir-iki malzemeyle çıkanları da gösterelim.</p>
   </div>
 
   <!-- canlı sayaç + seçilenler şeridi -->
   <div class="fr-bar">
-    <div class="fr-count">Elinde <b id="frN">0</b> malzeme</div>
+    <div class="fr-count">Elinde <b id="frN">0</b> malzeme · <b id="frHx">0</b> malzeme hariç tutuldu</div>
     <div class="fr-chips" id="frChips">
       <span class="fr-empty">Henüz seçim yok — Dolaptakiler&#39;den malzeme işaretle ya da Hariç Tuttuklarım&#39;ı doldur.</span>
     </div>
   </div>
 
-  <div data-tabs id="frTabs">
-    <div class="segs segs-scroll">
-      <button class="seg on" data-pane="fpHave">Dolaptakiler</button>
-      <button class="seg" data-pane="fpSev">Sevmiyorum</button>
-      <button class="seg" data-pane="fpTuk">Tüketmiyorum</button>
-      <button class="seg" data-pane="fpAlj">Alerjim Var</button>
-      <button class="seg" data-pane="fpHas">Hassasiyetim Var</button>
-    </div>
-
-    <div class="pane on" id="fpHave">
-      <p class="fr-lead">Dolabında bulunan malzemeleri seç, sana uygun tarifleri gösterelim.</p>
-    </div>
-    <div class="pane" id="fpSev">
-      <p class="fr-lead">Damak tadın nedeniyle görmek istemediğin malzemeleri seç — tarif kolayca çıkarılabiliyorsa yine gösterilir, seni bilgilendiririz.</p>
-    </div>
-    <div class="pane" id="fpTuk">
-      <p class="fr-lead">Yaşam biçimin ya da beslenme tercihin nedeniyle tüketmediğin ürünleri seç — uyumsuz tarifler sonuçlarda gösterilmez.</p>
-      <div class="fr-qs"><div class="ft">Hızlı seçim — tek dokunuşla ilgili ürün grubunu işaretler</div><div class="fopts">
-        <button class="fopt" data-qs="tk-vegan">Vegan</button>
-        <button class="fopt" data-qs="tk-vejetaryen">Vejetaryen</button>
-        <button class="fopt" data-qs="tk-pesketaryen">Pesketaryen</button>
-        <button class="fopt" data-qs="tk-ilave-seker-tuketmiyorum">İlave şeker tüketmiyorum</button>
-        <button class="fopt" data-qs="tk-cig-urun-tuketmiyorum">Çiğ ürün tüketmiyorum</button>
-      </div></div>
-    </div>
-    <div class="pane" id="fpAlj">
-      <p class="fr-lead">Sağlık açısından kesinlikle tüketmemen gereken malzemeleri seç — alerjen içeren tarifler sonuçlardan tamamen çıkarılır, önerilmez.</p>
-      <div class="fr-qs"><div class="fopts">
-        <button class="fopt" data-qs="al-sut">Süt</button>
-        <button class="fopt" data-qs="al-yumurta">Yumurta</button>
-        <button class="fopt" data-qs="al-gluten">Gluten</button>
-        <button class="fopt" data-qs="al-yer-fistigi">Yer fıstığı</button>
-        <button class="fopt" data-qs="al-sert-kabuklu-yemisler">Sert kabuklu yemişler</button>
-        <button class="fopt" data-qs="al-soya">Soya</button>
-        <button class="fopt" data-qs="al-balik">Balık</button>
-        <button class="fopt" data-qs="al-kabuklu-deniz-urunleri">Kabuklu deniz ürünleri</button>
-        <button class="fopt" data-qs="al-susam">Susam</button>
-        <button class="fopt" data-qs="al-hardal">Hardal</button>
-        <button class="fopt" data-qs="al-kereviz">Kereviz</button>
-        <button class="fopt" data-qs="al-diger">Diğer</button>
-      </div></div>
-    </div>
-    <div class="pane" id="fpHas">
-      <p class="fr-lead">Alerji olmasa da tüketmekte zorlandığın içerikler — her seçim için tarifi hiç gösterme ya da uyararak göster diyebilirsin.</p>
-      <div class="fr-qs">
-        <div class="hs-row"><b>Laktoz</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Gluten hassasiyeti</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Acı</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Sülfit</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Kafein</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Yüksek şeker</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Histamin</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Fruktoz (FODMAP)</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Patlıcangiller (domates·patates·biber)</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Maya</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Yumurta hassasiyeti</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-        <div class="hs-row"><b>Diğer</b><div class="hs-opt" data-chips="single"><button class="fopt on">Kesinlikle gösterme</button><button class="fopt">Uyararak göster</button></div></div>
-      </div>
-    </div>
+  <!-- BİRİNCİL SEÇİM — canlıdaki .mode-tab: iki buton, yan yana, tam genişlik -->
+  <div class="fr-mode" id="frMode2">
+    <button class="fr-m on" data-frm="dolap"><i class="fs i-basket-shopping"></i><span class="t">Dolaptakiler</span><span class="n" id="frnDolap">0</span></button>
+    <button class="fr-m" data-frm="haric"><i class="fs i-ban"></i><span class="t">Hariç Tuttuklarım</span><span class="n" id="frnHaric">0</span></button>
   </div>
 
-  <!-- 185 malzeme: 5 sekmede aynı liste tekrar etmesin diye TEK yerde,
-       aktif sekmeye ekleniyor. Mobil birleştirmesi. -->
-  <div class="fr-mz">
+  <!-- Dolaptakiler katmanı -->
+  <div class="fr-lay on" id="frLayDolap">
+    <p class="fr-lead">Dolabında bulunan malzemeleri seç, sana uygun tarifleri gösterelim.</p>
+  </div>
+
+  <!-- Hariç Tuttuklarım katmanı: açıklama + İKİNCİL dört mod kartı -->
+  <div class="fr-lay" id="frLayHaric">
+    <p class="fr-lead">Tariflerde bulunmasını istemediğin veya tüketemediğin malzemeleri belirt.</p>
+    <div class="fr-ex" id="frEx">
+      <button class="fr-e on" data-fre="sevmiyorum"><span class="ic"><i class="fs i-face-frown"></i></span><b>Sevmiyorum</b><span class="n" id="frn-sevmiyorum">0</span></button>
+      <button class="fr-e" data-fre="tuketmiyorum"><span class="ic"><i class="fs i-ban"></i></span><b>Tüketmiyorum</b><span class="n" id="frn-tuketmiyorum">0</span></button>
+      <button class="fr-e" data-fre="alerjim"><span class="ic"><i class="fs i-triangle-exclamation"></i></span><b>Alerjim Var</b><span class="n" id="frn-alerjim">0</span></button>
+      <button class="fr-e" data-fre="hassasiyet"><span class="ic"><i class="fs i-shield-heart"></i></span><b>Hassasiyetim Var</b><span class="n" id="frn-hassasiyet">0</span></button>
+    </div>
+    <div class="fr-exd on" data-fred="sevmiyorum"><p>Damak tadın nedeniyle görmek istemediğin malzemeleri seç — tarif kolayca çıkarılabiliyorsa yine gösterilir, seni bilgilendiririz.</p></div>
+    <div class="fr-exd" data-fred="tuketmiyorum"><p>Yaşam biçimin ya da beslenme tercihin nedeniyle tüketmediğin ürünleri seç — uyumsuz tarifler sonuçlarda gösterilmez.</p>
+      <div class="fr-qs"><div class="ft">Hızlı seçim — tek dokunuşla ilgili ürün grubunu işaretler</div><div class="fopts"><button class="fopt" data-qs="tuketmiyorum-0">Vegan</button><button class="fopt" data-qs="tuketmiyorum-1">Vejetaryen</button><button class="fopt" data-qs="tuketmiyorum-2">Pesketaryen</button><button class="fopt" data-qs="tuketmiyorum-3">İlave şeker tüketmiyorum</button><button class="fopt" data-qs="tuketmiyorum-4">Çiğ ürün tüketmiyorum</button></div></div></div>
+    <div class="fr-exd" data-fred="alerjim"><p>Sağlık açısından kesinlikle tüketmemen gereken malzemeleri seç — alerjen içeren tarifler sonuçlardan tamamen çıkarılır, önerilmez.</p>
+      <div class="fr-qs"><div class="ft">Hızlı seçim — tek dokunuşla ilgili ürün grubunu işaretler</div><div class="fopts"><button class="fopt" data-qs="alerjim-0">Süt</button><button class="fopt" data-qs="alerjim-1">Yumurta</button><button class="fopt" data-qs="alerjim-2">Gluten</button><button class="fopt" data-qs="alerjim-3">Fındık ve sert kabuklular</button><button class="fopt" data-qs="alerjim-4">Yer fıstığı</button><button class="fopt" data-qs="alerjim-5">Kabuklu deniz ürünleri</button><button class="fopt" data-qs="alerjim-6">Balık</button><button class="fopt" data-qs="alerjim-7">Soya</button><button class="fopt" data-qs="alerjim-8">Susam</button></div></div></div>
+    <div class="fr-exd" data-fred="hassasiyet"><p>Alerji olmasa da tüketmekte zorlandığın içerikler — her seçim için tarifi hiç gösterme ya da uyararak göster diyebilirsin.</p>
+      <div class="fr-qs" id="frSens">
+        <div class="ft">Hazır hassasiyetler — her biri için tarifi hiç gösterme ya da uyararak göster</div>
+        <div class="hs-row"><b>Laktoz</b><div class="hs-opt" data-hspref="0"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Gluten hassasiyeti</b><div class="hs-opt" data-hspref="1"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Acı</b><div class="hs-opt" data-hspref="2"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Sülfit</b><div class="hs-opt" data-hspref="3"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Kafein</b><div class="hs-opt" data-hspref="4"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Yüksek şeker</b><div class="hs-opt" data-hspref="5"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Histamin</b><div class="hs-opt" data-hspref="6"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Fruktoz (FODMAP)</b><div class="hs-opt" data-hspref="7"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Patlıcangiller (domates·patates·biber)</b><div class="hs-opt" data-hspref="8"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Maya</b><div class="hs-opt" data-hspref="9"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <div class="hs-row"><b>Yumurta hassasiyeti</b><div class="hs-opt" data-hspref="10"><button class="fopt">Kesinlikle gösterme</button><button class="fopt on">Uyararak göster</button></div></div>
+        <p class="fr-note" style="margin-top:12px">Listede yoksa aşağıdan tek tek malzeme ekle — aynı iki durum onlar için de geçerli.</p>
+      </div></div>
+  </div>
+
     <div class="fr-mzhead">
       <label class="fld fr-search"><i class="fs i-magnifying-glass"></i>
-        <input type="text" id="frQ" placeholder="Malzeme ara… (ör. domates)" /></label>
+        <input type="text" id="frQ" placeholder="Dolabındaki malzeme — örn. yumurta, patates…" />
+        <button class="fr-mic" data-toast="Sesli malzeme girişi — mikrofona konuş" aria-label="Sesli malzeme girişi"><i class="fs i-microphone"></i></button></label>
       <p class="fr-note">Seçtiklerin <b id="frMode">Dolaptakiler</b> listesine eklenir · 185 malzeme</p>
     </div>
       <section class="acc mzcat" data-mzcat="sebzeler">
-        <button class="acc-h" data-acc><span class="dash"></span><span class="mh-ic"><i class="fs i-carrot"></i></span><b>Sebzeler</b><span class="mh-n">0/21</span><i class="fs i-chevron-right cv"></i></button>
+        <button class="acc-h" data-acc><span class="dash"></span><span class="mzc-ic"><i class="fs i-carrot"></i></span><b>Sebzeler</b><span class="mzc-n">0/21</span><i class="fs i-chevron-right cv"></i></button>
         <div class="acc-b"><div class="acc-in"><div class="mz-grid">
-        <button class="mz" data-mz="Bezelye"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Bezelye</span></button>
-        <button class="mz" data-mz="Biber"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Biber</span></button>
-        <button class="mz" data-mz="Brokoli"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Brokoli</span></button>
+        <button class="mz" data-mz="Bezelye"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-bezelye.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Bezelye</span></button>
+        <button class="mz" data-mz="Biber"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-biber.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Biber</span></button>
+        <button class="mz" data-mz="Brokoli"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-brokoli.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Brokoli</span></button>
         <button class="mz" data-mz="Domates"><span class="mz-img" data-bg="url('assets/ing/tomatoes.webp')"></span><span class="mz-t">Domates</span></button>
         <button class="mz" data-mz="Enginar"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Enginar</span></button>
-        <button class="mz" data-mz="Havuç"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Havuç</span></button>
-        <button class="mz" data-mz="Ispanak"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Ispanak</span></button>
-        <button class="mz" data-mz="Kabak"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Kabak</span></button>
+        <button class="mz" data-mz="Havuç"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-havuc.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Havuç</span></button>
+        <button class="mz" data-mz="Ispanak"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-ispanak.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Ispanak</span></button>
+        <button class="mz" data-mz="Kabak"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kabak.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Kabak</span></button>
         <button class="mz" data-mz="Karnabahar"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Karnabahar</span></button>
-        <button class="mz" data-mz="Kereviz"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Kereviz</span></button>
-        <button class="mz" data-mz="Lahana"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Lahana</span></button>
-        <button class="mz" data-mz="Mantar"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Mantar</span></button>
+        <button class="mz" data-mz="Kereviz"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kereviz.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Kereviz</span></button>
+        <button class="mz" data-mz="Lahana"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-lahana.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Lahana</span></button>
+        <button class="mz" data-mz="Mantar"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-mantar.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Mantar</span></button>
         <button class="mz" data-mz="Mısır"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Mısır</span></button>
-        <button class="mz" data-mz="Pancar"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Pancar</span></button>
+        <button class="mz" data-mz="Pancar"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-pancar.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Pancar</span></button>
         <button class="mz" data-mz="Patates"><span class="mz-img" data-bg="url('assets/ing/potatoes.webp')"></span><span class="mz-t">Patates</span></button>
-        <button class="mz" data-mz="Patlıcan"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Patlıcan</span></button>
-        <button class="mz" data-mz="Pırasa"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Pırasa</span></button>
-        <button class="mz" data-mz="Salatalık"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Salatalık</span></button>
+        <button class="mz" data-mz="Patlıcan"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-patlican.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Patlıcan</span></button>
+        <button class="mz" data-mz="Pırasa"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-pirasa.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Pırasa</span></button>
+        <button class="mz" data-mz="Salatalık"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-salatalik.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Salatalık</span></button>
         <button class="mz" data-mz="Sarımsak"><span class="mz-img" data-bg="url('assets/ing/garlic.webp')"></span><span class="mz-t">Sarımsak</span></button>
         <button class="mz" data-mz="Soğan"><span class="mz-img" data-bg="url('assets/ing/onion.webp')"></span><span class="mz-t">Soğan</span></button>
-        <button class="mz" data-mz="Turp"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Turp</span></button>
+        <button class="mz" data-mz="Turp"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-turp.webp')"><i class="fs i-carrot"></i></span><span class="mz-t">Turp</span></button>
         </div></div></div>
       </section>
       <section class="acc mzcat" data-mzcat="meyveler">
-        <button class="acc-h" data-acc><span class="dash"></span><span class="mh-ic"><i class="fs i-apple-whole"></i></span><b>Meyveler</b><span class="mh-n">0/22</span><i class="fs i-chevron-right cv"></i></button>
+        <button class="acc-h" data-acc><span class="dash"></span><span class="mzc-ic"><i class="fs i-apple-whole"></i></span><b>Meyveler</b><span class="mzc-n">0/22</span><i class="fs i-chevron-right cv"></i></button>
         <div class="acc-b"><div class="acc-in"><div class="mz-grid">
-        <button class="mz" data-mz="Ananas"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Ananas</span></button>
-        <button class="mz" data-mz="Armut"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Armut</span></button>
-        <button class="mz" data-mz="Avokado"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Avokado</span></button>
-        <button class="mz" data-mz="Elma"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Elma</span></button>
+        <button class="mz" data-mz="Ananas"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-ananas.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Ananas</span></button>
+        <button class="mz" data-mz="Armut"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-armut.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Armut</span></button>
+        <button class="mz" data-mz="Avokado"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-avokado.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Avokado</span></button>
+        <button class="mz" data-mz="Elma"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-elma.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Elma</span></button>
         <button class="mz" data-mz="Erik"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Erik</span></button>
-        <button class="mz" data-mz="Greyfurt"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Greyfurt</span></button>
+        <button class="mz" data-mz="Greyfurt"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-greyfurt.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Greyfurt</span></button>
         <button class="mz" data-mz="Hindistan cevizi"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Hindistan cevizi</span></button>
         <button class="mz" data-mz="Karpuz"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Karpuz</span></button>
         <button class="mz" data-mz="Kavun"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Kavun</span></button>
-        <button class="mz" data-mz="Kayısı"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Kayısı</span></button>
-        <button class="mz" data-mz="Kiraz"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Kiraz</span></button>
-        <button class="mz" data-mz="Limon"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Limon</span></button>
+        <button class="mz" data-mz="Kayısı"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kayisi.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Kayısı</span></button>
+        <button class="mz" data-mz="Kiraz"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kiraz.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Kiraz</span></button>
+        <button class="mz" data-mz="Limon"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-limon.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Limon</span></button>
         <button class="mz" data-mz="Mandalina"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Mandalina</span></button>
-        <button class="mz" data-mz="Mango"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Mango</span></button>
-        <button class="mz" data-mz="Muz"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Muz</span></button>
-        <button class="mz" data-mz="Nar"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Nar</span></button>
-        <button class="mz" data-mz="Portakal"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Portakal</span></button>
+        <button class="mz" data-mz="Mango"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-mango.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Mango</span></button>
+        <button class="mz" data-mz="Muz"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-muz.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Muz</span></button>
+        <button class="mz" data-mz="Nar"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-nar.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Nar</span></button>
+        <button class="mz" data-mz="Portakal"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-portakal.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Portakal</span></button>
         <button class="mz" data-mz="Vişne"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Vişne</span></button>
-        <button class="mz" data-mz="Çilek"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Çilek</span></button>
+        <button class="mz" data-mz="Çilek"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-cilek.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Çilek</span></button>
         <button class="mz" data-mz="Üzüm"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Üzüm</span></button>
-        <button class="mz" data-mz="İncir"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">İncir</span></button>
-        <button class="mz" data-mz="Şeftali"><span class="mz-img"><i class="fs i-apple-whole"></i></span><span class="mz-t">Şeftali</span></button>
+        <button class="mz" data-mz="İncir"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-incir-2.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">İncir</span></button>
+        <button class="mz" data-mz="Şeftali"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-seftali.webp')"><i class="fs i-apple-whole"></i></span><span class="mz-t">Şeftali</span></button>
         </div></div></div>
       </section>
       <section class="acc mzcat" data-mzcat="kirmizi-et">
-        <button class="acc-h" data-acc><span class="dash"></span><span class="mh-ic"><i class="fs i-bacon"></i></span><b>Kırmızı Et</b><span class="mh-n">0/18</span><i class="fs i-chevron-right cv"></i></button>
+        <button class="acc-h" data-acc><span class="dash"></span><span class="mzc-ic"><i class="fs i-bacon"></i></span><b>Kırmızı Et</b><span class="mzc-n">0/18</span><i class="fs i-chevron-right cv"></i></button>
         <div class="acc-b"><div class="acc-in"><div class="mz-grid">
         <button class="mz" data-mz="Antrikot"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Antrikot</span></button>
-        <button class="mz" data-mz="Biftek"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Biftek</span></button>
-        <button class="mz" data-mz="Bonfile"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Bonfile</span></button>
+        <button class="mz" data-mz="Biftek"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-biftek.webp')"><i class="fs i-bacon"></i></span><span class="mz-t">Biftek</span></button>
+        <button class="mz" data-mz="Bonfile"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-bonfile.webp')"><i class="fs i-bacon"></i></span><span class="mz-t">Bonfile</span></button>
         <button class="mz" data-mz="Ciğer"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Ciğer</span></button>
-        <button class="mz" data-mz="Dana eti"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Dana eti</span></button>
+        <button class="mz" data-mz="Dana eti"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-dana-eti.webp')"><i class="fs i-bacon"></i></span><span class="mz-t">Dana eti</span></button>
         <button class="mz" data-mz="Kaburga"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Kaburga</span></button>
         <button class="mz" data-mz="Kavurma"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Kavurma</span></button>
-        <button class="mz" data-mz="Keçi eti"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Keçi eti</span></button>
-        <button class="mz" data-mz="Kontrfile"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Kontrfile</span></button>
+        <button class="mz" data-mz="Keçi eti"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-keci-eti.webp')"><i class="fs i-bacon"></i></span><span class="mz-t">Keçi eti</span></button>
+        <button class="mz" data-mz="Kontrfile"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kontrfile.webp')"><i class="fs i-bacon"></i></span><span class="mz-t">Kontrfile</span></button>
         <button class="mz" data-mz="Koyun eti"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Koyun eti</span></button>
-        <button class="mz" data-mz="Kuzu eti"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Kuzu eti</span></button>
+        <button class="mz" data-mz="Kuzu eti"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kuzu-eti.webp')"><i class="fs i-bacon"></i></span><span class="mz-t">Kuzu eti</span></button>
         <button class="mz" data-mz="Kuşbaşı"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Kuşbaşı</span></button>
         <button class="mz" data-mz="Kıyma"><span class="mz-img" data-bg="url('assets/ing/minced-beef.webp')"></span><span class="mz-t">Kıyma</span></button>
         <button class="mz" data-mz="Pastırma"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Pastırma</span></button>
-        <button class="mz" data-mz="Pirzola"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Pirzola</span></button>
+        <button class="mz" data-mz="Pirzola"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-pirzola.webp')"><i class="fs i-bacon"></i></span><span class="mz-t">Pirzola</span></button>
         <button class="mz" data-mz="Sakatat"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Sakatat</span></button>
         <button class="mz" data-mz="Sucuk"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Sucuk</span></button>
-        <button class="mz" data-mz="İncik"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">İncik</span></button>
+        <button class="mz" data-mz="İncik"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-incik-2.webp')"><i class="fs i-bacon"></i></span><span class="mz-t">İncik</span></button>
         </div></div></div>
       </section>
       <section class="acc mzcat" data-mzcat="tavuk-ve-kumes-urunleri">
-        <button class="acc-h" data-acc><span class="dash"></span><span class="mh-ic"><i class="fs i-drumstick-bite"></i></span><b>Tavuk ve Kümes Ürünleri</b><span class="mh-n">0/13</span><i class="fs i-chevron-right cv"></i></button>
+        <button class="acc-h" data-acc><span class="dash"></span><span class="mzc-ic"><i class="fs i-drumstick-bite"></i></span><b>Tavuk ve Kümes Ürünleri</b><span class="mzc-n">0/13</span><i class="fs i-chevron-right cv"></i></button>
         <div class="acc-b"><div class="acc-in"><div class="mz-grid">
-        <button class="mz" data-mz="Bütün tavuk"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Bütün tavuk</span></button>
+        <button class="mz" data-mz="Bütün tavuk"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-butun-tavuk.webp')"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Bütün tavuk</span></button>
         <button class="mz" data-mz="Bıldırcın eti"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Bıldırcın eti</span></button>
         <button class="mz" data-mz="Bıldırcın yumurtası"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Bıldırcın yumurtası</span></button>
         <button class="mz" data-mz="Hindi eti"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Hindi eti</span></button>
         <button class="mz" data-mz="Hindi göğsü"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Hindi göğsü</span></button>
         <button class="mz" data-mz="Kaz eti"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Kaz eti</span></button>
-        <button class="mz" data-mz="Tavuk but"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk but</span></button>
-        <button class="mz" data-mz="Tavuk ciğeri"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk ciğeri</span></button>
+        <button class="mz" data-mz="Tavuk but"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-tavuk-but.webp')"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk but</span></button>
+        <button class="mz" data-mz="Tavuk ciğeri"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-tavuk-cigeri.webp')"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk ciğeri</span></button>
         <button class="mz" data-mz="Tavuk göğsü"><span class="mz-img" data-bg="url('assets/ing/chicken.webp')"></span><span class="mz-t">Tavuk göğsü</span></button>
-        <button class="mz" data-mz="Tavuk kanat"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk kanat</span></button>
+        <button class="mz" data-mz="Tavuk kanat"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-tavuk-kanat.webp')"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk kanat</span></button>
         <button class="mz" data-mz="Tavuk pirzola"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk pirzola</span></button>
         <button class="mz" data-mz="Tavuk yumurtası"><span class="mz-img" data-bg="url('assets/ing/egg.webp')"></span><span class="mz-t">Tavuk yumurtası</span></button>
-        <button class="mz" data-mz="Ördek eti"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Ördek eti</span></button>
+        <button class="mz" data-mz="Ördek eti"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-ordek-eti.webp')"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Ördek eti</span></button>
         </div></div></div>
       </section>
       <section class="acc mzcat" data-mzcat="balik-ve-deniz-urunleri">
-        <button class="acc-h" data-acc><span class="dash"></span><span class="mh-ic"><i class="fs i-fish"></i></span><b>Balık ve Deniz Ürünleri</b><span class="mh-n">0/21</span><i class="fs i-chevron-right cv"></i></button>
+        <button class="acc-h" data-acc><span class="dash"></span><span class="mzc-ic"><i class="fs i-fish"></i></span><b>Balık ve Deniz Ürünleri</b><span class="mzc-n">0/21</span><i class="fs i-chevron-right cv"></i></button>
         <div class="acc-b"><div class="acc-in"><div class="mz-grid">
         <button class="mz" data-mz="Ahtapot"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Ahtapot</span></button>
-        <button class="mz" data-mz="Alabalık"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Alabalık</span></button>
+        <button class="mz" data-mz="Alabalık"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-alabalik.webp')"><i class="fs i-fish"></i></span><span class="mz-t">Alabalık</span></button>
         <button class="mz" data-mz="Barbun"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Barbun</span></button>
         <button class="mz" data-mz="Deniz tarağı"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Deniz tarağı</span></button>
         <button class="mz" data-mz="Hamsi"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Hamsi</span></button>
@@ -1074,29 +1052,29 @@
         <button class="mz" data-mz="Kalamar"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Kalamar</span></button>
         <button class="mz" data-mz="Kalkan"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Kalkan</span></button>
         <button class="mz" data-mz="Karides"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Karides</span></button>
-        <button class="mz" data-mz="Levrek"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Levrek</span></button>
+        <button class="mz" data-mz="Levrek"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-levrek.webp')"><i class="fs i-fish"></i></span><span class="mz-t">Levrek</span></button>
         <button class="mz" data-mz="Lüfer"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Lüfer</span></button>
         <button class="mz" data-mz="Mezgit"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Mezgit</span></button>
         <button class="mz" data-mz="Midye"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Midye</span></button>
         <button class="mz" data-mz="Palamut"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Palamut</span></button>
-        <button class="mz" data-mz="Sardalya"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Sardalya</span></button>
-        <button class="mz" data-mz="Somon"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Somon</span></button>
-        <button class="mz" data-mz="Ton balığı"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Ton balığı</span></button>
-        <button class="mz" data-mz="Uskumru"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Uskumru</span></button>
+        <button class="mz" data-mz="Sardalya"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-sardalya.webp')"><i class="fs i-fish"></i></span><span class="mz-t">Sardalya</span></button>
+        <button class="mz" data-mz="Somon"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-somon.webp')"><i class="fs i-fish"></i></span><span class="mz-t">Somon</span></button>
+        <button class="mz" data-mz="Ton balığı"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-ton-baligi.webp')"><i class="fs i-fish"></i></span><span class="mz-t">Ton balığı</span></button>
+        <button class="mz" data-mz="Uskumru"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-uskumru.webp')"><i class="fs i-fish"></i></span><span class="mz-t">Uskumru</span></button>
         <button class="mz" data-mz="Yengeç"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Yengeç</span></button>
         <button class="mz" data-mz="Çipura"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">Çipura</span></button>
         <button class="mz" data-mz="İstavrit"><span class="mz-img"><i class="fs i-fish"></i></span><span class="mz-t">İstavrit</span></button>
         </div></div></div>
       </section>
       <section class="acc mzcat" data-mzcat="sut-urunleri">
-        <button class="acc-h" data-acc><span class="dash"></span><span class="mh-ic"><i class="fs i-cheese"></i></span><b>Süt Ürünleri</b><span class="mh-n">0/18</span><i class="fs i-chevron-right cv"></i></button>
+        <button class="acc-h" data-acc><span class="dash"></span><span class="mzc-ic"><i class="fs i-cheese"></i></span><b>Süt Ürünleri</b><span class="mzc-n">0/18</span><i class="fs i-chevron-right cv"></i></button>
         <div class="acc-b"><div class="acc-in"><div class="mz-grid">
         <button class="mz" data-mz="Ayran"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Ayran</span></button>
         <button class="mz" data-mz="Beyaz peynir"><span class="mz-img" data-bg="url('assets/ing/cheese.webp')"></span><span class="mz-t">Beyaz peynir</span></button>
         <button class="mz" data-mz="Bitkisel süt alternatifleri"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Bitkisel süt alternatifleri</span></button>
         <button class="mz" data-mz="Cheddar"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Cheddar</span></button>
         <button class="mz" data-mz="Kaymak"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Kaymak</span></button>
-        <button class="mz" data-mz="Kaşar peyniri"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Kaşar peyniri</span></button>
+        <button class="mz" data-mz="Kaşar peyniri"><span class="mz-img foto" data-bg="url('assets/ing/cheese.webp')"><i class="fs i-cheese"></i></span><span class="mz-t">Kaşar peyniri</span></button>
         <button class="mz" data-mz="Kefir"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Kefir</span></button>
         <button class="mz" data-mz="Krema"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Krema</span></button>
         <button class="mz" data-mz="Labne"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Labne</span></button>
@@ -1104,7 +1082,7 @@
         <button class="mz" data-mz="Mozzarella"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Mozzarella</span></button>
         <button class="mz" data-mz="Parmesan"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Parmesan</span></button>
         <button class="mz" data-mz="Süt"><span class="mz-img" data-bg="url('assets/ing/milk.webp')"></span><span class="mz-t">Süt</span></button>
-        <button class="mz" data-mz="Süzme yoğurt"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Süzme yoğurt</span></button>
+        <button class="mz" data-mz="Süzme yoğurt"><span class="mz-img foto" data-bg="url('assets/ing/yogurt.webp')"><i class="fs i-cheese"></i></span><span class="mz-t">Süzme yoğurt</span></button>
         <button class="mz" data-mz="Tereyağı"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Tereyağı</span></button>
         <button class="mz" data-mz="Tulum peyniri"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Tulum peyniri</span></button>
         <button class="mz" data-mz="Yoğurt"><span class="mz-img" data-bg="url('assets/ing/yogurt.webp')"></span><span class="mz-t">Yoğurt</span></button>
@@ -1112,23 +1090,23 @@
         </div></div></div>
       </section>
       <section class="acc mzcat" data-mzcat="tahillar-ve-bakliyatlar">
-        <button class="acc-h" data-acc><span class="dash"></span><span class="mh-ic"><i class="fs i-wheat-awn"></i></span><b>Tahıllar ve Bakliyatlar</b><span class="mh-n">0/34</span><i class="fs i-chevron-right cv"></i></button>
+        <button class="acc-h" data-acc><span class="dash"></span><span class="mzc-ic"><i class="fs i-wheat-awn"></i></span><b>Tahıllar ve Bakliyatlar</b><span class="mzc-n">0/34</span><i class="fs i-chevron-right cv"></i></button>
         <div class="acc-b"><div class="acc-in"><div class="mz-grid">
-        <button class="mz" data-mz="Antep fıstığı"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Antep fıstığı</span></button>
+        <button class="mz" data-mz="Antep fıstığı"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-antep-fistigi.webp')"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Antep fıstığı</span></button>
         <button class="mz" data-mz="Arpa"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Arpa</span></button>
         <button class="mz" data-mz="Ay çekirdeği"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Ay çekirdeği</span></button>
-        <button class="mz" data-mz="Badem"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Badem</span></button>
-        <button class="mz" data-mz="Bakla"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Bakla</span></button>
+        <button class="mz" data-mz="Badem"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-badem.webp')"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Badem</span></button>
+        <button class="mz" data-mz="Bakla"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-bakla.webp')"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Bakla</span></button>
         <button class="mz" data-mz="Barbunya"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Barbunya</span></button>
         <button class="mz" data-mz="Bulgur"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Bulgur</span></button>
         <button class="mz" data-mz="Buğday"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Buğday</span></button>
         <button class="mz" data-mz="Börülce"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Börülce</span></button>
-        <button class="mz" data-mz="Ceviz"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Ceviz</span></button>
+        <button class="mz" data-mz="Ceviz"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-ceviz.webp')"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Ceviz</span></button>
         <button class="mz" data-mz="Chia tohumu"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Chia tohumu</span></button>
         <button class="mz" data-mz="Erişte"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Erişte</span></button>
-        <button class="mz" data-mz="Fındık"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Fındık</span></button>
-        <button class="mz" data-mz="Kabak çekirdeği"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Kabak çekirdeği</span></button>
-        <button class="mz" data-mz="Kaju"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Kaju</span></button>
+        <button class="mz" data-mz="Fındık"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-findik.webp')"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Fındık</span></button>
+        <button class="mz" data-mz="Kabak çekirdeği"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kabak.webp')"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Kabak çekirdeği</span></button>
+        <button class="mz" data-mz="Kaju"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kaju.webp')"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Kaju</span></button>
         <button class="mz" data-mz="Karabuğday"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Karabuğday</span></button>
         <button class="mz" data-mz="Keten tohumu"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Keten tohumu</span></button>
         <button class="mz" data-mz="Kinoa"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Kinoa</span></button>
@@ -1143,51 +1121,51 @@
         <button class="mz" data-mz="Soya fasulyesi"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Soya fasulyesi</span></button>
         <button class="mz" data-mz="Susam"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Susam</span></button>
         <button class="mz" data-mz="Un"><span class="mz-img" data-bg="url('assets/ing/flour.webp')"></span><span class="mz-t">Un</span></button>
-        <button class="mz" data-mz="Yer fıstığı"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Yer fıstığı</span></button>
+        <button class="mz" data-mz="Yer fıstığı"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-yer-fistigi.webp')"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Yer fıstığı</span></button>
         <button class="mz" data-mz="Yulaf"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Yulaf</span></button>
-        <button class="mz" data-mz="Çavdar"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Çavdar</span></button>
+        <button class="mz" data-mz="Çavdar"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-cavdar.webp')"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Çavdar</span></button>
         <button class="mz" data-mz="İrmik"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">İrmik</span></button>
         <button class="mz" data-mz="Şehriye"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Şehriye</span></button>
         </div></div></div>
       </section>
       <section class="acc mzcat" data-mzcat="baharatlar-otlar-ve-soslar">
-        <button class="acc-h" data-acc><span class="dash"></span><span class="mh-ic"><i class="fs i-mortar-pestle"></i></span><b>Baharatlar, Otlar ve Soslar</b><span class="mh-n">0/38</span><i class="fs i-chevron-right cv"></i></button>
+        <button class="acc-h" data-acc><span class="dash"></span><span class="mzc-ic"><i class="fs i-mortar-pestle"></i></span><b>Baharatlar, Otlar ve Soslar</b><span class="mzc-n">0/38</span><i class="fs i-chevron-right cv"></i></button>
         <div class="acc-b"><div class="acc-in"><div class="mz-grid">
         <button class="mz" data-mz="Acı sos"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Acı sos</span></button>
         <button class="mz" data-mz="Bal"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Bal</span></button>
         <button class="mz" data-mz="Barbekü sos"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Barbekü sos</span></button>
-        <button class="mz" data-mz="Biber salçası"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Biber salçası</span></button>
-        <button class="mz" data-mz="Biberiye"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Biberiye</span></button>
-        <button class="mz" data-mz="Dereotu"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Dereotu</span></button>
-        <button class="mz" data-mz="Domates salçası"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Domates salçası</span></button>
-        <button class="mz" data-mz="Fesleğen"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Fesleğen</span></button>
-        <button class="mz" data-mz="Frenk soğanı"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Frenk soğanı</span></button>
+        <button class="mz" data-mz="Biber salçası"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-biber.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Biber salçası</span></button>
+        <button class="mz" data-mz="Biberiye"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-biberiye.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Biberiye</span></button>
+        <button class="mz" data-mz="Dereotu"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-dereotu.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Dereotu</span></button>
+        <button class="mz" data-mz="Domates salçası"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-domates.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Domates salçası</span></button>
+        <button class="mz" data-mz="Fesleğen"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-feslegen.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Fesleğen</span></button>
+        <button class="mz" data-mz="Frenk soğanı"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-frenk-sogani.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Frenk soğanı</span></button>
         <button class="mz" data-mz="Hardal"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Hardal</span></button>
         <button class="mz" data-mz="Karabiber"><span class="mz-img" data-bg="url('assets/ing/black-pepper.webp')"></span><span class="mz-t">Karabiber</span></button>
         <button class="mz" data-mz="Kekik"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Kekik</span></button>
         <button class="mz" data-mz="Ketçap"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Ketçap</span></button>
-        <button class="mz" data-mz="Kimyon"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Kimyon</span></button>
-        <button class="mz" data-mz="Kişniş"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Kişniş</span></button>
+        <button class="mz" data-mz="Kimyon"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kimyon.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Kimyon</span></button>
+        <button class="mz" data-mz="Kişniş"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kisnis.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Kişniş</span></button>
         <button class="mz" data-mz="Köri"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Köri</span></button>
-        <button class="mz" data-mz="Kırmızı toz biber"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Kırmızı toz biber</span></button>
-        <button class="mz" data-mz="Maydanoz"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Maydanoz</span></button>
+        <button class="mz" data-mz="Kırmızı toz biber"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-kirmizi-toz-biber.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Kırmızı toz biber</span></button>
+        <button class="mz" data-mz="Maydanoz"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-maydanoz.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Maydanoz</span></button>
         <button class="mz" data-mz="Mayonez"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Mayonez</span></button>
-        <button class="mz" data-mz="Muskat"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Muskat</span></button>
+        <button class="mz" data-mz="Muskat"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-muskat.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Muskat</span></button>
         <button class="mz" data-mz="Nane"><span class="mz-img" data-bg="url('assets/ing/mint.webp')"></span><span class="mz-t">Nane</span></button>
-        <button class="mz" data-mz="Nar ekşisi"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Nar ekşisi</span></button>
+        <button class="mz" data-mz="Nar ekşisi"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-nar.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Nar ekşisi</span></button>
         <button class="mz" data-mz="Pekmez"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Pekmez</span></button>
         <button class="mz" data-mz="Pesto sos"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Pesto sos</span></button>
         <button class="mz" data-mz="Pul biber"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Pul biber</span></button>
-        <button class="mz" data-mz="Roka"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Roka</span></button>
-        <button class="mz" data-mz="Safran"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Safran</span></button>
+        <button class="mz" data-mz="Roka"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-roka.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Roka</span></button>
+        <button class="mz" data-mz="Safran"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-safran.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Safran</span></button>
         <button class="mz" data-mz="Sirke"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Sirke</span></button>
         <button class="mz" data-mz="Soya sosu"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Soya sosu</span></button>
         <button class="mz" data-mz="Sumak"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Sumak</span></button>
         <button class="mz" data-mz="Tahin"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Tahin</span></button>
-        <button class="mz" data-mz="Tarçın"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Tarçın</span></button>
+        <button class="mz" data-mz="Tarçın"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-tarcin.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Tarçın</span></button>
         <button class="mz" data-mz="Taze kekik"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Taze kekik</span></button>
         <button class="mz" data-mz="Taze nane"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Taze nane</span></button>
-        <button class="mz" data-mz="Taze soğan"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Taze soğan</span></button>
+        <button class="mz" data-mz="Taze soğan"><span class="mz-img foto" data-bg="url('assets/ing/tmdb-taze-sogan.webp')"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Taze soğan</span></button>
         <button class="mz" data-mz="Tuz"><span class="mz-img" data-bg="url('assets/ing/salt.webp')"></span><span class="mz-t">Tuz</span></button>
         <button class="mz" data-mz="Yenibahar"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Yenibahar</span></button>
         <button class="mz" data-mz="Zerdeçal"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Zerdeçal</span></button>
@@ -1199,7 +1177,6 @@
       <h3>Bu adda malzeme yok</h3>
       <p>Yazımı kontrol et ya da kategorilerden göz at.</p>
     </div>
-  </div>
 
   <div class="sec">
     <div class="sec-head"><div>
@@ -1598,15 +1575,14 @@
   </div>
 
   <div class="pane on" id="cpKat">
-    <div class="mk-hero">
-      <h2>2.057 denenmiş tarif, 33 kategori</h2>
-      <p>Her kategori canlıdaki tarif sayısıyla listelenir — en kalabalıktan en sadeye.</p>
-      <div class="mk-stats">
-        <span><b>215</b>en büyük<br />kategori</span>
-        <span><b>62</b>ortalama<br />tarif</span>
-        <span><b>33</b>toplam<br />kategori</span>
-      </div>
-    </div>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1425.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Tarifler</span>
+    <h2>Bütün tarifler, tek dizinde</h2>
+    <p>Kategoriye, mutfağa, süreye ve beslenme tercihine göre daralt — aradığın sofrayı bul.</p>
+    <div class="mh-stat"><span><b>2.057</b>Denenmiş tarif</span><span><b>33</b>Kategori</span><span><b>50</b>Dünya mutfağı</span></div>
+  </div>
     <div class="kit-lab">Tüm kategoriler</div>
     <div class="kt-grid">
       <a class="kt-t" data-open="kategori"><span class="im" data-bg="url('assets/img/1970.webp')"></span><span class="tx"><b>Sebze</b><span>215 tarif</span></span></a>
@@ -2217,12 +2193,13 @@
     <h2>Mutfak Ansiklopedisi</h2>
   </header>
 
-  <div class="sx-b">
-    <h2>Malzemeyi tanı</h2>
-    <p>Her malzemeyi tek tek anlattığımız ansiklopedi: nedir, ne işe yarar, faydaları ve hangi tariflerde kullanılır.</p>
-    <div class="sx-n">
-      <span><b>1.200</b>madde</span><span><b>26</b>kategori</span><span><b>143,9Mn</b>okunma</span>
-    </div>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1738.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Mutfak Sırları</span>
+    <h2>Mutfak Ansiklopedisi — malzemeyi tanı</h2>
+    <p>Barbunya nedir, ıspanak neye iyi gelir, avokado nasıl saklanır? Her malzemeyi tek tek anlattığımız ansiklopedi: nedir, ne işe yarar, faydaları ve hangi tariflerde kullanılır.</p>
+    <div class="mh-stat"><span><b>1.200</b>Malzeme maddesi</span><span><b>26</b>Kategori</span><span><b>143,9Mn</b>Toplam okunma</span></div>
   </div>
 
   <div class="lsearch" style="position:static;margin-top:16px;padding-bottom:12px">
@@ -2371,10 +2348,13 @@
     <h2>Mutfak Sözlüğü</h2>
   </header>
 
-  <div class="sx-b">
-    <h2>Jülyen nedir, benmari nasıl yapılır?</h2>
-    <p>Tariflerde geçen terimleri harfe, kategoriye veya aramaya göre bul.</p>
-    <div class="sx-n"><span><b>765</b>terim</span><span><b>20</b>kategori</span><span><b>2.057</b>tarifte geçiyor</span></div>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1593.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Mutfak Sırları</span>
+    <h2>Mutfak Sözlüğü</h2>
+    <p>Jülyen nedir, benmari nasıl yapılır? Tariflerde geçen terimleri harfe, kategoriye veya aramaya göre bul — tanım, örnek kullanım ve ilgili tariflerle.</p>
+    <div class="mh-stat"><span><b>765</b>Terim</span><span><b>A–Z</b>Harf dizini</span><span><b>20</b>Kategori</span></div>
   </div>
 
   <div class="lsearch" style="position:static;margin-top:16px;padding-bottom:12px">
@@ -2497,7 +2477,15 @@
   </header>
 
   <div data-tabs id="unTabs">
-  <div class="segs segs-scroll">
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1608.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Mutfak Sırları</span>
+    <h2>Ölçü Birimleri</h2>
+    <p>1 su bardağı un kaç gram? Tarifteki bardağı, kaşığı grama ve mililitreye çevir — 90+ malzemenin dönüşüm tablosu, standart ölçü kapları ve fırın sıcaklık rehberi tek sayfada.</p>
+  </div>
+
+  <div class="segs segs-scroll" style="margin-top:20px">
     <button class="seg on" data-pane="unCv">Dönüştürücü</button>
     <button class="seg" data-pane="unTb">Dönüşüm Tabloları</button>
     <button class="seg" data-pane="unSt">Standart Ölçüler</button>
@@ -2635,10 +2623,13 @@
     <h2>Sofra Düzeni</h2>
   </header>
 
-  <div class="sx-b">
-    <h2>Sofra nasıl kurulur?</h2>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1970.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Mutfak Sırları</span>
+    <h2>Sofra Düzeni</h2>
     <p>Günlük sofralardan özel davetlere kadar doğru, şık ve işlevsel sofra kurulum rehberi.</p>
-    <div class="sx-n"><span><b>11</b>sofra tipi</span><span><b>61</b>pratik ipucu</span><span><b>A–Z</b>kurulum rehberi</span></div>
+    <div class="mh-stat"><span><b>11</b>Sofra kategorisi</span><span><b>61</b>Pratik ipucu</span><span><b>A–Z</b>Kurulum rehberi</span></div>
   </div>
 
   <div class="kit-lab">Dört temel kural</div>
@@ -2744,10 +2735,13 @@
     <button class="ab-btn" data-open="arama" aria-label="Ara"><i class="fs i-magnifying-glass"></i></button>
   </header>
 
-  <div class="sx-b">
-    <h2>İzle &amp; Pişir</h2>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1419.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">İzle & Pişir</span>
+    <h2>Video Mutfağı</h2>
     <p>Adım adım tarif videoları, şef teknikleri ve 30 saniyelik pratik fikirler — mutfakta hiç yalnız kalma.</p>
-    <div class="sx-n"><span><b>33</b>video</span><span><b>4</b>seri</span><span><b>4,4Mn</b>izlenme</span></div>
+    <div class="mh-stat"><span><b>33</b>Video</span><span><b>4</b>Seri</span><span><b>4,4Mn</b>İzlenme</span></div>
   </div>
 
   <div class="sec">
@@ -2924,10 +2918,13 @@
     <h2>Video Serileri</h2>
   </header>
 
-  <div class="sx-b">
-    <h2>4 seri, 20 bölüm</h2>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1587.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">İzle & Pişir</span>
+    <h2>Video Serileri</h2>
     <p>Seriler haftalık yayınlanır. Kaldığın bölüm hatırlanır, listeye dönünce oradan devam edersin.</p>
-    <div class="sx-n"><span><b>4</b>seri</span><span><b>20</b>bölüm</span><span><b>4</b>izlediğin</span></div>
+    <div class="mh-stat"><span><b>4</b>Seri</span><span><b>20</b>Bölüm</span><span><b>4</b>İzlediğin</span></div>
   </div>
 
   <div class="kit-lab">Devam ettiklerin</div>
@@ -3033,10 +3030,12 @@
     <h2>Dada Route</h2>
   </header>
 
-  <div class="sx-b">
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1710.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Dada Route</span>
     <h2>Yol üstü lezzet rotanı oluştur</h2>
-    <p>Kalkış ve varışı yaz, güzergâhının üstündeki denenmiş durakları çıkaralım — sapma payını sen belirle.</p>
-    <div class="sx-n"><span><b>1.240</b>kayıtlı durak</span><span><b>81</b>il</span><span><b>12 km</b>maks. sapma</span></div>
+    <p>Nereden nereye gittiğini seç; rotana en az sapmayla ulaşabileceğin DadaGastro duraklarını keşfet.</p>
   </div>
 
   <div class="rt-form">
@@ -3234,10 +3233,13 @@
     <h2>Şefler</h2>
   </header>
 
-  <div class="sx-b">
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1483.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Şefler</span>
     <h2>Tarifin ustalarını keşfet</h2>
-    <p>Topluluğun tarif paylaşan üyeleri. Rütbe, tarif deneme ve yorum katkısıyla yükselir.</p>
-    <div class="sx-n"><span><b>265</b>topluluk üyesi</span><span><b>2.057</b>paylaşılan tarif</span><span><b>3,9</b>ortalama puan</span></div>
+    <p>Mutfağına yön veren şefleri ve yazarları tek yerde bul. Uzmanlık alanına göre keşfet, takip et, mutfak defterlerini gez.</p>
+    <div class="mh-stat"><span><b>265</b>Topluluk üyesi</span><span><b>2.057</b>Paylaşılan tarif</span><span><b>3,9</b>Ortalama şef puanı</span></div>
   </div>
 
   <div class="lsearch" style="position:static;margin-top:16px;padding-bottom:12px">
@@ -3459,10 +3461,13 @@
     <h2>Rozetlerim</h2>
   </header>
 
-  <div class="sx-b">
-    <h2>7 / 18 rozet</h2>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1824.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Hesabım</span>
+    <h2>Rozetlerim</h2>
     <p>Rozetler tarif deneme, paylaşım ve topluluk katkısıyla açılır. Kilitli olanın altında ne kaldığı yazar.</p>
-    <div class="sx-n"><span><b>7</b>kazanılan</span><span><b>11</b>kilitli</span><span><b>Seviye 4</b>Usta Aşçı</span></div>
+    <div class="mh-stat"><span><b>7</b>Kazanılan</span><span><b>11</b>Kilitli</span><span><b>Seviye 4</b>Usta Aşçı</span></div>
   </div>
 
   <div class="plevel">
@@ -4126,11 +4131,13 @@
       Sponsorlu içerik her zaman “Sponsorlu” etiketiyle işaretlenir — gizli reklam yapmayız.</p>
   </div>
 
-  <div class="sx-b">
-    <h2>Sayılarla DadaGastro</h2>
-    <p>3 Ağustos 2026 itibarıyla.</p>
-    <div class="sx-n"><span><b>2.057</b>denenmiş tarif</span><span><b>266</b>kayıtlı üye</span><span><b>2019</b>kuruluş</span></div>
-    <div class="sx-n"><span><b>27</b>video tarif</span><span><b>591</b>püf noktası</span><span><b>1.200</b>ansiklopedi maddesi</span></div>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1414.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Hakkımızda</span>
+    <h2>Yaşasın Yemek Yemek!</h2>
+    <p>2019’da bir mutfak defterini dijitale taşımakla başladık. Bugün her tarif en az bir kişi tarafından pişirilmiş, puanlanmış ve yorumlanmış.</p>
+    <div class="mh-stat"><span><b>2019</b>Kuruluş yılı</span><span><b>2,1B</b>Denenmiş tarif</span><span><b>266</b>Kayıtlı üye</span></div>
   </div>
 
   <div class="sec">
@@ -4171,10 +4178,12 @@
     <h2>Sık Sorulan Sorular</h2>
   </header>
 
-  <div class="sx-b">
-    <h2>Aradığın cevap burada</h2>
-    <p>16 soru, 5 başlık altında. Bulamazsan alttaki İletişime Geç bağlantısı bize ulaştırır.</p>
-    <div class="sx-n"><span><b>16</b>soru</span><span><b>5</b>başlık</span><span><b>1 gün</b>ortalama dönüş</span></div>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1762.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Kurumsal</span>
+    <h2>Sıkça Sorulan Sorular</h2>
+    <p>Üyelik, tarifler, üretici üyeliği ve moderasyon — en çok sorulan 16 soru, 5 başlık altında.</p>
   </div>
 
   <div class="lsearch" style="position:static;margin-top:16px;padding-bottom:12px">
@@ -4254,10 +4263,13 @@
     <h2>İletişim</h2>
   </header>
 
-  <div class="sx-b">
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1284.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Kurumsal</span>
     <h2>Bize yaz</h2>
     <p>Soru, öneri, şikâyet ya da iş birliği — hepsi aynı formdan geliyor, konuya göre doğru ekibe düşüyor.</p>
-    <div class="sx-n"><span><b>1</b>iş günü dönüş</span><span><b>09–18</b>hafta içi</span><span><b>7</b>konu başlığı</span></div>
+    <div class="mh-stat"><span><b>1</b>İş günü dönüş</span><span><b>09–18</b>Hafta içi</span><span><b>7</b>Konu başlığı</span></div>
   </div>
 
   <div class="rt-facts" style="margin-top:16px;grid-template-columns:1fr">

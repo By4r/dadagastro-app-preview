@@ -11,7 +11,7 @@ Geliştirme: `python3 -m http.server 8000` → `http://localhost:8000`
 
 ## 1. Durum: prototip tamamlandı
 
-**50 ekran · 0 ölü buton · 16 uçtan uca akış geçiyor.**
+**50 ekran · 0 ölü buton · 18 uçtan uca akış geçiyor.**
 
 | Faz | İş | Durum |
 |---|---|---|
@@ -28,6 +28,8 @@ Geliştirme: `python3 -m http.server 8000` → `http://localhost:8000`
 | **8** | **Kurumsal:** Hakkımızda · SSS · İletişim · Gizlilik · KVKK · Reklam Ver | ✅ |
 | **9** | Süpürme: borç 97 → **0** · `#/kit-*` vitrin rotaları silindi · 16 akış testi yazıldı | ✅ |
 | **10** | Mutfağa Giriş — **kapsam dışı bırakıldı**, gerekçe § 4.9 | ⛔ |
+| **R1** | **Modül hero'ları** — 15 ekran tek `.mh-` bileşeniyle görselli + sayaçlı, veri canlıdan ölçüldü | ✅ |
+| **R2** | **Dolapta iki katmanlı yapıya döndü** — birincil ikili toggle + dört mod kartı, mod başına ayrı state, 75 gerçek malzeme fotoğrafı | ✅ |
 
 ---
 
@@ -56,7 +58,7 @@ node .tools/lint-css.js   # sınıf adı sözleşmesi + öksüz sınıf taramas�
 node .tools/vqa.js        # 15 görsel kontrol × 50 ekran (rota otomatik keşfedilir)
 node .tools/faz0.js       # derin link · yığın · alt çubuk · borç sayacı
 node .tools/faz1.js       # kaldırılan modül izi · bölüm sırası · sekme
-node .tools/akis.js       # 16 uçtan uca kullanıcı akışı
+node .tools/akis.js       # 18 uçtan uca kullanıcı akışı
 node .tools/carpi.js      # her kapat/sil butonunun gerçekten bir eylemi var mı
 node .tools/cap.js <rota> # tam sayfa render (rota#paneId ile sekme seçilebilir)
 ```
@@ -199,14 +201,30 @@ girdi; `.sub` yazılmayınca metin `body` rengini miras alıp beyaz kartta gör�
 **Dış sınıfı alıp içini uydurmak da kopya sayılır.** Komponent artık kendini savunuyor:
 `flex:none` (buton), `min-width:0` (metin), ellipsis ve renk ata seçicide tanımlı.
 
-### 4.11 Görsel yükleme
+### 4.11 Modül hero'su — tek bileşen (`.mh-`)
+
+Canlıdaki modül giriş sayfalarının hero'su **ölçülerek** alındı
+(`node .tools/canli-hero.js`). Formül ana sayfa hero'suyla aynı katman düzeni:
+fotoğraf → perde → grain. Yükseklik kısaltıldı (modül girişi, kapak değil).
+
+15 ekran aynı bileşeni parametreyle kullanır — veri tek yerde:
+`.tools/mhero.py` içindeki `HERO` sözlüğü. Yeni modül eklerken oraya satır yaz,
+`python3 .tools/mhero.py` çalıştır.
+
+> **Sayaç satırı yalnız canlıda sayaç olan modüllerde var.** Canlıda yoksa
+> `.mh-stat` hiç basılmaz — boş kutu bırakılmaz. Sayaçsız olanlar:
+> `olcu-birimleri` · `dolapta` · `route` · `sss` (dördü de canlıda sayaçsız).
+
+Ölçülen kontrast (piksel örneklemesiyle, tahmin değil): alt başlık **7,9–8,4:1**.
+
+### 4.12 Görsel yükleme
 
 Kapalı ekranların arka plan görselleri **kaynakta `data-bg`** olarak duruyor; ekran ilk
 açıldığında `style`'a taşınıyor (`bgUyan`). JS'te temizlemek geç kalıyordu — ayrıştırıcı
 stili görür görmez indiriyor. **Ana sayfa dokunulmadı**, görselleri eager kalır ki ilk
 boyamada boşluk olmasın. Malzeme fotoğrafları `loading="lazy"`.
 
-### 4.12 Diğer varlık kararları
+### 4.13 Diğer varlık kararları
 
 - Malzeme ikonları WebP 128px · Gilroy woff2 (99 KB) · FA alt kümesi 11 KB
 - **Yeni FA glifi eklerken alt kümeyi yenile** (bkz. `CLAUDE.md`). Bu turda `flag-checkered`
@@ -265,6 +283,7 @@ Bunlar sahte değil — akış testleri doğruluyor:
 |---|---|
 | **DOM 8.866 düğüm** | Eşik 6.000'di. Tek sayfada 50 ekran duruyor. Flutter'a geçişte konu kendiliğinden kapanıyor (`IndexedStack` + lazy route). HTML'de kalınacaksa gizli ekranların içeriği `<template>`'e alınmalı |
 | Ne Pişirsem adımında 240px boşluk | **Bilinçli.** Karar ekranı; altına içerik doldurmak seçimle yarışır. `vqa` bunu bulgu gösteriyor — kabul edilmiş istisna, kalan tek bulgu bu (2 sekme kombinasyonunda) |
+| Malzeme fotoğrafı 75/185 (%41) | **Canlının kendisi 77/185 (%42)** — parite sağlandı. Kalan 110 malzemenin canlıda da fotoğrafı yok (Enginar, Karnabahar, Mısır, Erik…), jenerik kategori ikonu gösteriliyor |
 | Şef ve tarif adları kısmen uydurma | Canlıdaki gerçek şefler (Rüya, Burcu, Ece, Şahnur Yetkiner…) ve liderlik tablosu aktarıldı; tarif adları ve bazı avatar baş harfleri temsilî |
 | Dünya mutfağı sayıları | İlk 8'i canlıdan (Türk 1204, İtalyan 92…). Kalan 42'nin sayısı canlıda listelenmiyor, bölgesel dağılım temsilî |
 | Harita yok | Dada Route'ta harita yerine **dikey güzergâh şeridi** var (mobil-yerel, dış servise bağımlı değil). "Haritada gör" cihaz haritasına devreder |
