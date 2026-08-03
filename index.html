@@ -203,7 +203,7 @@
       <h2>Mutfağa Giriş &amp; Püf Noktaları</h2>
       <p class="sub">Sıfırdan başlayanlar için temel teknikler, ustalardan küçük sırlar.</p>
     </div>
-    <a class="see-all" data-go="mutfak">Tümü <i class="fs i-arrow-right"></i></a>
+    <a class="see-all" data-go="puf-noktalari">Tümü <i class="fs i-arrow-right"></i></a>
   </div>
   <div data-tabs>
     <div class="segs">
@@ -492,60 +492,75 @@
      Canlı hiyerarşi: Mutfak Sırları üst menüsünün altında YALNIZ şu 5 modül var.
      Püf Noktaları, Video Mutfağı, Dada Route ve Dolapta Ne Var ayrı üst seviye
      modüller — bu ekranın çocuğu değiller, ana sayfadan ve drawer'dan girilir. -->
-<section class="view root" id="vDiscover" data-route="mutfak">
-  <header class="vbar"><h2>Mutfak Sırları</h2>
+<!-- ==================== PÜF NOKTALARI (kök sekme) ====================
+     Canlıda /puf-noktalari üst seviye bir modül, üst menüde kendi başına duruyor.
+     Mutfak Sırları'nın 5 modülü buranın çocuğu DEĞİL — ana sayfa bölümünde
+     ve drawer'daki kendi grubunda yaşıyorlar. -->
+<section class="view root" id="vTips" data-route="puf-noktalari">
+  <header class="vbar"><h2>Püf Noktaları</h2>
     <button class="ab-btn" data-drawer="1" aria-label="Menü"><i class="fs i-bars"></i></button>
   </header>
 
   <section class="sec">
     <div class="mk-hero">
       <span class="eyebrow">Mutfak sırları</span>
-      <h2>Sıfırdan başlayanlar için</h2>
-      <p>Temel teknikler, malzeme bilgisi, terimler ve ölçüler — tarifin arkasındaki bilgi burada.</p>
+      <h2>Ustaların küçük sırları</h2>
+      <p>Pilav neden tane tane olur, hamur neden kabarmaz, et neden sertleşir? Şeflerden ve toplulukta denenmiş püf noktaları.</p>
       <div class="mk-stats">
-        <div><b>6</b><span>Mutfağa Giriş modülü</span></div>
-        <div><b>1.200</b><span>Ansiklopedi maddesi</span></div>
-        <div><b>765</b><span>Sözlük terimi</span></div>
+        <div><b>591</b><span>Püf noktası</span></div>
+        <div><b>11</b><span>Kategori</span></div>
+        <div><b>3,7B</b><span>Toplam okunma</span></div>
       </div>
     </div>
   </section>
 
   <section class="sec">
-    <a class="mk-feat" data-say="Mutfağa Giriş — Modül 01">
-      <div class="ph" style="background-image:url('assets/img/1561.webp')"></div>
+    <a class="mk-feat" data-say="Püf Noktası — Pilav neden tane tane olmaz?">
+      <div class="ph" style="background-image:url('assets/img/1749.webp')"></div>
       <div class="bd">
-        <span class="k">Buradan başla</span>
-        <h4>Mutfak Düzeni ve Çalışma Alanı</h4>
-        <p>Tezgâhı nasıl kurarsan işin kolaylaşır — ilk modül, üç bölüm.</p>
-        <span class="rd"><i class="fs i-graduation-cap"></i> Modül 01 · 3 bölüm</span>
+        <span class="k">Bu haftanın püf noktası</span>
+        <h4>Pilav neden tane tane olmaz?</h4>
+        <p>Pirinci yıkamadan pişirirsen nişasta suya karışır ve taneler birbirine yapışır.</p>
+        <span class="rd"><i class="fs i-eye"></i> 412 okunma</span>
       </div>
     </a>
   </section>
 
-  <div class="dgrp">
-    <div class="dlab">Mutfak Sırları</div>
-    <a class="lrow ic-lead" data-say="Mutfağa Giriş"><span class="ic"><i class="fs i-graduation-cap"></i></span><span class="tx"><b>Mutfağa Giriş</b><span>Sıfırdan temel teknikler</span></span><span class="n">6 modül</span><i class="fs i-chevron-right go"></i></a>
-    <a class="lrow ic-lead" data-say="Mutfak Ansiklopedisi"><span class="ic"><i class="fs i-book-open"></i></span><span class="tx"><b>Mutfak Ansiklopedisi</b><span>Malzemeleri tanı: faydası, kullanımı</span></span><span class="n">1.200</span><i class="fs i-chevron-right go"></i></a>
-    <a class="lrow ic-lead" data-say="Sözlük"><span class="ic"><i class="fs i-scroll"></i></span><span class="tx"><b>Sözlük</b><span>Mutfak terimleri</span></span><span class="n">765</span><i class="fs i-chevron-right go"></i></a>
-    <a class="lrow ic-lead" data-say="Ölçü Birimleri"><span class="ic"><i class="fs i-scale-balanced"></i></span><span class="tx"><b>Ölçü Birimleri</b><span>Bardak, kaşık, gram</span></span><i class="fs i-chevron-right go"></i></a>
-    <a class="lrow ic-lead" data-say="Sofra Düzeni"><span class="ic"><i class="fs i-utensils"></i></span><span class="tx"><b>Sofra Düzeni</b><span>Günlük &amp; davet sofra kurulumu</span></span><span class="n">11</span><i class="fs i-chevron-right go"></i></a>
+  <div class="rail catchips pn-kat"><div class="fopts" data-chips="single"><button class="fopt on">Tümü</button><button class="fopt">Pişirme Püf Noktaları</button><button class="fopt">Neden Olur?</button><button class="fopt">Nasıl Düzeltilir?</button><button class="fopt">Nasıl Saklanır?</button><button class="fopt">Bozulduğu Nasıl Anlaşılır?</button><button class="fopt">Yerine Ne Kullanılır?</button><button class="fopt">Kaç Dakikada / Kaç Derecede Pişer?</button><button class="fopt">Nasıl Seçilir ve Hazırlanır?</button><button class="fopt">Yanına Ne Gider?</button><button class="fopt">Kaç Kalori?</button><button class="fopt">Malzeme Rehberi</button></div></div>
+
+  <div class="pn-bar">
+    <span class="cnt">Tüm püf noktaları listeleniyor</span>
+    <button class="sortbtn" data-bsheet="pnSort">En Yeni <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
   </div>
 
-  <!-- Ayrı üst seviye modüller — Mutfak Sırları'nın çocuğu DEĞİL, kısayol -->
-  <section class="sec">
-    <div class="sec-head"><div>
-      <span class="eyebrow">Diğer modüller</span>
-      <h2>Buralara da bak</h2>
-      <p class="sub">Bunlar ayrı modüller — ana sayfadan da girebilirsin.</p>
-    </div></div>
-    <div class="qa">
-      <a class="qa-t" data-say="Püf Noktaları"><span class="ic"><i class="fs i-lightbulb"></i></span><b>Püf<br />Noktaları</b></a>
-      <a class="qa-t" data-say="Video Mutfağı"><span class="ic"><i class="fs i-video"></i></span><b>Video<br />Mutfağı</b></a>
-      <a class="qa-t" data-say="Dada Route"><span class="ic"><i class="fs i-route"></i></span><b>Dada<br />Route</b></a>
-      <a class="qa-t" data-open="dolapta"><span class="ic"><i class="fs i-carrot"></i></span><b>Dolapta<br />Ne Var</b></a>
-    </div>
-  </section>
+  <div class="pn-list">
+    <a class="pn-c" data-say="Püf Noktası — Mutfakta Kesik Olunca Ne Yapmalı?">
+      <div class="bd"><span class="k">Pişirme Püf Noktaları</span><h4>Mutfakta Kesik Olunca Ne Yapmalı?</h4><p>Mutfakta en sık yaşanan kazalardan biri kesiklerdir. Yeşillik ayıklarken, soğan doğrarken ya da et parçalarken bıçak bir anlık dikkatsizlikte kayabilir.</p>
+        <span class="rd"><i class="fs i-eye"></i> 10 okunma</span></div>
+    </a>
+    <a class="pn-c" data-say="Püf Noktası — Besin Sinerjisi Nedir?">
+      <div class="bd"><span class="k">Malzeme Rehberi</span><h4>Besin Sinerjisi Nedir?</h4><p>Besin öğelerini takviyelerden değil gıdalardan sağlamanın en önemli nedeni besin sinerjisidir. Birden fazla besin öğesi bir arada daha etkili olur.</p>
+        <span class="rd"><i class="fs i-eye"></i> 19 okunma</span></div>
+    </a>
+    <a class="pn-c" data-say="Püf Noktası — Evde Kefir Nasıl Yapılır?">
+      <div class="bd"><span class="k">Malzeme Rehberi</span><h4>Evde Kefir Nasıl Yapılır?</h4><p>Kefir, yüzyıllardır tüketilen fermente bir süt ürünüdür; dinç ve kuvvetli kalmanın kaynaklarından biri olarak görülür.</p>
+        <span class="rd"><i class="fs i-eye"></i> 10 okunma</span></div>
+    </a>
+    <a class="pn-c" data-say="Püf Noktası — Bağışıklığı Destekleyen Besinler">
+      <div class="bd"><span class="k">Malzeme Rehberi</span><h4>Bağışıklığı Destekleyen Besinler</h4><p>Kişisel temizlik dışarıdan gelecek mikroplara karşı alınan önlemdir. Bunun yanında beslenme de bağışıklığı doğrudan etkiler.</p>
+        <span class="rd"><i class="fs i-eye"></i> 9 okunma</span></div>
+    </a>
+    <a class="pn-c" data-say="Püf Noktası — Bitter Çikolatanın Faydaları">
+      <div class="bd"><span class="k">Malzeme Rehberi</span><h4>Bitter Çikolatanın Faydaları</h4><p>Kakao kütlesi oranı yüksek, süt oranı düşük çikolata türü. Sütlüden farkı yalnızca daha az tatlı olması değildir.</p>
+        <span class="rd"><i class="fs i-eye"></i> 14 okunma</span></div>
+    </a>
+    <a class="pn-c" data-say="Püf Noktası — Bağışıklık Zayıflığının Belirtileri">
+      <div class="bd"><span class="k">Malzeme Rehberi</span><h4>Bağışıklık Zayıflığının Belirtileri</h4><p>Soğuk havalarda vücudu hastalıklardan korumak önem kazanır. Bağışıklık sisteminin durumu hakkında fikir sahibi olmak işe yarar.</p>
+        <span class="rd"><i class="fs i-eye"></i> 11 okunma</span></div>
+    </a>
+  </div>
 
+  <button class="btn ghost loadmore" data-toast="24 püf noktası daha yüklendi">Daha Fazla Göster <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
   <div class="view-pad"></div>
 </section>
 
@@ -876,7 +891,7 @@
 </section>
 
 <!-- ==================== DOLAPTA NE VAR ==================== -->
-<section class="view pushed" id="vFridge" data-route="dolapta" data-parent="mutfak" data-bar="#barFridge">
+<section class="view pushed" id="vFridge" data-route="dolapta" data-parent="ana-sayfa" data-bar="#barFridge">
   <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Dolapta Ne Var?</h2>
     <button class="ab-btn" id="frClear" aria-label="Dolabı sıfırla"><i class="fs i-arrow-rotate-left"></i></button>
@@ -1659,7 +1674,7 @@
             <a class="tab on" data-root="vHome"><i class="fs i-house"></i><span>Ana Sayfa</span></a>
             <a class="tab" data-root="vList"><i class="fs i-bowl-food"></i><span>Tarifler</span></a>
             <a class="tab tab-fab" data-open="ne-pisirsem"><span class="fab"><i class="fs i-wand-magic-sparkles"></i></span><span class="lbl">Ne Pişirsem?</span></a>
-            <a class="tab" data-root="vDiscover"><i class="fs i-lightbulb"></i><span>Mutfak</span></a>
+            <a class="tab" data-root="vTips"><i class="fs i-lightbulb"></i><span>Püf Noktaları</span></a>
             <a class="tab" data-root="vAccount"><i class="fs i-user"></i><span>Hesap</span></a>
           </nav>
 
@@ -1824,13 +1839,20 @@
               <a class="dw-row" data-say="Alışveriş listem"><span class="ic"><i class="fs i-basket-shopping"></i></span><b>Alışveriş Listem</b><span class="tag">7</span></a>
               <a class="dw-row" data-say="Paylaştığım tarifler"><span class="ic"><i class="fs i-pen-to-square"></i></span><b>Tariflerim</b><span class="tag">12</span></a>
               <div class="dw-sep"></div>
-              <div class="dw-t">Keşfet &amp; Pişir</div>
-              <a class="dw-row" data-say="Püf Noktaları"><span class="ic"><i class="fs i-lightbulb"></i></span><b>Püf Noktaları</b></a>
+              <div class="dw-t">Mutfak Sırları</div>
+              <a class="dw-row" data-say="Mutfağa Giriş"><span class="ic"><i class="fs i-graduation-cap"></i></span><b>Mutfağa Giriş</b></a>
               <a class="dw-row" data-say="Mutfak Ansiklopedisi"><span class="ic"><i class="fs i-book-open"></i></span><b>Mutfak Ansiklopedisi</b></a>
+              <a class="dw-row" data-say="Sözlük"><span class="ic"><i class="fs i-scroll"></i></span><b>Sözlük</b></a>
+              <a class="dw-row" data-say="Ölçü Birimleri"><span class="ic"><i class="fs i-scale-balanced"></i></span><b>Ölçü Birimleri</b></a>
+              <a class="dw-row" data-say="Sofra Düzeni"><span class="ic"><i class="fs i-utensils"></i></span><b>Sofra Düzeni</b></a>
+            </div>
+            <div class="dw-grp">
+              <div class="dw-t">Keşfet &amp; Pişir</div>
+              <a class="dw-row" data-drawer-go="puf-noktalari"><span class="ic"><i class="fs i-lightbulb"></i></span><b>Püf Noktaları</b></a>
               <a class="dw-row" data-say="Video Mutfağı"><span class="ic"><i class="fs i-video"></i></span><b>Video Mutfağı</b></a>
               <a class="dw-row" data-say="Dada Route"><span class="ic"><i class="fs i-location-dot"></i></span><b>Dada Route</b></a>
-              <div class="dw-sep"></div>
-              <div class="dw-t">Uygulama</div>
+              <a class="dw-row" data-open="dolapta"><span class="ic"><i class="fs i-carrot"></i></span><b>Dolapta Ne Var?</b></a>
+            <div class="dw-t">Uygulama</div>
               <a class="dw-row" data-say="Bildirim ayarları"><span class="ic"><i class="fr i-bell"></i></span><b>Bildirimler</b></a>
               <a class="dw-row" data-say="Ayarlar"><span class="ic"><i class="fs i-sliders"></i></span><b>Ayarlar</b></a>
               <a class="dw-row" data-say="Yardım & Destek"><span class="ic"><i class="fs i-flask"></i></span><b>Yardım &amp; Destek</b></a>
