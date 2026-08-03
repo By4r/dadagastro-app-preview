@@ -61,6 +61,21 @@ Gerekçeler ve tam liste: `EKRAN-ENVANTERI.md`.
 
 **Dada Route kapsam içinde** — `/yol-guzergahim` canlıda çalışıyor.
 
+## ⚖️ HİÇBİR EKRAN CANLI SİTEDEN GERİ KALMAZ
+
+Bir ekranı yapmadan **önce** canlıdaki karşılığını aç ve üzerindeki **her kontrolü** listele:
+sekme · çip · slider · akordeon · sayaç · buton · boş durum · sonuç metni.
+Sonra prototipte hepsinin karşılığı olduğunu doğrula.
+
+Faz raporunda her ekran için bu tablo **zorunlu**:
+
+| Canlıdaki kontrol | Prototipte | Not |
+|---|---|---|
+
+- Eksik varsa **"eksik" yaz, gizleme.**
+- Mobil için birleştirdiysen (ör. 8 kategori akordeona girdi) onu da yaz.
+- **Birleştirme tamam, DÜŞÜRME yok.**
+
 ## 1. Proje kuralları
 
 - **frontend-design skill ZORUNLU** — her yeni ekran/komponent bu skill ile üretilir. Generic AI estetiğinden kaçınmak için.
@@ -120,9 +135,13 @@ Tarif kartındaki **"Yeni" şeridi** de petrol (`.gcard .rib.new`) — **korunuy
 **Yeni ekranlarda kural:** yeşili yalnız onay/tamamlandı için kullan; petrol ve moru yalnız
 avatar rotasyonunda. Bu renklere yeni bir anlam yükleme — tek baskın aksan domates.
 
-### 🚫 KREM KULLANILMIYOR
+### 🚫 KREM — yüzey yasağı, metin değil
 
-`#EFE5D3` ve `#F7F1E6` mobil uygulamada **yer almaz**. Patron kararı.
+`#EFE5D3` ve `#F7F1E6` **hiçbir yerde `background` olamaz**. Patron kararı.
+
+Koyu panel üzerindeki metin sıcak beyaz kalır — saf beyaz sert durur.
+**Tek değer:** `--on-dark: #FFF6EA`. Ton çoğaltma; `#F2ECE2` / `#FFF8EE` gibi
+varyantlar bu token'a çekildi.
 
 ### 🚫 CAM (GLASS) KULLANILMIYOR
 

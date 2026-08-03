@@ -310,6 +310,54 @@
       n.classList.add('on');
       var pane = el(n.dataset.pane);
       if (pane) pane.classList.add('on');
+      if (el('frMode') && FR_MOD[n.dataset.pane]) el('frMode').textContent = FR_MOD[n.dataset.pane];
+      if (scope.id === 'npTabs') npBar();
+      return;
+    }
+
+    /* --- dolapta: malzeme seç --- */
+    if ((n = t.closest('[data-mz]'))) {
+      e.preventDefault();
+      var ad = n.dataset.mz;
+      if (n.classList.contains('on')) { n.classList.remove('on'); delete frSel[ad]; }
+      else { n.classList.add('on'); frSel[ad] = frAktifMod(); }
+      frRender();
+      return;
+    }
+    /* --- dolapta: seçilen çipten çıkar --- */
+    if ((n = t.closest('[data-frx]'))) {
+      e.preventDefault();
+      var a2 = n.dataset.frx;
+      delete frSel[a2];
+      all('.mz').forEach(function (m) { if (m.dataset.mz === a2) m.classList.remove('on'); });
+      frRender();
+      return;
+    }
+    /* --- ne pişirsem: adım çipi --- */
+    if ((n = t.closest('[data-wzc]'))) {
+      e.preventDefault();
+      var st = n.closest('.wz-step');
+      var k = +st.dataset.wzstep;
+      if (st.dataset.multi === '1') { n.classList.toggle('on'); }
+      else { all('.wz-c', st).forEach(function (c) { c.classList.remove('on'); }); n.classList.add('on'); }
+      wzSecim[k] = all('.wz-c.on', st).map(function (c) { return c.querySelector('b').textContent; });
+      return;
+    }
+    /* --- ne pişirsem: yemek modu --- */
+    if ((n = t.closest('[data-mode]'))) {
+      e.preventDefault();
+      all('[data-mode]').forEach(function (m) { m.classList.remove('on'); });
+      n.classList.add('on');
+      return;
+    }
+    /* --- ne pişirsem: menüye ekle --- */
+    if ((n = t.closest('[data-tray]'))) {
+      e.preventDefault();
+      var ad2 = n.dataset.tray;
+      if (tray.indexOf(ad2) < 0) { tray.push(ad2); say(ad2 + ' menüye eklendi'); }
+      else { tray.splice(tray.indexOf(ad2), 1); say(ad2 + ' menüden çıkarıldı'); }
+      n.textContent = tray.indexOf(ad2) > -1 ? 'Menüden Çıkar' : 'Menüye Ekle';
+      trayRender(); npBar();
       return;
     }
 
@@ -398,15 +446,6 @@
       return;
     }
 
-    /* --- ne pişirsem malzeme kutusu --- */
-    if ((n = t.closest('.itile'))) {
-      n.classList.toggle('on');
-      var k = all('.itile.on').length;
-      var lbl = el('wzTxt');
-      if (lbl) lbl.textContent = k >= 3 ? (k + ' malzemeyle tarif bul') : ('Malzeme seç (' + k + '/3)');
-      return;
-    }
-
     /* --- gerçek geri bildirim: işlem oldu, ekran gerekmiyor --- */
     if ((n = t.closest('[data-toast]'))) { e.preventDefault(); say(n.dataset.toast); return; }
 
@@ -467,18 +506,6 @@
   }
   if (el('pPlus')) el('pPlus').addEventListener('click', function () { if (portion < 12) { portion++; applyPortion(); } });
   if (el('pMinus')) el('pMinus').addEventListener('click', function () { if (portion > 1) { portion--; applyPortion(); } });
-
-  /* ================= NE PİŞİRSEM SİHİRBAZI ================= */
-  if (el('wzReset')) el('wzReset').addEventListener('click', function () {
-    all('.itile.on').forEach(function (x) { x.classList.remove('on'); });
-    el('wzTxt').textContent = 'Malzeme seç (0/3)';
-  });
-  if (el('wzGo')) el('wzGo').addEventListener('click', function () {
-    var k = all('.itile.on').length;
-    if (k < 3) { say('En az 3 malzeme seç'); return; }
-    pop();
-    setTimeout(function () { goRoot('tarifler'); say(k + ' malzemeye uygun 24 tarif bulundu'); }, 400);
-  });
 
   /* ================= PİŞİRME MODU ================= */
   var STEPS = [{ "t": "Hamuru yoğur ve dinlendir", "p": "Unu geniş bir kaba ele, ortasını havuz gibi aç. Yumurta, tuz ve suyu ekleyip <b>kulak memesi yumuşaklığında</b> bir hamur yoğur. Üzerini nemli bezle örtüp 10 dakika dinlendir — dinlenen hamur açılırken yırtılmaz.", "img": "assets/img/1561.webp", "min": 15 }, { "t": "İç harcı hazırla", "p": "Kıymayı rendelenmiş soğan, tuz ve karabiberle karıştır. <b>Harcı çok yoğurma</b>; gevşek harç pişerken daha sulu ve lokum gibi kalır.", "img": "", "min": 5 }, { "t": "Hamuru aç, kareler kes", "p": "Hamuru ikiye böl, unlanmış tezgâhta her parçayı <b>2 mm incelikte</b> aç. Keskin bıçak ya da rulet ile 3×3 cm kareler kes. Kareler kurumasın diye üzerini bezle ört.", "img": "assets/img/1749.webp", "min": 20 }, { "t": "Mantıları doldur ve kapat", "p": "Her karenin ortasına <b>nohut büyüklüğünde</b> harç koy. Dört ucu birleştirip bohça gibi sıkıca kapat. Kapanan mantıları yağlanmış fırın tepsisine aralıklı diz.", "img": "assets/img/1637.webp", "min": 20 }, { "t": "Fırınla, sonra et suyunda pişir", "p": "Tepsiyi önceden ısıtılmış <b>180°C</b> fırında 15 dakika, mantılar hafif pembeleşene kadar kızart. Üzerine sıcak et suyunu döküp 10 dakika daha pişir — suyu çeken mantı dışı diri, içi yumuşacık olur.", "img": "assets/img/1425.webp", "min": 25 }, { "t": "Yoğurt ve sosla servis et", "p": "Süzme yoğurdu ezilmiş sarımsakla çırp, mantının üzerine gezdir. Tereyağını toz biberle kızdırıp <b>cazırdarken dök</b>; üzerine kuru nane serp. Eline sağlık!", "img": "assets/img/1424.webp", "min": 5 }];
@@ -542,6 +569,157 @@
   if (el('ckOv')) el('ckOv').addEventListener('click', function () { layerClose(el('ckDrawer'), el('ckOv')); });
   ckRender();
 
+  /* ================= DOLAPTA NE VAR =================
+     185 malzeme 5 sekmede tekrar etmesin diye tek listede duruyor;
+     aktif sekme seçimin hangi listeye gittiğini belirliyor. */
+  var frSel = {};                     // { malzeme: mod }
+  var FR_MOD = { fpHave: 'Dolaptakiler', fpSev: 'Sevmiyorum', fpTuk: 'Tüketmiyorum',
+                 fpAlj: 'Alerjim Var', fpHas: 'Hassasiyetim Var' };
+  function frAktifMod() {
+    var on = document.querySelector('#frTabs .pane.on');
+    return on ? on.id : 'fpHave';
+  }
+  function frRender() {
+    var adlar = Object.keys(frSel);
+    var n = adlar.length;
+    if (el('frN')) el('frN').textContent = n;
+    if (el('frFn')) el('frFn').textContent = n ? Math.max(3, 240 - n * 11) : 0;
+
+    var wrap = el('frChips');
+    if (wrap) {
+      wrap.innerHTML = n ? adlar.map(function (a) {
+        return '<button class="fr-chip" data-frx="' + a + '">' + a +
+               ' <i class="fs i-xmark"></i></button>';
+      }).join('') :
+      '<span class="fr-empty">Henüz seçim yok — Dolaptakiler\'den malzeme işaretle ' +
+      'ya da Hariç Tuttuklarım\'ı doldur.</span>';
+    }
+    all('.mzcat').forEach(function (c) {
+      var top = all('.mz.on', c).length;
+      var lbl = c.querySelector('.mh-n');
+      var tum = all('.mz', c).length;
+      if (lbl) lbl.textContent = top + '/' + tum;
+      c.classList.toggle('has-sel', top > 0);
+    });
+    if (el('frEmpty')) el('frEmpty').style.display = n ? 'none' : 'flex';
+    if (el('frResults')) el('frResults').style.display = n ? 'block' : 'none';
+    if (n && el('frRn')) { el('frRn').textContent = Math.max(3, 240 - n * 11); el('frRm').textContent = n; }
+  }
+  function frTemizle() {
+    frSel = {};
+    all('.mz.on').forEach(function (m) { m.classList.remove('on'); });
+    frRender();
+  }
+
+  /* malzeme arama */
+  if (el('frQ')) el('frQ').addEventListener('input', function () {
+    var q = this.value.trim().toLocaleLowerCase('tr');
+    var bulunan = 0;
+    all('.mzcat').forEach(function (c) {
+      var gorunen = 0;
+      all('.mz', c).forEach(function (m) {
+        var ok = !q || m.dataset.mz.toLocaleLowerCase('tr').indexOf(q) > -1;
+        m.hidden = !ok;
+        if (ok) gorunen++;
+      });
+      c.style.display = gorunen ? '' : 'none';
+      if (q && gorunen) c.classList.add('on');       // arama varken kategoriyi aç
+      bulunan += gorunen;
+    });
+    if (el('frNoRes')) el('frNoRes').style.display = bulunan ? 'none' : 'flex';
+  });
+
+  /* kalori kaydırıcısı */
+  var KCAL = ['0–120 kcal', '120–650 kcal', '650–900 kcal', '900–1200 kcal', '1200+ kcal'];
+  if (el('frKcal')) el('frKcal').addEventListener('input', function () {
+    el('frKcalV').textContent = KCAL[this.value] || KCAL[1];
+  });
+  if (el('frReset')) el('frReset').addEventListener('click', function () {
+    all('#vFridge .fopt.on').forEach(function (x) {
+      if (!x.closest('.hs-opt')) x.classList.remove('on');
+    });
+    if (el('frKcal')) { el('frKcal').value = 1; el('frKcalV').textContent = KCAL[1]; }
+    say('Filtreler sıfırlandı');
+  });
+  if (el('frClear')) el('frClear').addEventListener('click', function () {
+    if (!Object.keys(frSel).length) { say('Dolabın zaten boş'); return; }
+    frTemizle(); say('Dolap sıfırlandı');
+  });
+  if (el('frShow')) el('frShow').addEventListener('click', function () {
+    var n = Object.keys(frSel).length;
+    if (!n) { say('Önce dolabından birkaç malzeme işaretle'); return; }
+    el('frResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  /* ================= NE PİŞİRSEM ================= */
+  var wzAdim = 1, wzSecim = {};
+  function wzGoster(k) {
+    wzAdim = k;
+    all('#npAra .wz-step').forEach(function (st) {
+      st.classList.toggle('on', +st.dataset.wzstep === k);
+    });
+    all('.wz-s').forEach(function (s2) {
+      var i2 = +s2.dataset.wzs;
+      s2.classList.toggle('on', i2 === k);
+      s2.classList.toggle('done', i2 < k);
+    });
+    el('wzPrev').classList.toggle('off', k === 1);
+    var son = k >= 5;
+    el('barWizard').style.display = son ? 'none' : '';
+    if (!son) {
+      el('wzNext').innerHTML = (k === 4 ? 'Tarifleri Getir' : 'Devam') +
+        ' <i class="fs i-chevron-right"></i>';
+    }
+    var v = el('vWizard'); if (v) v.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function wzOzet() {
+    var p2 = el('wzPicked'); if (!p2) return;
+    var t = [];
+    Object.keys(wzSecim).forEach(function (k) { t = t.concat(wzSecim[k]); });
+    p2.innerHTML = t.map(function (x) {
+      return '<span class="fr-chip">' + x + '</span>';
+    }).join('');
+    el('wzN').textContent = Math.max(4, 40 - t.length * 3);
+  }
+  if (el('wzNext')) el('wzNext').addEventListener('click', function () {
+    if (wzAdim < 4) {
+      if (!(wzSecim[wzAdim] || []).length) { say('Bir seçim yap, sonra devam edelim'); return; }
+      wzGoster(wzAdim + 1); return;
+    }
+    wzOzet();
+    wzGoster(+el('wzN').textContent > 0 ? 5 : 6);
+  });
+  if (el('wzPrev')) el('wzPrev').addEventListener('click', function () {
+    if (wzAdim > 1) wzGoster(wzAdim - 1);
+  });
+  if (el('wzAgain')) el('wzAgain').addEventListener('click', function () {
+    wzSecim = {}; all('.wz-c.on').forEach(function (c) { c.classList.remove('on'); }); wzGoster(1);
+  });
+  if (el('wzLoosen')) el('wzLoosen').addEventListener('click', function () { wzGoster(4); });
+  if (el('wzReset')) el('wzReset').addEventListener('click', function () {
+    wzSecim = {}; all('.wz-c.on').forEach(function (c) { c.classList.remove('on'); });
+    wzGoster(1); say('Sihirbaz sıfırlandı');
+  });
+
+  /* menü tepsisi */
+  var tray = [];
+  function trayRender() {
+    if (el('trayN')) el('trayN').textContent = tray.length;
+    if (el('barTray')) el('barTray').hidden = !tray.length;
+  }
+  if (el('trayOpen')) el('trayOpen').addEventListener('click', function () {
+    if (!tray.length) return;
+    say(tray.length + ' tarif tepside — ' + tray[tray.length - 1]);
+  });
+
+  /* aktif panele göre alt çubuk: sihirbaz mı, tepsi mi */
+  function npBar() {
+    var mod = document.querySelector('#npTabs .pane.on');
+    var modda = mod && mod.id === 'npMod';
+    if (el('barWizard')) el('barWizard').style.display = (modda || wzAdim >= 5) ? 'none' : '';
+    if (el('barTray')) el('barTray').hidden = !(modda && tray.length);
+  }
+
   /* ================= FİLTRE ÇEKMECESİ ================= */
   function fltTally() {
     if (!el('fltCount')) return { n: 0, res: 248 };
@@ -603,6 +781,8 @@
 
   /* ================= AÇILIŞ =================
      #/ekran ile gelen link doğrudan o ekranı açar. */
+  frRender(); trayRender(); if (el('wzNext')) wzGoster(1);
+
   var boot = readHash();
   if (boot && viewOf(boot)) navigate(boot, true);
   after(true);                       // .view.top ve alt çubuk her hâlükârda işaretlensin
