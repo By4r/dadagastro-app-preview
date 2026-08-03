@@ -397,6 +397,9 @@
       /* burada return YOK — çip aynı zamanda data-say/data-open taşıyabilir */
     }
 
+    /* --- onay kutusu --- */
+    if ((n = t.closest('[data-chk]'))) { e.preventDefault(); n.classList.toggle('on'); return; }
+
     /* --- anahtar --- */
     if ((n = t.closest('.sw'))) { e.preventDefault(); n.classList.toggle('on'); return; }
 
@@ -682,7 +685,7 @@
     all('#npAra .wz-step').forEach(function (st) {
       st.classList.toggle('on', +st.dataset.wzstep === k);
     });
-    all('.wz-s').forEach(function (s2) {
+    all('#vWizard .wz-s').forEach(function (s2) {
       var i2 = +s2.dataset.wzs;
       s2.classList.toggle('on', i2 === k);
       s2.classList.toggle('done', i2 < k);
@@ -867,6 +870,136 @@
   });
   fltTally();
 
+
+  /* ================= ARAMA (B3) =================
+     Sonuç Tarifler ekranına düşer — canlıdaki /tarifler?q=… davranışı. */
+  var SR_DB = [
+    ['Ezogelin Çorbası', 'Çorba · 30 dk · Kolay'], ['Süzme Mercimek Çorbası', 'Çorba · 35 dk · Çok Kolay'],
+    ['Mercimek Köftesi', 'Meze · 40 dk · Kolay'], ['Fırında Tereyağlı Mantı', 'Mantı · 75 dk · Orta'],
+    ['Fırında Kıymalı Pide', 'Pizza ve Pide · 65 dk · Orta'], ['Ev Usulü Su Böreği', 'Hamur İşi · 90 dk · Zor'],
+    ['Beşamelli Fırın Makarna', 'Makarna · 45 dk · Kolay'], ['Islak Kakaolu Kek', 'Kek ve Pasta · 50 dk · Kolay'],
+    ['Köz Patlıcanlı Tavuk Sote', 'Tavuk ve Hindi · 40 dk · Orta'], ['Fırın Sütlaç', 'Tatlı · 55 dk · Kolay'],
+    ['Akdeniz Mevsim Salatası', 'Salata · 15 dk · Kolay'], ['Yayla Çorbası', 'Çorba · 40 dk · Kolay'],
+    ['Tarhana Çorbası', 'Çorba · 25 dk · Çok Kolay'], ['Zeytinyağlı Enginar', 'Zeytinyağlılar · 45 dk · Orta'],
+    ['Tepsi Böreği', 'Hamur İşi · 70 dk · Orta'], ['Kremalı Mantar Çorbası', 'Çorba · 50 dk · Kolay'],
+    ['Balık Çorbası — Ege Usulü', 'Çorba · 45 dk · Orta'], ['Fırında Tavuk But', 'Tavuk ve Hindi · 60 dk · Kolay']
+  ];
+  function srMod(hangi) {
+    ['srIdle', 'srSug', 'srEmpty'].forEach(function (id) {
+      var e = el(id); if (e) e.hidden = (id !== hangi);
+    });
+  }
+  function srAra(q) {
+    if (!el('srList')) return;
+    q = q.trim();
+    if (el('srX')) el('srX').hidden = !q;
+    if (!q) { srMod('srIdle'); return; }
+    var k = q.toLocaleLowerCase('tr');
+    var hit = SR_DB.filter(function (r) { return r[0].toLocaleLowerCase('tr').indexOf(k) > -1; });
+    if (!hit.length) { srMod('srEmpty'); return; }
+    el('srList').innerHTML = hit.map(function (r) {
+      var i = r[0].toLocaleLowerCase('tr').indexOf(k);
+      var ad = r[0].slice(0, i) + '<b>' + r[0].slice(i, i + q.length) + '</b>' + r[0].slice(i + q.length);
+      return '<button class="lrow ic-lead sr-hit" data-open="tarif-detay"><span class="ic">' +
+             '<i class="fs i-magnifying-glass"></i></span><span class="tx"><b>' + ad + '</b><span>' +
+             r[1] + '</span></span><i class="fs i-chevron-right go"></i></button>';
+    }).join('');
+    el('srN').textContent = hit.length + ' sonuç';
+    el('srGo').textContent = 'Tüm sonuçları göster (' + hit.length + ')';
+    el('srGo').dataset.q = q;
+    srMod('srSug');
+  }
+  if (el('srQ')) el('srQ').addEventListener('input', function () { srAra(this.value); });
+  if (el('srX')) el('srX').addEventListener('click', function () {
+    el('srQ').value = ''; srAra(''); el('srQ').focus();
+  });
+  if (el('srReset')) el('srReset').addEventListener('click', function () {
+    el('srQ').value = ''; srAra(''); el('srQ').focus();
+  });
+  if (el('srClear')) el('srClear').addEventListener('click', function () {
+    el('srRecent').innerHTML = '<div class="fr-empty" style="padding:14px 16px">' +
+      'Son arama geçmişin temizlendi.</div>';
+    say('Arama geçmişi temizlendi');
+  });
+  if (el('srGo')) el('srGo').addEventListener('click', function () {
+    var q = this.dataset.q || '';
+    pop();
+    setTimeout(function () { filtrelereGec([q], null); }, 200);
+  });
+  document.addEventListener('click', function (e) {
+    var r = e.target.closest('#srRecent .sr-r, #vSearch .poprail .chip');
+    if (!r || !el('srQ')) return;
+    var t = (r.querySelector('b') || r).textContent.trim();
+    el('srQ').value = t; srAra(t);
+  }, true);
+
+  /* ================= YORUM YAZ (B8) ================= */
+  var RW_LBL = ['', 'Olmadı', 'İdare eder', 'Fena değil', 'Beğendim', 'Harika oldu'];
+  var RW_SUB = ['Puanın olmadan yorum gönderilemez', 'Ne ters gitti? Aşağıda anlat',
+    'Eksik kalan neydi?', 'Neyi değiştirirdin?', 'Nesi iyiydi?', 'Başkalarına da anlat'];
+  var rwStar = 0;
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-rw]');
+    if (!b) return;
+    rwStar = +b.dataset.rw;
+    all('[data-rw]').forEach(function (x) { x.classList.toggle('on', +x.dataset.rw <= rwStar); });
+    el('rwLbl').innerHTML = RW_LBL[rwStar] + '<span>' + RW_SUB[rwStar] + '</span>';
+  });
+  if (el('rwTxt')) el('rwTxt').addEventListener('input', function () {
+    el('rwN').textContent = this.value.length;
+  });
+  if (el('rwSend')) el('rwSend').addEventListener('click', function () {
+    if (!rwStar) { say('Önce yıldızlara dokunup puan ver'); return; }
+    pop();
+    setTimeout(function () { say('Yorumun gönderildi — moderasyondan sonra yayında'); }, 420);
+  });
+
+  /* ================= TARİF EKLE (B9) ================= */
+  var raAdim = 1, RA_SON = 5;
+  function raGoster(k) {
+    raAdim = k;
+    all('#vAddRec .ra-step').forEach(function (st) {
+      st.classList.toggle('on', +st.dataset.rastep === k);
+    });
+    all('#raSteps .wz-s').forEach(function (s2) {
+      var i = +s2.dataset.ras;
+      s2.classList.toggle('on', i === k);
+      s2.classList.toggle('done', i < k);
+    });
+    if (el('raPrev')) el('raPrev').classList.toggle('off', k === 1);
+    if (el('raNext')) el('raNext').innerHTML = (k === RA_SON ? 'Tarifi Gönder' : 'Devam') +
+      ' <i class="fs i-chevron-right"></i>';
+    var v = el('vAddRec'); if (v) v.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  if (el('raNext')) el('raNext').addEventListener('click', function () {
+    if (raAdim === RA_SON) {
+      pop();
+      setTimeout(function () { say('Tarifin editör kuyruğuna gönderildi'); raGoster(1); }, 420);
+      return;
+    }
+    raGoster(raAdim + 1);
+  });
+  if (el('raPrev')) el('raPrev').addEventListener('click', function () {
+    if (raAdim > 1) raGoster(raAdim - 1);
+  });
+  all('#raSteps .wz-s').forEach(function (b) {
+    b.addEventListener('click', function () { raGoster(+b.dataset.ras); });
+  });
+  var raPor = 4;
+  function raPorSync() { if (el('raP')) el('raP').textContent = raPor; }
+  if (el('raPlus')) el('raPlus').addEventListener('click', function () { if (raPor < 24) { raPor++; raPorSync(); } });
+  if (el('raMinus')) el('raMinus').addEventListener('click', function () { if (raPor > 1) { raPor--; raPorSync(); } });
+
+
+  /* --- tarif ızgarası: 2 kolon / tek kolon görünümü --- */
+  if (el('lView')) el('lView').addEventListener('click', function () {
+    var g = document.querySelector('#vList .ggrid');
+    if (!g) return;
+    var tek = g.classList.toggle('one');
+    this.innerHTML = tek ? '<i class="fs i-layer-group"></i>' : '<i class="fs i-layer-group"></i>';
+    say(tek ? 'Tek kolon görünümü' : 'Izgara görünümü');
+  });
+
   /* ================= KLAVYE (masaüstü önizleme) ================= */
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
@@ -877,6 +1010,7 @@
   /* ================= AÇILIŞ =================
      #/ekran ile gelen link doğrudan o ekranı açar. */
   frRender(); trayRender(); trayList(); if (el('wzNext')) wzGoster(1);
+  if (el('raNext')) raGoster(1);
 
   var boot = readHash();
   if (boot && viewOf(boot)) navigate(boot, true);

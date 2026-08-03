@@ -60,10 +60,10 @@
     <button class="mode">Malzemeye Göre</button>
     <button class="mode">Ne Pişirsem</button>
   </div>
-  <div class="searchbar">
+  <div class="searchbar" data-open="arama">
     <i class="fs i-magnifying-glass si"></i>
     <input id="q" type="text" placeholder="Tarif adı ara… (ör. mercimek çorbası)" />
-    <button class="sb-go" data-go="tarifler"><i class="fs i-arrow-right"></i></button>
+    <button class="sb-go" data-open="arama"><i class="fs i-arrow-right"></i></button>
   </div>
 </div>
 
@@ -107,17 +107,17 @@
       <h2>Kategoriler &amp; dünya mutfakları</h2>
       <p class="sub">2.057 tarif · 33 kategori · 50 dünya mutfağı.</p>
     </div>
-    <a class="see-all" data-go="tarifler">Tümü <i class="fs i-arrow-right"></i></a>
+    <a class="see-all" data-open="kategoriler">Tümü <i class="fs i-arrow-right"></i></a>
   </div>
   <div class="rail">
-    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1970.webp')"></div><b>Sebze</b><span>215 tarif</span></a>
-    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1587.webp')"></div><b>Kırmızı Et</b><span>160 tarif</span></a>
-    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1284.webp')"></div><b>Tatlı</b><span>126 tarif</span></a>
-    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1436.webp')"></div><b>Atıştırmalık</b><span>125 tarif</span></a>
-    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1410.webp')"></div><b>Meze</b><span>121 tarif</span></a>
-    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1406.webp')"></div><b>Çorba</b><span>115 tarif</span></a>
-    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1710.webp')"></div><b>Zeytinyağlılar</b><span>115 tarif</span></a>
-    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1414.webp')"></div><b>Hamur İşi</b><span>104 tarif</span></a>
+    <a class="cat" data-open="kategori"><div class="thumb" style="background-image:url('assets/img/1970.webp')"></div><b>Sebze</b><span>215 tarif</span></a>
+    <a class="cat" data-open="kategori"><div class="thumb" style="background-image:url('assets/img/1587.webp')"></div><b>Kırmızı Et</b><span>160 tarif</span></a>
+    <a class="cat" data-open="kategori"><div class="thumb" style="background-image:url('assets/img/1284.webp')"></div><b>Tatlı</b><span>126 tarif</span></a>
+    <a class="cat" data-open="kategori"><div class="thumb" style="background-image:url('assets/img/1436.webp')"></div><b>Atıştırmalık</b><span>125 tarif</span></a>
+    <a class="cat" data-open="kategori"><div class="thumb" style="background-image:url('assets/img/1410.webp')"></div><b>Meze</b><span>121 tarif</span></a>
+    <a class="cat" data-open="kategori"><div class="thumb" style="background-image:url('assets/img/1406.webp')"></div><b>Çorba</b><span>115 tarif</span></a>
+    <a class="cat" data-open="kategori"><div class="thumb" style="background-image:url('assets/img/1710.webp')"></div><b>Zeytinyağlılar</b><span>115 tarif</span></a>
+    <a class="cat" data-open="kategori"><div class="thumb" style="background-image:url('assets/img/1414.webp')"></div><b>Hamur İşi</b><span>104 tarif</span></a>
   </div>
 </section>
 
@@ -273,7 +273,7 @@
     </div>
     <a class="see-all" data-say="Günün tarifi arşivi">Arşiv <i class="fs i-arrow-right"></i></a>
   </div>
-  <a class="hero-card" data-open="tarif-detay" style="background-image:url('assets/img/1425.webp')" data-say="Tarif detay ekranı — bir sonraki adımda tasarlanacak">
+  <a class="hero-card" data-open="tarif-detay" style="background-image:url('assets/img/1425.webp')" >
     <span class="play-badge"><i class="fs i-play"></i> 8:40</span>
     <button class="save"><i class="fr i-heart"></i></button>
     <div class="hc-cont">
@@ -329,7 +329,7 @@
     <span class="badge dark"><i class="fs i-users"></i> Topluluğa katıl</span>
     <h3>Senin de bir tarifin var</h3>
     <p>Tariflerini paylaş, denendikçe puan topla, mutfak defterini herkesle buluştur.</p>
-    <button class="btn block" data-say="Tarif ekleme ekranı"><i class="fs i-pen-to-square"></i> Tarifini Paylaş</button>
+    <button class="btn block" data-open="tarif-ekle"><i class="fs i-pen-to-square"></i> Tarifini Paylaş</button>
   </div>
 </section>
 
@@ -340,16 +340,17 @@
 <!-- ==================== TARİFLER ==================== -->
 <section class="view root" id="vList" data-route="tarifler">
   <header class="vbar"><h2>Tarifler</h2>
-    <button class="ab-btn" data-say="Görünümü değiştir"><i class="fs i-layer-group"></i></button>
+    <button class="ab-btn" id="lView"><i class="fs i-layer-group"></i></button>
     <button class="ab-btn" data-drawer="1" aria-label="Menü"><i class="fs i-bars"></i></button>
   </header>
 
   <div class="lsearch">
     <div class="row">
-      <label class="fld"><i class="fs i-magnifying-glass"></i><input type="text" placeholder="Tarif, malzeme ya da şef ara…" /></label>
+      <label class="fld" data-open="arama"><i class="fs i-magnifying-glass"></i><input type="text" placeholder="Tarif, malzeme ya da şef ara…" readonly /></label>
       <button class="fbtn" id="fltOpen" data-bsheet="fltSheet"><i class="fs i-sliders"></i><span class="bdg" id="fltCount">2</span></button>
     </div>
     <div class="lchips">
+      <span class="chip" data-open="kategoriler"><i class="fs i-layer-group"></i> Kategoriler</span>
       <span class="chip on">Tümü</span><span class="chip">Sebze</span><span class="chip">Kırmızı Et</span>
       <span class="chip">Tatlı</span><span class="chip">Atıştırmalık</span><span class="chip">Meze</span>
       <span class="chip">Çorba</span><span class="chip">Zeytinyağlılar</span><span class="chip">Kahvaltılık</span>
@@ -383,7 +384,7 @@
   </a>
 
   <div class="ggrid">
-    <a class="gcard" data-say="Köz Patlıcanlı Tavuk Sote">
+    <a class="gcard" data-open="tarif-detay">
       <div class="im" style="background-image:url('assets/img/2615.webp')">
         <button class="sv"><i class="fr i-heart"></i></button>
         <span class="tchip"><i class="fs i-clock"></i> 40 dk</span><span class="vchip"><i class="fs i-play"></i></span>
@@ -395,7 +396,7 @@
         <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,8</span><span class="dif">Orta</span></div>
       </div>
     </a>
-    <a class="gcard" data-say="Fırın Sütlaç — Cam Kâsede">
+    <a class="gcard" data-open="tarif-detay">
       <div class="im" style="background-image:url('assets/img/1598.webp')">
         <button class="sv"><i class="fr i-heart"></i></button>
         <span class="tchip"><i class="fs i-clock"></i> 55 dk</span>
@@ -407,7 +408,7 @@
         <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,9</span><span class="dif">Kolay</span></div>
       </div>
     </a>
-    <a class="gcard" data-say="Ezogelin Çorbası">
+    <a class="gcard" data-open="tarif-detay">
       <div class="im" style="background-image:url('assets/img/1410.webp')">
         <span class="rib">Şefin Tercihi</span><button class="sv"><i class="fr i-heart"></i></button>
         <span class="tchip"><i class="fs i-clock"></i> 30 dk</span><span class="vchip"><i class="fs i-play"></i></span>
@@ -419,7 +420,7 @@
         <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,9</span><span class="dif">Kolay</span></div>
       </div>
     </a>
-    <a class="gcard" data-say="Fırında Kıymalı Pide">
+    <a class="gcard" data-open="tarif-detay">
       <div class="im" style="background-image:url('assets/img/1494.webp')">
         <button class="sv"><i class="fr i-heart"></i></button>
         <span class="tchip"><i class="fs i-clock"></i> 65 dk</span>
@@ -431,7 +432,7 @@
         <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,7</span><span class="dif">Orta</span></div>
       </div>
     </a>
-    <a class="gcard" data-say="Ev Usulü Su Böreği">
+    <a class="gcard" data-open="tarif-detay">
       <div class="im" style="background-image:url('assets/img/1749.webp')">
         <span class="rib new">Yeni</span><button class="sv"><i class="fr i-heart"></i></button>
         <span class="tchip"><i class="fs i-clock"></i> 90 dk</span>
@@ -443,7 +444,7 @@
         <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,8</span><span class="dif">Zor</span></div>
       </div>
     </a>
-    <a class="gcard" data-say="Beşamelli Fırın Makarna">
+    <a class="gcard" data-open="tarif-detay">
       <div class="im" style="background-image:url('assets/img/1419.webp')">
         <button class="sv"><i class="fr i-heart"></i></button>
         <span class="tchip"><i class="fs i-clock"></i> 45 dk</span><span class="vchip"><i class="fs i-play"></i></span>
@@ -455,7 +456,7 @@
         <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,9</span><span class="dif">Kolay</span></div>
       </div>
     </a>
-    <a class="gcard" data-say="Akdeniz Mevsim Salatası">
+    <a class="gcard" data-open="tarif-detay">
       <div class="im" style="background-image:url('assets/img/1970.webp')">
         <button class="sv"><i class="fr i-heart"></i></button>
         <span class="tchip"><i class="fs i-clock"></i> 15 dk</span>
@@ -467,7 +468,7 @@
         <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,7</span><span class="dif">Kolay</span></div>
       </div>
     </a>
-    <a class="gcard" data-say="Islak Kakaolu Kek">
+    <a class="gcard" data-open="tarif-detay">
       <div class="im" style="background-image:url('assets/img/1284.webp')">
         <span class="rib new">Yeni</span><button class="sv"><i class="fr i-heart"></i></button>
         <span class="tchip"><i class="fs i-clock"></i> 50 dk</span>
@@ -619,15 +620,15 @@
     <div class="sec-head"><div><span class="eyebrow">Mutfağımdan</span><h2>Paylaştığın tarifler</h2></div>
       <a class="see-all" data-say="Paylaştıklarım">12 tarif <i class="fs i-arrow-right"></i></a></div>
     <div class="pgrid">
-      <a data-say="Zeytinyağlı Enginar" style="background-image:url('assets/img/1970.webp')"><span class="ov"><i class="fs i-star"></i> 4.8</span></a>
-      <a data-say="Fırın Makarna" style="background-image:url('assets/img/1419.webp')"><span class="ov"><i class="fs i-star"></i> 4.9</span></a>
-      <a data-say="Islak Kek" style="background-image:url('assets/img/1284.webp')"><span class="ov"><i class="fs i-star"></i> 4.7</span></a>
-      <a data-say="Kıymalı Pide" style="background-image:url('assets/img/1494.webp')"><span class="ov"><i class="fs i-star"></i> 4.6</span></a>
-      <a data-say="Mercimek Çorbası" style="background-image:url('assets/img/1406.webp')"><span class="ov"><i class="fs i-star"></i> 4.9</span></a>
-      <a data-say="Tepsi Böreği" style="background-image:url('assets/img/1452.webp')"><span class="ov"><i class="fs i-star"></i> 4.8</span></a>
+      <a data-open="tarif-detay" style="background-image:url('assets/img/1970.webp')"><span class="ov"><i class="fs i-star"></i> 4.8</span></a>
+      <a data-open="tarif-detay" style="background-image:url('assets/img/1419.webp')"><span class="ov"><i class="fs i-star"></i> 4.9</span></a>
+      <a data-open="tarif-detay" style="background-image:url('assets/img/1284.webp')"><span class="ov"><i class="fs i-star"></i> 4.7</span></a>
+      <a data-open="tarif-detay" style="background-image:url('assets/img/1494.webp')"><span class="ov"><i class="fs i-star"></i> 4.6</span></a>
+      <a data-open="tarif-detay" style="background-image:url('assets/img/1406.webp')"><span class="ov"><i class="fs i-star"></i> 4.9</span></a>
+      <a data-open="tarif-detay" style="background-image:url('assets/img/1452.webp')"><span class="ov"><i class="fs i-star"></i> 4.8</span></a>
     </div>
     <div class="pshare">
-      <button class="btn ghost block" data-say="Tarif ekleme ekranı"><i class="fs i-pen-to-square"></i> Yeni Tarif Paylaş</button>
+      <button class="btn ghost block" data-open="tarif-ekle"><i class="fs i-pen-to-square"></i> Yeni Tarif Paylaş</button>
     </div>
   </section>
 
@@ -1431,7 +1432,7 @@
       <span class="cm-rate"><i class="fs i-star"></i> 5.0</span>
     </div>
     <p>Hamuru 2 mm açma tüyosu gerçekten fark yaratıyor. Fırında 15 dakika sonra et suyu ekleme kısmı ilk defa denedim, mantı dağılmadı. Ailece bayıldık.</p>
-    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 48</a><a data-say="Yanıtla"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
+    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 48</a><a data-toast="Yanıt alanı açıldı"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
   </article>
 
   <article class="cm">
@@ -1441,11 +1442,11 @@
       <span class="cm-rate"><i class="fs i-star"></i> 4.5</span>
     </div>
     <p>Kıymayı az yoğurmak konusunda haklısınız. Ben et suyunu biraz fazla koydum, 10 dakika yerine 14 dakika pişirdim, kıvamı tuttu.</p>
-    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 21</a><a data-say="Yanıtla"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
+    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 21</a><a data-toast="Yanıt alanı açıldı"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
   </article>
 
   <div class="ig-group">
-    <button class="btn ghost block" data-say="Tüm yorumlar ekranı">Tüm yorumları gör (1.204)</button>
+    <button class="btn ghost block" data-open="yorumlar">Tüm yorumları gör (1.204)</button>
   </div>
 </div>
 
@@ -1473,24 +1474,24 @@
       <span class="eyebrow">Benzer tarifler</span>
       <h2>Bunları da seveceksin</h2>
     </div>
-    <a class="see-all" data-say="Tarif listesi">Tümü <i class="fs i-arrow-right"></i></a>
+    <a class="see-all" data-go="tarifler">Tümü <i class="fs i-arrow-right"></i></a>
   </div>
   <div class="rail">
-    <article class="rcard" data-say="Fırında Kıymalı Pide">
+    <article class="rcard" data-open="tarif-detay">
       <div class="media" style="background-image:url('assets/img/1494.webp')"><span class="badge dark">Hamur İşi</span><button class="save"><i class="fr i-heart"></i></button></div>
       <div class="body"><h4>Fırında Kıymalı Pide</h4>
         <div class="rfacts"><span><i class="fs i-clock"></i> 65 dk</span><span><i class="fs i-gauge-simple"></i> Orta</span></div>
         <div class="rstats"><span class="rate"><i class="fs i-star"></i> 4,7</span><span class="views"><i class="fs i-eye"></i> 76B</span></div>
       </div>
     </article>
-    <article class="rcard" data-say="Su Böreği">
+    <article class="rcard" data-open="tarif-detay">
       <div class="media" style="background-image:url('assets/img/1749.webp')"><span class="badge dark">Hamur İşi</span><button class="save"><i class="fr i-heart"></i></button></div>
       <div class="body"><h4>Ev Usulü Su Böreği</h4>
         <div class="rfacts"><span><i class="fs i-clock"></i> 90 dk</span><span><i class="fs i-gauge-simple"></i> Zor</span></div>
         <div class="rstats"><span class="rate"><i class="fs i-star"></i> 4,8</span><span class="views"><i class="fs i-eye"></i> 143B</span></div>
       </div>
     </article>
-    <article class="rcard" data-say="Fırın Makarna">
+    <article class="rcard" data-open="tarif-detay">
       <div class="media" style="background-image:url('assets/img/1419.webp')"><span class="badge">Şefin Tercihi</span><button class="save"><i class="fr i-heart"></i></button></div>
       <div class="body"><h4>Beşamelli Fırın Makarna</h4>
         <div class="rfacts"><span><i class="fs i-clock"></i> 45 dk</span><span><i class="fs i-gauge-simple"></i> Kolay</span></div>
@@ -1534,6 +1535,611 @@
   </div>
 </section>
 
+
+<!-- ==================== FAZ 2 — TARİF AKIŞI ==================== -->
+
+<!-- B3 · Arama — canlı: /tarifler?q=… Sonuç Tarifler ekranına düşer,
+     bu ekran arama niyetini toplar: son aramalar · popüler · kategoriye göz at -->
+<section class="view pushed" id="vSearch" data-route="arama" data-parent="tarifler">
+  <header class="vbar">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <label class="sr-fld"><i class="fs i-magnifying-glass"></i>
+      <input type="text" id="srQ" placeholder="Tarif, malzeme ya da şef ara…" autocomplete="off" />
+      <button class="x" id="srX" hidden aria-label="Temizle"><i class="fs i-xmark"></i></button></label>
+  </header>
+
+  <div id="srIdle">
+    <div class="sr-head"><span class="lab">Son aramalar</span><button class="rst" id="srClear">Temizle</button></div>
+    <div id="srRecent">
+      <button class="lrow ic-lead sr-r"><span class="ic"><i class="fs i-clock"></i></span><span class="tx"><b>mercimek çorbası</b><span>2.057 tarif içinde</span></span><i class="fs i-arrow-right go" style="transform:rotate(-45deg)"></i></button>
+      <button class="lrow ic-lead sr-r"><span class="ic"><i class="fs i-clock"></i></span><span class="tx"><b>fırında tavuk</b><span>110 tarif</span></span><i class="fs i-arrow-right go" style="transform:rotate(-45deg)"></i></button>
+      <button class="lrow ic-lead sr-r"><span class="ic"><i class="fs i-clock"></i></span><span class="tx"><b>Zeynep Usta</b><span>Şef · 126 tarif</span></span><i class="fs i-arrow-right go" style="transform:rotate(-45deg)"></i></button>
+      <button class="lrow ic-lead sr-r"><span class="ic"><i class="fs i-clock"></i></span><span class="tx"><b>15 dakikada akşam yemeği</b><span>389 tarif</span></span><i class="fs i-arrow-right go" style="transform:rotate(-45deg)"></i></button>
+    </div>
+
+    <div class="sr-head"><span class="lab">Popüler aramalar</span></div>
+    <div class="rail poprail">
+      <span class="chip">zeytinyağlı</span><span class="chip">kahvaltılık</span><span class="chip">misafir yemeği</span>
+      <span class="chip">vegan</span><span class="chip">fırın</span><span class="chip">tek tencere</span>
+      <span class="chip">airfryer</span><span class="chip">glutensiz</span>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <div><span class="eyebrow">Kategoriye göz at</span><h2>Ne aradığını bilmiyorsan</h2>
+          <p class="sub">33 kategori ve 50 dünya mutfağı — listeden gir, aramaya gerek kalmasın.</p></div>
+        <button class="see-all" data-open="kategoriler">Tümü <i class="fs i-chevron-right"></i></button>
+      </div>
+      <div class="kgrid">
+        <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1410.webp')"></span><span class="tx"><b>Çorba</b><span>115 tarif</span></span></a>
+        <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1749.webp')"></span><span class="tx"><b>Hamur İşi</b><span>104 tarif</span></span></a>
+        <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1970.webp')"></span><span class="tx"><b>Salata</b><span>94 tarif</span></span></a>
+        <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1284.webp')"></span><span class="tx"><b>Tatlı</b><span>126 tarif</span></span></a>
+      </div>
+    </div>
+  </div>
+
+  <div id="srSug" hidden>
+    <div class="sr-head"><span class="lab">Öneriler</span><span class="rst" id="srN">0 sonuç</span></div>
+    <div id="srList"></div>
+    <div class="loadmore"><button class="btn block" id="srGo">Tüm sonuçları göster</button></div>
+  </div>
+
+  <div class="emp" id="srEmpty" hidden>
+    <span class="ic"><i class="fs i-magnifying-glass"></i></span>
+    <span class="eyebrow">Sonuç yok</span>
+    <h3>Bu aramaya uyan tarif yok</h3>
+    <p>Yazımı kontrol et ya da daha kısa ara — “kıymalı pide” yerine “pide” dene.</p>
+    <button class="btn" id="srReset">Aramayı Temizle</button>
+    <button class="alt" data-open="kategoriler">Kategorilere göz at</button>
+  </div>
+  <div class="vpad"></div>
+</section>
+
+
+<!-- B4+B6 · Kategori dizini — canlıda dünya mutfaklarının ayrı sayfası yok,
+     aynı dizinin ikinci sekmesi olarak duruyor -->
+<section class="view pushed" id="vCats" data-route="kategoriler" data-parent="tarifler">
+  <header class="vbar">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <h2>Kategoriler</h2>
+    <button class="ab-btn" data-open="arama" aria-label="Ara"><i class="fs i-magnifying-glass"></i></button>
+  </header>
+
+  <div class="segs" data-tabs id="catTabs">
+    <button class="seg on" data-pane="cpKat">Kategoriler <span class="sg-n">33</span></button>
+    <button class="seg" data-pane="cpMut">Dünya Mutfakları <span class="sg-n">50</span></button>
+  </div>
+
+  <div class="pane on" id="cpKat">
+    <div class="mk-hero">
+      <h2>2.057 denenmiş tarif, 33 kategori</h2>
+      <p>Her kategori canlıdaki tarif sayısıyla listelenir — en kalabalıktan en sadeye.</p>
+      <div class="mk-stats">
+        <span><b>215</b>en büyük<br />kategori</span>
+        <span><b>62</b>ortalama<br />tarif</span>
+        <span><b>33</b>toplam<br />kategori</span>
+      </div>
+    </div>
+    <div class="kit-lab">Tüm kategoriler</div>
+    <div class="kgrid">
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1970.webp')"></span><span class="tx"><b>Sebze</b><span>215 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1436.webp')"></span><span class="tx"><b>Kırmızı Et</b><span>160 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1284.webp')"></span><span class="tx"><b>Tatlı</b><span>126 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1382.webp')"></span><span class="tx"><b>Atıştırmalık</b><span>125 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1388.webp')"></span><span class="tx"><b>Meze</b><span>121 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1410.webp')"></span><span class="tx"><b>Çorba</b><span>115 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1406.webp')"></span><span class="tx"><b>Zeytinyağlılar</b><span>115 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1414.webp')"></span><span class="tx"><b>Kahvaltılık</b><span>114 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1418.webp')"></span><span class="tx"><b>Bakliyat</b><span>113 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/2615.webp')"></span><span class="tx"><b>Tavuk ve Hindi</b><span>110 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1424.webp')"></span><span class="tx"><b>Balık ve Deniz Ürünleri</b><span>108 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1749.webp')"></span><span class="tx"><b>Hamur İşi</b><span>104 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1451.webp')"></span><span class="tx"><b>Salata</b><span>94 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1452.webp')"></span><span class="tx"><b>Pilav</b><span>92 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1483.webp')"></span><span class="tx"><b>Köfte ve Kebap</b><span>89 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1513.webp')"></span><span class="tx"><b>Meyve Tarifleri</b><span>89 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1419.webp')"></span><span class="tx"><b>Makarna</b><span>76 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1561.webp')"></span><span class="tx"><b>Sandviç Burger ve Dürüm</b><span>71 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1587.webp')"></span><span class="tx"><b>Kek ve Pasta</b><span>70 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1593.webp')"></span><span class="tx"><b>Ekmek</b><span>69 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1598.webp')"></span><span class="tx"><b>Dondurma ve Soğuk Tatlılar</b><span>62 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1608.webp')"></span><span class="tx"><b>Yumurta Tarifleri</b><span>61 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1637.webp')"></span><span class="tx"><b>İçecek</b><span>59 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1710.webp')"></span><span class="tx"><b>Dolma ve Sarma</b><span>58 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1726.webp')"></span><span class="tx"><b>Sakatat</b><span>58 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1738.webp')"></span><span class="tx"><b>Sos</b><span>58 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1762.webp')"></span><span class="tx"><b>Kurabiye</b><span>57 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1494.webp')"></span><span class="tx"><b>Pizza ve Pide</b><span>54 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1425.webp')"></span><span class="tx"><b>Mantı ve Dolgulu Hamurlar</b><span>53 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1773.webp')"></span><span class="tx"><b>Turşu ve Konserve</b><span>51 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1796.webp')"></span><span class="tx"><b>Çocuk Tarifleri</b><span>50 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/1824.webp')"></span><span class="tx"><b>Bebek Tarifleri</b><span>49 tarif</span></span></a>
+      <a class="ktile" data-open="kategori"><span class="im" style="background-image:url('assets/img/2437.webp')"></span><span class="tx"><b>Reçel</b><span>49 tarif</span></span></a>
+    </div>
+    <div class="vpad"></div>
+  </div>
+
+  <div class="pane" id="cpMut">
+    <a class="fcard" data-open="kategori" style="margin-top:0">
+      <div class="bg" style="background-image:url('assets/img/1425.webp')"></div>
+      <div class="in">
+        <span class="badge"><i class="fs i-crown"></i> En kalabalık mutfak</span>
+        <h3>Türk Mutfağı</h3>
+        <div class="mt"><span><i class="fs i-bowl-food"></i> 1.204 tarif</span><span><i class="fs i-layer-group"></i> 33 kategoriye yayılı</span></div>
+      </div>
+    </a>
+    <div class="dgrp">
+      <div class="dlab">Akdeniz &amp; Avrupa <i>18 mutfak</i></div>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>İtalyan</b></span><span class="n">92</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Fransız</b></span><span class="n">56</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>İngiliz</b></span><span class="n">22</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Alman</b></span><span class="n">15</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>İspanyol</b></span><span class="n">15</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Portekiz</b></span><span class="n">11</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Avusturya</b></span><span class="n">9</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Yunan</b></span><span class="n">8</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>İsviçre</b></span><span class="n">6</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Hollanda</b></span><span class="n">5</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Belçika</b></span><span class="n">5</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>İrlanda</b></span><span class="n">4</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>İskoçya</b></span><span class="n">4</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Danimarka</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>İsveç</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Norveç</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Finlandiya</b></span><span class="n">2</span><i class="fs i-chevron-right go"></i></button>
+    </div>
+    <div class="dgrp">
+      <div class="dlab">Balkanlar &amp; Kafkasya <i>13 mutfak</i></div>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Boşnak</b></span><span class="n">7</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Rus</b></span><span class="n">6</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Arnavut</b></span><span class="n">6</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Azerbaycan</b></span><span class="n">6</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Gürcü</b></span><span class="n">5</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Sırp</b></span><span class="n">5</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Hırvat</b></span><span class="n">4</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Bulgar</b></span><span class="n">4</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Romen</b></span><span class="n">4</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Macar</b></span><span class="n">4</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Çek</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Polonya</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Ukrayna</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+    </div>
+    <div class="dgrp">
+      <div class="dlab">Orta Doğu &amp; Afrika <i>9 mutfak</i></div>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Lübnan</b></span><span class="n">7</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>İran</b></span><span class="n">6</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Suriye</b></span><span class="n">5</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Fas</b></span><span class="n">5</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Mısır</b></span><span class="n">4</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Tunus</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Cezayir</b></span><span class="n">2</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Etiyopya</b></span><span class="n">2</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Güney Afrika</b></span><span class="n">2</span><i class="fs i-chevron-right go"></i></button>
+    </div>
+    <div class="dgrp">
+      <div class="dlab">Asya &amp; Pasifik <i>10 mutfak</i></div>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Çin</b></span><span class="n">9</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Japon</b></span><span class="n">8</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Hint</b></span><span class="n">8</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Tayland</b></span><span class="n">6</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Kore</b></span><span class="n">5</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Vietnam</b></span><span class="n">4</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Endonezya</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Malezya</b></span><span class="n">2</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Filipinler</b></span><span class="n">2</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Avustralya</b></span><span class="n">2</span><i class="fs i-chevron-right go"></i></button>
+    </div>
+    <div class="dgrp">
+      <div class="dlab">Amerika <i>6 mutfak</i></div>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Amerikan</b></span><span class="n">11</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Meksika</b></span><span class="n">9</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Brezilya</b></span><span class="n">4</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Arjantin</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Peru</b></span><span class="n">3</span><i class="fs i-chevron-right go"></i></button>
+      <button class="lrow" data-open="kategori"><span class="tx"><b>Küba</b></span><span class="n">2</span><i class="fs i-chevron-right go"></i></button>
+    </div>
+    <div class="vpad"></div>
+  </div>
+</section>
+
+
+<!-- B5 · Kategori sonuç listesi — canlı: /tarifler/kategori/corba, H1 = kategori adı -->
+<section class="view pushed" id="vCat" data-route="kategori" data-parent="kategoriler">
+  <header class="vbar">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <h2>Çorba</h2>
+    <button class="ab-btn" data-bsheet="fltSheet" aria-label="Filtrele"><i class="fs i-sliders"></i></button>
+  </header>
+
+  <div class="cat-hero" style="background-image:url('assets/img/1410.webp')">
+    <div class="in">
+      <span class="eyebrow">Kategori</span>
+      <h1>Çorba</h1>
+      <p>115 tarif · ortalama 35 dakika · en çok denenen Ezogelin Çorbası</p>
+    </div>
+  </div>
+
+  <div class="filterbar">
+    <span class="chip on">Tümü 115</span><span class="chip">Mercimek 24</span><span class="chip">Sebze 19</span>
+    <span class="chip">Tarhana 12</span><span class="chip">Yayla 9</span><span class="chip">Ezogelin 8</span>
+    <span class="chip">Balık 6</span><span class="chip">Kremalı 14</span>
+  </div>
+
+  <div class="lmeta">
+    <span class="cnt"><b>115</b> tarif bulundu</span>
+    <button class="sortbtn" data-bsheet="fltSheet">Önerilen <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
+  </div>
+
+  <div class="ggrid">
+    <a class="gcard" data-open="tarif-detay">
+      <div class="im" style="background-image:url('assets/img/1410.webp')"><span class="rib">Şefin Tercihi</span><button class="sv"><i class="fr i-heart"></i></button><span class="tchip"><i class="fs i-clock"></i> 30 dk</span></div>
+      <div class="bd"><h4>Ezogelin Çorbası</h4><div class="gsub"><span>6 kişilik</span><span class="pr"><b>₺</b><span>₺</span><span>₺</span></span></div>
+        <div class="gchef"><span class="av" style="background:var(--ink)">AT</span><b>Ayşe Tülin</b></div>
+        <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,9</span><span class="dif">Kolay</span></div></div>
+    </a>
+    <a class="gcard" data-open="tarif-detay">
+      <div class="im" style="background-image:url('assets/img/1418.webp')"><button class="sv"><i class="fr i-heart"></i></button><span class="tchip"><i class="fs i-clock"></i> 35 dk</span><span class="vchip"><i class="fs i-play"></i></span></div>
+      <div class="bd"><h4>Süzme Mercimek Çorbası</h4><div class="gsub"><span>4 kişilik</span><span class="pr"><b>₺</b><span>₺</span><span>₺</span></span></div>
+        <div class="gchef"><span class="av" style="background:var(--tomato)">AB</span><b>Arda Bozkurt</b></div>
+        <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,8</span><span class="dif">Çok Kolay</span></div></div>
+    </a>
+    <a class="gcard" data-open="tarif-detay">
+      <div class="im" style="background-image:url('assets/img/1406.webp')"><button class="sv"><i class="fr i-heart"></i></button><span class="tchip"><i class="fs i-clock"></i> 40 dk</span></div>
+      <div class="bd"><h4>Yayla Çorbası — Naneli</h4><div class="gsub"><span>6 kişilik</span><span class="pr"><b>₺</b><span>₺</span><span>₺</span></span></div>
+        <div class="gchef"><span class="av" style="background:var(--purple)">ZU</span><b>Zeynep Usta</b></div>
+        <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,7</span><span class="dif">Kolay</span></div></div>
+    </a>
+    <a class="gcard" data-open="tarif-detay">
+      <div class="im" style="background-image:url('assets/img/1388.webp')"><span class="rib new">Yeni</span><button class="sv"><i class="fr i-heart"></i></button><span class="tchip"><i class="fs i-clock"></i> 25 dk</span></div>
+      <div class="bd"><h4>Tarhana Çorbası</h4><div class="gsub"><span>4 kişilik</span><span class="pr"><b>₺</b><span>₺</span><span>₺</span></span></div>
+        <div class="gchef"><span class="av" style="background:var(--petrol)">MK</span><b>Mehmet K.</b></div>
+        <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,6</span><span class="dif">Çok Kolay</span></div></div>
+    </a>
+    <a class="gcard" data-open="tarif-detay">
+      <div class="im" style="background-image:url('assets/img/1424.webp')"><button class="sv"><i class="fr i-heart"></i></button><span class="tchip"><i class="fs i-clock"></i> 45 dk</span></div>
+      <div class="bd"><h4>Balık Çorbası — Ege Usulü</h4><div class="gsub"><span>4 kişilik</span><span class="pr"><b>₺</b><b>₺</b><span>₺</span></span></div>
+        <div class="gchef"><span class="av" style="background:var(--green-deep)">SA</span><b>Selin Aydın</b></div>
+        <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,8</span><span class="dif">Orta</span></div></div>
+    </a>
+    <a class="gcard" data-open="tarif-detay">
+      <div class="im" style="background-image:url('assets/img/1451.webp')"><button class="sv"><i class="fr i-heart"></i></button><span class="tchip"><i class="fs i-clock"></i> 50 dk</span><span class="vchip"><i class="fs i-play"></i></span></div>
+      <div class="bd"><h4>Kremalı Mantar Çorbası</h4><div class="gsub"><span>4 kişilik</span><span class="pr"><b>₺</b><b>₺</b><span>₺</span></span></div>
+        <div class="gchef"><span class="av" style="background:var(--purple)">ZU</span><b>Zeynep Usta</b></div>
+        <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,9</span><span class="dif">Kolay</span></div></div>
+    </a>
+  </div>
+
+  <div class="loadmore">
+    <button class="btn ghost block" data-toast="24 tarif daha yüklendi">Daha Fazla Göster <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><span class="eyebrow">Yakın kategoriler</span><h2>Bunlara da bak</h2></div>
+      <button class="see-all" data-open="kategoriler">Tümü <i class="fs i-chevron-right"></i></button></div>
+    <div class="rail">
+      <span class="chip" data-open="kategori">Meze 121</span><span class="chip" data-open="kategori">Bakliyat 113</span>
+      <span class="chip" data-open="kategori">Zeytinyağlılar 115</span><span class="chip" data-open="kategori">Salata 94</span>
+      <span class="chip" data-open="kategori">Sebze 215</span>
+    </div>
+  </div>
+  <div class="vpad"></div>
+</section>
+
+
+<!-- B7 · Tüm yorumlar — canlıda ayrı /yorumlar sayfası yok, tarif detayının
+     yorum sekmesinin tam listesi. Mobilde kendi ekranı oldu. -->
+<section class="view pushed" id="vReviews" data-route="yorumlar" data-parent="tarif-detay" data-bar="#barReview">
+  <header class="vbar">
+    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <h2>Yorumlar</h2>
+  </header>
+
+  <div class="rv-sum">
+    <div class="rv-big">
+      <b>4,9</b>
+      <span class="st"><i class="fs i-star"></i><i class="fs i-star"></i><i class="fs i-star"></i><i class="fs i-star"></i><i class="fs i-star"></i></span>
+      <span class="n">1.204 değerlendirme</span>
+    </div>
+    <div class="rv-bars">
+      <div class="rv-b"><span class="k">5<i class="fs i-star"></i></span><span class="tr"><i style="width:88%"></i></span><span class="v">1.058</span></div>
+      <div class="rv-b"><span class="k">4<i class="fs i-star"></i></span><span class="tr"><i style="width:9%"></i></span><span class="v">108</span></div>
+      <div class="rv-b"><span class="k">3<i class="fs i-star"></i></span><span class="tr"><i style="width:2%"></i></span><span class="v">24</span></div>
+      <div class="rv-b"><span class="k">2<i class="fs i-star"></i></span><span class="tr"><i style="width:1%"></i></span><span class="v">9</span></div>
+      <div class="rv-b"><span class="k">1<i class="fs i-star"></i></span><span class="tr"><i style="width:1%"></i></span><span class="v">5</span></div>
+    </div>
+  </div>
+
+  <div class="filterbar" style="top:98px;margin-top:16px">
+    <span class="chip on">Tümü 1.204</span><span class="chip">Fotoğraflı 214</span><span class="chip">Denedim 806</span>
+    <span class="chip">5 yıldız</span><span class="chip">4 yıldız</span><span class="chip">3 ve altı</span>
+  </div>
+
+  <div class="lmeta">
+    <span class="cnt"><b>1.204</b> yorum</span>
+    <button class="sortbtn" data-bsheet="rvSort">En Yeni <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
+  </div>
+
+  <article class="cm">
+    <div class="cm-top"><span class="av" style="background:var(--purple)">ZK</span>
+      <span class="txt"><b>Zehra Kaya</b><span>3 gün önce · Bu tarifi yaptı</span></span>
+      <span class="cm-rate"><i class="fs i-star"></i> 5.0</span></div>
+    <p>Hamuru 2 mm açma tüyosu gerçekten fark yaratıyor. Fırında 15 dakika sonra et suyu ekleme kısmı ilk defa denedim, mantı dağılmadı. Ailece bayıldık.</p>
+    <div class="ph"><span style="background-image:url('assets/img/1425.webp')"></span><span style="background-image:url('assets/img/1637.webp')"></span></div>
+    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 48</a><a data-toast="Yanıt alanı açıldı"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
+  </article>
+
+  <article class="cm">
+    <div class="cm-top"><span class="av" style="background:var(--petrol)">MD</span>
+      <span class="txt"><b>Murat Doğan</b><span>1 hafta önce · Bu tarifi yaptı</span></span>
+      <span class="cm-rate"><i class="fs i-star"></i> 4.5</span></div>
+    <p>Kareleri 3×3 yerine 2,5×2,5 kestim, daha zarif oldu. Tereyağını kızdırırken toz biberi ateşten alıp ekleyin, yoksa acılaşıyor.</p>
+    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 21</a><a data-toast="Yanıt alanı açıldı"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
+  </article>
+
+  <div class="cm-reply">
+    <div class="hd"><span class="av" style="background:var(--purple)">ZU</span><b>Zeynep Usta</b><span>Tarifin şefi</span></div>
+    <p>Doğru yakalamışsın Murat — toz biberi ocaktan aldıktan sonra eklemek şart. Kareleri küçültünce pişme süresi de 2–3 dakika kısalıyor, ona da dikkat.</p>
+  </div>
+
+  <article class="cm">
+    <div class="cm-top"><span class="av" style="background:var(--tomato)">EŞ</span>
+      <span class="txt"><b>Elif Şahin</b><span>2 hafta önce</span></span>
+      <span class="cm-rate"><i class="fs i-star"></i> 5.0</span></div>
+    <p>Pişirme modundaki zamanlayıcı sayesinde ilk denemede tutturdum. Malzeme çekmecesini açık tutmak da işi kolaylaştırdı.</p>
+    <div class="ph"><span style="background-image:url('assets/img/1424.webp')"></span></div>
+    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 33</a><a data-toast="Yanıt alanı açıldı"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
+  </article>
+
+  <article class="cm">
+    <div class="cm-top"><span class="av" style="background:var(--green-deep)">SA</span>
+      <span class="txt"><b>Selin Aydın</b><span>3 hafta önce · Bu tarifi yaptı</span></span>
+      <span class="cm-rate"><i class="fs i-star"></i> 4.0</span></div>
+    <p>Yoğurt sosunu biraz daha koyu tuttum, mantının üzerinde durdu. Et suyunu ev yapımı kullanınca tat bambaşka oluyor.</p>
+    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 12</a><a data-toast="Yanıt alanı açıldı"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
+  </article>
+
+  <div class="rv-cta">
+    <h4>Sen de bu tarifi yaptın mı?</h4>
+    <p>806 kişi denedim işaretledi. Senin notun bir sonraki denemeyi kolaylaştırır.</p>
+    <button class="btn" data-open="yorum-yaz"><i class="fs i-pen-to-square"></i> Deneyimini Yaz</button>
+  </div>
+
+  <article class="cm">
+    <div class="cm-top"><span class="av" style="background:var(--ink)">KD</span>
+      <span class="txt"><b>Kaan Demir</b><span>1 ay önce</span></span>
+      <span class="cm-rate"><i class="fs i-star"></i> 3.5</span></div>
+    <p>Hamuru biraz kalın açtığım için mantı diri kaldı. Tarifin suçu değil, benim acelem. İkinci denemede oldu.</p>
+    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 7</a><a data-toast="Yanıt alanı açıldı"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
+  </article>
+
+  <div class="loadmore"><button class="btn ghost block" data-toast="20 yorum daha yüklendi">Daha Fazla Yorum <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button></div>
+  <div class="vpad bar"></div>
+</section>
+
+
+<!-- B8 · Yorum yaz — modal -->
+<section class="view sheet" id="vReview" data-route="yorum-yaz" data-parent="tarif-detay" data-bar="#barReviewNew">
+  <header class="vbar">
+    <button class="ab-btn" data-close aria-label="Kapat"><i class="fs i-xmark"></i></button>
+    <h2>Yorum Yaz</h2>
+  </header>
+
+  <button class="lrow th-lead" style="border-top:1px solid var(--line)">
+    <span class="th" style="background-image:url('assets/img/1425.webp')"></span>
+    <span class="tx"><b>Fırında Tereyağlı Mantı</b><span>Zeynep Usta · 75 dk · Orta</span></span></button>
+
+  <div class="rw-why">
+    <div><span class="ic"><i class="fs i-star"></i></span><b>Puanın sayılır</b><span>4,9 ortalamayı sen belirliyorsun</span></div>
+    <div><span class="ic"><i class="fs i-camera"></i></span><b>Fotoğraf ekle</b><span>3 kat daha çok okunuyor</span></div>
+    <div><span class="ic"><i class="fs i-circle-check"></i></span><b>Moderasyon</b><span>Yayına 1 gün içinde girer</span></div>
+  </div>
+
+  <div class="form">
+    <div class="ff">
+      <span class="lb">Puanın</span>
+      <div class="rate-pick" id="rwStars">
+        <button data-rw="1"><i class="fs i-star"></i></button><button data-rw="2"><i class="fs i-star"></i></button>
+        <button data-rw="3"><i class="fs i-star"></i></button><button data-rw="4"><i class="fs i-star"></i></button>
+        <button data-rw="5"><i class="fs i-star"></i></button>
+      </div>
+      <div class="rate-lb" id="rwLbl">Yıldızlara dokun<span>Puanın olmadan yorum gönderilemez</span></div>
+    </div>
+
+    <div class="ff">
+      <span class="lb">Neyi beğendin? <i>birden çok seçebilirsin</i></span>
+      <div class="fopts" data-chips>
+        <button class="fopt">Lezzet</button><button class="fopt">Anlatım netliği</button><button class="fopt">Kolaylık</button>
+        <button class="fopt">Süre tutarlılığı</button><button class="fopt">Malzeme bulunabilirliği</button><button class="fopt">Görsel sunum</button>
+      </div>
+    </div>
+
+    <div class="ff">
+      <span class="lb">Deneyimin <span class="cnt"><b id="rwN">0</b>/600</span></span>
+      <textarea class="fta" id="rwTxt" rows="5" placeholder="Nasıl gitti? Neyi değiştirdin, bir sonraki sefere ne yaparsın? Somut ayrıntı başkasının işine yarar."></textarea>
+      <p class="hint">Yorumlar yayına alınmadan önce moderasyon ekibinden geçer.</p>
+    </div>
+
+    <div class="ff">
+      <span class="lb">Fotoğraf ekle <i>en fazla 4</i></span>
+      <div class="ph-grid">
+        <span class="ph-t" style="background-image:url('assets/img/1425.webp')"><button class="rm" data-toast="Fotoğraf kaldırıldı"><i class="fs i-xmark"></i></button></span>
+        <button class="ph-add" data-toast="Galeri açılıyor"><i class="fs i-images"></i><span>GALERİ</span></button>
+        <button class="ph-add" data-toast="Kamera açılıyor"><i class="fs i-camera"></i><span>ÇEK</span></button>
+        <span class="ph-add" style="border-style:solid;border-color:var(--line);color:#D6D1C9"><i class="fs i-plus"></i></span>
+      </div>
+    </div>
+
+    <div class="ff">
+      <div class="lrow" style="border:1px solid var(--line);border-radius:var(--r-md);padding:12px">
+        <span class="tx"><b>Denedim olarak işaretle</b><span>Profilinde birikir, topluluk puanına yazılır</span></span>
+        <button class="sw on" aria-label="Aç/kapat"></button></div>
+    </div>
+  </div>
+  <div class="vpad bar"></div>
+</section>
+
+
+<!-- B9 · Tarif Ekle — 5 adımlı sihirbaz. Canlı /tarif-ekle giriş ister;
+     alan adları oradan alındı. -->
+<section class="view sheet" id="vAddRec" data-route="tarif-ekle" data-parent="tarifler" data-bar="#barAdd">
+  <header class="vbar">
+    <button class="ab-btn" data-close aria-label="Kapat"><i class="fs i-xmark"></i></button>
+    <h2>Tarif Ekle</h2>
+    <button class="ab-btn" data-toast="Taslak kaydedildi"><i class="fs i-bookmark"></i></button>
+  </header>
+
+  <div class="wz-steps" id="raSteps" style="padding:16px 16px 0;margin-bottom:20px">
+    <button class="wz-s on" data-ras="1"><span class="n">1</span><span class="t"><b>Temel Bilgi</b></span></button>
+    <button class="wz-s" data-ras="2"><span class="n">2</span><span class="t"><b>Malzemeler</b></span></button>
+    <button class="wz-s" data-ras="3"><span class="n">3</span><span class="t"><b>Adımlar</b></span></button>
+    <button class="wz-s" data-ras="4"><span class="n">4</span><span class="t"><b>Görsel</b></span></button>
+    <button class="wz-s" data-ras="5"><span class="n">5</span><span class="t"><b>Önizleme</b></span></button>
+  </div>
+
+  <div class="ra-step on" data-rastep="1">
+    <div class="ra-lead"><h3>Tarifin künyesi</h3><p>Adı ve kategorisi doğru olsun — arama sonuçlarında bunlarla bulunuyorsun.</p></div>
+    <div class="form">
+      <div class="ff"><span class="lb">Tarif adı *</span>
+        <input class="fin" type="text" placeholder="ör. Fırında Tereyağlı Mantı" /></div>
+      <div class="ff"><span class="lb">Kısa açıklama <span class="cnt">0/180</span></span>
+        <textarea class="fta" rows="3" placeholder="Bu tarifi özel yapan ne? Tek cümlede anlat."></textarea></div>
+      <div class="ff"><span class="lb">Kategori *</span>
+        <div class="fopts" data-chips="single">
+          <button class="fopt">Çorba</button><button class="fopt on">Hamur İşi</button><button class="fopt">Sebze</button>
+          <button class="fopt">Kırmızı Et</button><button class="fopt">Tatlı</button><button class="fopt">Salata</button>
+          <button class="fopt">Pilav</button><button class="fopt">Meze</button></div>
+        <p class="hint">33 kategoriden birini seç — listede yoksa en yakınını seç, editör düzeltir.</p></div>
+      <div class="ff"><span class="lb">Mutfak</span>
+        <div class="fopts" data-chips="single">
+          <button class="fopt on">Türk</button><button class="fopt">İtalyan</button><button class="fopt">Fransız</button>
+          <button class="fopt">Akdeniz</button><button class="fopt">Uzak Doğu</button></div></div>
+      <div class="ff"><span class="lb">Öğün</span>
+        <div class="fopts" data-chips>
+          <button class="fopt">Kahvaltı</button><button class="fopt">Brunch</button><button class="fopt">Öğle Yemeği</button>
+          <button class="fopt on">Akşam Yemeği</button><button class="fopt">Ara Öğün</button><button class="fopt">İkindi ve Çay Saati</button></div></div>
+      <div class="ff"><span class="lb">Süre *</span>
+        <div class="fopts" data-chips="single">
+          <button class="fopt">15 dk altı</button><button class="fopt">15–30 dk</button><button class="fopt">30–60 dk</button>
+          <button class="fopt on">1–2 saat</button><button class="fopt">2 saatten uzun</button></div></div>
+      <div class="ff"><span class="lb">Zorluk *</span>
+        <div class="fopts" data-chips="single">
+          <button class="fopt">Çok Kolay</button><button class="fopt">Kolay</button><button class="fopt on">Orta</button>
+          <button class="fopt">Zor</button><button class="fopt">Ustalık Gerektirir</button></div></div>
+      <div class="ff"><span class="lb">Porsiyon</span>
+        <div class="row">
+          <div class="portion" style="flex:none"><button id="raMinus">−</button><b id="raP">4</b><button id="raPlus">+</button></div>
+          <span class="hint" style="margin-top:0;align-self:center">kişilik · malzeme miktarları buna göre ölçeklenir</span></div></div>
+      <div class="ff"><span class="lb">Maliyet</span>
+        <div class="fopts" data-chips="single">
+          <button class="fopt on">₺ Ekonomik</button><button class="fopt">₺₺ Orta</button><button class="fopt">₺₺₺ Şölen</button></div></div>
+    </div>
+    <div class="vpad bar"></div>
+  </div>
+
+  <div class="ra-step" data-rastep="2">
+    <div class="ra-lead"><h3>Malzemeler</h3><p>Grup başlığı kullan — “Hamur için”, “İç harç için”. Okuyan mutfakta şaşırmaz.</p></div>
+    <div class="form">
+      <div class="ff"><span class="lb">Grup adı</span>
+        <input class="fin" type="text" value="Hamur için" /></div>
+      <div class="ff"><span class="lb">Malzemeler</span>
+        <div class="ig-row"><input class="fin qt" type="text" value="3" /><input class="fin un" type="text" value="su bardağı" /><input class="fin nm" type="text" value="Un" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
+        <div class="ig-row"><input class="fin qt" type="text" value="1" /><input class="fin un" type="text" value="adet" /><input class="fin nm" type="text" value="Yumurta" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
+        <div class="ig-row"><input class="fin qt" type="text" value="1" /><input class="fin un" type="text" value="çay kaşığı" /><input class="fin nm" type="text" value="Tuz" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
+        <button class="add-row" data-toast="Yeni malzeme satırı eklendi"><i class="fs i-plus"></i> Malzeme ekle</button></div>
+      <div class="ff"><span class="lb">İkinci grup</span>
+        <input class="fin" type="text" value="İç harç için" />
+        <div class="ig-row"><input class="fin qt" type="text" value="250" /><input class="fin un" type="text" value="g" /><input class="fin nm" type="text" value="Kıyma" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
+        <div class="ig-row"><input class="fin qt" type="text" value="1" /><input class="fin un" type="text" value="adet" /><input class="fin nm" type="text" value="Soğan" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
+        <button class="add-row" data-toast="Yeni malzeme satırı eklendi"><i class="fs i-plus"></i> Malzeme ekle</button></div>
+      <div class="ff"><button class="add-row" data-toast="Yeni grup eklendi" style="border-color:rgba(225,72,39,.34)"><i class="fs i-layer-group"></i> Yeni malzeme grubu</button></div>
+    </div>
+    <div class="vpad bar"></div>
+  </div>
+
+  <div class="ra-step" data-rastep="3">
+    <div class="ra-lead"><h3>Yapılışı</h3><p>Her adım tek iş anlatsın. Pişirme modu bu adımları tam ekran gösterecek.</p></div>
+    <div class="form">
+      <div class="st-card">
+        <div class="hd"><span class="n">1</span><b>Hamuru yoğur ve dinlendir</b><button class="rm" data-toast="Adım silindi"><i class="fs i-trash"></i></button></div>
+        <textarea class="fta" rows="4">Unu geniş bir kaba ele, ortasını havuz gibi aç. Yumurta, tuz ve suyu ekleyip kulak memesi yumuşaklığında bir hamur yoğur. Üzerini nemli bezle örtüp 10 dakika dinlendir.</textarea>
+        <div class="tools"><button data-toast="Adım görseli eklendi"><i class="fs i-camera"></i> Görsel</button><button data-toast="Zamanlayıcı 15 dk olarak ayarlandı"><i class="fs i-clock"></i> 15 dk</button></div>
+      </div>
+      <div class="st-card">
+        <div class="hd"><span class="n">2</span><b>İç harcı hazırla</b><button class="rm" data-toast="Adım silindi"><i class="fs i-trash"></i></button></div>
+        <textarea class="fta" rows="3">Kıymayı rendelenmiş soğan, tuz ve karabiberle karıştır. Harcı çok yoğurma; gevşek harç pişerken daha sulu kalır.</textarea>
+        <div class="tools"><button data-toast="Adım görseli eklendi"><i class="fs i-camera"></i> Görsel</button><button data-toast="Zamanlayıcı 5 dk olarak ayarlandı"><i class="fs i-clock"></i> 5 dk</button></div>
+      </div>
+      <div class="st-card">
+        <div class="hd"><span class="n">3</span><b>Hamuru aç, kareler kes</b><button class="rm" data-toast="Adım silindi"><i class="fs i-trash"></i></button></div>
+        <textarea class="fta" rows="3" placeholder="Bu adımda ne yapılıyor?">Hamuru ikiye böl, unlanmış tezgâhta 2 mm incelikte aç. 3×3 cm kareler kes, üzerini bezle ört.</textarea>
+        <div class="tools"><button data-toast="Adım görseli eklendi"><i class="fs i-camera"></i> Görsel</button><button data-toast="Zamanlayıcı eklendi"><i class="fs i-clock"></i> Süre</button></div>
+      </div>
+      <button class="add-row" data-toast="4. adım eklendi"><i class="fs i-plus"></i> Adım ekle</button>
+      <div class="ff"><span class="lb">Şefin notu</span>
+        <textarea class="fta" rows="3" placeholder="Tarifin püf noktası, saklama koşulu ya da servis önerisi."></textarea></div>
+    </div>
+    <div class="vpad bar"></div>
+  </div>
+
+  <div class="ra-step" data-rastep="4">
+    <div class="ra-lead"><h3>Görsel &amp; video</h3><p>Kapak görseli aramada ilk görünen şey. Yatay çek, tabağı ortala.</p></div>
+    <div style="height:16px"></div>
+    <div class="cover-drop has" style="background-image:url('assets/img/1425.webp')">
+      <span class="ic"><i class="fs i-images"></i></span><b>Kapak görseli</b>
+      <span>Dokun, galeriden seç ya da fotoğraf çek</span></div>
+    <div class="form">
+      <div class="ff"><span class="lb">Galeri <i>en fazla 8</i></span>
+        <div class="ph-grid">
+          <span class="ph-t" style="background-image:url('assets/img/1637.webp')"><button class="rm" data-toast="Görsel kaldırıldı"><i class="fs i-xmark"></i></button></span>
+          <span class="ph-t" style="background-image:url('assets/img/1749.webp')"><button class="rm" data-toast="Görsel kaldırıldı"><i class="fs i-xmark"></i></button></span>
+          <button class="ph-add" data-toast="Galeri açılıyor"><i class="fs i-images"></i><span>GALERİ</span></button>
+          <button class="ph-add" data-toast="Kamera açılıyor"><i class="fs i-camera"></i><span>ÇEK</span></button></div></div>
+      <div class="ff"><span class="lb">Video bağlantısı</span>
+        <label class="fin-ic"><i class="fs i-video"></i><input class="fin" type="text" placeholder="YouTube ya da Vimeo bağlantısı" /></label>
+        <p class="hint">Video eklersen tarif kartında oynat rozeti çıkar, Video Mutfağı seçkisine girme şansın olur.</p></div>
+      <div class="ff"><span class="lb">Görsel ipuçları</span>
+        <div class="chklist" style="margin:0">
+          <div class="chkrow"><span class="ic"><i class="fs i-check"></i></span><b>Gün ışığında çek</b><span>tavsiye</span></div>
+          <div class="chkrow"><span class="ic"><i class="fs i-check"></i></span><b>Tabağı kadrajın ortasına al</b><span>tavsiye</span></div>
+          <div class="chkrow"><span class="ic"><i class="fs i-check"></i></span><b>En az 1200×900 piksel</b><span>zorunlu</span></div>
+        </div></div>
+    </div>
+    <div class="vpad bar"></div>
+  </div>
+
+  <div class="ra-step" data-rastep="5">
+    <div class="ra-lead"><h3>Önizleme</h3><p>Tarif kartın listede böyle görünecek. Eksik varsa aşağıda kırmızı işaretli.</p></div>
+    <div class="ggrid" style="grid-template-columns:1fr;padding-top:16px">
+      <a class="gcard">
+        <div class="im" style="background-image:url('assets/img/1425.webp');height:168px">
+          <span class="rib new">Yeni</span><span class="tchip"><i class="fs i-clock"></i> 75 dk</span></div>
+        <div class="bd"><h4>Fırında Tereyağlı Mantı — Klasik Tarif</h4>
+          <div class="gsub"><span>4 kişilik</span><span class="pr"><b>₺</b><span>₺</span><span>₺</span></span></div>
+          <div class="gchef"><span class="av" style="background:var(--tomato)">E</span><b>Elif Şahin</b></div>
+          <div class="gstat"><span class="rate"><i class="fs i-star"></i> —</span><span class="dif">Orta</span></div></div>
+      </a>
+    </div>
+    <div class="kit-lab">Yayına hazır mı?</div>
+    <div class="chklist">
+      <div class="chkrow"><span class="ic"><i class="fs i-check"></i></span><b>Tarif adı ve kategori</b><span>tamam</span></div>
+      <div class="chkrow"><span class="ic"><i class="fs i-check"></i></span><b>5 malzeme, 2 grup</b><span>tamam</span></div>
+      <div class="chkrow"><span class="ic"><i class="fs i-check"></i></span><b>3 adım yazıldı</b><span>tamam</span></div>
+      <div class="chkrow"><span class="ic"><i class="fs i-check"></i></span><b>Kapak görseli</b><span>tamam</span></div>
+      <div class="chkrow miss"><span class="ic"><i class="fs i-xmark"></i></span><b>Şefin notu boş</b><span>isteğe bağlı</span></div>
+    </div>
+    <div class="form">
+      <div class="ff">
+        <button class="chk on" data-chk><span class="bx"><i class="fs i-check"></i></span>
+          <span class="tx"><b>Tarifin bana ait.</b> Görseller ve metin özgün; başka bir siteden kopyalanmadı.</span></button>
+      </div>
+      <div class="ff">
+        <p class="hint" style="margin-top:0">Gönderdikten sonra tarif editör kuyruğuna düşer. Yayına alınınca bildirim gelir — genelde 1 iş günü.</p>
+      </div>
+    </div>
+    <div class="vpad bar"></div>
+  </div>
+</section>
 
 <section class="view pushed" id="vKit" data-route="kit" data-parent="ana-sayfa">
   <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>Komponentler</h2></header>
@@ -1726,6 +2332,19 @@
   </div>
 </div>
 
+<div class="bsheet" id="rvSort">
+  <div class="bs-grab"></div>
+  <div class="bs-head"><b>Yorumları sırala</b>
+    <button class="ab-btn" data-bsheet-close aria-label="Kapat"><i class="fs i-xmark"></i></button></div>
+  <div class="bs-body">
+    <div class="fgrp"><div class="fopts" data-single="1">
+      <button class="fopt on">En Yeni</button><button class="fopt">En Faydalı</button>
+      <button class="fopt">En Yüksek Puan</button><button class="fopt">En Düşük Puan</button>
+      <button class="fopt">Fotoğraflı Önce</button></div></div>
+  </div>
+  <div class="bs-foot"><button class="btn" data-bsheet-close>Uygula</button></div>
+</div>
+
 <div class="bsheet" id="traySheet">
   <div class="bs-grab"></div>
   <div class="bs-head"><b>Menü Tepsisi</b>
@@ -1816,6 +2435,17 @@
       <button class="tray-b" id="trayOpen"><i class="fs i-bowl-food"></i>
         <span>Menü Tepsisi — <b id="trayN">0</b> tarif tepside</span>
         <i class="fs i-chevron-right" style="transform:rotate(-90deg)"></i></button>
+    </div>
+    <div class="actionbar scrbar" id="barReview">
+      <button class="btn" data-open="yorum-yaz"><i class="fs i-pen-to-square"></i> Yorum Yaz</button>
+    </div>
+    <div class="actionbar scrbar" id="barReviewNew">
+      <button class="icobtn" data-toast="Taslak kaydedildi" aria-label="Taslak"><i class="fs i-bookmark"></i></button>
+      <button class="btn" id="rwSend">Yorumu Gönder</button>
+    </div>
+    <div class="wz-foot scrbar" id="barAdd">
+      <button class="nb prev off" id="raPrev"><i class="fs i-chevron-left"></i> Geri</button>
+      <button class="nb next" id="raNext">Devam <i class="fs i-chevron-right"></i></button>
     </div>
     <div class="fr-foot scrbar" id="barFridge">
       <span class="fr-fn"><b id="frFn">0</b> tarif bulundu</span>
