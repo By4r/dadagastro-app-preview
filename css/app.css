@@ -490,11 +490,7 @@ table.t tr:last-child td{border-bottom:0}
 .rd-tags{padding:14px var(--gutter) 0}
 
 /* sekmeler */
-.rdtabs{position:sticky;top:98px;z-index:40;display:grid;grid-template-columns:repeat(3,1fr);
-  background:var(--bg);border-bottom:1px solid var(--line);margin-top:20px}
-.rdtab{padding:14px 4px 12px;text-align:center;font-family:"GilroyXB";font-size:13px;color:var(--muted);position:relative}
-.rdtab.on{color:var(--tomato)}
-.rdtab.on::after{content:"";position:absolute;left:22%;right:22%;bottom:-1px;height:2px;background:var(--tomato);border-radius:2px}
+.rdtabs{position:sticky;top:98px;z-index:40;margin-top:20px}
 .pane{display:none;padding-top:20px}
 .pane.on{display:block}
 
@@ -1208,12 +1204,17 @@ table.t tr:last-child td{border-bottom:0}
    FAZ 1 — canlı siteden gelen bölümler
    ============================================================ */
 
-/* --- segmented control: bölüm içi sekme (Mutfak Sırları, Dolapta, Ölçü…) --- */
-.segs{display:inline-flex;margin:0 var(--gutter) 16px;padding:3px;background:var(--paper);
-  border:1px solid var(--line);border-radius:var(--r-md)}
-.seg{padding:9px 15px;border:0;background:none;border-radius:var(--r-sm);white-space:nowrap;
-  font-family:"Gilroy";font-weight:500;font-size:12.5px;color:var(--ink-2)}
-.seg.on{background:var(--tomato-tint);color:var(--tomato);font-family:"GilroyXB"}
+/* --- SEGMENTED CONTROL — uygulamada TEK tip ---
+   Tam genişlik (gutter'dan gutter'a), sekmeler eşit paylaşır (1fr),
+   aktif olan domates metin + 2px domates alt çizgi.
+   Tarif detayındaki .rdtabs de aynı kurallara bağlı — iki farklı görüntü yok. */
+.segs,.rdtabs{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:100%;
+  margin:0 0 16px;padding:0;background:var(--bg);border:0;border-bottom:1px solid var(--line)}
+.seg,.rdtab{padding:14px 6px 12px;text-align:center;background:none;border:0;position:relative;
+  font-family:"GilroyXB";font-size:13px;color:var(--muted);-webkit-tap-highlight-color:transparent}
+.seg.on,.rdtab.on{color:var(--tomato)}
+.seg.on::after,.rdtab.on::after{content:"";position:absolute;left:22%;right:22%;bottom:-1px;
+  height:2px;background:var(--tomato);border-radius:2px}
 
 /* --- hızlı erişim ızgarası --- */
 .qa{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:0 var(--gutter)}
@@ -1304,10 +1305,12 @@ table.t tr:last-child td{border-bottom:0}
    ============================================================ */
 
 /* --- çok segmentli şerit (5 sekme sığmıyor → kaydırılır) --- */
-.segs-scroll{display:flex;overflow-x:auto;max-width:calc(100% - var(--gutter)*2);
-  scroll-padding-left:3px}
+/* 5 sekme 390px'e eşit paylaşımla sığmıyor (70px'e "Hassasiyetim Var" girmiyor),
+   kapsayıcı yine tam genişlik ama sekmeler kaydırılıyor. */
+.segs-scroll{display:flex;overflow-x:auto;width:100%;scroll-padding-left:var(--gutter);
+  padding-left:var(--gutter);padding-right:var(--gutter)}
 .segs-scroll::-webkit-scrollbar{height:0}
-.segs-scroll .seg{flex:none}
+.segs-scroll .seg{flex:none;padding-left:14px;padding-right:14px}
 .sg-n{margin-left:6px;font-family:"GilroyXB";font-size:9.5px;color:var(--tomato);
   background:var(--tomato-tint);padding:2px 5px;border-radius:var(--r-sm)}
 .seg.on .sg-n{background:rgba(225,72,39,.16)}
@@ -1478,8 +1481,12 @@ table.t tr:last-child td{border-bottom:0}
 .catchips{padding-bottom:2px;scroll-padding-left:var(--gutter)}
 .catchips .fopts{display:flex;flex-wrap:nowrap;gap:7px}
 /* kategori çipi ana sayfadaki kategori kartlarıyla tutarlı olsun diye ikonlu */
-.catchips .fopt{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;padding:8px 12px}
-.catchips .fopt i{font-size:12px;color:var(--muted)}
+/* Çip: pasif de zeminli + kenarlıklı olacak. İkon metinle aynı satırda,
+   6px boşlukla; sarmalanmayı engellemek için satır kırılmıyor. */
+.catchips .fopt{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  padding:9px 13px;background:var(--paper);border:1px solid var(--line);color:var(--ink-2)}
+.catchips .fopt i{flex:none;font-size:12px;line-height:1;color:var(--muted)}
+.catchips .fopt.on{background:var(--tomato-tint);border-color:rgba(225,72,39,.32);color:var(--tomato)}
 .catchips .fopt.on i{color:var(--tomato)}
 
 /* --- Faz 2 ek glifleri --- */
@@ -1561,10 +1568,11 @@ table.t tr:last-child td{border-bottom:0}
    Tam genişlik tint bandı — beyaz kart / açık zemin / koyu panel dizisini tamamlar. */
 .sec.tint{background:var(--tomato-tint);padding:24px 0;margin-top:30px}
 .sec.tint .mod,.sec.tint .tip{border-color:rgba(225,72,39,.14)}
-.sec.tint .segs{background:rgba(255,255,255,.72);border-color:rgba(225,72,39,.18)}
-.sec.tint .seg.on{background:var(--paper)}
+.sec.tint .segs{background:transparent;border-bottom-color:rgba(225,72,39,.20)}
 /* hesap ekranı: ölçek dışı 14/18px boşluklar */
 .plevel{margin-top:16px!important}
 .pstats{margin-top:20px!important}
 /* hesap: "Yeni Tarif Paylaş" sarmalayıcısı — .ig-group (malzeme grubu) adıyla çakışıyordu */
 .pshare{margin:16px var(--gutter) 0}
+/* .rdtabs üst boşluğu paylaşılan .segs kuralından sonra gelmeli */
+.rdtabs{margin-top:20px}
