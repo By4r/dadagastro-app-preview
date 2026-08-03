@@ -198,8 +198,10 @@
 
   function navigate(route, fromHash) {
     var v = route && viewOf(route);
-    if (!v) { goRoot(DEFAULT_ROOT, fromHash); return; }
     closeLayers();
+    /* bilinmeyen ya da kaldırılmış rota (eski #/saglik linki gibi):
+       yığını da temizle, yoksa üstte takılı ekran kalıyor */
+    if (!v) { popAll(true); goRoot(DEFAULT_ROOT, true); after(fromHash); return; }
     if (topEl() === v) return;
 
     var i = stack.indexOf(v.id);
@@ -405,7 +407,11 @@
       return;
     }
 
-    /* --- son çare: bilgilendirme toast'ı --- */
+    /* --- gerçek geri bildirim: işlem oldu, ekran gerekmiyor --- */
+    if ((n = t.closest('[data-toast]'))) { e.preventDefault(); say(n.dataset.toast); return; }
+
+    /* --- BORÇ: bu butonun ekranı henüz yok.
+           data-say sayısı = kalan iş. Hedef 0. Geri bildirim için data-toast kullan. --- */
     if ((n = t.closest('[data-say]'))) { e.preventDefault(); say(n.dataset.say); }
   });
 
@@ -539,8 +545,16 @@
   /* ================= FİLTRE ÇEKMECESİ ================= */
   function fltTally() {
     if (!el('fltCount')) return { n: 0, res: 248 };
-    var n = all('#fltSheet .fgrp:not(:first-child) .fopt.on').length;
-    var res = Math.max(12, 248 - n * 38);
+    var secili = all('#fltSheet .fgrp:not(:first-child) .fopt.on');
+    var n = secili.length;
+    /* Çipin üzerindeki sayı o filtrenin tarif adedi. Sonuç en dar filtreyi aşamaz;
+       her ek filtre kalanı bir miktar daraltır. Etiketle çelişen sayı gösterme. */
+    var sayilar = secili.map(function (o) {
+      var m = /(\d+)\s*$/.exec(o.textContent.trim());
+      return m ? parseInt(m[1], 10) : null;
+    }).filter(function (x) { return x; });
+    var taban = sayilar.length ? Math.min.apply(null, sayilar) : 2057;
+    var res = n ? Math.max(8, Math.round(taban * Math.pow(0.86, n - 1))) : 2057;
     el('fltCount').textContent = n;
     el('fltCount').style.display = n ? 'grid' : 'none';
     el('fltApplyTx').textContent = res + ' Tarifi Göster';

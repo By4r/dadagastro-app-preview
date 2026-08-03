@@ -236,15 +236,26 @@ Ana sayfadaki 6 modül (canlıdan): 01 Mutfak Düzeni ve Çalışma Alanı (3 b�
 
 ## Kabul kriteri
 
-Uygulamada gezerken **hiçbir dokunuş boşa gitmemeli**. Bir buton hâlâ toast gösteriyorsa,
-o ekran yapılmamış demektir. Bitirmeden önce şu testi çalıştır:
+Uygulamada gezerken **hiçbir dokunuş boşa gitmemeli**.
+
+İki öznitelik var, karıştırma:
+
+| Öznitelik | Anlamı | Hedef |
+|---|---|---|
+| `data-say` | **Borç.** Bu butonun ekranı henüz yok. | **0** |
+| `data-toast` | Gerçek geri bildirim — işlem oldu, ekran gerekmiyor ("Bağlantı kopyalandı"). | serbest |
+
+İkisi de toast gösterir; ayrım yalnız kabul testi içindir. Yeni ekran yaparken
+o ekranın `data-say`'ini sil ve butonu `data-open` ile bağla.
 
 ```js
-// konsola yapıştır — hâlâ ekrana bağlanmamış butonları listeler
+// konsola yapıştır — kalan borç
 [...document.querySelectorAll('[data-say]')].map(e => e.dataset.say)
 ```
 
-Bu liste **boş** olmalı (ya da yalnız gerçekten bilgilendirme amaçlı olanlar kalmalı).
+Bu liste **boş** olmalı.
+
+**Borç sayacı:** Faz 0 sonu 107 → ayrım sonrası **97**
 
 İkinci test — kaldırılan modüllerden hiçbir iz kalmamalı:
 

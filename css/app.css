@@ -277,7 +277,7 @@ img{display:block;max-width:100%}
 .hc-meta i{font-size:10px;color:rgba(255,255,255,.72)}
 .hc-meta .rate i{color:var(--yellow)}
 .save{
-  position:absolute;top:12px;right:12px;z-index:3;width:36px;height:36px;border-radius:var(--r-circle);
+  position:absolute;top:12px;right:12px;z-index:3;width:36px;height:36px;border-radius:var(--r-md);
   background:#FFFFFF;display:grid;place-items:center;
   color:var(--ink);font-size:14px;box-shadow:0 2px 10px rgba(0,0,0,.16);
 }
@@ -322,31 +322,12 @@ img{display:block;max-width:100%}
 .btn.block{display:flex;width:100%}
 .btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:var(--sh-sm)}
 .btn.dark{background:var(--ink);box-shadow:0 6px 18px rgba(33,30,22,.22)}
-.btn.green{background:var(--green);box-shadow:0 6px 18px rgba(59,183,126,.26)}
 .fridge .btn{margin-top:15px}
 
-/* --- sağlık --- */
-.hgrid{padding:0 var(--gutter);display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.htile{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:13px;display:flex;gap:10px;align-items:center}
-.htile .ic{width:34px;height:34px;border-radius:var(--r-md);display:grid;place-items:center;background:rgba(59,183,126,.12);color:var(--green-deep);font-size:14px;flex:none}
-.htile b{display:block;font-family:"GilroyXB";font-size:12.5px;color:var(--ink);line-height:1.25}
-.htile .sub{display:block;font-family:"GilroyLt";font-size:10.5px;color:var(--muted);margin-top:2px}
-.dyt{
-  margin:11px var(--gutter) 0;background:var(--ink);border-radius:var(--r-xl);padding:16px;color:#F2ECE2;
-}
-.dyt .eyebrow{color:var(--green)}
-.dyt .eyebrow::before{background:var(--green)}
-.dyt h3{font-size:17px;color:#FFF8EE;line-height:1.25}
-.dyt p{font-family:"GilroyLt";font-size:12px;color:#B3ABA0;margin-top:6px;line-height:1.5}
-.dyt-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid rgba(251,248,243,.12)}
-.dyt-row:last-of-type{border-bottom:0}
+/* --- kişi avatarı (Sağlık modülü kaldırıldı, avatar kuralları kaldı) --- */
 .av{width:36px;height:36px;border-radius:var(--r-circle);display:grid;place-items:center;font-family:"GilroyXB";font-size:12.5px;color:#FFF;flex:none}
-.dyt-row .av,.chef .av,.vmeta .av,.htile .ic{display:grid;place-items:center}
-.dyt-row b{display:block;font-family:"GilroyXB";font-size:13px;color:#FFF8EE}
-.dyt-row .sub{display:block;font-family:"GilroyLt";font-size:10.5px;color:#9E968B;margin-top:2px}
-.dyt-row .txt{flex:1;min-width:0}
-.dyt-row .r{margin-left:auto;font-family:"GilroyXB";font-size:12px;color:var(--yellow);display:inline-flex;align-items:center;gap:4px}
-.dyt .btn{margin-top:13px}
+/* kapsayıcı `span{display:block}` kuralları avatarın grid'ini ezmesin — açıkça sabitle */
+.chef .av,.vmeta .av{display:grid;place-items:center}
 
 /* --- video --- */
 .vcard{width:236px}
@@ -359,19 +340,6 @@ img{display:block;max-width:100%}
 .vmeta .av{width:22px;height:22px;font-size:9px}
 .vmeta b{font-family:"Gilroy";font-weight:500;font-size:11.5px;color:var(--ink-2)}
 .vmeta .views{margin-left:auto;font-family:"GilroyLt";font-size:11px;color:var(--muted);display:inline-flex;gap:4px;align-items:center}
-
-/* --- pro planlama bandı --- */
-.pro{
-  margin:0 var(--gutter);border-radius:var(--r-xl);padding:18px 16px;color:#F2ECE2;
-  background:linear-gradient(135deg,#2B2620,#17140F);position:relative;overflow:hidden;
-}
-.pro::after{content:"";position:absolute;right:-40px;top:-40px;width:170px;height:170px;border-radius:var(--r-circle);background:radial-gradient(circle,rgba(225,72,39,.30),transparent 68%)}
-.pro-tag{display:inline-flex;align-items:center;gap:5px;background:var(--yellow);color:#3A2C08;font-family:"GilroyXB";font-size:10px;padding:4px 8px;border-radius:6px;letter-spacing:.04em}
-.pro h3{font-size:18px;color:#FFF8EE;line-height:1.22;margin-top:11px;position:relative;z-index:2}
-.pro p{font-family:"GilroyLt";font-size:12px;color:#AEA69B;margin-top:7px;line-height:1.5;position:relative;z-index:2}
-.meals{display:flex;gap:6px;margin-top:13px;position:relative;z-index:2;flex-wrap:wrap}
-.meal{font-size:11px;font-family:"GilroyXB";padding:6px 10px;border-radius:var(--r-sm);background:rgba(251,248,243,.10);border:1px solid rgba(251,248,243,.14);color:#E7DFD3}
-.pro .btn{margin-top:15px;position:relative;z-index:2}
 
 /* --- şefler --- */
 .chef{width:132px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 11px;text-align:center}
@@ -429,7 +397,7 @@ img{display:block;max-width:100%}
 .toast{
   position:absolute;left:50%;bottom:calc(var(--tabbar-h) + var(--safe-bottom) + 14px);
   transform:translate(-50%,14px);z-index:70;background:rgba(33,30,22,.94);color:#FFF6EA;
-  font-size:12px;font-family:"Gilroy";padding:11px 15px;border-radius:var(--r-md);
+  font-size:12px;font-family:"Gilroy";padding:11px 15px;border-radius:var(--r-sm);
   box-shadow:0 10px 30px rgba(0,0,0,.34);opacity:0;pointer-events:none;transition:.28s var(--ease);
   max-width:300px;text-align:center;line-height:1.45;
 }
@@ -638,7 +606,7 @@ table.t tr:last-child td{border-bottom:0}
 
 /* .save (ana sayfadan gelen mutlak konumlu kaydet butonu) — detayda akış içinde */
 .appbar .save,.actionbar .save{position:static;top:auto;right:auto;border-radius:var(--r-md)}
-.appbar .save{width:36px;height:36px;border-radius:var(--r-circle);background:var(--paper);box-shadow:var(--sh-sm);color:var(--ink)}
+.appbar .save{width:36px;height:36px;border-radius:var(--r-md);background:var(--paper);box-shadow:var(--sh-sm);color:var(--ink)}
 .appbar .save.on{background:var(--tomato);color:#FFF}
 .screen.hero-mode .appbar .save{background:rgba(255,255,255,.16);box-shadow:none;color:#FFF}
 .screen.hero-mode .appbar .save.on{background:var(--tomato)}
@@ -1213,6 +1181,73 @@ table.t tr:last-child td{border-bottom:0}
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .shr-link .cp{flex:none;font-family:"GilroyXB";font-size:12px;color:var(--tomato);background:none;border:0}
 
+/* ============================================================
+   FAZ 1 — canlı siteden gelen bölümler
+   ============================================================ */
+
+/* --- segmented control: bölüm içi sekme (Mutfak Sırları, Dolapta, Ölçü…) --- */
+.segs{display:inline-flex;margin:0 var(--gutter) 14px;padding:3px;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-md)}
+.seg{padding:9px 15px;border:0;background:none;border-radius:var(--r-sm);white-space:nowrap;
+  font-family:"Gilroy";font-weight:500;font-size:12.5px;color:var(--ink-2)}
+.seg.on{background:var(--tomato-tint);color:var(--tomato);font-family:"GilroyXB"}
+
+/* --- hızlı erişim ızgarası --- */
+.qa{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:0 var(--gutter)}
+.qa-t{display:flex;flex-direction:column;align-items:center;gap:8px;padding:13px 4px 12px;
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);
+  box-shadow:var(--sh-sm);-webkit-tap-highlight-color:transparent}
+.qa-t .ic{width:30px;height:30px;border-radius:var(--r-sm);display:grid;place-items:center;
+  background:var(--tomato-tint);color:var(--tomato);font-size:13px}
+.qa-t b{font-family:"Gilroy";font-weight:500;font-size:10px;line-height:1.3;color:var(--ink);text-align:center}
+.qa-t:active{background:var(--tomato-tint)}
+
+/* --- mutfağa giriş modülü — numaralandırma gerçek bir sıra (01→06 ders akışı) --- */
+.mod{width:186px;flex:none;background:var(--paper);border-radius:var(--r-lg);box-shadow:var(--sh-sm);
+  border:1px solid rgba(33,30,22,.05);padding:14px;display:flex;flex-direction:column;gap:10px}
+.mod .no{display:inline-flex;align-items:center;gap:7px;font-family:"GilroyXB";font-size:10px;
+  letter-spacing:.14em;color:var(--tomato)}
+.mod .no::before{content:"";width:16px;height:2px;border-radius:2px;background:var(--tomato)}
+.mod h4{font-size:14px;line-height:1.32;color:var(--ink);flex:1}
+.mod .n{font-family:"GilroyLt";font-weight:300;font-size:11.5px;color:var(--muted)}
+
+/* --- püf noktası kartı --- */
+.tip{width:238px;flex:none;background:var(--paper);border-radius:var(--r-lg);box-shadow:var(--sh-sm);
+  border:1px solid rgba(33,30,22,.05);padding:14px;display:flex;flex-direction:column;gap:9px}
+.tip .k{align-self:flex-start;font-family:"GilroyXB";font-size:9.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--tomato);background:var(--tomato-tint);
+  padding:4px 8px;border-radius:var(--r-sm)}
+.tip h4{font-size:14px;line-height:1.32;color:var(--ink)}
+.tip p{font-family:"GilroyLt";font-weight:300;font-size:12px;line-height:1.5;color:var(--ink-2)}
+.tip .rd{display:flex;align-items:center;gap:5px;font-family:"GilroyLt";font-weight:300;
+  font-size:11px;color:var(--muted)}
+.tip .rd i{font-size:10px}
+
+/* --- dada route paneli --- */
+.route{margin:0 var(--gutter);background:var(--ink);border-radius:var(--r-xl);padding:20px 18px}
+.route h3{font-size:19px;line-height:1.22;letter-spacing:-.01em;color:#FFF}
+.route p{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:12.5px;line-height:1.55;
+  color:rgba(255,255,255,.66)}
+.route .leg{display:flex;align-items:center;gap:11px;margin-top:16px;padding:12px 13px;
+  background:rgba(255,255,255,.07);border-radius:var(--r-md)}
+.route .leg .pin{width:26px;height:26px;flex:none;border-radius:var(--r-sm);display:grid;place-items:center;
+  background:rgba(225,72,39,.22);color:var(--tomato);font-size:11px}
+.route .leg .to{flex:1;min-width:0;font-family:"Gilroy";font-weight:500;font-size:12.5px;color:#FFF}
+.route .leg .to span{display:block;margin-top:2px;font-family:"GilroyLt";font-weight:300;
+  font-size:10.5px;color:rgba(255,255,255,.5)}
+.route .btn{margin-top:14px;width:100%}
+
+/* --- keşfet sekmesi: gruplu liste --- */
+.dgrp{margin-top:26px}
+.dgrp .dlab{padding:0 var(--gutter) 10px;font-family:"GilroyXB";font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.dgrp .lrow:first-of-type{border-top:1px solid var(--line)}
+.dgrp .lrow:last-of-type{border-bottom:1px solid var(--line)}
+
+/* data-say  = borç: bu butonun ekranı henüz yok. Sayacı 0'a inmeli.
+   data-toast = gerçek geri bildirim: işlem gerçekten oldu, ekran gerekmiyor.
+   İkisi de toast gösterir; ayrım yalnız kabul testi içindir. */
+
 /* ---- komponent vitrini (yalnız geliştirme — sevkiyatta silinir) ---- */
 .kit-sec{padding:22px var(--gutter) 6px}
 .kit-sec h2{font-family:"GilroyXB";font-size:20px;line-height:1.18;letter-spacing:-.015em;color:var(--ink)}
@@ -1232,3 +1267,11 @@ table.t tr:last-child td{border-bottom:0}
 .i-circle-question:before{content:"\f059"}
 .i-wifi:before{content:"\f1eb"}
 .i-compass:before{content:"\f14e"}
+
+/* ---- Faz 1'in ihtiyaç duyduğu ek FA6 glifleri ---- */
+.i-lightbulb:before{content:"\f0eb"}
+.i-book-open:before{content:"\f518"}
+.i-scroll:before{content:"\f70e"}
+.i-kitchen-set:before{content:"\e51a"}
+.i-route:before{content:"\f4d7"}
+.i-fire-burner:before{content:"\e4f1"}

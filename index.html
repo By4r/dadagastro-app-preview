@@ -13,11 +13,12 @@
     <div>
       <span class="st-eyebrow">DadaGastro · Mobil Uygulama · v2</span>
       <h1>Tam uygulama — navigasyonlu prototip</h1>
-      <p>Ana sayfa, tarif listesi, tarif detay, sağlık, hesap ve pişirme modu tek uygulamada bağlı.
-         Sekmeler, itilen ekranlar, alttan açılan modaller ve geri navigasyonu çalışıyor.</p>
+      <p>Ana sayfa, tarifler, keşfet, hesap, tarif detay ve pişirme modu tek uygulamada bağlı.
+         Sekmeler, itilen ekranlar, alttan açılan modaller ve geri navigasyonu çalışıyor.
+         Tek ekran linki için adresin sonuna <code>#/tarif-detay</code> gibi bir rota ekleyebilirsin.</p>
     </div>
     <div class="stage-badges">
-      <span class="sb"><i class="fs i-check"></i>7 ekran · gerçek navigasyon</span>
+      <span class="sb"><i class="fs i-check"></i>Derin link · #/ekran</span>
       <span class="sb"><i class="fs i-layer-group"></i>Gilroy · FA 6.5.2</span>
       <span class="sb"><i class="fs i-check"></i>Çevrimdışı çalışır</span>
     </div>
@@ -69,20 +70,33 @@
 <div class="pop">
   <span class="pop-lbl">Popüler</span>
   <div class="rail poprail">
-  <span class="chip">Mercimek Çorbası</span>
-  <span class="chip">Pratik Tavuk</span>
-  <span class="chip">Fırın Makarna</span>
-  <span class="chip">Sufle</span>
-  <span class="chip">Vegan</span>
-  <span class="chip">Bayram Tatlısı</span>
+  <span class="chip">zeytinyağlı</span>
+  <span class="chip">kahvaltılık</span>
+  <span class="chip">misafir yemeği</span>
+  <span class="chip">vegan</span>
+  <span class="chip">fırın</span>
 </div>
 </div>
 
 <div class="stats">
-  <div class="stat"><b>48.200+</b><span>Denenmiş tarif</span></div>
-  <div class="stat"><b>1.2M</b><span>Topluluk üyesi</span></div>
-  <div class="stat"><b>320+</b><span>Diyetisyen</span></div>
+  <div class="stat"><b>2.057</b><span>Denenmiş tarif</span></div>
+  <div class="stat"><b>266</b><span>Topluluk üyesi</span></div>
+  <div class="stat"><b>591</b><span>Püf noktası</span></div>
 </div>
+</section>
+
+<!-- HIZLI ERİŞİM -->
+<section class="sec">
+  <div class="qa">
+    <a class="qa-t" data-open="ne-pisirsem"><span class="ic"><i class="fs i-wand-magic-sparkles"></i></span><b>Ne<br />Pişirsem</b></a>
+    <a class="qa-t" data-say="Dolapta Ne Var"><span class="ic"><i class="fs i-carrot"></i></span><b>Dolapta<br />Ne Var</b></a>
+    <a class="qa-t" data-say="Püf Noktaları"><span class="ic"><i class="fs i-lightbulb"></i></span><b>Püf<br />Noktaları</b></a>
+    <a class="qa-t" data-say="Mutfağa Giriş"><span class="ic"><i class="fs i-graduation-cap"></i></span><b>Mutfağa<br />Giriş</b></a>
+    <a class="qa-t" data-say="Mutfak Ansiklopedisi"><span class="ic"><i class="fs i-book-open"></i></span><b>Ansiklopedi</b></a>
+    <a class="qa-t" data-say="Mutfak Sözlüğü"><span class="ic"><i class="fs i-scroll"></i></span><b>Sözlük</b></a>
+    <a class="qa-t" data-say="Ölçü Birimleri"><span class="ic"><i class="fs i-scale-balanced"></i></span><b>Ölçü<br />Birimleri</b></a>
+    <a class="qa-t" data-say="Sofra Düzeni"><span class="ic"><i class="fs i-utensils"></i></span><b>Sofra<br />Düzeni</b></a>
+  </div>
 </section>
 
 <!-- KATEGORİLER -->
@@ -90,46 +104,37 @@
   <div class="sec-head">
     <div>
       <span class="eyebrow">Kategoriler</span>
-      <h2>Dünya mutfakları</h2>
-      <p class="sub">Yöresel lezzetlerden dünya mutfağına.</p>
+      <h2>Kategoriler &amp; dünya mutfakları</h2>
+      <p class="sub">2.057 tarif · 33 kategori · 50 dünya mutfağı.</p>
     </div>
     <a class="see-all" data-go="tarifler">Tümü <i class="fs i-arrow-right"></i></a>
   </div>
   <div class="rail">
-    <a class="cat" data-go="tarifler" data-say="Çorba Tarifleri"><div class="thumb" style="background-image:url('assets/img/1406.webp')"></div><b>Çorba</b><span>1.240 tarif</span></a>
-    <a class="cat" data-go="tarifler" data-say="Kırmızı Et Tarifleri"><div class="thumb" style="background-image:url('assets/img/1587.webp')"></div><b>Kırmızı Et</b><span>3.810 tarif</span></a>
-    <a class="cat" data-go="tarifler" data-say="Tatlı Tarifleri"><div class="thumb" style="background-image:url('assets/img/1284.webp')"></div><b>Tatlı</b><span>2.105 tarif</span></a>
-    <a class="cat" data-go="tarifler" data-say="Hamur İşi Tarifleri"><div class="thumb" style="background-image:url('assets/img/1414.webp')"></div><b>Hamur İşi</b><span>1.560 tarif</span></a>
-    <a class="cat" data-go="tarifler" data-say="Salata Tarifleri"><div class="thumb" style="background-image:url('assets/img/1970.webp')"></div><b>Salata</b><span>980 tarif</span></a>
-    <a class="cat" data-go="tarifler" data-say="Kahvaltılık Tarifler"><div class="thumb" style="background-image:url('assets/img/1710.webp')"></div><b>Kahvaltılık</b><span>740 tarif</span></a>
-    <a class="cat" data-go="tarifler" data-say="Kek Tarifleri"><div class="thumb" style="background-image:url('assets/img/1436.webp')"></div><b>Kek</b><span>610 tarif</span></a>
-    <a class="cat" data-go="tarifler" data-say="Makarna Tarifleri"><div class="thumb" style="background-image:url('assets/img/1419.webp')"></div><b>Makarna</b><span>820 tarif</span></a>
+    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1970.webp')"></div><b>Sebze</b><span>215 tarif</span></a>
+    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1587.webp')"></div><b>Kırmızı Et</b><span>160 tarif</span></a>
+    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1284.webp')"></div><b>Tatlı</b><span>126 tarif</span></a>
+    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1436.webp')"></div><b>Atıştırmalık</b><span>125 tarif</span></a>
+    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1410.webp')"></div><b>Meze</b><span>121 tarif</span></a>
+    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1406.webp')"></div><b>Çorba</b><span>115 tarif</span></a>
+    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1710.webp')"></div><b>Zeytinyağlılar</b><span>115 tarif</span></a>
+    <a class="cat" data-go="tarifler"><div class="thumb" style="background-image:url('assets/img/1414.webp')"></div><b>Hamur İşi</b><span>104 tarif</span></a>
   </div>
 </section>
 
-<!-- GÜNÜN TARİFİ -->
+<!-- DOLAPTA NE VAR -->
 <section class="sec">
-  <div class="sec-head">
-    <div>
-      <span class="eyebrow">Günün tarifi</span>
-      <h2>Bugün bunu deneyin</h2>
+  <div class="fridge">
+    <span class="eyebrow">Dolapta ne var?</span>
+    <h3>Tarif bul — elindekiyle</h3>
+    <p>Malzemelerini seç, sana uygun tarifleri saniyeler içinde bulalım.</p>
+    <div class="ings">
+      <span class="ing"><img src="assets/ing/egg.png" alt="" />Yumurta</span>
+      <span class="ing"><img src="assets/ing/chicken.png" alt="" />Tavuk</span>
+      <span class="ing"><img src="assets/ing/potatoes.png" alt="" />Patates</span>
+      <span class="ing more">+60 malzeme</span>
     </div>
-    <a class="see-all" data-say="Günün tarifi arşivi">Arşiv <i class="fs i-arrow-right"></i></a>
+    <button class="btn block" data-open="ne-pisirsem"><i class="fs i-carrot"></i> Malzemelerimi Seç</button>
   </div>
-  <a class="hero-card" data-open="tarif-detay" style="background-image:url('assets/img/1425.webp')" data-say="Tarif detay ekranı — bir sonraki adımda tasarlanacak">
-    <span class="play-badge"><i class="fs i-play"></i> 8:40</span>
-    <button class="save"><i class="fr i-heart"></i></button>
-    <div class="hc-cont">
-      <span class="badge"><i class="fs i-award"></i> Şefin Tercihi</span>
-      <h3>Fırında Tereyağlı Mantı — Klasik Tarif</h3>
-      <div class="hc-meta">
-        <span class="rate"><i class="fs i-star"></i> 4.9 (1.204)</span>
-        <span><i class="fs i-clock"></i> 75 dk</span>
-        <span><i class="fs i-gauge-simple"></i> Orta</span>
-        <span><i class="fs i-eye"></i> 412B</span>
-      </div>
-    </div>
-  </a>
 </section>
 
 <!-- BU HAFTA ÖNE ÇIKANLAR -->
@@ -190,53 +195,38 @@
   </div>
 </section>
 
-<!-- DOLAPTA NE VAR -->
-<section class="sec">
-  <div class="fridge">
-    <span class="eyebrow">Dolapta ne var?</span>
-    <h3>Tarif bul — elindekiyle</h3>
-    <p>Malzemelerini seç, sana uygun tarifleri saniyeler içinde bulalım.</p>
-    <div class="ings">
-      <span class="ing"><img src="assets/ing/egg.png" alt="" />Yumurta</span>
-      <span class="ing"><img src="assets/ing/chicken.png" alt="" />Tavuk</span>
-      <span class="ing"><img src="assets/ing/potatoes.png" alt="" />Patates</span>
-      <span class="ing more">+60 malzeme</span>
-    </div>
-    <button class="btn block" data-open="ne-pisirsem"><i class="fs i-carrot"></i> Malzemelerimi Seç</button>
-  </div>
-</section>
-
-<!-- SAĞLIKLI YAŞAM -->
+<!-- MUTFAK SIRLARI -->
 <section class="sec">
   <div class="sec-head">
     <div>
-      <span class="eyebrow">Sağlıklı yaşam</span>
-      <h2>Bedenini tanı, dengede ye</h2>
-      <p class="sub">Ücretsiz hesaplayıcılarla başla.</p>
+      <span class="eyebrow">Mutfak sırları</span>
+      <h2>Mutfağa Giriş &amp; Püf Noktaları</h2>
+      <p class="sub">Sıfırdan başlayanlar için temel teknikler, ustalardan küçük sırlar.</p>
     </div>
-    <a class="see-all" data-go="saglik">Tümü <i class="fs i-arrow-right"></i></a>
+    <a class="see-all" data-go="kesfet">Tümü <i class="fs i-arrow-right"></i></a>
   </div>
-  <div class="hgrid">
-    <a class="htile" data-say="Kalori Hesaplayıcı"><span class="ic"><i class="fs i-calculator"></i></span><span class="txt"><b>Kalori Hesapla</b><span class="sub">Günlük ihtiyacın</span></span></a>
-    <a class="htile" data-say="Vücut Kitle İndeksi"><span class="ic"><i class="fs i-weight-scale"></i></span><span class="txt"><b>Vücut Kitle İnd.</b><span class="sub">BMI değerin</span></span></a>
-    <a class="htile" data-say="Bazal Metabolizma"><span class="ic"><i class="fs i-bolt"></i></span><span class="txt"><b>Bazal Metab.</b><span class="sub">Dinlenme yakımı</span></span></a>
-    <a class="htile" data-say="Besin Kalori Cetveli"><span class="ic"><i class="fs i-apple-whole"></i></span><span class="txt"><b>Kalori Cetveli</b><span class="sub">Yiyecek bazında</span></span></a>
-  </div>
-  <div class="dyt">
-    <span class="eyebrow">Diyetisyen modülü</span>
-    <h3>Uzman bir diyetisyenle çalış</h3>
-    <p>Sana özel beslenme planı, randevu takibi ve birebir takip. Online görüş, evden çıkma.</p>
-    <div class="dyt-row">
-      <span class="av" style="background:var(--green-deep)">SA</span>
-      <span class="txt"><b>Dyt. Selin Aydın</b><span class="sub">Kilo yönetimi · Sporcu beslenmesi</span></span>
-      <span class="r"><i class="fs i-star"></i> 4.9</span>
+  <div data-tabs>
+    <div class="segs">
+      <button class="seg on" data-pane="pnGiris">Mutfağa Giriş</button>
+      <button class="seg" data-pane="pnPuf">Püf Noktaları</button>
     </div>
-    <div class="dyt-row">
-      <span class="av" style="background:var(--petrol)">BÇ</span>
-      <span class="txt"><b>Dyt. Burak Çelik</b><span class="sub">Çocuk beslenmesi · Diyabet</span></span>
-      <span class="r"><i class="fs i-star"></i> 4.8</span>
+    <div class="pane on" id="pnGiris">
+      <div class="rail">
+      <a class="mod" data-say="Mutfağa Giriş — Mutfak Düzeni ve Çalışma Alanı"><span class="no">Modül 01</span><h4>Mutfak Düzeni ve Çalışma Alanı</h4><span class="n">3 bölüm</span></a>
+      <a class="mod" data-say="Mutfağa Giriş — Temel Bıçak Türleri ve Kullanımları"><span class="no">Modül 02</span><h4>Temel Bıçak Türleri ve Kullanımları</h4><span class="n">4 bölüm</span></a>
+      <a class="mod" data-say="Mutfağa Giriş — Sebze ve Meyve Hazırlama Teknikleri"><span class="no">Modül 03</span><h4>Sebze ve Meyve Hazırlama Teknikleri</h4><span class="n">4 bölüm</span></a>
+      <a class="mod" data-say="Mutfağa Giriş — Haşlama: Sudan Fazlası"><span class="no">Modül 04</span><h4>Haşlama: Sudan Fazlası</h4><span class="n">5 bölüm</span></a>
+      <a class="mod" data-say="Mutfağa Giriş — Tavada Pişirme Teknikleri"><span class="no">Modül 05</span><h4>Tavada Pişirme Teknikleri</h4><span class="n">4 bölüm</span></a>
+      <a class="mod" data-say="Mutfağa Giriş — Fırında Pişirme Teknikleri"><span class="no">Modül 06</span><h4>Fırında Pişirme Teknikleri</h4><span class="n">4 bölüm</span></a>
+      </div>
     </div>
-    <button class="btn green block" data-say="Diyetisyen arama & randevu ekranı">Diyetisyen Ara & Randevu Al</button>
+    <div class="pane" id="pnPuf">
+      <div class="rail">
+      <a class="tip" data-say="Püf Noktası — Pilav neden tane tane olmaz?"><span class="k">Pişirme</span><h4>Pilav neden tane tane olmaz?</h4><p>Pirinci yıkamadan pişirirsen nişasta suya karışır ve taneler birbirine yapışır. Berrak su gelene kadar durula.</p><span class="rd"><i class="fs i-eye"></i> 412 okunma</span></a>
+      <a class="tip" data-say="Püf Noktası — Çorba tuzlu oldu, ne yapmalı?"><span class="k">Nasıl Düzeltilir?</span><h4>Çorba tuzlu oldu, ne yapmalı?</h4><p>Bir soyulmuş patatesi çorbada 10 dakika kaynat, sonra çıkar. Patates fazla tuzu çeker.</p><span class="rd"><i class="fs i-eye"></i> 268 okunma</span></a>
+      <a class="tip" data-say="Püf Noktası — Tereyağı mı, margarin mi?"><span class="k">Malzeme Rehberi</span><h4>Tereyağı mı, margarin mi?</h4><p>Hamur işinde tereyağı katmanları ayırır ve koku verir. Kızartmada yanma noktası düşük olduğu için uygun değil.</p><span class="rd"><i class="fs i-eye"></i> 190 okunma</span></a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -274,14 +264,44 @@
   </div>
 </section>
 
-<!-- PRO PLANLAMA -->
+<!-- GÜNÜN TARİFİ -->
 <section class="sec">
-  <div class="pro">
-    <span class="pro-tag"><i class="fs i-crown"></i> Pro</span>
-    <h3>Haftanı tek ekranda planla</h3>
-    <p>Öğünlerini hafta görünümünde kur; alışveriş listen menünden tek dokunuşla çıksın.</p>
-    <div class="meals"><span class="meal">Kahvaltı</span><span class="meal">Öğle</span><span class="meal">Akşam</span><span class="meal">+ ara öğünler</span></div>
-    <button class="btn block" data-say="Menü planlayıcı ekranı"><i class="fs i-calendar-days"></i> Menünü Planla</button>
+  <div class="sec-head">
+    <div>
+      <span class="eyebrow">Günün tarifi</span>
+      <h2>Bugün bunu deneyin</h2>
+    </div>
+    <a class="see-all" data-say="Günün tarifi arşivi">Arşiv <i class="fs i-arrow-right"></i></a>
+  </div>
+  <a class="hero-card" data-open="tarif-detay" style="background-image:url('assets/img/1425.webp')" data-say="Tarif detay ekranı — bir sonraki adımda tasarlanacak">
+    <span class="play-badge"><i class="fs i-play"></i> 8:40</span>
+    <button class="save"><i class="fr i-heart"></i></button>
+    <div class="hc-cont">
+      <span class="badge"><i class="fs i-award"></i> Şefin Tercihi</span>
+      <h3>Fırında Tereyağlı Mantı — Klasik Tarif</h3>
+      <div class="hc-meta">
+        <span class="rate"><i class="fs i-star"></i> 4.9 (1.204)</span>
+        <span><i class="fs i-clock"></i> 75 dk</span>
+        <span><i class="fs i-gauge-simple"></i> Orta</span>
+        <span><i class="fs i-eye"></i> 412B</span>
+      </div>
+    </div>
+  </a>
+</section>
+
+<!-- DADA ROUTE -->
+<section class="sec">
+  <div class="route">
+    <span class="eyebrow">Dada Route · yol üstü</span>
+    <h3>Yola çık, yol üstünü keşfet</h3>
+    <p>Nereden nereye gittiğini yaz — güzergâhın boyunca uğrayabileceğin yol üstü mekânları haritada gör.</p>
+    <div class="leg">
+      <span class="pin"><i class="fs i-location-dot"></i></span>
+      <span class="to">İstanbul <span>Kalkış</span></span>
+      <i class="fs i-arrow-right" style="color:rgba(255,255,255,.34);font-size:11px"></i>
+      <span class="to" style="text-align:right">Bursa <span>Varış</span></span>
+    </div>
+    <button class="btn" data-say="Dada Route — güzergâh planlayıcı"><i class="fs i-route"></i> Güzergâh Planla</button>
   </div>
 </section>
 
@@ -297,7 +317,7 @@
   <div class="rail">
     <div class="chef"><span class="av" style="background:var(--tomato)">AB</span><b>Arda Bozkurt</b><span class="meta">Ev Yemekleri · 84 tarif</span><button class="follow">+ Takip Et</button></div>
     <div class="chef"><span class="av" style="background:var(--purple)">ZU</span><b>Zeynep Usta</b><span class="meta">Hamur İşi · 126 tarif</span><button class="follow">+ Takip Et</button></div>
-    <div class="chef"><span class="av" style="background:var(--green-deep)">SA</span><b>Dyt. Selin Aydın</b><span class="meta">Sağlıklı · 58 tarif</span><button class="follow">+ Takip Et</button></div>
+    <div class="chef"><span class="av" style="background:var(--green-deep)">BT</span><b>Burcu Tüzün</b><span class="meta">Çömez Aşçı · 8 tarif</span><button class="follow">+ Takip Et</button></div>
     <div class="chef"><span class="av" style="background:var(--petrol)">KD</span><b>Kaan Demir</b><span class="meta">Et &amp; Mangal · 67 tarif</span><button class="follow">+ Takip Et</button></div>
     <div class="chef"><span class="av" style="background:var(--ink)">AT</span><b>Ayşe Tülin</b><span class="meta">Yöresel · 142 tarif</span><button class="follow">+ Takip Et</button></div>
   </div>
@@ -330,14 +350,14 @@
       <button class="fbtn" id="fltOpen" data-bsheet="fltSheet"><i class="fs i-sliders"></i><span class="bdg" id="fltCount">2</span></button>
     </div>
     <div class="lchips">
-      <span class="chip on">Tümü</span><span class="chip">Çorba</span><span class="chip">Ana Yemek</span>
-      <span class="chip">Hamur İşi</span><span class="chip">Tatlı</span><span class="chip">Salata</span>
-      <span class="chip">Kahvaltılık</span><span class="chip">Vegan</span><span class="chip">Kırmızı Et</span>
+      <span class="chip on">Tümü</span><span class="chip">Sebze</span><span class="chip">Kırmızı Et</span>
+      <span class="chip">Tatlı</span><span class="chip">Atıştırmalık</span><span class="chip">Meze</span>
+      <span class="chip">Çorba</span><span class="chip">Zeytinyağlılar</span><span class="chip">Kahvaltılık</span>
     </div>
   </div>
 
   <div class="lmeta">
-    <span class="cnt"><b id="lCount">248</b> tarif bulundu</span>
+    <span class="cnt"><b id="lCount">89</b> tarif bulundu</span>
     <button class="sortbtn" id="sortBtn" data-bsheet="fltSheet">Önerilen <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
   </div>
 
@@ -454,49 +474,49 @@
   </div>
 
   <div class="loadmore">
-    <button class="btn ghost block" data-say="24 tarif daha yüklendi">Daha Fazla Göster <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
+    <button class="btn ghost block" data-toast="24 tarif daha yüklendi">Daha Fazla Göster <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
   </div>
   <div class="view-pad"></div>
 </section>
 
 <!-- ==================== SAĞLIK ==================== -->
-<section class="view root" id="vHealth" data-route="saglik">
-  <header class="vbar"><h2>Sağlıklı Yaşam</h2>
-    <button class="ab-btn" data-say="Sağlık profilim"><i class="fs i-person"></i></button>
+<!-- ==================== KEŞFET ==================== -->
+<section class="view root" id="vDiscover" data-route="kesfet">
+  <header class="vbar"><h2>Keşfet</h2>
     <button class="ab-btn" data-drawer="1" aria-label="Menü"><i class="fs i-bars"></i></button>
   </header>
-  <div class="sec" style="margin-top:20px">
-    <div class="sec-head"><div><span class="eyebrow">Hesaplayıcılar</span><h2>Bedenini tanı</h2></div></div>
-    <div class="hgrid">
-      <a class="htile" data-say="Kalori Hesaplayıcı"><span class="ic"><i class="fs i-calculator"></i></span><span class="txt"><b>Kalori Hesapla</b><span class="sub">Günlük ihtiyacın</span></span></a>
-      <a class="htile" data-say="Vücut Kitle İndeksi"><span class="ic"><i class="fs i-weight-scale"></i></span><span class="txt"><b>Vücut Kitle İnd.</b><span class="sub">BMI değerin</span></span></a>
-      <a class="htile" data-say="Bazal Metabolizma"><span class="ic"><i class="fs i-bolt"></i></span><span class="txt"><b>Bazal Metab.</b><span class="sub">Dinlenme yakımı</span></span></a>
-      <a class="htile" data-say="Besin Kalori Cetveli"><span class="ic"><i class="fs i-apple-whole"></i></span><span class="txt"><b>Kalori Cetveli</b><span class="sub">Yiyecek bazında</span></span></a>
-      <a class="htile" data-say="Vücut Tipi Testi"><span class="ic"><i class="fs i-ruler"></i></span><span class="txt"><b>Vücut Tipi</b><span class="sub">Hangi tip?</span></span></a>
-      <a class="htile" data-say="Ölçü Birimleri"><span class="ic"><i class="fs i-scale-balanced"></i></span><span class="txt"><b>Ölçü Birimleri</b><span class="sub">Bardak↔gram</span></span></a>
-    </div>
-    <div class="dyt">
-      <span class="eyebrow">Diyetisyen modülü</span>
-      <h3>Uzman bir diyetisyenle çalış</h3>
-      <p>Sana özel beslenme planı, randevu takibi ve birebir takip.</p>
-      <div class="dyt-row"><span class="av" style="background:var(--green-deep)">SA</span>
-        <span class="txt"><b>Dyt. Selin Aydın</b><span class="sub">Kilo yönetimi · Sporcu beslenmesi</span></span>
-        <span class="r"><i class="fs i-star"></i> 4.9</span></div>
-      <div class="dyt-row"><span class="av" style="background:var(--petrol)">BÇ</span>
-        <span class="txt"><b>Dyt. Burak Çelik</b><span class="sub">Çocuk beslenmesi · Diyabet</span></span>
-        <span class="r"><i class="fs i-star"></i> 4.8</span></div>
-      <button class="btn green block" data-say="Diyetisyen arama ekranı">Diyetisyen Ara &amp; Randevu Al</button>
+
+  <div class="sec" style="margin-top:22px">
+    <div class="sec-head">
+      <div>
+        <h2>Öğren, dene, ustalaş</h2>
+        <p class="sub">Tekniği, terimi, ölçüyü tek yerde topladık — tarifin arkasındaki bilgi burada.</p>
+      </div>
     </div>
   </div>
-  <section class="sec">
-    <div class="pro">
-      <span class="pro-tag"><i class="fs i-crown"></i> Pro</span>
-      <h3>Haftanı tek ekranda planla</h3>
-      <p>Öğünlerini hafta görünümünde kur; alışveriş listen menünden çıksın.</p>
-      <div class="meals"><span class="meal">Kahvaltı</span><span class="meal">Öğle</span><span class="meal">Akşam</span></div>
-      <button class="btn block" data-say="Menü planlayıcı"><i class="fs i-calendar-days"></i> Menünü Planla</button>
-    </div>
-  </section>
+
+  <div class="dgrp">
+    <div class="dlab">Mutfak sırları</div>
+    <a class="lrow ic-lead" data-say="Mutfağa Giriş"><span class="ic"><i class="fs i-graduation-cap"></i></span><span class="tx"><b>Mutfağa Giriş</b><span>Sıfırdan başlayanlar için temel teknikler</span></span><span class="n">6 modül</span><i class="fs i-chevron-right go"></i></a>
+    <a class="lrow ic-lead" data-say="Püf Noktaları"><span class="ic"><i class="fs i-lightbulb"></i></span><span class="tx"><b>Püf Noktaları</b><span>Ustalardan küçük sırlar, 11 kategori</span></span><span class="n">591</span><i class="fs i-chevron-right go"></i></a>
+    <a class="lrow ic-lead" data-say="Mutfak Ansiklopedisi"><span class="ic"><i class="fs i-book-open"></i></span><span class="tx"><b>Mutfak Ansiklopedisi</b><span>Malzemeyi tanı: nedir, nasıl saklanır</span></span><span class="n">1.200</span><i class="fs i-chevron-right go"></i></a>
+    <a class="lrow ic-lead" data-say="Mutfak Sözlüğü"><span class="ic"><i class="fs i-scroll"></i></span><span class="tx"><b>Mutfak Sözlüğü</b><span>Jülyen, benmari — tariflerdeki terimler</span></span><span class="n">765</span><i class="fs i-chevron-right go"></i></a>
+    <a class="lrow ic-lead" data-say="Ölçü Birimleri"><span class="ic"><i class="fs i-scale-balanced"></i></span><span class="tx"><b>Ölçü Birimleri</b><span>Bardağı, kaşığı grama çevir</span></span><i class="fs i-chevron-right go"></i></a>
+    <a class="lrow ic-lead" data-say="Sofra Düzeni"><span class="ic"><i class="fs i-utensils"></i></span><span class="tx"><b>Sofra Düzeni</b><span>Günlük sofradan resmî düzene</span></span><span class="n">11</span><i class="fs i-chevron-right go"></i></a>
+  </div>
+
+  <div class="dgrp">
+    <div class="dlab">İzle & pişir</div>
+    <a class="lrow ic-lead" data-say="Video Mutfağı"><span class="ic"><i class="fs i-video"></i></span><span class="tx"><b>Video Mutfağı</b><span>Adım adım tarif videoları</span></span><span class="n">33 video</span><i class="fs i-chevron-right go"></i></a>
+    <a class="lrow ic-lead" data-say="Video Serileri"><span class="ic"><i class="fs i-layer-group"></i></span><span class="tx"><b>Video Serileri</b><span>Bölüm bölüm, ustalaşana kadar</span></span><span class="n">4 seri</span><i class="fs i-chevron-right go"></i></a>
+  </div>
+
+  <div class="dgrp">
+    <div class="dlab">Yolda & mutfakta</div>
+    <a class="lrow ic-lead" data-say="Dada Route"><span class="ic"><i class="fs i-route"></i></span><span class="tx"><b>Dada Route</b><span>Güzergâhın üstündeki lezzetler</span></span><i class="fs i-chevron-right go"></i></a>
+    <a class="lrow ic-lead" data-say="Dolapta Ne Var"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Dolapta Ne Var</b><span>Elindekiyle ne pişirebilirsin</span></span><i class="fs i-chevron-right go"></i></a>
+  </div>
+
   <div class="view-pad"></div>
 </section>
 
@@ -528,7 +548,7 @@
   <div class="pbadges">
     <span class="pbg t"><i class="fs i-award"></i> Şef Adayı</span>
     <span class="pbg y"><i class="fs i-star"></i> 50 Tarif Denedi</span>
-    <span class="pbg g"><i class="fs i-seedling"></i> Sağlıklı Mutfak</span>
+    <span class="pbg g"><i class="fs i-seedling"></i> Zeytinyağlı Ustası</span>
     <span class="pbg p"><i class="fs i-users"></i> Topluluk Yıldızı</span>
     <span class="pbg"><i class="fs i-fire"></i> 12 Gün Seri</span>
   </div>
@@ -571,15 +591,15 @@
     <div class="mtitle">Mutfağım</div>
     <a class="mrow" data-say="Tarif defterim"><span class="ic"><i class="fr i-bookmark"></i></span><b>Tarif Defterim</b><span class="tag">34</span><i class="fs i-chevron-right go"></i></a>
     <a class="mrow" data-say="Alışveriş listesi"><span class="ic"><i class="fs i-basket-shopping"></i></span><b>Alışveriş Listem</b><span class="tag">7</span><i class="fs i-chevron-right go"></i></a>
-    <a class="mrow" data-say="Menü planlayıcı"><span class="ic"><i class="fs i-calendar-days"></i></span><b>Haftalık Menüm</b><i class="fs i-chevron-right go"></i></a>
+    <a class="mrow" data-say="Paylaştığım tarifler"><span class="ic"><i class="fs i-pen-to-square"></i></span><b>Tariflerim</b><span class="tag">12</span><i class="fs i-chevron-right go"></i></a>
   </div>
 
   <div class="mgroup">
     <div class="mtitle">Keşfet</div>
-    <a class="mrow" data-say="Dada Store"><span class="ic"><i class="fs i-basket-shopping"></i></span><b>Dada Store</b><i class="fs i-chevron-right go"></i></a>
-    <a class="mrow" data-say="Dada Akademi"><span class="ic"><i class="fs i-graduation-cap"></i></span><b>Dada Akademi</b><i class="fs i-chevron-right go"></i></a>
+    <a class="mrow" data-say="Püf Noktaları"><span class="ic"><i class="fs i-lightbulb"></i></span><b>Püf Noktaları</b><i class="fs i-chevron-right go"></i></a>
+    <a class="mrow" data-say="Mutfak Ansiklopedisi"><span class="ic"><i class="fs i-book-open"></i></span><b>Mutfak Ansiklopedisi</b><i class="fs i-chevron-right go"></i></a>
+    <a class="mrow" data-say="Video Mutfağı"><span class="ic"><i class="fs i-video"></i></span><b>Video Mutfağı</b><i class="fs i-chevron-right go"></i></a>
     <a class="mrow" data-say="Dada Route"><span class="ic"><i class="fs i-location-dot"></i></span><b>Dada Route</b><i class="fs i-chevron-right go"></i></a>
-    <a class="mrow" data-say="DadaGourmet"><span class="ic"><i class="fs i-utensils"></i></span><b>DadaGourmet — Mekânlar</b><i class="fs i-chevron-right go"></i></a>
   </div>
 
   <div class="mgroup">
@@ -623,7 +643,7 @@
     <header class="vbar overlay" data-bar="detail">
       <button class="ab-btn" data-back="1"><i class="fs i-chevron-left"></i></button>
       <span class="vtitle">Fırında Tereyağlı Mantı</span>
-      <button class="ab-btn" data-say="Paylaş"><i class="fs i-share-nodes"></i></button>
+      <button class="ab-btn" data-bsheet="shrSheet"><i class="fs i-share-nodes"></i></button>
       <button class="ab-btn save"><i class="fr i-heart"></i></button>
     </header>
 <!-- HERO -->
@@ -637,7 +657,6 @@
   <div class="rd-cont">
     <div class="rd-badges">
       <span class="badge"><i class="fs i-circle-check"></i> Editör Onaylı</span>
-      <span class="badge green"><i class="fs i-heart-pulse"></i> Diyetisyen Yorumlu</span>
     </div>
     <h1>Fırında Tereyağlı Mantı — Klasik Tarif</h1>
     <div class="rd-meta">
@@ -802,7 +821,7 @@
       <span class="cm-rate"><i class="fs i-star"></i> 5.0</span>
     </div>
     <p>Hamuru 2 mm açma tüyosu gerçekten fark yaratıyor. Fırında 15 dakika sonra et suyu ekleme kısmı ilk defa denedim, mantı dağılmadı. Ailece bayıldık.</p>
-    <div class="cm-acts"><a data-say="Beğenildi"><i class="fr i-heart"></i> 48</a><a data-say="Yanıtla"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
+    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 48</a><a data-say="Yanıtla"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
   </article>
 
   <article class="cm">
@@ -812,7 +831,7 @@
       <span class="cm-rate"><i class="fs i-star"></i> 4.5</span>
     </div>
     <p>Kıymayı az yoğurmak konusunda haklısınız. Ben et suyunu biraz fazla koydum, 10 dakika yerine 14 dakika pişirdim, kıvamı tuttu.</p>
-    <div class="cm-acts"><a data-say="Beğenildi"><i class="fr i-heart"></i> 21</a><a data-say="Yanıtla"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
+    <div class="cm-acts"><a data-toast="Beğenildi"><i class="fr i-heart"></i> 21</a><a data-say="Yanıtla"><i class="fs i-share-nodes"></i> Yanıtla</a></div>
   </article>
 
   <div class="ig-group">
@@ -834,23 +853,6 @@
     <a class="made" data-say="Fotoğraf"><div class="ph" style="background-image:url('assets/img/1762.webp')"></div><span class="who"><span class="av" style="background:var(--petrol)">MD</span><b>Murat D.</b></span></a>
     <a class="made" data-say="Fotoğraf"><div class="ph" style="background-image:url('assets/img/1824.webp')"></div><span class="who"><span class="av" style="background:var(--green-deep)">SA</span><b>Selin A.</b></span></a>
     <a class="made" data-say="Fotoğraf"><div class="ph" style="background-image:url('assets/img/1593.webp')"></div><span class="who"><span class="av" style="background:var(--tomato)">EÇ</span><b>Emre Ç.</b></span></a>
-  </div>
-</section>
-
-<!-- ÜRÜNLER -->
-<section class="sec">
-  <div class="sec-head">
-    <div>
-      <span class="eyebrow">Dada Store</span>
-      <h2>Bu tarifte kullanılanlar</h2>
-    </div>
-    <a class="see-all" data-say="Dada Store">Tümü <i class="fs i-arrow-right"></i></a>
-  </div>
-  <div class="rail">
-    <article class="pcard"><div class="ph"><img src="assets/ing/flour.png" alt="" /></div><div class="bd"><b>Taş Değirmen Tam Buğday Unu 1 kg</b><span class="price">₺89,90</span><button class="add" data-say="Sepete eklendi">Sepete Ekle</button></div></article>
-    <article class="pcard"><div class="ph"><img src="assets/ing/olive-oil.png" alt="" /></div><div class="bd"><b>Köy Tereyağı 500 g</b><span class="price">₺249,00</span><button class="add" data-say="Sepete eklendi">Sepete Ekle</button></div></article>
-    <article class="pcard"><div class="ph"><img src="assets/ing/black-pepper.png" alt="" /></div><div class="bd"><b>Pul Biber 200 g</b><span class="price">₺64,50</span><button class="add" data-say="Sepete eklendi">Sepete Ekle</button></div></article>
-    <article class="pcard"><div class="ph"><img src="assets/ing/yogurt.png" alt="" /></div><div class="bd"><b>Süzme Yoğurt 900 g</b><span class="price">₺74,90</span><button class="add" data-say="Sepete eklendi">Sepete Ekle</button></div></article>
   </div>
 </section>
 
@@ -1062,7 +1064,7 @@
             <a class="tab on" data-root="vHome"><i class="fs i-house"></i><span>Ana Sayfa</span></a>
             <a class="tab" data-root="vList"><i class="fs i-bowl-food"></i><span>Tarifler</span></a>
             <a class="tab tab-fab" data-open="ne-pisirsem"><span class="fab"><i class="fs i-wand-magic-sparkles"></i></span><span class="lbl">Ne Pişirsem?</span></a>
-            <a class="tab" data-root="vHealth"><i class="fs i-heart-pulse"></i><span>Sağlık</span></a>
+            <a class="tab" data-root="vDiscover"><i class="fs i-compass"></i><span>Keşfet</span></a>
             <a class="tab" data-root="vAccount"><i class="fs i-user"></i><span>Hesap</span></a>
           </nav>
 
@@ -1073,24 +1075,21 @@
     <button class="ab-btn" id="fltX" data-bsheet-close><i class="fs i-xmark"></i></button></div>
   <div class="bs-body">
     <div class="fgrp"><div class="ft">Sıralama</div><div class="fopts" data-single="1">
-      <button class="fopt on">Önerilen</button><button class="fopt">En Yeni</button>
-      <button class="fopt">En Çok Puanlanan</button><button class="fopt">En Hızlı</button></div></div>
-    <div class="fgrp"><div class="ft">Süre</div><div class="fopts">
-      <button class="fopt">0–30 dk</button><button class="fopt on">30–60 dk</button>
-      <button class="fopt">60 dk+</button></div></div>
-    <div class="fgrp"><div class="ft">Zorluk</div><div class="fopts">
-      <button class="fopt">Kolay</button><button class="fopt">Orta</button><button class="fopt">Zor</button></div></div>
-    <div class="fgrp"><div class="ft">Öğün</div><div class="fopts">
-      <button class="fopt">Kahvaltı</button><button class="fopt">Öğle</button>
-      <button class="fopt">Akşam</button><button class="fopt">Atıştırmalık</button></div></div>
+      <button class="fopt on">Önerilen</button><button class="fopt">En Yeni</button><button class="fopt">En Çok Puanlanan</button><button class="fopt">En Hızlı</button></div></div>
     <div class="fgrp"><div class="ft">Kategori</div><div class="fopts">
-      <button class="fopt on">Hamur İşi</button><button class="fopt">Çorba</button><button class="fopt">Ana Yemek</button>
-      <button class="fopt">Tatlı</button><button class="fopt">Salata</button><button class="fopt">Kırmızı Et</button></div></div>
+      <button class="fopt">Sebze 215</button><button class="fopt">Kırmızı Et 160</button><button class="fopt">Tatlı 126</button><button class="fopt">Atıştırmalık 125</button><button class="fopt">Meze 121</button><button class="fopt">Çorba 115</button><button class="fopt">Zeytinyağlılar 115</button><button class="fopt">Kahvaltılık 114</button><button class="fopt">Bakliyat 113</button><button class="fopt">Tavuk ve Hindi 110</button><button class="fopt on">Hamur İşi 104</button><button class="fopt">Salata 94</button><button class="fopt">Pilav 92</button></div></div>
+    <div class="fgrp"><div class="ft">Mutfak</div><div class="fopts">
+      <button class="fopt">Türk 1204</button><button class="fopt">İtalyan 92</button><button class="fopt">Fransız 56</button><button class="fopt">İngiliz 22</button><button class="fopt">Alman 15</button><button class="fopt">İspanyol 15</button><button class="fopt">Portekiz 11</button><button class="fopt">Avusturya 9</button></div></div>
+    <div class="fgrp"><div class="ft">Yemek Modu</div><div class="fopts">
+      <button class="fopt">Günlük Pratik 706</button><button class="fopt">Fırın Yemekleri 403</button><button class="fopt">Hızlı ve Kolay 389</button><button class="fopt">Tek Tencere 158</button><button class="fopt">Airfryer 5</button></div></div>
+    <div class="fgrp"><div class="ft">Öğün</div><div class="fopts">
+      <button class="fopt">Kahvaltı</button><button class="fopt">Brunch</button><button class="fopt">Öğle Yemeği</button><button class="fopt">Akşam Yemeği</button><button class="fopt">Ara Öğün</button><button class="fopt">İkindi ve Çay Saati</button></div></div>
+    <div class="fgrp"><div class="ft">Süre</div><div class="fopts">
+      <button class="fopt">15 dakikadan az</button><button class="fopt">15–30 dk</button><button class="fopt on">30–60 dk</button><button class="fopt">1–2 saat</button><button class="fopt">2 saatten uzun</button></div></div>
+    <div class="fgrp"><div class="ft">Zorluk</div><div class="fopts">
+      <button class="fopt">Çok Kolay</button><button class="fopt">Kolay</button><button class="fopt">Orta</button><button class="fopt">Zor</button><button class="fopt">Ustalık Gerektirir</button></div></div>
     <div class="fgrp"><div class="ft">Beslenme</div><div class="fopts">
-      <button class="fopt">Vegan</button><button class="fopt">Vejetaryen</button>
-      <button class="fopt">Glutensiz</button><button class="fopt">Şekersiz</button></div></div>
-    <div class="fgrp"><div class="ft">Bütçe</div><div class="fopts">
-      <button class="fopt">Ekonomik</button><button class="fopt">Orta</button><button class="fopt">Özel gün</button></div></div>
+      <button class="fopt">Vejetaryen 1079</button><button class="fopt">Glutensiz 941</button><button class="fopt">Vegan 591</button><button class="fopt">Protein Ağırlıklı 477</button><button class="fopt">Pesketaryen 109</button><button class="fopt">Düşük Kalorili 58</button></div></div>
   </div>
   <div class="bs-foot">
     <button class="btn" id="fltApply"><span id="fltApplyTx">248 Tarifi Göster</span></button>
@@ -1123,18 +1122,18 @@
     <button class="ab-btn" data-bsheet-close aria-label="Kapat"><i class="fs i-xmark"></i></button></div>
   <div class="bs-body">
     <div class="shr-grid">
-      <button class="shr-t" data-say="Bağlantı kopyalandı"><span class="ic"><i class="fs i-link"></i></span><span>Bağlantıyı<br />kopyala</span></button>
-      <button class="shr-t" data-say="Mesaj uygulaması açılıyor"><span class="ic"><i class="fs i-comment"></i></span><span>Mesajla<br />gönder</span></button>
-      <button class="shr-t" data-say="E-posta taslağı hazırlandı"><span class="ic"><i class="fs i-envelope"></i></span><span>E-posta</span></button>
-      <button class="shr-t" data-say="Sistem paylaşımı"><span class="ic"><i class="fs i-ellipsis"></i></span><span>Diğer</span></button>
+      <button class="shr-t" data-toast="Bağlantı kopyalandı"><span class="ic"><i class="fs i-link"></i></span><span>Bağlantıyı<br />kopyala</span></button>
+      <button class="shr-t" data-toast="Mesaj uygulaması açılıyor"><span class="ic"><i class="fs i-comment"></i></span><span>Mesajla<br />gönder</span></button>
+      <button class="shr-t" data-toast="E-posta taslağı hazırlandı"><span class="ic"><i class="fs i-envelope"></i></span><span>E-posta</span></button>
+      <button class="shr-t" data-toast="Sistem paylaşımı"><span class="ic"><i class="fs i-ellipsis"></i></span><span>Diğer</span></button>
     </div>
     <div class="shr-link">
       <span class="ic"><i class="fs i-link"></i></span>
       <span class="u">dadagastro.com/tarif/firinda-tereyagli-manti</span>
-      <button class="cp" data-say="Bağlantı kopyalandı">Kopyala</button>
+      <button class="cp" data-toast="Bağlantı kopyalandı">Kopyala</button>
     </div>
     <div class="kit-lab" style="padding:18px 0 8px">Mutfağıma</div>
-    <button class="lrow ic-lead" style="border-radius:var(--r-md);border:1px solid var(--line)" data-say="Tarif defterine kaydedildi">
+    <button class="lrow ic-lead" style="border-radius:var(--r-md);border:1px solid var(--line)" data-toast="Tarif defterine kaydedildi">
       <span class="ic"><i class="fs i-bookmark"></i></span>
       <span class="tx"><b>Tarif defterime kaydet</b><span>Çevrimdışı da açılır</span></span></button>
     <div style="height:10px"></div>
@@ -1142,7 +1141,7 @@
 </div>
       <div class="actionbar scrbar" id="barDetail">
         <button class="icobtn save" aria-label="Kaydet"><i class="fr i-heart"></i></button>
-        <button class="icobtn" data-say="Alışveriş listesine eklendi"><i class="fs i-basket-shopping"></i></button>
+        <button class="icobtn" data-toast="Alışveriş listesine eklendi"><i class="fs i-basket-shopping"></i></button>
         <button class="btn" data-open="pisirme-modu"><i class="fs i-wand-magic-sparkles"></i> Pişirmeye Başla</button>
       </div>
     <nav class="cook-nav scrbar" id="barCook">
@@ -1193,15 +1192,13 @@
               <a class="dw-row" data-drawer-go="hesap"><span class="ic"><i class="fs i-user"></i></span><b>Profilim</b><i class="fs i-chevron-right go"></i></a>
               <a class="dw-row" data-say="Tarif defterim"><span class="ic"><i class="fr i-bookmark"></i></span><b>Tarif Defterim</b><span class="tag">34</span></a>
               <a class="dw-row" data-say="Alışveriş listem"><span class="ic"><i class="fs i-basket-shopping"></i></span><b>Alışveriş Listem</b><span class="tag">7</span></a>
-              <a class="dw-row" data-say="Haftalık menüm"><span class="ic"><i class="fs i-calendar-days"></i></span><b>Haftalık Menüm</b></a>
               <a class="dw-row" data-say="Paylaştığım tarifler"><span class="ic"><i class="fs i-pen-to-square"></i></span><b>Tariflerim</b><span class="tag">12</span></a>
               <div class="dw-sep"></div>
               <div class="dw-t">Keşfet</div>
-              <a class="dw-row" data-say="Dada Store"><span class="ic"><i class="fs i-basket-shopping"></i></span><b>Dada Store</b></a>
-              <a class="dw-row" data-say="Dada Akademi"><span class="ic"><i class="fs i-graduation-cap"></i></span><b>Dada Akademi</b></a>
+              <a class="dw-row" data-say="Püf Noktaları"><span class="ic"><i class="fs i-lightbulb"></i></span><b>Püf Noktaları</b></a>
+              <a class="dw-row" data-say="Mutfak Ansiklopedisi"><span class="ic"><i class="fs i-book-open"></i></span><b>Mutfak Ansiklopedisi</b></a>
+              <a class="dw-row" data-say="Video Mutfağı"><span class="ic"><i class="fs i-video"></i></span><b>Video Mutfağı</b></a>
               <a class="dw-row" data-say="Dada Route"><span class="ic"><i class="fs i-location-dot"></i></span><b>Dada Route</b></a>
-              <a class="dw-row" data-say="DadaGourmet"><span class="ic"><i class="fs i-utensils"></i></span><b>DadaGourmet</b></a>
-              <a class="dw-row" data-say="Topluluk"><span class="ic"><i class="fs i-users"></i></span><b>Topluluk</b></a>
               <div class="dw-sep"></div>
               <div class="dw-t">Uygulama</div>
               <a class="dw-row" data-say="Bildirim ayarları"><span class="ic"><i class="fr i-bell"></i></span><b>Bildirimler</b></a>
@@ -1211,7 +1208,7 @@
               <a class="dw-row" data-say="Gizlilik & KVKK"><span class="ic"><i class="fs i-droplet"></i></span><b>Gizlilik &amp; KVKK</b></a>
             </div>
             <div class="dw-foot">
-              <a class="dw-out" data-say="Çıkış yapıldı"><i class="fs i-arrow-right"></i> Çıkış Yap</a>
+              <a class="dw-out" data-toast="Çıkış yapıldı"><i class="fs i-arrow-right"></i> Çıkış Yap</a>
               <span class="dw-ver">DadaGastro Mobil · sürüm 1.0</span>
             </div>
           </aside>
