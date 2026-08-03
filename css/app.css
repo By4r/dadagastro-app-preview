@@ -248,7 +248,7 @@ img{display:block;max-width:100%}
 
 /* --- bölüm iskeleti --- */
 .sec{margin-top:30px}
-.sec-head{padding:0 var(--gutter);display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:13px}
+.sec-head{padding:0 var(--gutter);display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}
 .sec-head h2{font-size:20px;line-height:1.18;letter-spacing:-.015em;color:var(--ink)}
 .sec-head .sub{font-family:"GilroyLt";font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5}
 .see-all{font-family:"GilroyXB";font-size:12px;color:var(--tomato);white-space:nowrap;display:inline-flex;align-items:center;gap:5px;padding-bottom:2px}
@@ -696,7 +696,7 @@ table.t tr:last-child td{border-bottom:0}
 .pstat+.pstat::before{content:"";position:absolute;left:0;top:22%;height:56%;width:1px;background:var(--line)}
 .pstat b{display:block;font-family:"GilroyXB";font-size:17px;color:var(--ink)}
 .pstat span{display:block;font-family:"GilroyLt";font-size:10.5px;color:var(--muted);margin-top:3px}
-.mgroup{margin-top:14px;background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mgroup{margin-top:16px;background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .mgroup .mtitle{font-family:"GilroyXB";font-size:10.5px;letter-spacing:.10em;text-transform:uppercase;
   color:var(--muted);padding:14px var(--gutter) 8px}
 .mrow{display:flex;align-items:center;gap:13px;padding:14px var(--gutter);border-top:1px solid var(--line)}
@@ -835,7 +835,13 @@ table.t tr:last-child td{border-bottom:0}
 
 /* 2 kolonlu ızgara */
 .ggrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:16px var(--gutter) 0}
-.gcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:block}
+/* Izgara satırındaki kartlar eşit yükseklikte; gövde sütun olduğu için
+   alttaki buton her kartta aynı hizaya oturuyor (margin-top:auto). */
+.ggrid{align-items:stretch}
+.gcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
+  overflow:hidden;display:flex;flex-direction:column}
+.gcard .bd{flex:1;display:flex;flex-direction:column}
+.gcard .btn.sm{margin-top:auto}
 .gcard .im{position:relative;height:118px;background-size:cover;background-position:center}
 .gcard .im::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,12,0) 55%,rgba(20,18,12,.42))}
 .gcard .tchip{position:absolute;left:8px;bottom:8px;z-index:2;font-family:"GilroyXB";font-size:10px;color:#FFF;
@@ -848,8 +854,16 @@ table.t tr:last-child td{border-bottom:0}
 .gcard .rib{position:absolute;top:8px;left:8px;z-index:2;font-family:"GilroyXB";font-size:9.5px;color:#FFF;
   background:var(--tomato);padding:4px 7px;border-radius:6px;letter-spacing:.02em}
 .gcard .rib.new{background:var(--petrol)}
-.gcard .bd{padding:11px 11px 12px}
-.gcard h4{font-size:13px;line-height:1.32;color:var(--ink);min-height:34px}
+.gcard .bd{padding:11px 11px 12px;gap:0}
+.gcard h4{font-size:13px;line-height:1.32;color:var(--ink);
+  min-height:34px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* porsiyon + maliyet — canlıdaki kart alanları */
+.gsub{display:flex;align-items:center;gap:8px;margin-top:7px}
+.gsub>span{font-family:"GilroyLt";font-weight:300;font-size:10.5px;color:var(--muted)}
+.gsub .pr{margin-left:auto;letter-spacing:.5px}
+.gsub .pr b{font-family:"GilroyXB";font-weight:800;color:var(--ink)}
+.gsub .pr span{color:#D6D1C9}
+.gstat .rate .n{font-family:"GilroyLt";font-weight:300;font-style:normal;font-size:10px;color:var(--muted)}
 .gchef{display:flex;align-items:center;gap:6px;margin-top:9px}
 .gchef .av{width:18px;height:18px;font-size:8px;display:grid;place-items:center;color:#FFF;margin-top:0}
 .gchef b{font-family:"Gilroy";font-weight:500;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -857,7 +871,7 @@ table.t tr:last-child td{border-bottom:0}
 .gstat .rate{font-family:"GilroyXB";font-size:11.5px;color:var(--ink);display:inline-flex;align-items:center;gap:4px}
 .gstat .rate i{color:var(--yellow);font-size:10px}
 .gstat .dif{font-family:"GilroyLt";font-size:10.5px;color:var(--muted)}
-.loadmore{margin:18px var(--gutter) 0}
+.loadmore{margin:20px var(--gutter) 0}
 
 /* ---- filtre alt çekmecesi ---- */
 .sheet-ov{position:absolute;inset:0;z-index:60;background:rgba(10,9,7,.60);opacity:0;pointer-events:none;transition:.26s var(--ease)}
@@ -918,7 +932,7 @@ table.t tr:last-child td{border-bottom:0}
 .pbg i{font-size:12px}
 .pbg.g i{color:var(--green)} .pbg.y i{color:var(--yellow)} .pbg.t i{color:var(--tomato)} .pbg.p i{color:var(--purple)}
 .pstats{display:grid;grid-template-columns:repeat(3,1fr);background:var(--paper);border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);margin-top:18px}
+  border-bottom:1px solid var(--line);margin-top:20px}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:0 var(--gutter)}
 .pgrid a{aspect-ratio:1;background-size:cover;background-position:center;border-radius:var(--r-sm);position:relative;overflow:hidden}
 .pgrid a .ov{position:absolute;inset:auto 0 0 0;padding:6px 7px;background:linear-gradient(180deg,rgba(20,18,12,0),rgba(20,18,12,.72));
@@ -1126,7 +1140,9 @@ table.t tr:last-child td{border-bottom:0}
   line-height:1.55;color:var(--ink-2)}
 
 /* ---- 4. boş durum ---------------------------------------- */
-.emp{display:flex;flex-direction:column;align-items:center;text-align:center;padding:56px 34px 40px}
+/* boş durum bloğu: üstündeki bölümden 20px ile ayrılır (ölçek) */
+.emp{display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:56px 32px 40px;margin-top:20px}
 .emp .ic{width:64px;height:64px;border-radius:var(--r-lg);display:grid;place-items:center;
   background:var(--tomato-tint);color:var(--tomato);font-size:23px;margin-bottom:18px}
 .emp .eyebrow{margin-bottom:9px}
@@ -1193,7 +1209,7 @@ table.t tr:last-child td{border-bottom:0}
    ============================================================ */
 
 /* --- segmented control: bölüm içi sekme (Mutfak Sırları, Dolapta, Ölçü…) --- */
-.segs{display:inline-flex;margin:0 var(--gutter) 14px;padding:3px;background:var(--paper);
+.segs{display:inline-flex;margin:0 var(--gutter) 16px;padding:3px;background:var(--paper);
   border:1px solid var(--line);border-radius:var(--r-md)}
 .seg{padding:9px 15px;border:0;background:none;border-radius:var(--r-sm);white-space:nowrap;
   font-family:"Gilroy";font-weight:500;font-size:12.5px;color:var(--ink-2)}
@@ -1245,7 +1261,7 @@ table.t tr:last-child td{border-bottom:0}
 .route .btn{margin-top:14px;width:100%}
 
 /* --- keşfet sekmesi: gruplu liste --- */
-.dgrp{margin-top:26px}
+.dgrp{margin-top:24px}
 .dgrp .dlab{padding:0 var(--gutter) 10px;font-family:"GilroyXB";font-size:10px;
   letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .dgrp .lrow:first-of-type{border-top:1px solid var(--line)}
@@ -1297,7 +1313,7 @@ table.t tr:last-child td{border-bottom:0}
 .seg.on .sg-n{background:rgba(225,72,39,.16)}
 
 /* --- dolapta: sayaç + seçilenler şeridi --- */
-.fr-bar{margin:0 var(--gutter) 4px;padding:13px 14px;background:var(--paper);
+.fr-bar{margin:0 var(--gutter) 4px;padding:12px 14px;background:var(--paper);
   border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-sm)}
 .fr-count{font-family:"GilroyXB";font-size:13px;color:var(--ink)}
 .fr-count b{color:var(--tomato);font-size:15px}
@@ -1319,7 +1335,7 @@ table.t tr:last-child td{border-bottom:0}
 .hs-opt .fopt{font-size:11.5px;padding:7px 11px}
 
 /* --- 185 malzeme --- */
-.fr-mz{margin-top:22px}
+.fr-mz{margin-top:24px}
 .fr-mzhead{padding:0 var(--gutter) 12px}
 .fr-search{display:flex;align-items:center;gap:10px;width:100%;height:46px;padding:0 13px;
   background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md)}
@@ -1367,7 +1383,7 @@ table.t tr:last-child td{border-bottom:0}
 .fr-foot .btn{margin:0;width:auto;padding:0 20px}
 
 /* --- ne pişirsem: adım göstergesi --- */
-.wz-steps{display:flex;gap:7px;padding:2px var(--gutter) 18px;overflow-x:auto}
+.wz-steps{display:flex;gap:8px;padding:0 var(--gutter) 20px;overflow-x:auto;scroll-padding-left:var(--gutter)}
 .wz-steps::-webkit-scrollbar{height:0}
 /* 390px'de dört başlık+alt başlık yan yana sığmıyordu, hepsi kırpılıyordu.
    Çözüm: pasif adımlar yalnız numara, aktif adım açılıp etiketini gösteriyor. */
@@ -1392,9 +1408,9 @@ table.t tr:last-child td{border-bottom:0}
 .wz-step.on{display:block}
 .wz-step h2{font-size:20px;line-height:1.18;letter-spacing:-.015em;color:var(--ink)}
 .wz-step h2 b{color:var(--tomato)}
-.wz-lead{margin-top:7px;font-family:"GilroyLt";font-weight:300;font-size:12.5px;
+.wz-lead{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:12.5px;
   line-height:1.55;color:var(--ink-2)}
-.wz-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
+.wz-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
 .wz-c{display:flex;flex-direction:column;gap:4px;padding:14px 13px;text-align:left;
   background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);
   box-shadow:var(--sh-sm);-webkit-tap-highlight-color:transparent}
@@ -1407,16 +1423,19 @@ table.t tr:last-child td{border-bottom:0}
 .wz-reset{margin-left:auto}
 
 /* --- ne pişirsem: yemek modu rayı --- */
-.mode-rail{padding-bottom:4px}
-.mode-c{flex:none;display:flex;flex-direction:column;gap:3px;padding:11px 14px;text-align:left;
-  background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);white-space:nowrap}
+.mode-rail{padding-bottom:4px;scroll-padding-left:var(--gutter)}
+/* Sayısı olan ve olmayan modlar aynı yükseklikte dursun diye çip sabit boyda;
+   alt satır yoksa başlık dikeyde ortalanıyor, ray zıplamıyor. */
+.mode-c{flex:none;height:56px;display:flex;flex-direction:column;justify-content:center;gap:3px;
+  padding:0 14px;text-align:left;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--r-md);white-space:nowrap}
 .mode-c b{font-family:"GilroyXB";font-size:12.5px;color:var(--ink)}
 .mode-c span{font-family:"GilroyLt";font-weight:300;font-size:10.5px;color:var(--muted)}
 .mode-c.on{background:var(--tomato-tint);border-color:rgba(225,72,39,.32)}
 .mode-c.on b{color:var(--tomato)}
 
 /* --- hazır menü kartı --- */
-.menu-list{padding:4px var(--gutter) 0}
+.menu-list{padding:0 var(--gutter)}
 .menu-c{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
   box-shadow:var(--sh-sm);padding:15px 14px;margin-bottom:10px}
 .mc-h{display:flex;align-items:flex-start;gap:10px}
@@ -1456,8 +1475,12 @@ table.t tr:last-child td{border-bottom:0}
 /* --- küçük/hayalet buton --- */
 .btn.sm{height:36px;font-size:12px;margin-top:9px;width:100%}
 .btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:none}
-.catchips{padding-bottom:2px}
+.catchips{padding-bottom:2px;scroll-padding-left:var(--gutter)}
 .catchips .fopts{display:flex;flex-wrap:nowrap;gap:7px}
+/* kategori çipi ana sayfadaki kategori kartlarıyla tutarlı olsun diye ikonlu */
+.catchips .fopt{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;padding:8px 12px}
+.catchips .fopt i{font-size:12px;color:var(--muted)}
+.catchips .fopt.on i{color:var(--tomato)}
 
 /* --- Faz 2 ek glifleri --- */
 .i-bacon:before{content:"\f7e5"}
@@ -1496,3 +1519,52 @@ table.t tr:last-child td{border-bottom:0}
   line-height:1.45;color:var(--muted)}
 .wz-result>i{flex:none;color:var(--tomato);font-size:13px}
 .wz-result:active{background:var(--tomato-tint);border-color:rgba(225,72,39,.32)}
+
+/* --- Mutfak Sırları: görsel çıpalar --- */
+.mk-hero{margin:0 var(--gutter);background:var(--ink);border-radius:var(--r-xl);padding:20px 18px}
+.mk-hero h2{font-size:20px;line-height:1.18;letter-spacing:-.015em;color:#FFF}
+.mk-hero p{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:12.5px;line-height:1.55;
+  color:rgba(255,255,255,.66)}
+.mk-stats{display:flex;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
+.mk-stats>div{flex:1;min-width:0}
+.mk-stats b{display:block;font-family:"GilroyXB";font-size:19px;line-height:1;color:var(--tomato)}
+.mk-stats span{display:block;margin-top:4px;font-family:"GilroyLt";font-weight:300;font-size:10px;
+  line-height:1.3;color:rgba(255,255,255,.52)}
+.mk-feat{display:flex;gap:12px;margin:0 var(--gutter);padding:12px;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-sm)}
+.mk-feat .ph{width:84px;height:84px;flex:none;border-radius:var(--r-md);background-size:cover;
+  background-position:center}
+.mk-feat .bd{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.mk-feat .k{font-family:"GilroyXB";font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--tomato)}
+.mk-feat h4{font-size:14px;line-height:1.3;color:var(--ink)}
+.mk-feat p{font-family:"GilroyLt";font-weight:300;font-size:11.5px;line-height:1.45;color:var(--ink-2);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mk-feat .rd{margin-top:auto;display:inline-flex;align-items:center;gap:5px;font-family:"GilroyLt";
+  font-weight:300;font-size:10.5px;color:var(--muted)}
+.mk-feat .rd i{font-size:9px}
+
+/* --- sihirbaz: adım altındaki alternatif yol --- */
+.wz-alt{display:flex;align-items:center;gap:12px;margin:24px var(--gutter) 0;padding:14px;
+  background:var(--tomato-tint);border:1px solid rgba(225,72,39,.22);border-radius:var(--r-lg)}
+.wz-alt .ic{width:34px;height:34px;flex:none;border-radius:var(--r-md);display:grid;place-items:center;
+  background:rgba(225,72,39,.14);color:var(--tomato);font-size:14px}
+.wz-alt .tx{flex:1;min-width:0}
+.wz-alt .tx b{display:block;font-family:"GilroyXB";font-size:13px;color:var(--ink)}
+.wz-alt .tx span{display:block;margin-top:3px;font-family:"GilroyLt";font-weight:300;font-size:11px;
+  line-height:1.4;color:var(--ink-2)}
+.wz-alt .go{flex:none;display:inline-flex;align-items:center;gap:5px;background:none;border:0;
+  font-family:"GilroyXB";font-size:11.5px;color:var(--tomato);white-space:nowrap}
+.wz-alt .go i{font-size:9px}
+
+/* Bölüm ritmi: arka arkaya gelen bölümler aynı zeminde kalmasın.
+   Tam genişlik tint bandı — beyaz kart / açık zemin / koyu panel dizisini tamamlar. */
+.sec.tint{background:var(--tomato-tint);padding:24px 0;margin-top:30px}
+.sec.tint .mod,.sec.tint .tip{border-color:rgba(225,72,39,.14)}
+.sec.tint .segs{background:rgba(255,255,255,.72);border-color:rgba(225,72,39,.18)}
+.sec.tint .seg.on{background:var(--paper)}
+/* hesap ekranı: ölçek dışı 14/18px boşluklar */
+.plevel{margin-top:16px!important}
+.pstats{margin-top:20px!important}
+/* hesap: "Yeni Tarif Paylaş" sarmalayıcısı — .ig-group (malzeme grubu) adıyla çakışıyordu */
+.pshare{margin:16px var(--gutter) 0}

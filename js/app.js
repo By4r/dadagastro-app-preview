@@ -305,8 +305,13 @@
     if ((n = t.closest('[data-pane]'))) {
       e.preventDefault();
       var scope = n.closest('[data-tabs]') || n.closest('.view') || document;
-      all('[data-pane]', scope).forEach(function (x) { x.classList.remove('on'); });
-      all('.pane', scope).forEach(function (x) { x.classList.remove('on'); });
+      /* İç içe sekme grupları var (Yemek Modu > Sıfırdan Kur). Kapatırken yalnız
+         BU gruba ait olanlara dokun; yoksa dış sekme iç paneli de söndürüyor. */
+      var bizim = function (x) {
+        return (x.closest('[data-tabs]') || n.closest('.view') || document) === scope;
+      };
+      all('[data-pane]', scope).forEach(function (x) { if (bizim(x)) x.classList.remove('on'); });
+      all('.pane', scope).forEach(function (x) { if (bizim(x)) x.classList.remove('on'); });
       n.classList.add('on');
       var pane = el(n.dataset.pane);
       if (pane) pane.classList.add('on');
@@ -683,6 +688,7 @@
       s2.classList.toggle('done', i2 < k);
     });
     el('wzPrev').classList.toggle('off', k === 1);
+    if (el('wzAlt')) el('wzAlt').style.display = k <= 4 ? '' : 'none';
     var son = k >= 5;
     el('barWizard').style.display = son ? 'none' : '';
     if (!son) {
@@ -735,11 +741,13 @@
   var TRAY_DK = { };
   all('[data-tray]').forEach(function (btn) {
     var card = btn.closest('.gcard');
-    var dk = card ? (card.querySelector('.gmeta span') || {}).textContent : '';
+    if (!card) return;
+    var sec = function (q) { return card.querySelector(q); };
+    var im = sec('.im');
     TRAY_DK[btn.dataset.tray] = {
-      dk: parseInt((dk || '0').replace(/\D/g, ''), 10) || 0,
-      img: card ? (card.querySelector('.media') || {}).style.backgroundImage : '',
-      kat: card ? ((card.querySelector('.rib') || {}).textContent || '') : ''
+      dk: parseInt(((sec('.tchip') || {}).textContent || '0').replace(/\D/g, ''), 10) || 0,
+      img: im ? getComputedStyle(im).backgroundImage : '',
+      kat: (sec('.rib') || {}).textContent || ''
     };
   });
   function trayList() {

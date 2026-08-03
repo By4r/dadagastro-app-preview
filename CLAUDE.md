@@ -76,6 +76,62 @@ Faz raporunda her ekran için bu tablo **zorunlu**:
 - Mobil için birleştirdiysen (ör. 8 kategori akordeona girdi) onu da yaz.
 - **Birleştirme tamam, DÜŞÜRME yok.**
 
+## 🎨 GÖRSEL ZENGİNLİK VE DENGE
+
+Bu prototip patrona gösterilecek. **"İşlevsel ama çıplak" kabul edilmiyor.**
+
+### 1. Her ekranın görsel çıpası olacak
+
+Saf metin listesi ekran = başarısız. Her ekranda en az bir görsel çıpa:
+fotoğraf · renkli panel · ikon bloğu · sayı vurgusu · illüstrasyon.
+
+**Karar sırası:**
+1. Canlıda görsel var mı? → aynısını kullan
+2. Yok ama içerik görsele uygun mu (kategori, tarif, mekân, video, şef)? → görsel ekle
+3. İçerik gerçekten metin mi (KVKK, SSS, ayarlar)? → tipografi ve boşlukla zenginleştir:
+   bölüm ikonları, akordeon, vurgu kutuları
+
+**Her şeye görsel değil** — analiz et, uygun olana koy, gerekçesini raporda yaz.
+
+### 2. Yoğunluk dengesi
+
+Bir bölge tıka basa doluyken başka bölge bomboş kalmayacak.
+Render'a bak, **gözünü kıs, lekelere bak**. Bir yan kara leke bir yan beyaz boşluksa yeniden düzenle.
+
+- Uzun listeler bölünsün: her 5–6 satırda başlık, ayraç ya da vurgu bloğu
+- **Üst üste 3'ten fazla aynı tip blok gelmesin** — ritim kır
+- **Ekranın sonu boş kalmasın**: ilgili içerik rayı, CTA ya da bir sonraki adım
+
+### 3. Boşluk ölçeği — rastgele değer YOK
+
+Yalnız: **4 · 8 · 12 · 16 · 20 · 24 · 30**
+Dışına çıkıyorsan gerekçeyi CSS'e yorum olarak yaz.
+
+- Komponentler arası **minimum 12px** — birbirine yapışmayacak
+- İlişkili öğeler yakın (8–12), ilişkisiz öğeler uzak (20–30).
+  Yakınlık ilişkiyi anlatır; her şey eşit aralıklıysa hiyerarşi yok demektir.
+
+### 4. Bölüm ritmi
+
+Arka arkaya gelen bölümlerin zemini değişsin:
+**beyaz kart → açık zemin → koyu panel → tint panel.**
+Hepsi aynı griyse ekran tek bir hamur gibi okunur.
+
+### 5. Öz-denetim — her ekran sonunda ÇALIŞTIR
+
+`node .tools/vqa.js <rota>` çalıştır **ve tam sayfa render'a kendin bak.**
+Raporda şu yedi soruyu yanıtla:
+
+1. Görsel çıpa var mı? Nerede?
+2. Aşırı dolu / aşırı boş bölge var mı?
+3. Aynı satırdaki kartlar eşit yükseklikte mi?
+4. Metin kırpılıyor, taşıyor ya da birbirine yapışıyor mu?
+5. Yatay raylar gutter'a hizalı mı, son öğe kırpık mı?
+6. Boşluklar ölçekte mi?
+7. Üst üste 3'ten fazla aynı tip blok var mı?
+
+**"Render aldım" yetmez. Bakıp değerlendireceksin.**
+
 ## 1. Proje kuralları
 
 - **frontend-design skill ZORUNLU** — her yeni ekran/komponent bu skill ile üretilir. Generic AI estetiğinden kaçınmak için.
@@ -221,7 +277,9 @@ Nötr siyah gölge marka tonunu bozar. Material `elevation` kullanma.
 
 ### Boşluk
 
-Gutter 16 · bölümler arası 30 · başlık→içerik 13 · kart dolgu 12–14 (panel 16–18) · ray aralığı 8–10 · min dokunma hedefi 44×44.
+Ölçek: **4 · 8 · 12 · 16 · 20 · 24 · 30**. Gutter 16 · bölümler arası 30 · başlık→içerik 12 ·
+kart dolgu 12 (panel 16) · ray aralığı 8 · min dokunma hedefi 44×44.
+Ölçek dışı bir değer kullanıyorsan CSS'e gerekçe yorumu yaz.
 
 ### Sistem ölçüleri
 
@@ -276,9 +334,10 @@ Flutter'da `DecorationImage(fit: BoxFit.cover)`. **Esnetme yok, kırp.**
 
 ### Kök sekmeler (TabBar)
 
-`Ana Sayfa · Tarifler · [FAB: Ne Pişirsem?] · Keşfet · Hesap`
+`Ana Sayfa · Tarifler · [FAB: Ne Pişirsem?] · Mutfak · Hesap`
 
-Keşfet sekmesi ikonu: FA6 `compass` (`\f14e`). Sağlık sekmesi kaldırıldı, yerine bu geldi.
+Mutfak sekmesi ikonu: FA6 `lightbulb` (`\f0eb`) — ekran adı **Mutfak Sırları**, canlı sitenin
+kendi bölüm adı. Sağlık sekmesi kaldırıldı, yerine bu geldi.
 
 Her sekme **kendi scroll konumunu korur**. Aktif sekmeye tekrar dokunmak başa sarar.
 
@@ -294,12 +353,12 @@ Alttan yukarı `.38s`. Ne Pişirsem sihirbazı, Pişirme Modu.
 ### App Drawer
 
 Sağ üstteki hamburger → **sağdan** açılır (304px). Üstte koyu kullanıcı başlığı (avatar + seviye çubuğu),
-altında **Mutfağım / Keşfet / Uygulama** grupları, en altta çıkış + sürüm.
+altında **Mutfağım / Mutfak Sırları / Uygulama** grupları, en altta çıkış + sürüm.
 TabBar birincil, drawer **ikincil/yönetim** katmanı.
 
 Drawer içeriği — Store, Gourmet, Akademi, Sağlık satırları **yok**:
 **Mutfağım:** Profilim · Tarif Defterim · Alışveriş Listem · Tariflerim
-**Keşfet:** Püf Noktaları · Mutfak Ansiklopedisi · Video Mutfağı · Dada Route
+**Mutfak Sırları:** Püf Noktaları · Mutfak Ansiklopedisi · Video Mutfağı · Dada Route
 **Uygulama:** Ayarlar · Yardım · Hakkımızda
 
 ### Alt çekmece (bottom sheet)
@@ -316,7 +375,7 @@ Filtreler, malzeme listesi. Max %82 yükseklik, üstte tutamak, dışına dokunm
 |---|---|---|
 | Ana Sayfa | kök | Hero (arama kartı + sayaç) · hızlı erişim · kategori rayı · öne çıkanlar · dolapta ne var · mutfak sırları · videolar · günün tarifi · route · şefler · topluluk |
 | Tarifler | kök | Yapışkan arama + kategori rayı · sonuç sayacı + sıralama · aktif filtre pilleri · editör seçkisi geniş kartı · **2 kolonlu ızgara** · filtre çekmecesi |
-| Keşfet | kök | 🔨 **YENİ** — Sağlık sekmesinin yerine. Püf Noktaları · Ansiklopedi · Sözlük · Ölçü Birimleri · Sofra Düzeni · Video Mutfağı · Dada Route · Dolapta Ne Var |
+| Mutfak | kök | Ekran adı **Mutfak Sırları**. Sağlık sekmesinin yerine. Püf Noktaları · Ansiklopedi · Sözlük · Ölçü Birimleri · Sofra Düzeni · Video Mutfağı · Dada Route · Dolapta Ne Var |
 | Hesap | kök | Kapak + taşkın avatar · bio · **tek** "Profili Düzenle" butonu · seviye çubuğu · rozet rayı · 3 sayaç · kaydettiklerin rayı · paylaştıkların ızgarası · menü grupları |
 | Tarif Detay | push | Hero 352 · yazar · künye tek satır şerit · sekmeler (Malzemeler/Yapılışı/Yorumlar) · topluluk · benzerler · alt eylem çubuğu. **DadaStore ürün rayı kaldırılacak** |
 | Ne Pişirsem | modal | Canlıdaki 4 adımlı sihirbaza yükseltilecek: Öğün/Kap → Süre → Zorluk → Damak + Yemek Modu sekmesi |
@@ -417,9 +476,9 @@ Hızlı karar vermeyi sağlar.
 ## 9. Faz sırası (HTML prototipi)
 
 0. **İskelet** — genel ekran kaydı · sınırsız derinlikte push/pop · `#/ekran` hash yönlendirme · tam olay delegasyonu · ortak komponent seti
-1. **Kök ekranları canlıya hizala** — sayaçlar · 33 kategori · Mutfak Sırları bölümü · Hızlı Erişim · **Sağlık sekmesini kaldır, Keşfet'i koy** · kaldırılan modüllerin izlerini temizle
+1. **Kök ekranları canlıya hizala** — sayaçlar · 33 kategori · Mutfak Sırları bölümü · Hızlı Erişim · **Sağlık sekmesini kaldır, Mutfak'ı koy** · kaldırılan modüllerin izlerini temizle
 2. Tarif akışı (arama · kategori dizini · yorumlar · Tarif Ekle)
-3. Keşfet & Mutfak Sırları — iki fazda
+3. Mutfak Sırları ekranları — iki fazda
 4. Ne Pişirsem yükseltmesi + Dolapta Ne Var
 5. Dada Route
 6. Topluluk (şefler · liderlik · onur listesi · rozetler)

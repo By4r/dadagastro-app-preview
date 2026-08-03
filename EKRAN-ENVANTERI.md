@@ -37,14 +37,14 @@ Bir şey yoksa **yok**.
 
 ## A. Kök sekmeler (TabBar)
 
-**Yeni alt çubuk:** `Ana Sayfa · Tarifler · [FAB: Ne Pişirsem?] · Keşfet · Hesap`
+**Yeni alt çubuk:** `Ana Sayfa · Tarifler · [FAB: Ne Pişirsem?] · Mutfak · Hesap`
 
 | # | Ekran | Durum | Not |
 |---|---|---|---|
 | A1 | Ana Sayfa | ✅ | Bölüm sırası canlıya göre güncellenecek |
 | A2 | Tarifler | ✅ | Filtre taksonomisi gerçek sayılara bağlanacak |
 | A3 | Ne Pişirsem (FAB → modal) | ✅ | Canlıdaki 4 adımlı sihirbaza yükseltilecek |
-| A4 | **Keşfet** | 🔨 | **YENİ** — Sağlık sekmesinin yerine |
+| A4 | **Mutfak** | ✅ | Ekran adı *Mutfak Sırları*. Sağlık sekmesinin yerine |
 | A5 | Hesap | ✅ | |
 
 ### A1 — Ana sayfa bölüm sırası (canlıdan, birebir)
@@ -62,10 +62,10 @@ Bir şey yoksa **yok**.
 
 > **Kaldırılacak prototip bölümleri:** "Sağlıklı Yaşam" bölümü · diyetisyen paneli · "Haftanı tek ekranda planla" Pro bandı.
 
-### A4 — Keşfet sekmesi içeriği
+### A4 — Mutfak sekmesi içeriği
 
-Sekme ikonu: `compass` (FA6 `\f14e`). Alt çubukta 9.5px etiketle okunması gereken tek glif —
-`magnifying-glass-location` bu boyutta bulanıklaşıyor.
+Sekme ikonu: `lightbulb` (FA6 `\f0eb`). Sekme adı **Mutfak**, ekran başlığı **Mutfak Sırları** —
+canlı sitenin kendi bölüm adı.
 
 Bölümler: **Püf Noktaları · Mutfak Ansiklopedisi · Mutfak Sözlüğü · Ölçü Birimleri ·
 Sofra Düzeni · Video Mutfağı · Dada Route · Dolapta Ne Var**
@@ -118,7 +118,7 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 
 ---
 
-## C. Keşfet & Mutfak Sırları
+## C. Mutfak Sırları
 
 | # | Ekran | Durum | Kaynak / ölçü |
 |---|---|---|---|
@@ -137,7 +137,7 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 | C13 | Seri detay (bölümler) | 🔨 | Bölüm bölüm liste, kaldığın yerden devam |
 | C14 | Dolapta Ne Var | 🔨 | `/dolapta-ne-var` — Dolaptakiler / Hariç Tuttuklarım sekmeleri · kategorili malzeme seçimi |
 
-> `Ölçü Birimleri` canlıda **Mutfak Sırları** altında duruyor, sağlık aracı değil — bu yüzden Keşfet'te.
+> `Ölçü Birimleri` canlıda **Mutfak Sırları** altında duruyor, sağlık aracı değil — bu yüzden Mutfak sekmesinde.
 
 ---
 
@@ -212,7 +212,7 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 ### Drawer'ın son hâli
 
 **Mutfağım:** Profilim · Tarif Defterim · Alışveriş Listem · Tariflerim
-**Keşfet:** Püf Noktaları · Mutfak Ansiklopedisi · Video Mutfağı · Dada Route
+**Mutfak Sırları:** Püf Noktaları · Mutfak Ansiklopedisi · Video Mutfağı · Dada Route
 **Uygulama:** Ayarlar · Yardım · Hakkımızda
 En altta: Çıkış Yap + sürüm
 
