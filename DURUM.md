@@ -57,6 +57,7 @@ node .tools/vqa.js        # 15 görsel kontrol × 50 ekran (rota otomatik keşfe
 node .tools/faz0.js       # derin link · yığın · alt çubuk · borç sayacı
 node .tools/faz1.js       # kaldırılan modül izi · bölüm sırası · sekme
 node .tools/akis.js       # 16 uçtan uca kullanıcı akışı
+node .tools/carpi.js      # her kapat/sil butonunun gerçekten bir eylemi var mı
 node .tools/cap.js <rota> # tam sayfa render (rota#paneId ile sekme seçilebilir)
 ```
 
@@ -254,6 +255,7 @@ Bunlar sahte değil — akış testleri doğruluyor:
 | Tarif Ekle | 5 adımlı sihirbaz, adım çipleri tıklanabilir |
 | Bildirimler | "Tümünü okundu işaretle" |
 | Tarifler | Üst bardaki görünüm anahtarı 2 kolon ↔ tek kolon |
+| Tarif Ekle / Yorum yaz | Malzeme satırı, adım ve fotoğraf **gerçekten** ekleniyor/siliniyor; adım numaraları kendini yeniliyor |
 
 ---
 
@@ -284,6 +286,7 @@ Bunlar sahte değil — akış testleri doğruluyor:
 | Yazar alt metni `body` rengini miras aldı | `vqa` 15. kontrolü artık yakalıyor |
 | `open()` yığındaki ekranı açmıyordu | Giriş ⇄ Üye Ol gibi çapraz bağlantılar ölü görünüyordu; artık oraya geri sarıyor |
 | `#barTray` `.on` sınıfını hiç almıyordu | `.scrbar` görünürlüğü `.on`'a bağlı — menü tepsisi çubuğuna dokunulamıyordu |
+| Kart köşesindeki sil butonu yalnız toast gösteriyordu | Fotoğraf, malzeme satırı ve adım silme "çalışmıyor" görünüyordu. `data-rm` ile gerçekten siliyor, `data-add` gerçekten ekliyor. `carpi.js` eylemsiz kapat/sil butonu bırakılmasını engelliyor |
 | `margin-top:auto` 0'a düştü | Auto'yu bir üstteki bloğa ver |
 | Boşluk dolguyla verildi | Kardeş boşluğu **margin** ile (§ 4.7) |
 

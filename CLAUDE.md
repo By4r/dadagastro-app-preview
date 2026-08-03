@@ -125,6 +125,7 @@ node .tools/vqa.js           # 15 görsel kontrol, tüm ekranlar (rota otomatik 
 node .tools/faz0.js          # rota · yığın · alt çubuk · borç sayacı
 node .tools/faz1.js          # kaldırılan modül izi · bölüm sırası · sekme
 node .tools/akis.js          # 16 uçtan uca kullanıcı akışı
+node .tools/carpi.js         # kapat/sil butonlarının eylemi var mı
 ```
 
 `vqa.js` 15 kontrol yapar. Son ikisi bu turda eklendi:
@@ -139,6 +140,10 @@ node .tools/akis.js          # 16 uçtan uca kullanıcı akışı
 yazar alt metni (1,21:1) ve porsiyon sayacının renksiz `+/−` butonları (1,21:1).
 Foto üstü beyaz yazı ve kasten soluk durumlar (devre dışı harf, pasif fiyat
 işareti) muaf.
+
+> **Kapat/sil butonu toast'la geçiştirilmez.** Kart köşesindeki çarpı gerçekten
+> silmeli, "ekle" gerçekten eklemeli. `carpi.js` eylemsiz buton bırakılmasını
+> engeller — `data-rm` / `data-add` kalıbını kullan.
 
 **"Render aldım" yetmez. Bakıp değerlendireceksin.**
 

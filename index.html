@@ -1950,9 +1950,9 @@
     <div class="fm-f">
       <span class="fm-lb">Fotoğraf ekle <i>en fazla 4</i></span>
       <div class="ph-grid">
-        <span class="ph-t" data-bg="url('assets/img/1425.webp')"><button class="rm" data-toast="Fotoğraf kaldırıldı"><i class="fs i-xmark"></i></button></span>
-        <button class="ph-add" data-toast="Galeri açılıyor"><i class="fs i-images"></i><span>GALERİ</span></button>
-        <button class="ph-add" data-toast="Kamera açılıyor"><i class="fs i-camera"></i><span>ÇEK</span></button>
+        <span class="ph-t" data-bg="url('assets/img/1425.webp')"><button class="rm" data-rm=".ph-t" data-rm-say="Fotoğraf kaldırıldı" aria-label="Fotoğrafı kaldır"><i class="fs i-xmark"></i></button></span>
+        <button class="ph-add" data-add="foto"><i class="fs i-images"></i><span>GALERİ</span></button>
+        <button class="ph-add" data-add="foto"><i class="fs i-camera"></i><span>ÇEK</span></button>
         <span class="ph-add" style="border-style:solid;border-color:var(--line);color:#D6D1C9"><i class="fs i-plus"></i></span>
       </div>
     </div>
@@ -2030,15 +2030,15 @@
       <div class="fm-f"><span class="fm-lb">Grup adı</span>
         <input class="fm-in" type="text" value="Hamur için" /></div>
       <div class="fm-f"><span class="fm-lb">Malzemeler</span>
-        <div class="ra-ig"><input class="fm-in qt" type="text" value="3" /><input class="fm-in un" type="text" value="su bardağı" /><input class="fm-in nm" type="text" value="Un" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
-        <div class="ra-ig"><input class="fm-in qt" type="text" value="1" /><input class="fm-in un" type="text" value="adet" /><input class="fm-in nm" type="text" value="Yumurta" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
-        <div class="ra-ig"><input class="fm-in qt" type="text" value="1" /><input class="fm-in un" type="text" value="çay kaşığı" /><input class="fm-in nm" type="text" value="Tuz" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
-        <button class="ra-add" data-toast="Yeni malzeme satırı eklendi"><i class="fs i-plus"></i> Malzeme ekle</button></div>
+        <div class="ra-ig"><input class="fm-in qt" type="text" value="3" /><input class="fm-in un" type="text" value="su bardağı" /><input class="fm-in nm" type="text" value="Un" /><button class="rm" data-rm=".ra-ig" data-rm-say="Malzeme çıkarıldı" aria-label="Malzemeyi çıkar"><i class="fs i-xmark"></i></button></div>
+        <div class="ra-ig"><input class="fm-in qt" type="text" value="1" /><input class="fm-in un" type="text" value="adet" /><input class="fm-in nm" type="text" value="Yumurta" /><button class="rm" data-rm=".ra-ig" data-rm-say="Malzeme çıkarıldı" aria-label="Malzemeyi çıkar"><i class="fs i-xmark"></i></button></div>
+        <div class="ra-ig"><input class="fm-in qt" type="text" value="1" /><input class="fm-in un" type="text" value="çay kaşığı" /><input class="fm-in nm" type="text" value="Tuz" /><button class="rm" data-rm=".ra-ig" data-rm-say="Malzeme çıkarıldı" aria-label="Malzemeyi çıkar"><i class="fs i-xmark"></i></button></div>
+        <button class="ra-add" data-add="ig"><i class="fs i-plus"></i> Malzeme ekle</button></div>
       <div class="fm-f"><span class="fm-lb">İkinci grup</span>
         <input class="fm-in" type="text" value="İç harç için" />
-        <div class="ra-ig"><input class="fm-in qt" type="text" value="250" /><input class="fm-in un" type="text" value="g" /><input class="fm-in nm" type="text" value="Kıyma" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
-        <div class="ra-ig"><input class="fm-in qt" type="text" value="1" /><input class="fm-in un" type="text" value="adet" /><input class="fm-in nm" type="text" value="Soğan" /><button class="rm" data-toast="Malzeme çıkarıldı"><i class="fs i-xmark"></i></button></div>
-        <button class="ra-add" data-toast="Yeni malzeme satırı eklendi"><i class="fs i-plus"></i> Malzeme ekle</button></div>
+        <div class="ra-ig"><input class="fm-in qt" type="text" value="250" /><input class="fm-in un" type="text" value="g" /><input class="fm-in nm" type="text" value="Kıyma" /><button class="rm" data-rm=".ra-ig" data-rm-say="Malzeme çıkarıldı" aria-label="Malzemeyi çıkar"><i class="fs i-xmark"></i></button></div>
+        <div class="ra-ig"><input class="fm-in qt" type="text" value="1" /><input class="fm-in un" type="text" value="adet" /><input class="fm-in nm" type="text" value="Soğan" /><button class="rm" data-rm=".ra-ig" data-rm-say="Malzeme çıkarıldı" aria-label="Malzemeyi çıkar"><i class="fs i-xmark"></i></button></div>
+        <button class="ra-add" data-add="ig"><i class="fs i-plus"></i> Malzeme ekle</button></div>
       <div class="fm-f"><button class="ra-add" data-toast="Yeni grup eklendi" style="border-color:rgba(225,72,39,.34)"><i class="fs i-layer-group"></i> Yeni malzeme grubu</button></div>
     </div>
     <div class="vw-pad vw-bar"></div>
@@ -2048,21 +2048,21 @@
     <div class="ra-lead"><h3>Yapılışı</h3><p>Her adım tek iş anlatsın. Pişirme modu bu adımları tam ekran gösterecek.</p></div>
     <div class="fm-wrap">
       <div class="ra-st">
-        <div class="hd"><span class="n">1</span><b>Hamuru yoğur ve dinlendir</b><button class="rm" data-toast="Adım silindi"><i class="fs i-trash"></i></button></div>
+        <div class="hd"><span class="n">1</span><b>Hamuru yoğur ve dinlendir</b><button class="rm" data-rm=".ra-st" data-rm-say="Adım silindi" aria-label="Adımı sil"><i class="fs i-trash"></i></button></div>
         <textarea class="fm-ta" rows="4">Unu geniş bir kaba ele, ortasını havuz gibi aç. Yumurta, tuz ve suyu ekleyip kulak memesi yumuşaklığında bir hamur yoğur. Üzerini nemli bezle örtüp 10 dakika dinlendir.</textarea>
         <div class="tools"><button data-toast="Adım görseli eklendi"><i class="fs i-camera"></i> Görsel</button><button data-toast="Zamanlayıcı 15 dk olarak ayarlandı"><i class="fs i-clock"></i> 15 dk</button></div>
       </div>
       <div class="ra-st">
-        <div class="hd"><span class="n">2</span><b>İç harcı hazırla</b><button class="rm" data-toast="Adım silindi"><i class="fs i-trash"></i></button></div>
+        <div class="hd"><span class="n">2</span><b>İç harcı hazırla</b><button class="rm" data-rm=".ra-st" data-rm-say="Adım silindi" aria-label="Adımı sil"><i class="fs i-trash"></i></button></div>
         <textarea class="fm-ta" rows="3">Kıymayı rendelenmiş soğan, tuz ve karabiberle karıştır. Harcı çok yoğurma; gevşek harç pişerken daha sulu kalır.</textarea>
         <div class="tools"><button data-toast="Adım görseli eklendi"><i class="fs i-camera"></i> Görsel</button><button data-toast="Zamanlayıcı 5 dk olarak ayarlandı"><i class="fs i-clock"></i> 5 dk</button></div>
       </div>
       <div class="ra-st">
-        <div class="hd"><span class="n">3</span><b>Hamuru aç, kareler kes</b><button class="rm" data-toast="Adım silindi"><i class="fs i-trash"></i></button></div>
+        <div class="hd"><span class="n">3</span><b>Hamuru aç, kareler kes</b><button class="rm" data-rm=".ra-st" data-rm-say="Adım silindi" aria-label="Adımı sil"><i class="fs i-trash"></i></button></div>
         <textarea class="fm-ta" rows="3" placeholder="Bu adımda ne yapılıyor?">Hamuru ikiye böl, unlanmış tezgâhta 2 mm incelikte aç. 3×3 cm kareler kes, üzerini bezle ört.</textarea>
         <div class="tools"><button data-toast="Adım görseli eklendi"><i class="fs i-camera"></i> Görsel</button><button data-toast="Zamanlayıcı eklendi"><i class="fs i-clock"></i> Süre</button></div>
       </div>
-      <button class="ra-add" data-toast="4. adım eklendi"><i class="fs i-plus"></i> Adım ekle</button>
+      <button class="ra-add" data-add="step"><i class="fs i-plus"></i> Adım ekle</button>
       <div class="fm-f"><span class="fm-lb">Şefin notu</span>
         <textarea class="fm-ta" rows="3" placeholder="Tarifin püf noktası, saklama koşulu ya da servis önerisi."></textarea></div>
     </div>
@@ -2078,10 +2078,10 @@
     <div class="fm-wrap">
       <div class="fm-f"><span class="fm-lb">Galeri <i>en fazla 8</i></span>
         <div class="ph-grid">
-          <span class="ph-t" data-bg="url('assets/img/1637.webp')"><button class="rm" data-toast="Görsel kaldırıldı"><i class="fs i-xmark"></i></button></span>
-          <span class="ph-t" data-bg="url('assets/img/1749.webp')"><button class="rm" data-toast="Görsel kaldırıldı"><i class="fs i-xmark"></i></button></span>
-          <button class="ph-add" data-toast="Galeri açılıyor"><i class="fs i-images"></i><span>GALERİ</span></button>
-          <button class="ph-add" data-toast="Kamera açılıyor"><i class="fs i-camera"></i><span>ÇEK</span></button></div></div>
+          <span class="ph-t" data-bg="url('assets/img/1637.webp')"><button class="rm" data-rm=".ph-t" data-rm-say="Görsel kaldırıldı" aria-label="Görseli kaldır"><i class="fs i-xmark"></i></button></span>
+          <span class="ph-t" data-bg="url('assets/img/1749.webp')"><button class="rm" data-rm=".ph-t" data-rm-say="Görsel kaldırıldı" aria-label="Görseli kaldır"><i class="fs i-xmark"></i></button></span>
+          <button class="ph-add" data-add="foto"><i class="fs i-images"></i><span>GALERİ</span></button>
+          <button class="ph-add" data-add="foto"><i class="fs i-camera"></i><span>ÇEK</span></button></div></div>
       <div class="fm-f"><span class="fm-lb">Video bağlantısı</span>
         <label class="fm-ic"><i class="fs i-video"></i><input class="fm-in" type="text" placeholder="YouTube ya da Vimeo bağlantısı" /></label>
         <p class="fm-hint">Video eklersen tarif kartında oynat rozeti çıkar, Video Mutfağı seçkisine girme şansın olur.</p></div>

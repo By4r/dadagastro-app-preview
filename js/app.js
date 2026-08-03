@@ -1380,6 +1380,95 @@
   if (el('obSkip')) el('obSkip').addEventListener('click', obBitir);
   obGoster(1);
 
+
+  /* ================= SİL / EKLE =================
+     Kart köşesindeki çarpı yalnız toast gösteriyordu — kullanıcıya "buton
+     çalışmıyor" gibi görünüyor. data-rm kapsayıcıyı gerçekten kaldırır,
+     data-add gerçekten satır ekler. */
+  var FOTO = ['assets/img/1970.webp', 'assets/img/1598.webp', 'assets/img/1494.webp',
+              'assets/img/1587.webp', 'assets/img/1738.webp'];
+  var fotoIx = 0;
+
+  function raNumaraSync() {
+    all('#vAddRec .ra-st').forEach(function (st, i) {
+      var n = st.querySelector('.hd .n');
+      if (n) n.textContent = i + 1;
+    });
+    var ek = document.querySelector('#vAddRec [data-add="step"]');
+    if (ek) ek.innerHTML = '<i class="fs i-plus"></i> Adım ekle (' +
+      (all('#vAddRec .ra-st').length + 1) + '. adım)';
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-rm]');
+    if (b) {
+      e.preventDefault(); e.stopPropagation();
+      var kap = b.closest(b.dataset.rm);
+      if (!kap) return;
+      var kardes = kap.parentElement.querySelectorAll(b.dataset.rm).length;
+      if (kardes <= 1 && b.dataset.rm !== '.ph-t') {
+        say('Son satırı silemezsin — en az bir tane kalmalı');
+        return;
+      }
+      kap.remove();
+      if (b.dataset.rm === '.ra-st') raNumaraSync();
+      say(b.dataset.rmSay || 'Kaldırıldı');
+      return;
+    }
+
+    var a = e.target.closest('[data-add]');
+    if (!a) return;
+    e.preventDefault(); e.stopPropagation();
+    var tip = a.dataset.add;
+
+    if (tip === 'ig') {
+      var satir = document.createElement('div');
+      satir.className = 'ra-ig';
+      satir.innerHTML = '<input class="fm-in qt" type="text" placeholder="1" />' +
+        '<input class="fm-in un" type="text" placeholder="adet" />' +
+        '<input class="fm-in nm" type="text" placeholder="Malzeme" />' +
+        '<button class="rm" data-rm=".ra-ig" data-rm-say="Malzeme çıkarıldı" ' +
+        'aria-label="Malzemeyi çıkar"><i class="fs i-xmark"></i></button>';
+      a.parentElement.insertBefore(satir, a);
+      var ilk = satir.querySelector('.qt'); if (ilk) ilk.focus();
+      say('Malzeme satırı eklendi');
+      return;
+    }
+
+    if (tip === 'step') {
+      var kart = document.createElement('div');
+      kart.className = 'ra-st';
+      var no = all('#vAddRec .ra-st').length + 1;
+      kart.innerHTML = '<div class="hd"><span class="n">' + no + '</span>' +
+        '<b>Yeni adım</b><button class="rm" data-rm=".ra-st" data-rm-say="Adım silindi" ' +
+        'aria-label="Adımı sil"><i class="fs i-trash"></i></button></div>' +
+        '<textarea class="fm-ta" rows="3" placeholder="Bu adımda ne yapılıyor?"></textarea>' +
+        '<div class="tools"><button data-toast="Adım görseli eklendi">' +
+        '<i class="fs i-camera"></i> Görsel</button>' +
+        '<button data-toast="Zamanlayıcı eklendi"><i class="fs i-clock"></i> Süre</button></div>';
+      a.parentElement.insertBefore(kart, a);
+      raNumaraSync();
+      var ta = kart.querySelector('textarea'); if (ta) ta.focus();
+      say(no + '. adım eklendi');
+      return;
+    }
+
+    if (tip === 'foto') {
+      var grid = a.closest('.ph-grid');
+      if (!grid) return;
+      if (all('.ph-t', grid).length >= 4) { say('En fazla 4 fotoğraf ekleyebilirsin'); return; }
+      var t = document.createElement('span');
+      t.className = 'ph-t';
+      t.style.backgroundImage = "url('" + FOTO[fotoIx++ % FOTO.length] + "')";
+      t.innerHTML = '<button class="rm" data-rm=".ph-t" data-rm-say="Fotoğraf kaldırıldı" ' +
+        'aria-label="Fotoğrafı kaldır"><i class="fs i-xmark"></i></button>';
+      grid.insertBefore(t, grid.firstElementChild);
+      var bos = grid.querySelector('.ph-add:not([data-add])');
+      if (bos && all('.ph-t', grid).length + all('.ph-add[data-add]', grid).length > 4) bos.remove();
+      say('Fotoğraf eklendi');
+    }
+  }, true);
+
   /* ================= KLAVYE (masaüstü önizleme) ================= */
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
