@@ -313,6 +313,9 @@
       all('[data-pane]', scope).forEach(function (x) { if (bizim(x)) x.classList.remove('on'); });
       all('.pane', scope).forEach(function (x) { if (bizim(x)) x.classList.remove('on'); });
       n.classList.add('on');
+      /* kaydırılan sekme şeridinde aktif sekme görünür alana gelsin */
+      var rail = n.closest('.segs-scroll');
+      if (rail) rail.scrollTo({ left: Math.max(0, n.offsetLeft - 90), behavior: 'smooth' });
       var pane = el(n.dataset.pane);
       if (pane) pane.classList.add('on');
       if (el('frMode') && FR_MOD[n.dataset.pane]) el('frMode').textContent = FR_MOD[n.dataset.pane];
@@ -927,7 +930,7 @@
     setTimeout(function () { filtrelereGec([q], null); }, 200);
   });
   document.addEventListener('click', function (e) {
-    var r = e.target.closest('#srRecent .sr-r, #vSearch .poprail .chip');
+    var r = e.target.closest('#srRecent .lrow, #vSearch .poprail .chip');
     if (!r || !el('srQ')) return;
     var t = (r.querySelector('b') || r).textContent.trim();
     el('srQ').value = t; srAra(t);
@@ -998,6 +1001,179 @@
     var tek = g.classList.toggle('one');
     this.innerHTML = tek ? '<i class="fs i-layer-group"></i>' : '<i class="fs i-layer-group"></i>';
     say(tek ? 'Tek kolon görünümü' : 'Izgara görünümü');
+  });
+
+
+  /* ================= ÖLÇÜ BİRİMLERİ (C7) =================
+     Canlı /olcu-birimleri verisi. Dönüştürücü gerçekten çeviriyor:
+     [su bardağı, yemek kaşığı, tatlı kaşığı, çay kaşığı] gram karşılıkları.
+     null = o ölçekte anlamlı değil (bir bardak karabiber ölçülmez). */
+  var OLCU = {
+    un: ['Unlar ve Tozlar', [
+      ['Un (buğday)', 125, 8, 4, 3], ['Tam Buğday Unu', 130, 9, 5, 3], ['Mısır Unu', 130, 9, 5, 3],
+      ['Nişasta', 130, 9, 5, 3], ['Pirinç Unu', 135, 9, 5, 3], ['Çavdar Unu', 120, 8, 4, 3],
+      ['Yulaf Unu', 95, 6, 3, 2], ['Karabuğday Unu', 125, 8, 4, 3], ['Badem Unu', 100, 7, 4, 2],
+      ['Hindistan Cevizi Unu', 130, 9, 5, 3], ['İrmik', 165, 16, 8, 5]]],
+    tahil: ['Tahıllar', [
+      ['Pirinç (Baldo)', 190, 20, 10, 6], ['Pirinç (Beyaz)', 185, 19, 10, 6], ['Bulgur (Pilavlık)', 170, 18, 9, 5],
+      ['Bulgur (Köftelik)', 145, 15, 8, 5], ['Yulaf', 90, 7, 4, 2], ['Kuskus', 175, 16, 8, 5],
+      ['Arpa (Pilavlık)', 200, 20, 10, 6], ['Kinoa', 175, 18, 9, 5], ['Karabuğday', 170, 17, 9, 5],
+      ['Aşurelik Buğday', 190, 19, 10, 6], ['Esmer Pirinç', 185, 19, 10, 6], ['Darı', 200, 20, 10, 6]]],
+    bakliyat: ['Bakliyatlar', [
+      ['Nohut', 180, 17, 9, 5], ['Yeşil Mercimek', 185, 18, 9, 5], ['Kırmızı Mercimek', 195, 19, 10, 6],
+      ['Kuru Fasulye', 175, 17, 9, 5], ['Barbunya', 175, 17, 9, 5], ['Börülce', 170, 16, 8, 5],
+      ['Meksika Fasulyesi', 175, 17, 9, 5], ['Kuru Bezelye', 195, 19, 10, 6]]],
+    seker: ['Şeker ve Tatlandırıcılar', [
+      ['Toz Şeker', 180, 15, 8, 5], ['Pudra Şekeri', 120, 8, 4, 3], ['Esmer Şeker', 165, 13, 7, 4],
+      ['Bal', 280, 22, 11, 7], ['Pekmez', 280, 22, 11, 7], ['Akçaağaç Şurubu', 265, 21, 10, 6],
+      ['Mısır Şurubu', 275, 21, 11, 7], ['Stevia', null, 6, 3, 2]]],
+    sivi: ['Sıvılar, Yağlar ve Sirkeler', [
+      ['Su', 200, 15, 5, 4], ['Zeytinyağı', 185, 14, 5, 4], ['Ayçiçek Yağı', 185, 14, 5, 4],
+      ['Tereyağı', 195, 15, 8, 5], ['Margarin', 190, 15, 8, 5], ['Domates Salçası', 230, 18, 9, 6],
+      ['Biber Salçası', 230, 18, 9, 6], ['Susam Yağı', 185, 14, 5, 4], ['Elma Sirkesi', 200, 15, 5, 4],
+      ['Üzüm Sirkesi', 200, 15, 5, 4], ['Balzamik Sirke', 200, 15, 5, 4], ['Limon Suyu', 200, 15, 5, 4]]],
+    sut: ['Süt ve Süt Ürünleri', [
+      ['Süt', 200, 15, 5, 4], ['Yoğurt', 210, 16, 8, 5], ['Ayran', 200, 15, 5, 4], ['Krema', 200, 15, 8, 5],
+      ['Süt Tozu', 110, 8, 4, 3], ['Kaymak', 200, 15, 8, 5], ['Rendelenmiş Peynir', 115, 8, 4, 3],
+      ['Kefir', 200, 15, 5, 4]]],
+    kuru: ['Kuruyemişler ve Tohumlar', [
+      ['Ceviz', 100, 8, 4, 2], ['Fındık', 140, 10, 5, 3], ['Badem', 150, 11, 5, 3],
+      ['Antep Fıstığı', 120, 9, 5, 3], ['Kaju', 115, 8, 4, 3], ['Yer Fıstığı', 145, 11, 5, 3],
+      ['Çam Fıstığı', 140, 10, 5, 3], ['Ay Çekirdeği', 130, 9, 5, 3], ['Kabak Çekirdeği', 125, 9, 5, 3],
+      ['Susam', 145, 9, 5, 3], ['Haşhaş', 145, 9, 5, 3], ['Chia Tohumu', 150, 9, 5, 3],
+      ['Keten Tohumu', 140, 9, 5, 3], ['Hindistan Cevizi (Rende)', 55, 4, 2, 1], ['Kuru Üzüm', 150, 11, 6, 3],
+      ['Hurma', 150, 12, 6, 4], ['Kuru İncir', 150, 12, 6, 4]]],
+    baharat: ['Baharatlar', [
+      ['Karabiber', null, 7, 4, 2], ['Kaya Tuzu', 220, 18, 9, 5], ['Pul Biber', null, 6, 3, 2],
+      ['Tane Karabiber', null, 9, 5, 3], ['Tuz', 250, 20, 10, 5], ['Kimyon', null, 7, 4, 2],
+      ['Tarçın', null, 8, 4, 2.5]]],
+    hamur: ['Hamur ve Pastacılık', [
+      ['Kabartma Tozu', null, 12, 6, 4], ['Karbonat', null, 14, 7, 4], ['Vanilin', null, 8, 4, 2],
+      ['Kakao', 100, 7, 4, 2], ['Instant Maya', null, 9, 5, 3], ['Kuru Maya', null, 9, 5, 3],
+      ['Yaş Maya', null, 15, 8, 5]]],
+    kahvalti: ['Kahvaltılık Ürünler', [
+      ['Reçel', 260, 20, 10, 6], ['Tahin', 230, 18, 9, 6], ['Fıstık Ezmesi', 240, 16, 8, 5],
+      ['Çikolata Kreması', 250, 19, 10, 6], ['Krem Peynir', 195, 15, 8, 5]]],
+    sos: ['Soslar ve Hazır Ürünler', [
+      ['Ketçap', 240, 18, 9, 6], ['Mayonez', 220, 16, 8, 5], ['Hardal', 230, 17, 9, 6],
+      ['Soya Sosu', 200, 15, 5, 4], ['Nar Ekşisi', 250, 18, 9, 6], ['Acı Sos', 220, 16, 8, 5],
+      ['Barbekü Sosu', 235, 17, 9, 6], ['Teriyaki Sos', 240, 18, 9, 6], ['Ranch Sos', 200, 15, 8, 5],
+      ['Worcestershire Sos', 200, 15, 5, 4]]]
+  };
+  var OLCU_AD = { cup: 'su bardağı', tbsp: 'yemek kaşığı', dsp: 'tatlı kaşığı', tsp: 'çay kaşığı' };
+  var OLCU_IX = { cup: 1, tbsp: 2, dsp: 3, tsp: 4 };
+  /* sıvılarda gram yerine ml okunur — canlıdaki gösterim böyle */
+  var SIVI = ['Su', 'Elma Sirkesi', 'Üzüm Sirkesi', 'Balzamik Sirke', 'Limon Suyu',
+              'Süt', 'Ayran', 'Kefir', 'Soya Sosu', 'Worcestershire Sos'];
+
+  function olcuTumu() {
+    var l = [];
+    Object.keys(OLCU).forEach(function (k) {
+      OLCU[k][1].forEach(function (r) { l.push(r); });
+    });
+    return l.sort(function (a, b) { return a[0].localeCompare(b[0], 'tr'); });
+  }
+  function olcuBul(ad) {
+    var t = olcuTumu();
+    for (var i = 0; i < t.length; i++) if (t[i][0] === ad) return t[i];
+    return null;
+  }
+  function fmtG(n) {
+    n = Math.round(n * 10) / 10;
+    return String(n).replace('.', ',');
+  }
+  function cvRender() {
+    if (!el('cvIng')) return;
+    var r = olcuBul(el('cvIng').value);
+    if (!r) return;
+    var u = el('cvUnit').value, q = parseFloat(el('cvQty').value);
+    var g = r[OLCU_IX[u]];
+    var birim = SIVI.indexOf(r[0]) > -1 ? 'ml' : 'gram';
+    var qAd = { '1': '1', '0.5': 'yarım', '0.25': 'çeyrek', '2': '2', '3': '3', '4': '4' }[el('cvQty').value];
+    if (g === null) {
+      el('cvOut').textContent = 'Bardakla ölçülmez';
+      el('cvNote').textContent = r[0] + ' bardak ölçüsünde anlamlı değil — kaşık ölçüsünü kullan.';
+    } else {
+      el('cvOut').textContent = fmtG(g * q) + ' ' + birim;
+      el('cvNote').textContent = qAd + ' ' + OLCU_AD[u] + ' ' + r[0].toLocaleLowerCase('tr') +
+        ' ≈ ' + fmtG(g * q) + ' ' + birim + '. Değerler ortalamadır; nem ve sıkışıklığa göre ±%10 oynar.';
+    }
+    el('cvEq').innerHTML = ['cup', 'tbsp', 'dsp', 'tsp'].map(function (k) {
+      var v = r[OLCU_IX[k]];
+      return '<div><b>' + (v === null ? '—' : fmtG(v)) + '</b><span>1 ' + OLCU_AD[k] + '</span></div>';
+    }).join('');
+  }
+  if (el('cvIng')) {
+    el('cvIng').innerHTML = olcuTumu().map(function (r) {
+      return '<option' + (r[0] === 'Un (buğday)' ? ' selected' : '') + '>' + r[0] + '</option>';
+    }).join('');
+    ['cvIng', 'cvQty', 'cvUnit'].forEach(function (id) {
+      el(id).addEventListener('change', cvRender);
+    });
+    cvRender();
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-cv]');
+    if (!b || !el('cvIng')) return;
+    all('#cvPop .fopt').forEach(function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    el('cvIng').value = b.dataset.cv;
+    cvRender();
+  });
+
+  /* dönüşüm tabloları */
+  function tbRender(k) {
+    if (!el('tbBody')) return;
+    var g = OLCU[k];
+    el('tbTitle').textContent = g[0] + ' — ' + g[1].length + ' malzeme';
+    el('tbBody').innerHTML = g[1].map(function (r) {
+      var sivi = SIVI.indexOf(r[0]) > -1 ? ' ml' : ' g';
+      return '<tr><td>' + r[0] + '</td>' + [1, 2, 3, 4].map(function (i) {
+        return r[i] === null ? '<td class="dash">—</td>' : '<td>' + fmtG(r[i]) + sivi + '</td>';
+      }).join('') + '</tr>';
+    }).join('');
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-tb]');
+    if (!b) return;
+    all('#tbCats .fopt').forEach(function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    tbRender(b.dataset.tb);
+  });
+  tbRender('un');
+
+  /* ================= LİSTE FİLTRESİ =================
+     data-filter="<listeId>" taşıyan her arama alanı o listeyi süzer.
+     Ansiklopedi, sözlük, alışveriş listesi — hepsi aynı davranış. */
+  all('[data-filter]').forEach(function (inp) {
+    inp.addEventListener('input', function () {
+      var kutu = el(this.dataset.filter);
+      if (!kutu) return;
+      var q = this.value.trim().toLocaleLowerCase('tr');
+      var bulunan = 0, sonHarf = null, harfVar = {};
+      all('.lrow', kutu).forEach(function (r) {
+        var ok = !q || r.textContent.toLocaleLowerCase('tr').indexOf(q) > -1;
+        r.hidden = !ok;
+        if (ok) bulunan++;
+      });
+      /* harf başlığı: altında görünen satır kalmadıysa başlık da gizlensin */
+      all('.azh', kutu).forEach(function (h) {
+        var n = 0;
+        for (var x = h.nextElementSibling; x && !x.classList.contains('azh'); x = x.nextElementSibling) {
+          if (x.classList.contains('lrow') && !x.hidden) n++;
+        }
+        h.hidden = !n;
+      });
+      var bos = kutu.querySelector('.lst-empty');
+      if (!bos) {
+        bos = document.createElement('div');
+        bos.className = 'lst-empty fr-empty';
+        bos.style.cssText = 'padding:30px 16px;text-align:center;display:block';
+        kutu.appendChild(bos);
+      }
+      bos.textContent = '“' + this.value.trim() + '” için sonuç yok. Daha kısa bir kelime dene.';
+      bos.hidden = !!bulunan;
+    });
   });
 
   /* ================= KLAVYE (masaüstü önizleme) ================= */

@@ -1076,7 +1076,10 @@ table.t tr:last-child td{border-bottom:0}
 .lrow{--lead:0px;position:relative;display:flex;align-items:center;gap:12px;width:100%;
   min-height:56px;padding:11px var(--gutter);background:var(--paper);text-align:left;border:0;
   font-family:"Gilroy";color:var(--ink);-webkit-tap-highlight-color:transparent}
-.lrow.ic-lead{--lead:46px} .lrow.av-lead{--lead:48px} .lrow.th-lead{--lead:60px}
+.lrow.ic-lead{--lead:46px}
+/* ayraç girintisi lead genişliğine göre — avatar ve görsel satırında da doğru olsun */
+.lrow.av-lead{--lead:48px}
+.lrow.th-lead{--lead:60px} .lrow.av-lead{--lead:48px} .lrow.th-lead{--lead:60px}
 .lrow+.lrow::before{content:"";position:absolute;top:0;height:1px;background:var(--line);
   left:calc(var(--gutter) + var(--lead));right:0}
 .lrow:active{background:var(--tomato-tint)}
@@ -1804,3 +1807,154 @@ table.t tr:last-child td{border-bottom:0}
 .rw-why b{display:block;font-family:"GilroyXB";font-size:11px;line-height:1.3;color:var(--ink)}
 .rw-why span{display:block;font-family:"GilroyLt";font-weight:300;font-size:10px;line-height:1.4;
   color:var(--muted);margin-top:5px}
+
+/* ============================================================
+   FAZ 3 — MUTFAK SIRLARI
+   püf detay · ansiklopedi · sözlük · ölçü birimleri · sofra düzeni
+   ============================================================ */
+
+/* A–Z dizini itilen ekranda üst barın altına oturur (kit ekranında top:0'dı) */
+.view.pushed .azb,.view.sheet .azb{top:98px}
+.view.pushed .azh,.view.sheet .azh{top:143px}
+@supports (padding:max(0px)){
+  .view.pushed .azb,.view.sheet .azb{top:calc(max(20px, env(safe-area-inset-top)) + var(--appbar-h))}
+  .view.pushed .azh,.view.sheet .azh{top:calc(max(20px, env(safe-area-inset-top)) + var(--appbar-h) + 45px)}
+}
+
+/* ---------- MAKALE GÖVDESİ (püf detay · ansiklopedi · sözlük · sofra) ---------- */
+.ar-b{padding:0 var(--gutter)}
+.ar-b h3{font-family:"GilroyXB";font-size:17px;line-height:1.24;letter-spacing:-.01em;
+  color:var(--ink);margin-top:24px}
+.ar-b h3:first-child{margin-top:0}
+.ar-b p{margin-top:12px;font-family:"GilroyLt";font-weight:300;font-size:14px;line-height:1.68;color:var(--ink-2)}
+.ar-b p b{font-family:"GilroyXB";font-weight:800;color:var(--ink)}
+.ar-b ul{margin:12px 0 0;padding:0;list-style:none}
+.ar-b li{position:relative;padding-left:20px;margin-top:10px;font-family:"GilroyLt";font-weight:300;
+  font-size:14px;line-height:1.6;color:var(--ink-2)}
+.ar-b li::before{content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;border-radius:2px;
+  background:var(--tomato)}
+.ar-b li b{font-family:"GilroyXB";font-weight:800;color:var(--ink)}
+.ar-note{margin:20px var(--gutter) 0;padding:14px 16px;background:var(--tomato-tint);
+  border:1px solid rgba(225,72,39,.22);border-radius:var(--r-lg)}
+.ar-note .ar-k{display:inline-flex;align-items:center;gap:7px;font-family:"GilroyXB";font-size:9.5px;
+  letter-spacing:.10em;text-transform:uppercase;color:var(--tomato)}
+.ar-note p{margin-top:9px;font-family:"GilroyLt";font-weight:300;font-size:13px;line-height:1.6;color:var(--ink-2)}
+.ar-note.ar-dk{background:var(--ink);border-color:transparent}
+.ar-note.ar-dk .ar-k{color:#FF8763}
+.ar-note.ar-dk p{color:rgba(255,255,255,.78)}
+.ar-note.ar-dk p b{color:var(--on-dark)}
+
+/* makale künyesi — okunma · tarih · kategori */
+.ar-meta{display:flex;flex-wrap:wrap;gap:8px;padding:0 var(--gutter);margin-top:12px}
+.ar-meta span{display:inline-flex;align-items:center;gap:6px;font-family:"GilroyLt";font-weight:300;
+  font-size:11.5px;color:var(--muted)}
+.ar-meta span i{font-size:11px;color:#C9C4BC}
+.ar-hero{position:relative;height:220px;background-size:cover;background-position:center;
+  background-color:var(--ink)}
+.ar-hero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,18,12,.10) 40%,rgba(20,18,12,.78))}
+.ar-hero .ar-k{position:absolute;left:var(--gutter);bottom:16px;z-index:2;font-family:"GilroyXB";
+  font-size:9.5px;letter-spacing:.10em;text-transform:uppercase;color:#FFF;background:var(--tomato);
+  padding:6px 10px;border-radius:var(--r-sm)}
+.ar-title{padding:20px var(--gutter) 0}
+.ar-title h1{font-family:"GilroyXB";font-size:25px;line-height:1.14;letter-spacing:-.02em;color:var(--ink)}
+
+/* ---------- KOYU SAYI PANELİ (liste ekranlarının çıpası) ---------- */
+.sx-b{margin:16px var(--gutter) 0;background:var(--ink);border-radius:var(--r-xl);padding:20px 18px}
+.sx-b h2{font-size:20px;line-height:1.18;letter-spacing:-.015em;color:#FFF}
+.sx-b p{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:12.5px;line-height:1.55;
+  color:rgba(255,255,255,.66)}
+.sx-n{display:flex;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
+.sx-n span{flex:1;min-width:0;font-family:"GilroyLt";font-weight:300;font-size:10.5px;line-height:1.35;
+  color:rgba(255,255,255,.62)}
+.sx-n span b{display:block;font-family:"GilroyXB";font-weight:800;font-size:18px;color:#FFF;
+  letter-spacing:-.02em;margin-bottom:5px}
+
+/* ---------- TABLO (ölçü birimleri) ---------- */
+/* geniş tablo kendi kapsayıcısında kayar — gövde asla yatay kaymaz */
+.tb-wrap{margin:0 var(--gutter);border:1px solid var(--line);border-radius:var(--r-lg);
+  overflow-x:auto;background:var(--paper);-webkit-overflow-scrolling:touch}
+.tb-wrap::-webkit-scrollbar{height:0}
+.tb-l{width:100%;border-collapse:collapse}
+.tb-l th{font-family:"GilroyXB";font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);text-align:right;padding:11px 7px;background:var(--bg);
+  border-bottom:1px solid var(--line);white-space:nowrap}
+.tb-l th:first-child{text-align:left;padding-left:12px}
+.tb-l th:last-child,.tb-l td:last-child{padding-right:12px}
+.tb-l td{font-family:"Gilroy";font-weight:500;font-size:11.5px;color:var(--ink-2);text-align:right;
+  padding:11px 7px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tb-l td:first-child{text-align:left;padding-left:12px;font-family:"GilroyXB";font-size:12px;
+  color:var(--ink);white-space:normal;min-width:118px}
+.tb-l td small{display:block;font-family:"GilroyLt";font-weight:300;font-size:10.5px;
+  color:var(--muted);margin-top:4px}
+.tb-l tr:last-child td{border-bottom:0}
+.tb-l td.dash{color:#C9C4BC}
+
+/* ---------- DÖNÜŞTÜRÜCÜ ---------- */
+.cv-p{margin:0 var(--gutter);background:var(--ink);border-radius:var(--r-xl);padding:18px}
+.cv-p .cv-lb{display:block;font-family:"GilroyXB";font-size:10px;letter-spacing:.10em;text-transform:uppercase;
+  color:rgba(255,255,255,.52);margin-bottom:8px}
+.cv-p select{width:100%;height:48px;padding:0 36px 0 13px;border-radius:var(--r-md);border:0;
+  background:rgba(255,255,255,.08);color:#FFF;font-family:"GilroyXB";font-size:14px;
+  -webkit-appearance:none;appearance:none;outline:0}
+.cv-p select option{color:#211E16}
+.cv-p .cv-sel{position:relative}
+.cv-p .cv-sel>i{position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(90deg);
+  color:rgba(255,255,255,.52);font-size:11px;pointer-events:none}
+.cv-p .cv-2{display:flex;gap:10px;margin-top:16px}
+.cv-p .cv-2>div{flex:1;min-width:0}
+.cv-out{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
+.cv-out b{display:block;font-family:"GilroyXB";font-size:30px;line-height:1.1;letter-spacing:-.02em;
+  color:#FFF}
+.cv-out span{display:block;font-family:"GilroyLt";font-weight:300;font-size:12px;line-height:1.55;
+  color:rgba(255,255,255,.62);margin-top:8px}
+.cv-eq{display:flex;gap:8px;margin-top:16px}
+.cv-eq div{flex:1;min-width:0;background:rgba(255,255,255,.07);border-radius:var(--r-md);
+  padding:11px 8px;text-align:center}
+.cv-eq b{display:block;font-family:"GilroyXB";font-size:14px;color:#FFF}
+.cv-eq span{display:block;font-family:"GilroyLt";font-weight:300;font-size:9.5px;
+  color:rgba(255,255,255,.55);margin-top:5px;line-height:1.3}
+
+/* ---------- STANDART ÖLÇÜ KARTI ---------- */
+.ms-row{display:flex;align-items:center;gap:14px;padding:14px var(--gutter);background:var(--paper);
+  border-bottom:1px solid var(--line)}
+.ms-row .ic{flex:none;width:48px;height:48px;border-radius:var(--r-md);background:var(--tomato-tint);
+  color:var(--tomato);display:grid;place-items:center;font-size:19px}
+.ms-row .tx{flex:1;min-width:0}
+.ms-row .tx b{display:block;font-family:"GilroyXB";font-size:14.5px;color:var(--ink)}
+.ms-row .tx span{display:block;font-family:"GilroyLt";font-weight:300;font-size:11.5px;line-height:1.45;
+  color:var(--muted);margin-top:5px}
+.ms-row .v{flex:none;font-family:"GilroyXB";font-size:15px;color:var(--tomato)}
+
+/* ---------- SOFRA DÜZENİ ---------- */
+.sd-rules{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 var(--gutter)}
+.sd-rules div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:12px}
+.sd-rules .ic{width:32px;height:32px;border-radius:var(--r-md);background:var(--tomato-tint);
+  color:var(--tomato);display:grid;place-items:center;font-size:13px;margin-bottom:10px}
+.sd-rules b{display:block;font-family:"GilroyXB";font-size:12.5px;color:var(--ink);line-height:1.3}
+.sd-rules span{display:block;font-family:"GilroyLt";font-weight:300;font-size:11px;line-height:1.45;
+  color:var(--muted);margin-top:6px}
+.sd-step{display:flex;gap:12px;padding:0 var(--gutter);margin-top:16px}
+.sd-step .n{flex:none;width:28px;height:28px;border-radius:var(--r-sm);background:var(--ink);color:#FFF;
+  font-family:"GilroyXB";font-size:12px;display:grid;place-items:center}
+.sd-step .tx{flex:1;min-width:0}
+.sd-step .tx b{display:block;font-family:"GilroyXB";font-size:14px;color:var(--ink);line-height:1.3}
+.sd-step .tx p{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:13px;line-height:1.6;
+  color:var(--ink-2)}
+
+/* ---------- SÖZLÜK / ANSİKLOPEDİ SATIRI ---------- */
+.lrow.lr-two .tx span{white-space:normal;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical}
+.lrow .lr-k{flex:none;font-family:"GilroyXB";font-size:9.5px;letter-spacing:.04em;color:var(--ink-2);
+  background:var(--bg);border:1px solid var(--line);padding:4px 8px;border-radius:var(--r-sm)}
+
+/* sofra detayında adım ritmini kıran görsel şema */
+.sd-fig{margin:20px var(--gutter) 0;border:1px solid var(--line);border-radius:var(--r-lg);
+  overflow:hidden;background:var(--paper)}
+.sd-fig .im{height:150px;background-size:cover;background-position:center}
+.sd-fig .lg{display:flex;flex-wrap:wrap;gap:8px;padding:12px}
+.sd-fig .lg span{display:inline-flex;align-items:center;gap:6px;font-family:"GilroyLt";font-weight:300;
+  font-size:11px;color:var(--ink-2);background:var(--bg);border:1px solid var(--line);
+  padding:6px 9px;border-radius:var(--r-sm)}
+.sd-fig .lg span i{font-size:10px;color:var(--tomato)}
+/* arama süzgeci sonrası boş durum */
+.lst-empty{font-family:"GilroyLt";font-weight:300;font-size:12.5px;line-height:1.55;color:var(--muted)}
