@@ -1,253 +1,596 @@
-(function(){
-  var screen=document.getElementById('screen'), toast=document.getElementById('toast'), tmr;
-  function say(m){ toast.textContent=m; toast.classList.add('show'); clearTimeout(tmr); tmr=setTimeout(function(){toast.classList.remove('show')},2200); }
-  var V={home:'vHome',list:'vList',health:'vHealth',account:'vAccount',detail:'vDetail',wizard:'vWizard',cook:'vCook'};
-  function el(id){ return document.getElementById(id); }
-  var curRoot='vHome', stack=[];
+/* DadaGastro mobil prototipi — router + etkileşimler
+   ------------------------------------------------------------------
+   Faz 0 iskeleti:
+   · Ekranlar kendini data-route ile kaydeder — sabit liste yok
+   · Sınırsız derinlikte push/pop yığını
+   · #/ekran hash yönlendirme — tek ekran linki + tarayıcı geri tuşu
+   · Tam olay delegasyonu — yeni ekran eklemek için markup yeterli
+   ------------------------------------------------------------------ */
+(function () {
+  'use strict';
 
-  /* ---- üst bar / durum çubuğu senkronu ---- */
-  function bindBar(view){
-    var bar=view.querySelector('.vbar.overlay'); if(!bar) return;
-    var hero=view.querySelector('.hero,.rd-hero');
-    function s(){
-      var solid = view.scrollTop > 4;   /* KURAL: kaydırma başlar başlamaz solid */
+  var screen = document.getElementById('screen');
+  var toast = document.getElementById('toast');
+  var toastTimer;
+
+  function el(id) { return document.getElementById(id); }
+  function all(sel, root) { return [].slice.call((root || document).querySelectorAll(sel)); }
+  function raf2(fn) { requestAnimationFrame(function () { requestAnimationFrame(fn); }); }
+
+  function say(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+  }
+
+  /* ================= EKRAN KAYDI =================
+     Yeni ekran eklemek için js'e dokunmaya gerek yok:
+     <section class="view pushed" id="vXxx" data-route="xxx" data-parent="tarifler">  */
+  var ROUTE = {};   // route  -> element id
+  var BYID = {};    // element id -> route
+  all('.view[data-route]').forEach(function (v) {
+    ROUTE[v.dataset.route] = v.id;
+    BYID[v.id] = v.dataset.route;
+  });
+
+  function viewOf(route) { var id = ROUTE[route]; return id ? el(id) : null; }
+  function isRoot(v) { return v.classList.contains('root'); }
+
+  var DEFAULT_ROOT = el('vHome') ? 'ana-sayfa' : Object.keys(ROUTE)[0];
+  var curRoot = ROUTE[DEFAULT_ROOT];
+  var stack = [];   // kökün üstündeki ekranların id'leri
+
+  function topEl() { return stack.length ? el(stack[stack.length - 1]) : el(curRoot); }
+
+  /* ================= ÜST BAR / DURUM ÇUBUĞU =================
+     KURAL: şeffaf bar yalnız scrollTop = 0'da. 4px kaydırma → anında solid. */
+  function bindBar(view) {
+    var bar = view.querySelector('.vbar.overlay');
+    if (!bar || bar._sync) return;
+    function sync() {
+      var solid = view.scrollTop > 4;
       bar.classList.toggle('solid', solid);
-      if(view.classList.contains('on')) screen.classList.toggle('dark-status', !solid), screen.classList.toggle('light-status', solid);
+      if (view === topEl()) {
+        screen.classList.toggle('dark-status', !solid);
+        screen.classList.toggle('light-status', solid);
+      }
     }
-    view.addEventListener('scroll',s); bar._sync=s; s();
+    view.addEventListener('scroll', sync, { passive: true });
+    bar._sync = sync;
+    sync();
   }
-  document.querySelectorAll('.view').forEach(bindBar);
-  function syncStatus(){
-    var top = stack.length ? el(stack[stack.length-1]) : el(curRoot);
+  all('.view').forEach(bindBar);
+
+  function syncStatus() {
+    var top = topEl();
+    if (top.dataset.status === 'dark') {
+      screen.classList.add('dark-status');
+      screen.classList.remove('light-status');
+      return;
+    }
     var bar = top.querySelector('.vbar.overlay');
-    if(top.id==='vCook'){ screen.classList.add('dark-status'); screen.classList.remove('light-status'); return; }
-    if(bar){ bar._sync && bar._sync(); }
-    else { screen.classList.add('light-status'); screen.classList.remove('dark-status'); }
+    if (bar && bar._sync) { bar._sync(); return; }
+    screen.classList.add('light-status');
+    screen.classList.remove('dark-status');
   }
 
-  /* ---- kök sekmeler ---- */
-  function goRoot(id){
-    if(id===curRoot){ el(id).scrollTo({top:0,behavior:'smooth'}); return; }
-    el(curRoot).classList.remove('on'); el(id).classList.add('on'); curRoot=id;
-    document.querySelectorAll('.tab[data-root]').forEach(function(t){ t.classList.toggle('on', t.dataset.root===id); });
+  /* ================= HASH YÖNLENDİRME ================= */
+  var hashLock = false;
+
+  function readHash() {
+    var m = /^#\/([A-Za-z0-9\-]+)$/.exec(location.hash || '');
+    return m ? m[1] : null;
+  }
+
+  function writeHash(route) {
+    if (!route) return;
+    var h = '#/' + route;
+    if (location.hash === h) return;
+    hashLock = true;
+    location.hash = h;
+    setTimeout(function () { hashLock = false; }, 0);
+  }
+
+  window.addEventListener('hashchange', function () {
+    if (hashLock) return;
+    navigate(readHash(), true);
+  });
+
+  /* ================= EKRAN DURUMU =================
+     Her gezinme sonrası: yığın sınıfı · sabit alt çubuk · durum çubuğu · hash */
+  function after(noHash) {
+    var top = topEl();
+
+    screen.classList.toggle('stacked', stack.length > 0);
+
+    /* sabit alt çubuklar ekran katmanında durur (Safari containing-block kuralı),
+       o yüzden görünürlüğü buradan yönetiliyor: yalnız en üstteki ekranın çubuğu açık */
+    all('.scrbar.on').forEach(function (b) { b.classList.remove('on'); });
+    if (top.dataset.bar) {
+      var bar = document.querySelector(top.dataset.bar);
+      if (bar) bar.classList.add('on');
+    }
+
+    all('.view.top').forEach(function (v) { v.classList.remove('top'); });
+    top.classList.add('top');
+
+    all('.tab[data-root]').forEach(function (t) {
+      t.classList.toggle('on', t.dataset.root === curRoot);
+    });
+
     syncStatus();
+    if (!noHash) writeHash(BYID[top.id]);
   }
-  document.querySelectorAll('.tab[data-root]').forEach(function(t){
-    t.addEventListener('click',function(){ goRoot(t.dataset.root); });
-  });
-  document.querySelectorAll('[data-go]').forEach(function(a){
-    a.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); goRoot(V[a.dataset.go]); });
-  });
 
-  /* ---- itilen ekran ---- */
-  function push(id){
-    var v=el(id); v.scrollTop=0; v.classList.add('on');
-    el(curRoot).classList.add('behind'); screen.classList.add('stacked');
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ v.classList.add('in'); }); });
-    stack.push(id); screen.classList.add('on-detail'); setTimeout(syncStatus,30);
+  /* ================= KÖK SEKMELER ================= */
+  function goRoot(route, silent) {
+    var v = viewOf(route);
+    if (!v || !isRoot(v)) return;
+    if (v.id === curRoot && !stack.length) {
+      v.scrollTo({ top: 0, behavior: 'smooth' });   // aktif sekmeye tekrar dokun → başa sar
+      return;
+    }
+    el(curRoot).classList.remove('on', 'behind');
+    v.classList.add('on');
+    curRoot = v.id;
+    after(silent);
   }
-  function pop(){
-    var id=stack.pop(); if(!id) return; var v=el(id);
-    v.classList.remove('in'); el(curRoot).classList.remove('behind');
-    if(!stack.length) screen.classList.remove('stacked');
-    screen.classList.remove('on-detail');
-    setTimeout(function(){ v.classList.remove('on'); syncStatus(); },340);
-  }
-  /* ---- modal (sheet) ---- */
-  function openSheet(id){
-    var v=el(id); v.scrollTop=0; v.classList.add('on'); screen.classList.add('stacked');
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ v.classList.add('in'); }); });
-    stack.push(id);
-    if(id==='vCook') screen.classList.add('on-cook');
-    if(id==='vWizard') screen.classList.add('on-wizard');
-    setTimeout(syncStatus,30);
-  }
-  function closeSheet(){
-    var id=stack.pop(); if(!id) return; var v=el(id);
-    v.classList.remove('in');
-    screen.classList.remove('on-cook','on-wizard');
-    if(stack[stack.length-1]==='vDetail') screen.classList.add('on-detail');
-    if(!stack.length){ screen.classList.remove('stacked'); el(curRoot).classList.remove('behind'); }
-    setTimeout(function(){ v.classList.remove('on'); syncStatus(); },380);
-  }
-  document.addEventListener('click',function(e){
-    var o=e.target.closest('[data-open]'); if(o){ e.preventDefault(); e.stopPropagation();
-      var k=o.dataset.open;
-      if(k==='detail') push('vDetail');
-      else if(k==='cook'){ if(stack[stack.length-1]==='vCook') return; openSheet('vCook'); ckRender(); }
-      else openSheet(V[k]);
-      return; }
-    var b=e.target.closest('[data-back]'); if(b){ e.preventDefault(); pop(); return; }
-    var c=e.target.closest('[data-close]'); if(c){ e.preventDefault(); closeSheet(); return; }
-    var s=e.target.closest('[data-say]'); if(s){ e.preventDefault(); say(s.dataset.say); }
-  });
 
-  /* ---- ana sayfa etkileşimleri ---- */
-  document.querySelectorAll('.mode').forEach(function(m){
-    m.addEventListener('click',function(){
-      document.querySelectorAll('.mode').forEach(function(x){x.classList.remove('on')}); m.classList.add('on');
-      var ph={'Tarif Ara':'Tarif adı ara… (ör. mercimek çorbası)','Malzemeye Göre':'Malzeme ekle… (ör. yumurta, patates)','Ne Pişirsem':'Canın ne çekti? (ör. hafif, pratik)'};
-      var i=document.getElementById('q'); if(i) i.placeholder=ph[m.textContent.trim()]||i.placeholder;
+  /* ================= İTİLEN EKRAN / MODAL ================= */
+  function push(route, silent, instant) {
+    var v = viewOf(route);
+    if (!v || v.classList.contains('on')) return;
+    var below = topEl();
+    v.scrollTop = 0;
+    v.classList.add('on');
+    if (!v.classList.contains('sheet')) below.classList.add('behind');
+    stack.push(v.id);
+    if (instant) v.classList.add('in');            // derin link — geçiş animasyonu yok
+    else raf2(function () { v.classList.add('in'); });
+    after(silent);
+    setTimeout(function () { after(true); }, 380);
+  }
+
+  function pop(silent) {
+    if (!stack.length) return;
+    closeLayers();
+    var v = el(stack.pop());
+    v.classList.remove('in', 'top');
+    topEl().classList.remove('behind');
+    after(silent);
+    setTimeout(function () {
+      if (!v.classList.contains('in')) v.classList.remove('on');
+      after(true);
+    }, 380);
+  }
+
+  function popAll(silent) { while (stack.length) pop(silent); }
+
+  /* ================= GEZİNME =================
+     İki ayrı iş, karıştırılmamalı:
+
+     open()     — kullanıcı bir butona bastı. Ekran mevcut yığının ÜSTÜNE binet.
+     navigate() — bir hash çözülüyor (derin link, tarayıcı geri, yapıştırılan URL).
+                  Yığın hedefin kanonik zincirine göre baştan kurulur, böylece
+                  aynı link her zaman aynı ekran durumunu açar.                     */
+
+  /* kök → … → route zinciri; data-parent başka bir itilen ekranı da gösterebilir */
+  function chainFor(route) {
+    var chain = [], guard = 0, r = route;
+    while (r && guard++ < 8) {
+      var v = viewOf(r);
+      if (!v) break;
+      chain.unshift(r);
+      if (isRoot(v)) break;
+      r = v.dataset.parent || DEFAULT_ROOT;
+    }
+    return chain;
+  }
+
+  function open(route) {
+    var v = route && viewOf(route);
+    if (!v) return;
+    closeLayers();
+    if (isRoot(v)) { popAll(); goRoot(route); return; }
+    push(route);
+  }
+
+  function navigate(route, fromHash) {
+    var v = route && viewOf(route);
+    if (!v) { goRoot(DEFAULT_ROOT, fromHash); return; }
+    closeLayers();
+    if (topEl() === v) return;
+
+    var i = stack.indexOf(v.id);
+    if (i > -1) {                                    // yığında zaten var → oraya kadar geri sar
+      while (stack.length - 1 > i) pop(true);
+      after(fromHash);
+      return;
+    }
+
+    var chain = chainFor(route);
+    popAll(true);
+    goRoot(chain[0], true);
+    for (var k = 1; k < chain.length; k++) push(chain[k], true, true);
+    after(fromHash);
+  }
+
+  /* ================= KATMANLAR (drawer · sheet · diyalog) ================= */
+  function layerOpen(elm, ov) { if (elm) elm.classList.add('on'); if (ov) ov.classList.add('on'); }
+  function layerClose(elm, ov) { if (elm) elm.classList.remove('on'); if (ov) ov.classList.remove('on'); }
+
+  /* gezinme olduğunda üstte asılı kalan katman kalmamalı */
+  function closeLayers() {
+    all('.dlg.on,.bsheet.on,.appdrawer.on,.drawer.on').forEach(function (x) { x.classList.remove('on'); });
+    ['dlgOv', 'bsOv', 'dwOv', 'ckOv'].forEach(function (id) {
+      var o = el(id); if (o) o.classList.remove('on');
     });
+  }
+
+  function closeTopLayer() {
+    var dlg = document.querySelector('.dlg.on');
+    if (dlg) { layerClose(dlg, el('dlgOv')); return true; }
+    var sheet = document.querySelector('.bsheet.on');
+    if (sheet) { layerClose(sheet, el('bsOv')); return true; }
+    var dw = document.querySelector('.appdrawer.on');
+    if (dw) { layerClose(dw, el('dwOv')); return true; }
+    return false;
+  }
+
+  /* ================= TEK OLAY DELEGASYONU =================
+     Yeni ekranın butonları kendiliğinden çalışır — bağlama kodu yazılmaz. */
+  document.addEventListener('click', function (e) {
+    var t = e.target, n;
+
+    /* --- gezinme --- */
+    if ((n = t.closest('[data-open]'))) { e.preventDefault(); open(n.dataset.open); return; }
+    if ((n = t.closest('[data-go]'))) { e.preventDefault(); popAll(); goRoot(n.dataset.go); return; }
+    if ((n = t.closest('[data-root]'))) { e.preventDefault(); popAll(); goRoot(BYID[n.dataset.root]); return; }
+    if (t.closest('[data-back],[data-close]')) { e.preventDefault(); pop(); return; }
+
+    /* --- app drawer --- */
+    if (t.closest('[data-drawer]')) { e.preventDefault(); layerOpen(el('appDrawer'), el('dwOv')); return; }
+    if (t.closest('[data-drawer-close]') || t === el('dwOv')) {
+      e.preventDefault(); layerClose(el('appDrawer'), el('dwOv')); return;
+    }
+    if ((n = t.closest('[data-drawer-go]'))) {
+      e.preventDefault();
+      var go = n.dataset.drawerGo;
+      layerClose(el('appDrawer'), el('dwOv'));
+      setTimeout(function () { open(go); }, 240);
+      return;
+    }
+
+    /* --- alt çekmece --- */
+    if ((n = t.closest('[data-bsheet]'))) { e.preventDefault(); layerOpen(el(n.dataset.bsheet), el('bsOv')); return; }
+    if (t.closest('[data-bsheet-close]') || t === el('bsOv')) {
+      e.preventDefault();
+      layerClose(document.querySelector('.bsheet.on'), el('bsOv'));
+      return;
+    }
+
+    /* --- onay diyaloğu --- */
+    if ((n = t.closest('[data-dlg]'))) { e.preventDefault(); layerOpen(el(n.dataset.dlg), el('dlgOv')); return; }
+    if ((n = t.closest('[data-dlg-close]')) || t === el('dlgOv')) {
+      e.preventDefault();
+      var d = document.querySelector('.dlg.on');
+      layerClose(d, el('dlgOv'));
+      if (n && n.dataset.dlgSay) say(n.dataset.dlgSay);
+      return;
+    }
+
+    /* --- akordeon --- */
+    if ((n = t.closest('[data-acc]'))) {
+      e.preventDefault();
+      var acc = n.closest('.acc');
+      var wasOpen = acc.classList.contains('on');
+      if (acc.parentElement.dataset.accSingle !== undefined) {
+        all('.acc.on', acc.parentElement).forEach(function (a) { a.classList.remove('on'); });
+      }
+      acc.classList.toggle('on', !wasOpen);
+      return;
+    }
+
+    /* --- A–Z harf dizini --- */
+    if ((n = t.closest('[data-az]'))) {
+      e.preventDefault();
+      jumpToLetter(n);
+      return;
+    }
+
+    /* --- sekme şeridi (data-pane) --- */
+    if ((n = t.closest('[data-pane]'))) {
+      e.preventDefault();
+      var scope = n.closest('[data-tabs]') || n.closest('.view') || document;
+      all('[data-pane]', scope).forEach(function (x) { x.classList.remove('on'); });
+      all('.pane', scope).forEach(function (x) { x.classList.remove('on'); });
+      n.classList.add('on');
+      var pane = el(n.dataset.pane);
+      if (pane) pane.classList.add('on');
+      return;
+    }
+
+    /* --- tek seçimli çip grubu --- */
+    if ((n = t.closest('[data-chips] > *'))) {
+      var grp = n.parentElement;
+      if (grp.dataset.chips === 'single') {
+        all('> *', grp).forEach(function (x) { x.classList.remove('on'); });
+        n.classList.add('on');
+      } else {
+        n.classList.toggle('on');
+      }
+      /* burada return YOK — çip aynı zamanda data-say/data-open taşıyabilir */
+    }
+
+    /* --- anahtar --- */
+    if ((n = t.closest('.sw'))) { e.preventDefault(); n.classList.toggle('on'); return; }
+
+    /* --- kaydet (kalp) --- */
+    if ((n = t.closest('.save,.icobtn.save'))) {
+      e.preventDefault(); e.stopPropagation();
+      var on = !n.classList.contains('on');
+      if (n.closest('#vDetail') || n.closest('.actionbar')) {
+        all('.save,.icobtn.save').forEach(function (x) {
+          x.classList.toggle('on', on);
+          x.innerHTML = on ? '<i class="fs i-heart"></i>' : '<i class="fr i-heart"></i>';
+        });
+      } else {
+        n.classList.toggle('on', on);
+        n.innerHTML = on ? '<i class="fs i-heart"></i>' : '<i class="fr i-heart"></i>';
+      }
+      say(on ? 'Tarif defterine kaydedildi' : 'Kayıt kaldırıldı');
+      return;
+    }
+
+    /* --- takip et --- */
+    if ((n = t.closest('.follow'))) {
+      e.preventDefault(); e.stopPropagation();
+      n.classList.toggle('on');
+      n.textContent = n.classList.contains('on') ? '✓ Takiptesin' : '+ Takip Et';
+      return;
+    }
+
+    /* --- malzeme satırı işaretle --- */
+    if ((n = t.closest('.ig'))) {
+      n.classList.toggle('done');
+      var c = el('igCount');
+      if (c) c.textContent = all('#vDetail .ig.done').length;
+      return;
+    }
+
+    /* --- adım "yaptım" --- */
+    if ((n = t.closest('.step .did'))) {
+      var st = n.closest('.step');
+      st.classList.toggle('done');
+      n.lastChild.textContent = st.classList.contains('done') ? ' Yapıldı' : ' Yaptım';
+      return;
+    }
+
+    /* --- hero arama modu --- */
+    if ((n = t.closest('.mode'))) {
+      all('.mode').forEach(function (x) { x.classList.remove('on'); });
+      n.classList.add('on');
+      var ph = {
+        'Tarif Ara': 'Tarif adı ara… (ör. mercimek çorbası)',
+        'Malzemeye Göre': 'Malzeme ekle… (ör. yumurta, patates)',
+        'Ne Pişirsem': 'Canın ne çekti? (ör. hafif, pratik)'
+      };
+      var q = el('q');
+      if (q) q.placeholder = ph[n.textContent.trim()] || q.placeholder;
+      return;
+    }
+
+    /* --- popüler arama çipi --- */
+    if ((n = t.closest('.poprail .chip'))) {
+      var qq = el('q');
+      if (qq) qq.value = n.textContent.trim();
+      popAll(); goRoot('tarifler');
+      return;
+    }
+
+    /* --- liste ekranı kategori çipi --- */
+    if ((n = t.closest('.lchips .chip'))) {
+      all('.lchips .chip').forEach(function (x) { x.classList.remove('on'); });
+      n.classList.add('on');
+      return;
+    }
+
+    /* --- ne pişirsem malzeme kutusu --- */
+    if ((n = t.closest('.itile'))) {
+      n.classList.toggle('on');
+      var k = all('.itile.on').length;
+      var lbl = el('wzTxt');
+      if (lbl) lbl.textContent = k >= 3 ? (k + ' malzemeyle tarif bul') : ('Malzeme seç (' + k + '/3)');
+      return;
+    }
+
+    /* --- son çare: bilgilendirme toast'ı --- */
+    if ((n = t.closest('[data-say]'))) { e.preventDefault(); say(n.dataset.say); }
   });
-  document.querySelectorAll('.poprail .chip').forEach(function(c){
-    c.addEventListener('click',function(){ var i=document.getElementById('q'); if(i) i.value=c.textContent.trim(); goRoot('vList'); });
-  });
-  document.querySelectorAll('.follow').forEach(function(b){
-    b.addEventListener('click',function(e){ e.stopPropagation(); b.classList.toggle('on'); b.textContent=b.classList.contains('on')?'✓ Takiptesin':'+ Takip Et'; });
-  });
-  function saveSync(on){
-    document.querySelectorAll('.save,.icobtn.save').forEach(function(x){
-      x.classList.toggle('on',on); x.innerHTML = on ? '<i class="fs i-heart"></i>' : '<i class="fr i-heart"></i>';
+
+  /* ================= A–Z DİZİNİ =================
+     Harfe dokun → listedeki o harfin başlığına kaydır.
+     Kaydırırken dizin kendini günceller (yapışkan harf başlığıyla senkron). */
+  function jumpToLetter(btn) {
+    var view = btn.closest('.view');
+    var target = view.querySelector('[data-azh="' + btn.dataset.az + '"]');
+    if (!target) return;
+    var bar = view.querySelector('.azb');
+    view.scrollTo({ top: target.offsetTop - (bar ? bar.offsetHeight : 0), behavior: 'smooth' });
+    setActiveLetter(view, btn.dataset.az);
+  }
+
+  function setActiveLetter(view, letter) {
+    var rail = view.querySelector('.azb-rail');
+    if (!rail) return;
+    all('.azl', rail).forEach(function (b) {
+      var on = b.dataset.az === letter;
+      b.classList.toggle('on', on);
+      if (on) rail.scrollTo({ left: b.offsetLeft - 140, behavior: 'smooth' });
     });
   }
-  document.addEventListener('click',function(e){
-    var b=e.target.closest('.save,.icobtn.save'); if(!b) return;
-    e.preventDefault(); e.stopPropagation();
-    var on=!b.classList.contains('on');
-    if(b.closest('#vDetail')||b.closest('.actionbar')) saveSync(on);
-    else { b.classList.toggle('on',on); b.innerHTML = on ? '<i class="fs i-heart"></i>' : '<i class="fr i-heart"></i>'; }
-    say(on?'Tarif defterine kaydedildi':'Kayıt kaldırıldı');
-  },true);
 
-  /* ---- tarif detay ---- */
-  document.querySelectorAll('.rdtab').forEach(function(t){
-    t.addEventListener('click',function(){
-      document.querySelectorAll('.rdtab').forEach(function(x){x.classList.remove('on')});
-      document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
-      t.classList.add('on'); el(t.dataset.pane).classList.add('on');
-    });
+  all('.view').forEach(function (view) {
+    if (!view.querySelector('.azb')) return;
+    var heads = all('[data-azh]', view);
+    var bar = view.querySelector('.azb');
+    function syncLetter() {
+      var y = view.scrollTop + bar.offsetHeight + 8;
+      var cur = heads[0];
+      for (var i = 0; i < heads.length; i++) { if (heads[i].offsetTop <= y) cur = heads[i]; }
+      if (cur) setActiveLetter(view, cur.dataset.azh);
+    }
+    view.addEventListener('scroll', syncLetter, { passive: true });
+    syncLetter();                       // açılışta da ilk harf işaretli gelsin
   });
-  var portion=4;
-  function fmt(n){ n=Math.round(n*2)/2; return (n%1===0)?String(n):String(n).replace('.',','); }
-  function applyPortion(){
-    el('pVal').textContent=portion; el('kfPortion').textContent=portion+' kişilik';
-    document.querySelectorAll('#vDetail .ig b i[data-base]').forEach(function(x){ x.textContent=fmt(parseFloat(x.dataset.base)/4*portion); });
+
+  /* ================= TARİF DETAY — porsiyon ================= */
+  var portion = 4;
+  function fmtQty(n) {
+    n = Math.round(n * 2) / 2;
+    return (n % 1 === 0) ? String(n) : String(n).replace('.', ',');
   }
-  el('pPlus').addEventListener('click',function(){ if(portion<12){portion++;applyPortion();} });
-  el('pMinus').addEventListener('click',function(){ if(portion>1){portion--;applyPortion();} });
-  document.querySelectorAll('.ig').forEach(function(r){
-    r.addEventListener('click',function(){ r.classList.toggle('done');
-      var n=document.querySelectorAll('#vDetail .ig.done').length; if(el('igCount')) el('igCount').textContent=n; });
-  });
-  document.querySelectorAll('.step .did').forEach(function(d){
-    d.addEventListener('click',function(){ var c=d.closest('.step'); c.classList.toggle('done');
-      d.lastChild.textContent = c.classList.contains('done') ? ' Yapıldı' : ' Yaptım'; });
-  });
-
-  /* ---- Ne Pişirsem sihirbazı ---- */
-  var wzN=0;
-  document.querySelectorAll('.itile').forEach(function(t){
-    t.addEventListener('click',function(){
-      t.classList.toggle('on'); wzN=document.querySelectorAll('.itile.on').length;
-      el('wzTxt').textContent = wzN>=3 ? (wzN+' malzemeyle tarif bul') : ('Malzeme seç ('+wzN+'/3)');
+  function applyPortion() {
+    if (!el('pVal')) return;
+    el('pVal').textContent = portion;
+    el('kfPortion').textContent = portion + ' kişilik';
+    all('#vDetail .ig b i[data-base]').forEach(function (x) {
+      x.textContent = fmtQty(parseFloat(x.dataset.base) / 4 * portion);
     });
+  }
+  if (el('pPlus')) el('pPlus').addEventListener('click', function () { if (portion < 12) { portion++; applyPortion(); } });
+  if (el('pMinus')) el('pMinus').addEventListener('click', function () { if (portion > 1) { portion--; applyPortion(); } });
+
+  /* ================= NE PİŞİRSEM SİHİRBAZI ================= */
+  if (el('wzReset')) el('wzReset').addEventListener('click', function () {
+    all('.itile.on').forEach(function (x) { x.classList.remove('on'); });
+    el('wzTxt').textContent = 'Malzeme seç (0/3)';
   });
-  el('wzReset').addEventListener('click',function(){
-    document.querySelectorAll('.itile.on').forEach(function(x){x.classList.remove('on')});
-    wzN=0; el('wzTxt').textContent='Malzeme seç (0/3)';
-  });
-  el('wzGo').addEventListener('click',function(){
-    if(wzN<3){ say('En az 3 malzeme seç'); return; }
-    closeSheet(); setTimeout(function(){ goRoot('vList'); say(wzN+' malzemeye uygun 24 tarif bulundu'); },400);
+  if (el('wzGo')) el('wzGo').addEventListener('click', function () {
+    var k = all('.itile.on').length;
+    if (k < 3) { say('En az 3 malzeme seç'); return; }
+    pop();
+    setTimeout(function () { goRoot('tarifler'); say(k + ' malzemeye uygun 24 tarif bulundu'); }, 400);
   });
 
-  /* ---- PİŞİRME MODU ---- */
-  var STEPS=[{"t": "Hamuru yoğur ve dinlendir", "p": "Unu geniş bir kaba ele, ortasını havuz gibi aç. Yumurta, tuz ve suyu ekleyip <b>kulak memesi yumuşaklığında</b> bir hamur yoğur. Üzerini nemli bezle örtüp 10 dakika dinlendir — dinlenen hamur açılırken yırtılmaz.", "img": "assets/img/1561.webp", "min": 15}, {"t": "İç harcı hazırla", "p": "Kıymayı rendelenmiş soğan, tuz ve karabiberle karıştır. <b>Harcı çok yoğurma</b>; gevşek harç pişerken daha sulu ve lokum gibi kalır.", "img": "", "min": 5}, {"t": "Hamuru aç, kareler kes", "p": "Hamuru ikiye böl, unlanmış tezgâhta her parçayı <b>2 mm incelikte</b> aç. Keskin bıçak ya da rulet ile 3×3 cm kareler kes. Kareler kurumasın diye üzerini bezle ört.", "img": "assets/img/1749.webp", "min": 20}, {"t": "Mantıları doldur ve kapat", "p": "Her karenin ortasına <b>nohut büyüklüğünde</b> harç koy. Dört ucu birleştirip bohça gibi sıkıca kapat. Kapanan mantıları yağlanmış fırın tepsisine aralıklı diz.", "img": "assets/img/1637.webp", "min": 20}, {"t": "Fırınla, sonra et suyunda pişir", "p": "Tepsiyi önceden ısıtılmış <b>180°C</b> fırında 15 dakika, mantılar hafif pembeleşene kadar kızart. Üzerine sıcak et suyunu döküp 10 dakika daha pişir — suyu çeken mantı dışı diri, içi yumuşacık olur.", "img": "assets/img/1425.webp", "min": 25}, {"t": "Yoğurt ve sosla servis et", "p": "Süzme yoğurdu ezilmiş sarımsakla çırp, mantının üzerine gezdir. Tereyağını toz biberle kızdırıp <b>cazırdarken dök</b>; üzerine kuru nane serp. Eline sağlık!", "img": "assets/img/1424.webp", "min": 5}];
-  var ci=0, tSec=0, tRun=false, tInt=null;
-  function pad(n){ return (n<10?'0':'')+n; }
-  function clock(){ el('ckClock').textContent = Math.floor(tSec/60)+':'+pad(tSec%60); }
-  function stopTimer(){ tRun=false; clearInterval(tInt); el('ckTimer').classList.remove('run'); el('ckPlay').innerHTML='<i class="fs i-play"></i>'; }
-  function ckRender(){
-    var s=STEPS[ci];
-    el('ckCount').textContent='Adım '+(ci+1)+' / '+STEPS.length;
-    el('ckNum').textContent='Adım '+(ci+1);
-    el('ckTitle').textContent=s.t; el('ckText').innerHTML=s.p;
-    var f=el('ckFig');
-    f.style.backgroundImage = s.img ? "url('"+s.img+"')" : 'none';
+  /* ================= PİŞİRME MODU ================= */
+  var STEPS = [{ "t": "Hamuru yoğur ve dinlendir", "p": "Unu geniş bir kaba ele, ortasını havuz gibi aç. Yumurta, tuz ve suyu ekleyip <b>kulak memesi yumuşaklığında</b> bir hamur yoğur. Üzerini nemli bezle örtüp 10 dakika dinlendir — dinlenen hamur açılırken yırtılmaz.", "img": "assets/img/1561.webp", "min": 15 }, { "t": "İç harcı hazırla", "p": "Kıymayı rendelenmiş soğan, tuz ve karabiberle karıştır. <b>Harcı çok yoğurma</b>; gevşek harç pişerken daha sulu ve lokum gibi kalır.", "img": "", "min": 5 }, { "t": "Hamuru aç, kareler kes", "p": "Hamuru ikiye böl, unlanmış tezgâhta her parçayı <b>2 mm incelikte</b> aç. Keskin bıçak ya da rulet ile 3×3 cm kareler kes. Kareler kurumasın diye üzerini bezle ört.", "img": "assets/img/1749.webp", "min": 20 }, { "t": "Mantıları doldur ve kapat", "p": "Her karenin ortasına <b>nohut büyüklüğünde</b> harç koy. Dört ucu birleştirip bohça gibi sıkıca kapat. Kapanan mantıları yağlanmış fırın tepsisine aralıklı diz.", "img": "assets/img/1637.webp", "min": 20 }, { "t": "Fırınla, sonra et suyunda pişir", "p": "Tepsiyi önceden ısıtılmış <b>180°C</b> fırında 15 dakika, mantılar hafif pembeleşene kadar kızart. Üzerine sıcak et suyunu döküp 10 dakika daha pişir — suyu çeken mantı dışı diri, içi yumuşacık olur.", "img": "assets/img/1425.webp", "min": 25 }, { "t": "Yoğurt ve sosla servis et", "p": "Süzme yoğurdu ezilmiş sarımsakla çırp, mantının üzerine gezdir. Tereyağını toz biberle kızdırıp <b>cazırdarken dök</b>; üzerine kuru nane serp. Eline sağlık!", "img": "assets/img/1424.webp", "min": 5 }];
+  var ci = 0, tSec = 0, tRun = false, tInt = null;
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function clock() { el('ckClock').textContent = Math.floor(tSec / 60) + ':' + pad(tSec % 60); }
+  function stopTimer() {
+    tRun = false; clearInterval(tInt);
+    el('ckTimer').classList.remove('run');
+    el('ckPlay').innerHTML = '<i class="fs i-play"></i>';
+  }
+  function ckRender() {
+    if (!el('ckTitle')) return;
+    var s = STEPS[ci];
+    el('ckCount').textContent = 'Adım ' + (ci + 1) + ' / ' + STEPS.length;
+    el('ckNum').textContent = 'Adım ' + (ci + 1);
+    el('ckTitle').textContent = s.t;
+    el('ckText').innerHTML = s.p;
+    var f = el('ckFig');
+    f.style.backgroundImage = s.img ? "url('" + s.img + "')" : 'none';
     el('ckNoImg').style.display = s.img ? 'none' : 'grid';
-    var pr=el('ckProg'); pr.innerHTML='';
-    for(var i=0;i<STEPS.length;i++){ var d=document.createElement('span'); d.className='cp'+(i<=ci?' done':''); pr.appendChild(d); }
-    el('ckPrev').classList.toggle('off', ci===0);
-    var last = ci===STEPS.length-1;
+    var pr = el('ckProg'); pr.innerHTML = '';
+    for (var i = 0; i < STEPS.length; i++) {
+      var d = document.createElement('span');
+      d.className = 'cp' + (i <= ci ? ' done' : '');
+      pr.appendChild(d);
+    }
+    el('ckPrev').classList.toggle('off', ci === 0);
+    var last = ci === STEPS.length - 1;
     el('ckNext').classList.toggle('fin', last);
-    el('ckNext').innerHTML = last ? 'Tarifi Bitir <i class="fs i-check"></i>' : 'Sonraki Adım <i class="fs i-chevron-right"></i>';
-    stopTimer(); tSec=s.min*60; clock();
-    el('ckTLabel').textContent='Zamanlayıcı — '+s.min+' dk';
-    el('ckTHint').textContent='Başlat, süre dolunca haber verelim';
-    el('vCook').scrollTo({top:0,behavior:'auto'});
+    el('ckNext').innerHTML = last
+      ? 'Tarifi Bitir <i class="fs i-check"></i>'
+      : 'Sonraki Adım <i class="fs i-chevron-right"></i>';
+    stopTimer(); tSec = s.min * 60; clock();
+    el('ckTLabel').textContent = 'Zamanlayıcı — ' + s.min + ' dk';
+    el('ckTHint').textContent = 'Başlat, süre dolunca haber verelim';
+    el('vCook').scrollTo({ top: 0, behavior: 'auto' });
   }
-  el('ckNext').addEventListener('click',function(){
-    if(ci===STEPS.length-1){ closeSheet(); setTimeout(function(){ say('Afiyet olsun! Tarifi tamamladın 🎉'.replace(' 🎉','')); },420); ci=0; return; }
+  if (el('ckNext')) el('ckNext').addEventListener('click', function () {
+    if (ci === STEPS.length - 1) {
+      pop();
+      setTimeout(function () { say('Afiyet olsun! Tarifi tamamladın'); }, 420);
+      ci = 0; return;
+    }
     ci++; ckRender();
   });
-  el('ckPrev').addEventListener('click',function(){ if(ci>0){ci--;ckRender();} });
-  el('ckPlay').addEventListener('click',function(){
-    if(tRun){ stopTimer(); return; }
-    tRun=true; el('ckTimer').classList.add('run'); el('ckPlay').innerHTML='<i class="fs i-xmark"></i>';
-    el('ckTHint').textContent='Çalışıyor — ekran açık kalır';
-    tInt=setInterval(function(){ if(tSec>0){ tSec--; clock(); } else { stopTimer(); say('Süre doldu — '+STEPS[ci].t); } },1000);
+  if (el('ckPrev')) el('ckPrev').addEventListener('click', function () { if (ci > 0) { ci--; ckRender(); } });
+  if (el('ckPlay')) el('ckPlay').addEventListener('click', function () {
+    if (tRun) { stopTimer(); return; }
+    tRun = true;
+    el('ckTimer').classList.add('run');
+    el('ckPlay').innerHTML = '<i class="fs i-xmark"></i>';
+    el('ckTHint').textContent = 'Çalışıyor — ekran açık kalır';
+    tInt = setInterval(function () {
+      if (tSec > 0) { tSec--; clock(); }
+      else { stopTimer(); say('Süre doldu — ' + STEPS[ci].t); }
+    }, 1000);
   });
-  el('ckIng').addEventListener('click',function(){ el('ckDrawer').classList.add('on'); el('ckOv').classList.add('on'); });
-  el('ckOv').addEventListener('click',function(){ el('ckDrawer').classList.remove('on'); el('ckOv').classList.remove('on'); });
+  if (el('ckIng')) el('ckIng').addEventListener('click', function () { layerOpen(el('ckDrawer'), el('ckOv')); });
+  if (el('ckOv')) el('ckOv').addEventListener('click', function () { layerClose(el('ckDrawer'), el('ckOv')); });
   ckRender();
 
-  /* ---- app drawer ---- */
-  var dwOv=el('dwOv'), dw=el('appDrawer');
-  function dwOpen(){ dwOv.classList.add('on'); dw.classList.add('on'); }
-  function dwClose(){ dwOv.classList.remove('on'); dw.classList.remove('on'); }
-  dwOv.addEventListener('click',dwClose);
-  document.addEventListener('click',function(e){
-    if(e.target.closest('[data-drawer]')){ e.preventDefault(); dwOpen(); return; }
-    if(e.target.closest('[data-drawer-close]')){ e.preventDefault(); dwClose(); return; }
-    var g=e.target.closest('[data-drawer-go]');
-    if(g){ e.preventDefault(); dwClose(); setTimeout(function(){ goRoot(V[g.dataset.drawerGo]); },260); }
-  });
-
-  /* ---- filtre çekmecesi ---- */
-  var fltOv=el('fltOv'), fltSheet=el('fltSheet');
-  function fltOpen(){ fltOv.classList.add('on'); fltSheet.classList.add('on'); }
-  function fltClose(){ fltOv.classList.remove('on'); fltSheet.classList.remove('on'); }
-  el('fltOpen').addEventListener('click',fltOpen);
-  el('fltX').addEventListener('click',fltClose);
-  fltOv.addEventListener('click',fltClose);
-  function fltTally(){
-    var n=document.querySelectorAll('#fltSheet .fgrp:not(:first-child) .fopt.on').length;
-    var res = Math.max(12, 248 - n*38);
-    el('fltCount').textContent=n; el('fltCount').style.display = n? 'grid':'none';
-    el('fltApplyTx').textContent = res+' Tarifi Göster';
-    return {n:n,res:res};
+  /* ================= FİLTRE ÇEKMECESİ ================= */
+  function fltTally() {
+    if (!el('fltCount')) return { n: 0, res: 248 };
+    var n = all('#fltSheet .fgrp:not(:first-child) .fopt.on').length;
+    var res = Math.max(12, 248 - n * 38);
+    el('fltCount').textContent = n;
+    el('fltCount').style.display = n ? 'grid' : 'none';
+    el('fltApplyTx').textContent = res + ' Tarifi Göster';
+    return { n: n, res: res };
   }
-  document.querySelectorAll('#fltSheet .fopt').forEach(function(o){
-    o.addEventListener('click',function(){
-      var wrap=o.parentElement;
-      if(wrap.dataset.single){ wrap.querySelectorAll('.fopt').forEach(function(x){x.classList.remove('on')}); o.classList.add('on');
-        el('sortBtn').innerHTML = o.textContent+' <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i>'; }
-      else o.classList.toggle('on');
+  all('#fltSheet .fopt').forEach(function (o) {
+    o.addEventListener('click', function () {
+      var wrap = o.parentElement;
+      if (wrap.dataset.single !== undefined) {
+        all('.fopt', wrap).forEach(function (x) { x.classList.remove('on'); });
+        o.classList.add('on');
+        el('sortBtn').innerHTML = o.textContent +
+          ' <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i>';
+      } else { o.classList.toggle('on'); }
       fltTally();
     });
   });
-  el('fltReset').addEventListener('click',function(){
-    document.querySelectorAll('#fltSheet .fgrp:not(:first-child) .fopt.on').forEach(function(x){x.classList.remove('on')});
+  if (el('fltReset')) el('fltReset').addEventListener('click', function () {
+    all('#fltSheet .fgrp:not(:first-child) .fopt.on').forEach(function (x) { x.classList.remove('on'); });
     fltTally();
   });
-  el('fltApply').addEventListener('click',function(){
-    var t=fltTally(); fltClose(); el('lCount').textContent=t.res;
-    setTimeout(function(){ say(t.res+' tarif listelendi'); },320);
+  if (el('fltApply')) el('fltApply').addEventListener('click', function () {
+    var t = fltTally();
+    layerClose(el('fltSheet'), el('bsOv'));
+    el('lCount').textContent = t.res;
+    setTimeout(function () { say(t.res + ' tarif listelendi'); }, 320);
   });
-  el('sortBtn').addEventListener('click',fltOpen);
-  document.querySelectorAll('#actFlt .afl[data-flt]').forEach(function(a){
-    a.addEventListener('click',function(){ a.remove(); say(a.dataset.flt+' filtresi kaldırıldı'); });
+  all('#actFlt .afl[data-flt]').forEach(function (a) {
+    a.addEventListener('click', function () { a.remove(); say(a.dataset.flt + ' filtresi kaldırıldı'); });
   });
-  el('fltClear').addEventListener('click',function(){
-    document.querySelectorAll('#actFlt .afl[data-flt]').forEach(function(x){x.remove()});
-    document.querySelectorAll('#fltSheet .fgrp:not(:first-child) .fopt.on').forEach(function(x){x.classList.remove('on')});
-    fltTally(); el('lCount').textContent='248'; say('Filtreler temizlendi');
-  });
-  document.querySelectorAll('.lchips .chip').forEach(function(c){
-    c.addEventListener('click',function(){ document.querySelectorAll('.lchips .chip').forEach(function(x){x.classList.remove('on')}); c.classList.add('on'); });
+  if (el('fltClear')) el('fltClear').addEventListener('click', function () {
+    all('#actFlt .afl[data-flt]').forEach(function (x) { x.remove(); });
+    all('#fltSheet .fgrp:not(:first-child) .fopt.on').forEach(function (x) { x.classList.remove('on'); });
+    fltTally();
+    el('lCount').textContent = '248';
+    say('Filtreler temizlendi');
   });
   fltTally();
 
-  syncStatus();
+  /* ================= KLAVYE (masaüstü önizleme) ================= */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (closeTopLayer()) return;
+    pop();
+  });
+
+  /* ================= AÇILIŞ =================
+     #/ekran ile gelen link doğrudan o ekranı açar. */
+  var boot = readHash();
+  if (boot && viewOf(boot)) navigate(boot, true);
+  after(true);                       // .view.top ve alt çubuk her hâlükârda işaretlensin
+  writeHash(BYID[topEl().id]);
 })();

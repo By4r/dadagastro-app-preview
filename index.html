@@ -35,7 +35,7 @@
           </div>
           <div class="viewport" id="viewport">
 
-            <section class="view root on" id="vHome" data-title="Ana Sayfa">
+            <section class="view root on" id="vHome" data-route="ana-sayfa" data-title="Ana Sayfa">
     <header class="vbar overlay" data-bar="home">
       <div class="ab-brand">
         <img class="lm" src="assets/img/logo-mark.png" alt="DadaGastro" /><img class="lw" src="assets/img/logo-mark-white.png" alt="DadaGastro" />
@@ -62,7 +62,7 @@
   <div class="searchbar">
     <i class="fs i-magnifying-glass si"></i>
     <input id="q" type="text" placeholder="Tarif adı ara… (ör. mercimek çorbası)" />
-    <button class="sb-go" data-go="list"><i class="fs i-arrow-right"></i></button>
+    <button class="sb-go" data-go="tarifler"><i class="fs i-arrow-right"></i></button>
   </div>
 </div>
 
@@ -93,17 +93,17 @@
       <h2>Dünya mutfakları</h2>
       <p class="sub">Yöresel lezzetlerden dünya mutfağına.</p>
     </div>
-    <a class="see-all" data-go="list">Tümü <i class="fs i-arrow-right"></i></a>
+    <a class="see-all" data-go="tarifler">Tümü <i class="fs i-arrow-right"></i></a>
   </div>
   <div class="rail">
-    <a class="cat" data-go="list" data-say="Çorba Tarifleri"><div class="thumb" style="background-image:url('assets/img/1406.webp')"></div><b>Çorba</b><span>1.240 tarif</span></a>
-    <a class="cat" data-go="list" data-say="Kırmızı Et Tarifleri"><div class="thumb" style="background-image:url('assets/img/1587.webp')"></div><b>Kırmızı Et</b><span>3.810 tarif</span></a>
-    <a class="cat" data-go="list" data-say="Tatlı Tarifleri"><div class="thumb" style="background-image:url('assets/img/1284.webp')"></div><b>Tatlı</b><span>2.105 tarif</span></a>
-    <a class="cat" data-go="list" data-say="Hamur İşi Tarifleri"><div class="thumb" style="background-image:url('assets/img/1414.webp')"></div><b>Hamur İşi</b><span>1.560 tarif</span></a>
-    <a class="cat" data-go="list" data-say="Salata Tarifleri"><div class="thumb" style="background-image:url('assets/img/1970.webp')"></div><b>Salata</b><span>980 tarif</span></a>
-    <a class="cat" data-go="list" data-say="Kahvaltılık Tarifler"><div class="thumb" style="background-image:url('assets/img/1710.webp')"></div><b>Kahvaltılık</b><span>740 tarif</span></a>
-    <a class="cat" data-go="list" data-say="Kek Tarifleri"><div class="thumb" style="background-image:url('assets/img/1436.webp')"></div><b>Kek</b><span>610 tarif</span></a>
-    <a class="cat" data-go="list" data-say="Makarna Tarifleri"><div class="thumb" style="background-image:url('assets/img/1419.webp')"></div><b>Makarna</b><span>820 tarif</span></a>
+    <a class="cat" data-go="tarifler" data-say="Çorba Tarifleri"><div class="thumb" style="background-image:url('assets/img/1406.webp')"></div><b>Çorba</b><span>1.240 tarif</span></a>
+    <a class="cat" data-go="tarifler" data-say="Kırmızı Et Tarifleri"><div class="thumb" style="background-image:url('assets/img/1587.webp')"></div><b>Kırmızı Et</b><span>3.810 tarif</span></a>
+    <a class="cat" data-go="tarifler" data-say="Tatlı Tarifleri"><div class="thumb" style="background-image:url('assets/img/1284.webp')"></div><b>Tatlı</b><span>2.105 tarif</span></a>
+    <a class="cat" data-go="tarifler" data-say="Hamur İşi Tarifleri"><div class="thumb" style="background-image:url('assets/img/1414.webp')"></div><b>Hamur İşi</b><span>1.560 tarif</span></a>
+    <a class="cat" data-go="tarifler" data-say="Salata Tarifleri"><div class="thumb" style="background-image:url('assets/img/1970.webp')"></div><b>Salata</b><span>980 tarif</span></a>
+    <a class="cat" data-go="tarifler" data-say="Kahvaltılık Tarifler"><div class="thumb" style="background-image:url('assets/img/1710.webp')"></div><b>Kahvaltılık</b><span>740 tarif</span></a>
+    <a class="cat" data-go="tarifler" data-say="Kek Tarifleri"><div class="thumb" style="background-image:url('assets/img/1436.webp')"></div><b>Kek</b><span>610 tarif</span></a>
+    <a class="cat" data-go="tarifler" data-say="Makarna Tarifleri"><div class="thumb" style="background-image:url('assets/img/1419.webp')"></div><b>Makarna</b><span>820 tarif</span></a>
   </div>
 </section>
 
@@ -116,7 +116,7 @@
     </div>
     <a class="see-all" data-say="Günün tarifi arşivi">Arşiv <i class="fs i-arrow-right"></i></a>
   </div>
-  <a class="hero-card" data-open="detail" style="background-image:url('assets/img/1425.webp')" data-say="Tarif detay ekranı — bir sonraki adımda tasarlanacak">
+  <a class="hero-card" data-open="tarif-detay" style="background-image:url('assets/img/1425.webp')" data-say="Tarif detay ekranı — bir sonraki adımda tasarlanacak">
     <span class="play-badge"><i class="fs i-play"></i> 8:40</span>
     <button class="save"><i class="fr i-heart"></i></button>
     <div class="hc-cont">
@@ -140,10 +140,10 @@
       <h2>Bu hafta öne çıkanlar</h2>
       <p class="sub">En çok denenen, puanlanan ve kaydedilenler.</p>
     </div>
-    <a class="see-all" data-go="list">Tümü <i class="fs i-arrow-right"></i></a>
+    <a class="see-all" data-go="tarifler">Tümü <i class="fs i-arrow-right"></i></a>
   </div>
   <div class="rail">
-    <article class="rcard" data-open="detail">
+    <article class="rcard" data-open="tarif-detay">
       <div class="media" style="background-image:url('assets/img/2615.webp')">
         <span class="badge dark">Ana Yemek</span>
         <button class="save"><i class="fr i-heart"></i></button>
@@ -154,7 +154,7 @@
         <div class="rstats"><span class="rate"><i class="fs i-star"></i> 4.8</span><span class="views"><i class="fs i-eye"></i> 89B</span></div>
       </div>
     </article>
-    <article class="rcard" data-open="detail">
+    <article class="rcard" data-open="tarif-detay">
       <div class="media" style="background-image:url('assets/img/1598.webp')">
         <span class="badge dark">Tatlı</span>
         <button class="save"><i class="fr i-heart"></i></button>
@@ -165,7 +165,7 @@
         <div class="rstats"><span class="rate"><i class="fs i-star"></i> 4.9</span><span class="views"><i class="fs i-eye"></i> 210B</span></div>
       </div>
     </article>
-    <article class="rcard" data-open="detail">
+    <article class="rcard" data-open="tarif-detay">
       <div class="media" style="background-image:url('assets/img/1410.webp')">
         <span class="badge">Şefin Tercihi</span>
         <button class="save"><i class="fr i-heart"></i></button>
@@ -176,7 +176,7 @@
         <div class="rstats"><span class="rate"><i class="fs i-star"></i> 4.9</span><span class="views"><i class="fs i-eye"></i> 124B</span></div>
       </div>
     </article>
-    <article class="rcard" data-open="detail">
+    <article class="rcard" data-open="tarif-detay">
       <div class="media" style="background-image:url('assets/img/1494.webp')">
         <span class="badge dark">Hamur İşi</span>
         <button class="save"><i class="fr i-heart"></i></button>
@@ -202,7 +202,7 @@
       <span class="ing"><img src="assets/ing/potatoes.png" alt="" />Patates</span>
       <span class="ing more">+60 malzeme</span>
     </div>
-    <button class="btn block" data-open="wizard"><i class="fs i-carrot"></i> Malzemelerimi Seç</button>
+    <button class="btn block" data-open="ne-pisirsem"><i class="fs i-carrot"></i> Malzemelerimi Seç</button>
   </div>
 </section>
 
@@ -214,7 +214,7 @@
       <h2>Bedenini tanı, dengede ye</h2>
       <p class="sub">Ücretsiz hesaplayıcılarla başla.</p>
     </div>
-    <a class="see-all" data-go="health">Tümü <i class="fs i-arrow-right"></i></a>
+    <a class="see-all" data-go="saglik">Tümü <i class="fs i-arrow-right"></i></a>
   </div>
   <div class="hgrid">
     <a class="htile" data-say="Kalori Hesaplayıcı"><span class="ic"><i class="fs i-calculator"></i></span><span class="txt"><b>Kalori Hesapla</b><span class="sub">Günlük ihtiyacın</span></span></a>
@@ -318,7 +318,7 @@
             </section>
 
 <!-- ==================== TARİFLER ==================== -->
-<section class="view root" id="vList">
+<section class="view root" id="vList" data-route="tarifler">
   <header class="vbar"><h2>Tarifler</h2>
     <button class="ab-btn" data-say="Görünümü değiştir"><i class="fs i-layer-group"></i></button>
     <button class="ab-btn" data-drawer="1" aria-label="Menü"><i class="fs i-bars"></i></button>
@@ -327,7 +327,7 @@
   <div class="lsearch">
     <div class="row">
       <label class="fld"><i class="fs i-magnifying-glass"></i><input type="text" placeholder="Tarif, malzeme ya da şef ara…" /></label>
-      <button class="fbtn" id="fltOpen"><i class="fs i-sliders"></i><span class="bdg" id="fltCount">2</span></button>
+      <button class="fbtn" id="fltOpen" data-bsheet="fltSheet"><i class="fs i-sliders"></i><span class="bdg" id="fltCount">2</span></button>
     </div>
     <div class="lchips">
       <span class="chip on">Tümü</span><span class="chip">Çorba</span><span class="chip">Ana Yemek</span>
@@ -338,7 +338,7 @@
 
   <div class="lmeta">
     <span class="cnt"><b id="lCount">248</b> tarif bulundu</span>
-    <button class="sortbtn" id="sortBtn">Önerilen <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
+    <button class="sortbtn" id="sortBtn" data-bsheet="fltSheet">Önerilen <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button>
   </div>
 
   <div class="actflt" id="actFlt">
@@ -347,7 +347,7 @@
     <span class="afl clear" id="fltClear">Tümünü temizle</span>
   </div>
 
-  <a class="fcard" data-open="detail">
+  <a class="fcard" data-open="tarif-detay">
     <div class="bg" style="background-image:url('assets/img/1425.webp')"></div>
     <span class="match"><i class="fs i-check"></i> 8/11 malzemen var</span>
     <div class="in">
@@ -460,7 +460,7 @@
 </section>
 
 <!-- ==================== SAĞLIK ==================== -->
-<section class="view root" id="vHealth">
+<section class="view root" id="vHealth" data-route="saglik">
   <header class="vbar"><h2>Sağlıklı Yaşam</h2>
     <button class="ab-btn" data-say="Sağlık profilim"><i class="fs i-person"></i></button>
     <button class="ab-btn" data-drawer="1" aria-label="Menü"><i class="fs i-bars"></i></button>
@@ -501,7 +501,7 @@
 </section>
 
 <!-- ==================== HESAP ==================== -->
-<section class="view root" id="vAccount">
+<section class="view root" id="vAccount" data-route="hesap">
   <header class="vbar overlay" data-bar="account">
     <h2>Hesabım</h2>
     <button class="ab-btn" data-say="Bildirim ayarları"><i class="fr i-bell"></i></button>
@@ -543,7 +543,7 @@
     <div class="sec-head"><div><span class="eyebrow">Tarif defterim</span><h2>Kaydettiklerin</h2></div>
       <a class="see-all" data-say="Tarif defteri">34 tarif <i class="fs i-arrow-right"></i></a></div>
     <div class="rail">
-      <a class="psaved" data-open="detail"><div class="ph" style="background-image:url('assets/img/1425.webp')"></div><b>Fırında Tereyağlı Mantı</b></a>
+      <a class="psaved" data-open="tarif-detay"><div class="ph" style="background-image:url('assets/img/1425.webp')"></div><b>Fırında Tereyağlı Mantı</b></a>
       <a class="psaved" data-say="Kaydedilen tarif"><div class="ph" style="background-image:url('assets/img/1598.webp')"></div><b>Fırın Sütlaç</b></a>
       <a class="psaved" data-say="Kaydedilen tarif"><div class="ph" style="background-image:url('assets/img/2615.webp')"></div><b>Köz Patlıcanlı Tavuk</b></a>
       <a class="psaved" data-say="Kaydedilen tarif"><div class="ph" style="background-image:url('assets/img/1749.webp')"></div><b>Ev Usulü Su Böreği</b></a>
@@ -593,7 +593,7 @@
 </section>
 
 <!-- ==================== NE PİŞİRSEM (sheet) ==================== -->
-<section class="view sheet" id="vWizard">
+<section class="view sheet" id="vWizard" data-route="ne-pisirsem" data-bar="#barWizard">
   <div class="wz">
     <header class="wz-bar">
       <button class="ab-btn" data-close="sheet"><i class="fs i-xmark"></i></button>
@@ -619,7 +619,7 @@
 </section>
 
 
-            <section class="view pushed" id="vDetail" data-title="Tarif Detay">
+            <section class="view pushed" id="vDetail" data-route="tarif-detay" data-parent="ana-sayfa" data-bar="#barDetail">
     <header class="vbar overlay" data-bar="detail">
       <button class="ab-btn" data-back="1"><i class="fs i-chevron-left"></i></button>
       <span class="vtitle">Fırında Tereyağlı Mantı</span>
@@ -727,7 +727,7 @@
 
 <!-- ===== YAPILIŞI ===== -->
 <div class="pane" id="pnStep">
-  <div class="cookcta" data-open="cook">
+  <div class="cookcta" data-open="pisirme-modu">
     <span class="ic"><i class="fs i-wand-magic-sparkles"></i></span>
     <span class="txt"><b>Pişirme Moduna Gir</b><span>Tam ekran adımlar, zamanlayıcı, ekran açık kalır</span></span>
     <i class="fs i-chevron-right go"></i>
@@ -892,7 +892,7 @@
 
             </section>
 
-<section class="view sheet" id="vCook">
+<section class="view sheet" id="vCook" data-route="pisirme-modu" data-parent="tarif-detay" data-bar="#barCook" data-status="dark">
   <div class="cook">
     <div class="cook-top">
       <div class="cook-head">
@@ -922,20 +922,155 @@
   </div>
 </section>
 
+
+<section class="view pushed" id="vKit" data-route="kit" data-parent="ana-sayfa">
+  <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>Komponentler</h2></header>
+  <div class="kit-sec"><span class="eyebrow">FAZ 0</span><h2>Ortak komponent seti</h2><p>46 ekranın tamamında tekrar eder. Her biri mevcut token’lardan türetildi — yeni renk, yeni radius, yeni gölge yok.</p></div>
+  <div class="kit-lab">Bileşenler</div>
+    <button class="lrow ic-lead" data-open="kit-liste"><span class="ic"><i class="fs i-bars"></i></span><span class="tx"><b>Liste satırı</b><span>İkon · avatar · görsel · anahtar</span></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-open="kit-az"><span class="ic"><i class="fs i-magnifying-glass"></i></span><span class="tx"><b>A–Z harf dizini</b><span>1.200 maddelik ansiklopedi için</span></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-open="kit-akordeon"><span class="ic"><i class="fs i-chevron-right"></i></span><span class="tx"><b>Akordeon</b><span>SSS, sofra düzeni, ölçü tabloları</span></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-open="kit-bos"><span class="ic"><i class="fs i-inbox"></i></span><span class="tx"><b>Boş durum</b><span>Sonuç yok · liste boş · bağlantı yok</span></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-open="kit-iskelet"><span class="ic"><i class="fs i-layer-group"></i></span><span class="tx"><b>Yükleme iskeleti</b><span>Satır ve kart varyantı</span></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-open="kit-dialog"><span class="ic"><i class="fs i-circle-question"></i></span><span class="tx"><b>Onay diyaloğu</b><span>Sil, çıkış, geri alınamaz işlem</span></span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow ic-lead" data-open="kit-paylas"><span class="ic"><i class="fs i-share-nodes"></i></span><span class="tx"><b>Paylaş sheet</b><span>Alt çekmece üzerine kurulu</span></span><i class="fs i-chevron-right go"></i></button>
+  <div style="height:26px"></div>
+</section>
+
+<section class="view pushed" id="vKitList" data-route="kit-liste" data-parent="ana-sayfa">
+  <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>Liste satırı</h2></header>
+  <div class="kit-lab">İkon + chevron</div>
+  <button class="lrow ic-lead"><span class="ic"><i class="fs i-gear"></i></span><span class="tx"><b>Ayarlar</b><span>Bildirim, dil, tema</span></span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow ic-lead"><span class="ic"><i class="fs i-bookmark"></i></span><span class="tx"><b>Tarif Defterim</b><span>Kaydettiğin tarifler</span></span><span class="n">34</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow ic-lead"><span class="ic"><i class="fs i-basket-shopping"></i></span><span class="tx"><b>Alışveriş Listem</b><span>Markete giderken yanında</span></span><span class="n">7</span><i class="fs i-chevron-right go"></i></button>
+  <div class="kit-lab">Avatar — kişi satırı</div>
+  <button class="lrow av-lead"><span class="av" style="background:var(--petrol)">AB</span><span class="tx"><b>Arda Bozkurt</b><span>Ev Yemekleri · 84 tarif</span></span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow av-lead"><span class="av" style="background:var(--purple)">ZU</span><span class="tx"><b>Zeynep Usta</b><span>Hamur İşi · 126 tarif</span></span><i class="fs i-chevron-right go"></i></button>
+  <div class="kit-lab">Görsel — tarif satırı</div>
+  <button class="lrow th-lead"><span class="th" style="background-image:url('assets/img/1425.webp')"></span><span class="tx"><b>Fırında Tereyağlı Mantı</b><span>75 dk · Orta · 4 kişilik</span></span><span class="side rate"><i class="fs i-star"></i>4,9</span></button>
+  <button class="lrow th-lead"><span class="th" style="background-image:url('assets/img/1587.webp')"></span><span class="tx"><b>Ezogelin Çorbası</b><span>30 dk · Kolay · 6 kişilik</span></span><span class="side rate"><i class="fs i-star"></i>4,9</span></button>
+  <div class="kit-lab">Düz satır + sağ değer</div>
+  <div class="lrow"><span class="tx"><b>1 su bardağı Un</b></span><span class="side">125 g · 200 ml</span></div>
+  <div class="lrow"><span class="tx"><b>1 yemek kaşığı Un</b></span><span class="side">8 g · 15 ml</span></div>
+  <div class="kit-lab">Anahtar — köşeli, pill değil</div>
+  <div class="lrow"><span class="tx"><b>Yeni tarif bildirimi</b><span>Takip ettiğin şefler paylaşınca</span></span><button class="sw on" aria-label="Aç/kapat"></button></div>
+  <div class="lrow"><span class="tx"><b>Haftalık özet</b><span>Pazar sabahı tek e-posta</span></span><button class="sw" aria-label="Aç/kapat"></button></div>
+  <div style="height:26px"></div>
+</section>
+
+<section class="view pushed" id="vKitAz" data-route="kit-az" data-parent="ana-sayfa">
+  <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>A–Z harf dizini</h2></header>
+  <div class="azb"><div class="azb-rail"><button class="azl" data-az="A">A</button><button class="azl" data-az="B">B</button><button class="azl" data-az="C">C</button><button class="azl" data-az="Ç">Ç</button><button class="azl" data-az="D">D</button><button class="azl off" data-az="E">E</button><button class="azl off" data-az="F">F</button><button class="azl off" data-az="G">G</button><button class="azl off" data-az="Ğ">Ğ</button><button class="azl off" data-az="H">H</button><button class="azl off" data-az="I">I</button><button class="azl off" data-az="İ">İ</button><button class="azl off" data-az="J">J</button><button class="azl off" data-az="K">K</button><button class="azl off" data-az="L">L</button><button class="azl off" data-az="M">M</button><button class="azl off" data-az="N">N</button><button class="azl off" data-az="O">O</button><button class="azl off" data-az="Ö">Ö</button><button class="azl off" data-az="P">P</button><button class="azl off" data-az="R">R</button><button class="azl off" data-az="S">S</button><button class="azl off" data-az="Ş">Ş</button><button class="azl off" data-az="T">T</button><button class="azl off" data-az="U">U</button><button class="azl off" data-az="Ü">Ü</button><button class="azl off" data-az="V">V</button><button class="azl off" data-az="Y">Y</button><button class="azl off" data-az="Z">Z</button></div></div>
+  <div class="azh" data-azh="A">A</div>
+  <button class="lrow"><span class="tx"><b>Avokado</b><span>Yağlı, kremsi tropik meyve</span></span><span class="side">34 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Ananas</b><span>Tatlı-ekşi tropik meyve</span></span><span class="side">21 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Armut</b><span>Sonbahar meyvesi, kompostoluk</span></span><span class="side">18 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Arpacık Soğan</b><span>Küçük, tatlı soğan çeşidi</span></span><span class="side">46 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <div class="azh" data-azh="B">B</div>
+  <button class="lrow"><span class="tx"><b>Bakla</b><span>Taze ya da kuru baklagil</span></span><span class="side">29 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Barbunya</b><span>Benekli, etli kuru fasulye</span></span><span class="side">52 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Bezelye</b><span>Taze ya da dondurulmuş</span></span><span class="side">63 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Brokoli</b><span>Turpgiller, buharda pişer</span></span><span class="side">41 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <div class="azh" data-azh="C">C</div>
+  <button class="lrow"><span class="tx"><b>Ceviz</b><span>İç ceviz, tatlı ve mezede</span></span><span class="side">77 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Civelek</b><span>Ege otu, kavurmalık</span></span><span class="side">6 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <div class="azh" data-azh="Ç">Ç</div>
+  <button class="lrow"><span class="tx"><b>Çavdar</b><span>Koyu, yoğun ekmeklik tahıl</span></span><span class="side">14 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Çemen</b><span>Pastırmanın baharat harcı</span></span><span class="side">9 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Çilek</b><span>İlkbahar meyvesi</span></span><span class="side">38 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <div class="azh" data-azh="D">D</div>
+  <button class="lrow"><span class="tx"><b>Defne Yaprağı</b><span>Haşlama ve sosların kokusu</span></span><span class="side">88 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Dereotu</b><span>Zeytinyağlının vazgeçilmezi</span></span><span class="side">95 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow"><span class="tx"><b>Domates</b><span>Sos, salata, dolma — her yerde</span></span><span class="side">215 tarif</span><i class="fs i-chevron-right go"></i></button>
+  <div style="height:420px"></div>
+</section>
+
+<section class="view pushed" id="vKitAcc" data-route="kit-akordeon" data-parent="ana-sayfa">
+  <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>Akordeon</h2></header>
+  <div class="kit-sec"><h2>Sık sorulanlar</h2><p>Aynı anda tek başlık açık kalır — okuma yerini kaybetmeyesin.</p></div>
+  <div class="kit-box" data-acc-single>
+    <div class="acc"><button class="acc-h" data-acc><span class="dash"></span><b>Tarifi kaç kişilik yapabilirim?</b><i class="fs i-chevron-right cv"></i></button><div class="acc-b"><div class="acc-in"><p>Tarif detayında porsiyon adedini değiştir; malzeme miktarları anında güncellenir. 1 ile 12 kişi arası seçebilirsin.</p></div></div></div>
+    <div class="acc"><button class="acc-h" data-acc><span class="dash"></span><b>Kaydettiğim tarifler nerede duruyor?</b><i class="fs i-chevron-right cv"></i></button><div class="acc-b"><div class="acc-in"><p>Hesap sekmesindeki Tarif Defterim’de. Kalbe dokunduğun her tarif oraya düşer, koleksiyonlara ayırabilirsin.</p></div></div></div>
+    <div class="acc"><button class="acc-h" data-acc><span class="dash"></span><b>Pişirme modu ne işe yarar?</b><i class="fs i-chevron-right cv"></i></button><div class="acc-b"><div class="acc-in"><p>Tarifi adım adım tam ekran gösterir, her adımın kendi zamanlayıcısı vardır ve ekran pişirme boyunca açık kalır.</p></div></div></div>
+    <div class="acc"><button class="acc-h" data-acc><span class="dash"></span><b>Alışveriş listesini nasıl oluştururum?</b><i class="fs i-chevron-right cv"></i></button><div class="acc-b"><div class="acc-in"><p>Tarif detayında Alışveriş Listeme Ekle’ye dokun. Birden çok tarifin malzemeleri tek listede birleşir.</p></div></div></div>
+  </div>
+  <div style="height:26px"></div>
+</section>
+
+<section class="view pushed" id="vKitEmpty" data-route="kit-bos" data-parent="ana-sayfa">
+  <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>Boş durum</h2></header>
+  <div class="emp">
+    <span class="ic"><i class="fs i-magnifying-glass"></i></span>
+    <span class="eyebrow">SONUÇ YOK</span>
+    <h3>Bu aramaya uyan tarif yok</h3>
+    <p>Filtreleri gevşet ya da malzeme adıyla ara — “kıymalı” yerine “kıyma” dene.</p>
+    <button class="btn">Filtreleri Temizle</button>
+    <button class="alt">Tüm tarifleri gör</button>
+  </div>
+  <div class="emp" style="border-top:1px solid var(--line)">
+    <span class="ic"><i class="fs i-bookmark"></i></span>
+    <span class="eyebrow">DEFTER BOŞ</span>
+    <h3>Tarif defterin henüz boş</h3>
+    <p>Beğendiğin tarifin kalbine dokun; burada birikir, mutfakta elinin altında olur.</p>
+    <button class="btn">Tariflere Göz At</button>
+  </div>
+  <div class="emp" style="border-top:1px solid var(--line)">
+    <span class="ic"><i class="fs i-wifi"></i></span>
+    <span class="eyebrow">BAĞLANTI YOK</span>
+    <h3>Bağlantı kurulamadı</h3>
+    <p>İnternet bağlantını kontrol et, sonra tekrar dene. Kaydettiğin tarifler çevrimdışı da açılır.</p>
+    <button class="btn">Tekrar Dene</button>
+    <button class="alt">Kaydettiklerimi aç</button>
+  </div>
+</section>
+
+<section class="view pushed" id="vKitSkel" data-route="kit-iskelet" data-parent="ana-sayfa">
+  <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>Yükleme iskeleti</h2></header>
+  <div class="kit-lab">Liste iskeleti</div>
+  <div class="sk-row"><div class="sk" style="width:48px;height:48px;border-radius:var(--r-md);flex:none"></div><div class="tx"><div class="sk" style="height:12px;width:62%"></div><div class="sk" style="height:10px;width:38%"></div></div></div>
+  <div class="sk-row"><div class="sk" style="width:48px;height:48px;border-radius:var(--r-md);flex:none"></div><div class="tx"><div class="sk" style="height:12px;width:78%"></div><div class="sk" style="height:10px;width:46%"></div></div></div>
+  <div class="sk-row"><div class="sk" style="width:48px;height:48px;border-radius:var(--r-md);flex:none"></div><div class="tx"><div class="sk" style="height:12px;width:54%"></div><div class="sk" style="height:10px;width:33%"></div></div></div>
+  <div class="kit-lab">Kart ızgarası iskeleti</div>
+  <div class="kit-box" style="display:grid;grid-template-columns:1fr 1fr;gap:11px">
+    <div class="sk-card"><div class="sk img"></div><div class="bd"><div class="sk" style="height:12px;width:88%"></div><div class="sk" style="height:12px;width:56%"></div><div style="display:flex;align-items:center;gap:7px;margin-top:3px"><div class="sk circ" style="width:20px;height:20px;flex:none"></div><div class="sk" style="height:10px;width:52%"></div></div></div></div>
+    <div class="sk-card"><div class="sk img"></div><div class="bd"><div class="sk" style="height:12px;width:88%"></div><div class="sk" style="height:12px;width:56%"></div><div style="display:flex;align-items:center;gap:7px;margin-top:3px"><div class="sk circ" style="width:20px;height:20px;flex:none"></div><div class="sk" style="height:10px;width:52%"></div></div></div></div>
+    <div class="sk-card"><div class="sk img"></div><div class="bd"><div class="sk" style="height:12px;width:88%"></div><div class="sk" style="height:12px;width:56%"></div><div style="display:flex;align-items:center;gap:7px;margin-top:3px"><div class="sk circ" style="width:20px;height:20px;flex:none"></div><div class="sk" style="height:10px;width:52%"></div></div></div></div>
+    <div class="sk-card"><div class="sk img"></div><div class="bd"><div class="sk" style="height:12px;width:88%"></div><div class="sk" style="height:12px;width:56%"></div><div style="display:flex;align-items:center;gap:7px;margin-top:3px"><div class="sk circ" style="width:20px;height:20px;flex:none"></div><div class="sk" style="height:10px;width:52%"></div></div></div></div>
+  </div>
+  <div style="height:26px"></div>
+</section>
+
+<section class="view pushed" id="vKitDlg" data-route="kit-dialog" data-parent="ana-sayfa">
+  <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>Onay diyaloğu</h2></header>
+  <div class="kit-sec"><h2>Onay diyaloğu</h2><p>Geri alınamayan işlemlerde. Zemin düz koyu — cam/blur yok.</p></div>
+  <div class="kit-lab">Tetikleyiciler</div>
+  <button class="lrow ic-lead" data-dlg="dlgDelete"><span class="ic"><i class="fs i-trash"></i></span><span class="tx"><b>Tarifi sil</b><span>Yıkıcı işlem</span></span><i class="fs i-chevron-right go"></i></button>
+  <button class="lrow ic-lead" data-dlg="dlgLogout"><span class="ic"><i class="fs i-arrow-right-from-bracket"></i></span><span class="tx"><b>Çıkış yap</b><span>Oturumu kapat</span></span><i class="fs i-chevron-right go"></i></button>
+  <div style="height:26px"></div>
+</section>
+
+<section class="view pushed" id="vKitShare" data-route="kit-paylas" data-parent="ana-sayfa">
+  <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button><h2>Paylaş sheet</h2></header>
+  <div class="kit-sec"><h2>Paylaş sheet</h2><p>Alt çekmece iskeleti üzerine kurulu. Marka logosu yok — pakette fa-brands fontu bulunmuyor, sahte logo çizmektense işlevi yazıyoruz.</p></div>
+  <div class="kit-lab">Tetikleyici</div>
+  <button class="lrow ic-lead" data-bsheet="shrSheet"><span class="ic"><i class="fs i-share-nodes"></i></span><span class="tx"><b>Tarifi paylaş</b><span>Fırında Tereyağlı Mantı</span></span><i class="fs i-chevron-right go"></i></button>
+  <div style="height:26px"></div>
+</section>
+
           </div>
           <nav class="tabbar" id="tabbar">
             <a class="tab on" data-root="vHome"><i class="fs i-house"></i><span>Ana Sayfa</span></a>
             <a class="tab" data-root="vList"><i class="fs i-bowl-food"></i><span>Tarifler</span></a>
-            <a class="tab tab-fab" data-open="wizard"><span class="fab"><i class="fs i-wand-magic-sparkles"></i></span><span class="lbl">Ne Pişirsem?</span></a>
+            <a class="tab tab-fab" data-open="ne-pisirsem"><span class="fab"><i class="fs i-wand-magic-sparkles"></i></span><span class="lbl">Ne Pişirsem?</span></a>
             <a class="tab" data-root="vHealth"><i class="fs i-heart-pulse"></i><span>Sağlık</span></a>
             <a class="tab" data-root="vAccount"><i class="fs i-user"></i><span>Hesap</span></a>
           </nav>
 
-<div class="sheet-ov" id="fltOv"></div>
+<div class="sheet-ov" id="bsOv"></div>
 <div class="bsheet" id="fltSheet">
   <div class="bs-grab"></div>
   <div class="bs-head"><b>Filtrele &amp; Sırala</b><button class="rst" id="fltReset">Temizle</button>
-    <button class="ab-btn" id="fltX"><i class="fs i-xmark"></i></button></div>
+    <button class="ab-btn" id="fltX" data-bsheet-close><i class="fs i-xmark"></i></button></div>
   <div class="bs-body">
     <div class="fgrp"><div class="ft">Sıralama</div><div class="fopts" data-single="1">
       <button class="fopt on">Önerilen</button><button class="fopt">En Yeni</button>
@@ -961,12 +1096,56 @@
     <button class="btn" id="fltApply"><span id="fltApplyTx">248 Tarifi Göster</span></button>
   </div>
 </div>
-      <div class="actionbar">
+
+<div class="dlg-ov" id="dlgOv"></div>
+<div class="dlg" id="dlgDelete">
+  <span class="ic"><i class="fs i-trash"></i></span>
+  <h4>Bu tarifi silelim mi?</h4>
+  <p>Fırında Tereyağlı Mantı defterinden kalkar. Bu işlem geri alınamaz.</p>
+  <div class="dlg-act">
+    <button class="ghost" data-dlg-close>Vazgeç</button>
+    <button class="prim" data-dlg-close data-dlg-say="Tarif silindi">Sil</button>
+  </div>
+</div>
+<div class="dlg" id="dlgLogout">
+  <span class="ic"><i class="fs i-arrow-right-from-bracket"></i></span>
+  <h4>Çıkış yapılsın mı?</h4>
+  <p>Defterin ve alışveriş listen hesabında durur; tekrar girdiğinde yerinde bulursun.</p>
+  <div class="dlg-act">
+    <button class="ghost" data-dlg-close>Vazgeç</button>
+    <button class="prim" data-dlg-close data-dlg-say="Çıkış yapıldı">Çıkış Yap</button>
+  </div>
+</div>
+
+<div class="bsheet" id="shrSheet">
+  <div class="bs-grab"></div>
+  <div class="bs-head"><b>Tarifi paylaş</b>
+    <button class="ab-btn" data-bsheet-close aria-label="Kapat"><i class="fs i-xmark"></i></button></div>
+  <div class="bs-body">
+    <div class="shr-grid">
+      <button class="shr-t" data-say="Bağlantı kopyalandı"><span class="ic"><i class="fs i-link"></i></span><span>Bağlantıyı<br />kopyala</span></button>
+      <button class="shr-t" data-say="Mesaj uygulaması açılıyor"><span class="ic"><i class="fs i-comment"></i></span><span>Mesajla<br />gönder</span></button>
+      <button class="shr-t" data-say="E-posta taslağı hazırlandı"><span class="ic"><i class="fs i-envelope"></i></span><span>E-posta</span></button>
+      <button class="shr-t" data-say="Sistem paylaşımı"><span class="ic"><i class="fs i-ellipsis"></i></span><span>Diğer</span></button>
+    </div>
+    <div class="shr-link">
+      <span class="ic"><i class="fs i-link"></i></span>
+      <span class="u">dadagastro.com/tarif/firinda-tereyagli-manti</span>
+      <button class="cp" data-say="Bağlantı kopyalandı">Kopyala</button>
+    </div>
+    <div class="kit-lab" style="padding:18px 0 8px">Mutfağıma</div>
+    <button class="lrow ic-lead" style="border-radius:var(--r-md);border:1px solid var(--line)" data-say="Tarif defterine kaydedildi">
+      <span class="ic"><i class="fs i-bookmark"></i></span>
+      <span class="tx"><b>Tarif defterime kaydet</b><span>Çevrimdışı da açılır</span></span></button>
+    <div style="height:10px"></div>
+  </div>
+</div>
+      <div class="actionbar scrbar" id="barDetail">
         <button class="icobtn save" aria-label="Kaydet"><i class="fr i-heart"></i></button>
         <button class="icobtn" data-say="Alışveriş listesine eklendi"><i class="fs i-basket-shopping"></i></button>
-        <button class="btn" data-open="cook"><i class="fs i-wand-magic-sparkles"></i> Pişirmeye Başla</button>
+        <button class="btn" data-open="pisirme-modu"><i class="fs i-wand-magic-sparkles"></i> Pişirmeye Başla</button>
       </div>
-    <nav class="cook-nav">
+    <nav class="cook-nav scrbar" id="barCook">
       <button class="nb prev off" id="ckPrev"><i class="fs i-chevron-left"></i></button>
       <button class="nb next" id="ckNext">Sonraki Adım <i class="fs i-chevron-right"></i></button>
     </nav>
@@ -995,7 +1174,7 @@
         <div class="ig"><img src="assets/ing/mint.png" alt="" /><span class="txt"><b>1 yemek kaşığı Kuru nane</b></span><span class="box"><i class="fs i-check"></i></span></div>
       </div>
     </div>
-    <div class="wz-foot">
+    <div class="wz-foot scrbar" id="barWizard">
       <button class="btn block" id="wzGo"><i class="fs i-wand-magic-sparkles"></i> <span id="wzTxt">Malzeme seç (0/3)</span></button>
     </div>
 
@@ -1011,7 +1190,7 @@
             </div>
             <div class="dw-body">
               <div class="dw-t">Mutfağım</div>
-              <a class="dw-row" data-drawer-go="account"><span class="ic"><i class="fs i-user"></i></span><b>Profilim</b><i class="fs i-chevron-right go"></i></a>
+              <a class="dw-row" data-drawer-go="hesap"><span class="ic"><i class="fs i-user"></i></span><b>Profilim</b><i class="fs i-chevron-right go"></i></a>
               <a class="dw-row" data-say="Tarif defterim"><span class="ic"><i class="fr i-bookmark"></i></span><b>Tarif Defterim</b><span class="tag">34</span></a>
               <a class="dw-row" data-say="Alışveriş listem"><span class="ic"><i class="fs i-basket-shopping"></i></span><b>Alışveriş Listem</b><span class="tag">7</span></a>
               <a class="dw-row" data-say="Haftalık menüm"><span class="ic"><i class="fs i-calendar-days"></i></span><b>Haftalık Menüm</b></a>

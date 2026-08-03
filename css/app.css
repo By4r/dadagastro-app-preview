@@ -666,7 +666,7 @@ table.t tr:last-child td{border-bottom:0}
 .view.pushed{z-index:20;transform:translateX(100%);transition:transform .34s var(--ease-nav);box-shadow:-8px 0 30px rgba(0,0,0,.16)}
 .view.pushed.in{transform:translateX(0)}
 /* alttaki ekran hafifçe geri çekilir (iOS parallax) */
-.view.root.behind{transform:translateX(-22%);transition:transform .34s var(--ease-nav)}
+.view.behind{transform:translateX(-22%);transition:transform .34s var(--ease-nav)}
 
 /* modal ekran (pişirme modu, sihirbaz) — alttan kayar */
 .view.sheet{z-index:30;transform:translateY(100%);transition:transform .38s var(--ease-nav)}
@@ -1064,11 +1064,171 @@ table.t tr:last-child td{border-bottom:0}
   position:absolute;left:0;right:0;bottom:0;z-index:58;
   opacity:0;pointer-events:none;transition:opacity .18s var(--ease);
 }
-.screen.on-detail .actionbar{opacity:1;pointer-events:auto}
-.screen.on-cook .cook-nav{opacity:1;pointer-events:auto;z-index:62}
-.screen.on-wizard .wz-foot{opacity:1;pointer-events:auto}
+.scrbar.on{opacity:1;pointer-events:auto}
+.cook-nav.on{z-index:62}
 .drawer-ov{position:absolute;inset:0;z-index:63}
 .drawer{position:absolute;left:0;right:0;bottom:0;z-index:64}
 
 /* raylar view içinde */
 .view .rail{scroll-behavior:auto}
+
+/* ============================================================
+   ORTAK KOMPONENT SETİ — 46 ekranın tamamında tekrar eder
+   Sınıf adları önekli (lrow/azb/acc/emp/sk/dlg/shr) —
+   bölüm aralığı kurallarıyla çakışmasın diye.
+   Yeni renk YOK; her değer mevcut token'lardan türetildi.
+   ============================================================ */
+
+/* ---- 1. liste satırı ------------------------------------- */
+/* --lead: ayırıcı çizginin metin başlangıcına hizalanması için */
+.lrow{--lead:0px;position:relative;display:flex;align-items:center;gap:12px;width:100%;
+  min-height:56px;padding:11px var(--gutter);background:var(--paper);text-align:left;border:0;
+  font-family:"Gilroy";color:var(--ink);-webkit-tap-highlight-color:transparent}
+.lrow.ic-lead{--lead:46px} .lrow.av-lead{--lead:48px} .lrow.th-lead{--lead:60px}
+.lrow+.lrow::before{content:"";position:absolute;top:0;height:1px;background:var(--line);
+  left:calc(var(--gutter) + var(--lead));right:0}
+.lrow:active{background:var(--tomato-tint)}
+.lrow .ic{width:34px;height:34px;border-radius:var(--r-md);flex:none;display:grid;place-items:center;
+  background:var(--bg);color:var(--ink);font-size:14px}
+.lrow .av{width:36px;height:36px;border-radius:var(--r-circle);flex:none;display:grid;place-items:center;
+  color:#FFF;font-family:"GilroyXB";font-size:12.5px}
+.lrow .th{width:48px;height:48px;border-radius:var(--r-md);flex:none;background-size:cover;
+  background-position:center;background-color:var(--line)}
+.lrow .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.lrow .tx b{font-family:"GilroyXB";font-size:14.5px;line-height:1.3;color:var(--ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lrow .tx span{font-family:"GilroyLt";font-weight:300;font-size:11.5px;line-height:1.4;color:var(--muted);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lrow .go{flex:none;color:#C9C4BC;font-size:12px}
+.lrow .n{flex:none;font-family:"GilroyXB";font-size:10.5px;color:var(--tomato);
+  background:var(--tomato-tint);padding:4px 8px;border-radius:var(--r-sm)}
+.lrow .side{flex:none;display:inline-flex;align-items:center;gap:4px;
+  font-family:"GilroyLt";font-weight:300;font-size:11.5px;color:var(--muted)}
+.lrow .side.rate{font-family:"GilroyXB";color:var(--ink)}
+.lrow .side.rate i{color:var(--yellow);font-size:10.5px}
+
+/* anahtar — "pill yok" kuralı anahtara da uygulanır.
+   28px yükseklikte r-md (12) stadyuma çok yaklaşıyor; r-sm (8) köşeyi görünür tutuyor. */
+.sw{flex:none;width:46px;height:28px;border-radius:var(--r-sm);background:#DED9D1;border:0;
+  position:relative;transition:background .2s var(--ease)}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:6px;
+  background:#FFF;box-shadow:var(--sh-sm);transition:transform .2s var(--ease-nav)}
+.sw.on{background:var(--tomato)}
+.sw.on::after{transform:translateX(18px)}
+
+/* ---- 2. A–Z harf dizini ---------------------------------- */
+.azb{position:sticky;top:0;z-index:6;background:var(--bg);border-bottom:1px solid var(--line)}
+.azb-rail{display:flex;overflow-x:auto;scroll-behavior:smooth;
+  padding-left:var(--gutter);padding-right:var(--gutter);scroll-padding-left:var(--gutter)}
+.azb-rail::-webkit-scrollbar{height:0}
+.azl{flex:none;width:44px;height:44px;display:grid;place-items:center;position:relative;background:none;
+  border:0;font-family:"GilroyXB";font-size:12.5px;color:var(--ink-2);-webkit-tap-highlight-color:transparent}
+.azl.off{color:#D6D1C9;pointer-events:none}
+.azl.on{color:var(--tomato)}
+/* marka tiresi — eyebrow'daki 16×2 domates tire, burada aktif harfin altında */
+.azl.on::after{content:"";position:absolute;bottom:6px;left:50%;margin-left:-8px;
+  width:16px;height:2px;border-radius:2px;background:var(--tomato)}
+/* listede kayan yapışkan harf başlığı — dizinle senkron */
+.azh{position:sticky;top:45px;z-index:5;padding:8px var(--gutter) 7px;background:var(--bg);
+  font-family:"GilroyXB";font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tomato);border-bottom:1px solid var(--line)}
+
+/* ---- 3. akordeon ----------------------------------------- */
+.acc{background:var(--paper);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden;margin-bottom:10px}
+.acc-h{display:flex;align-items:center;gap:10px;width:100%;min-height:54px;padding:15px 14px;
+  text-align:left;background:none;border:0;-webkit-tap-highlight-color:transparent}
+.acc-h .dash{flex:none;width:0;height:2px;border-radius:2px;background:var(--tomato);
+  transition:width .22s var(--ease)}
+.acc.on .acc-h .dash{width:16px}
+.acc-h b{flex:1;font-family:"GilroyXB";font-size:14.5px;line-height:1.3;color:var(--ink);transition:color .18s}
+.acc.on .acc-h b{color:var(--tomato)}
+.acc-h .cv{flex:none;color:#C9C4BC;font-size:12px;transition:transform .22s var(--ease),color .18s}
+.acc.on .acc-h .cv{transform:rotate(90deg);color:var(--tomato)}
+.acc-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .26s var(--ease)}
+.acc.on .acc-b{grid-template-rows:1fr}
+.acc-b>.acc-in{overflow:hidden}
+.acc-b p{padding:0 14px 16px;font-family:"GilroyLt";font-weight:300;font-size:13px;
+  line-height:1.55;color:var(--ink-2)}
+
+/* ---- 4. boş durum ---------------------------------------- */
+.emp{display:flex;flex-direction:column;align-items:center;text-align:center;padding:56px 34px 40px}
+.emp .ic{width:64px;height:64px;border-radius:var(--r-lg);display:grid;place-items:center;
+  background:var(--tomato-tint);color:var(--tomato);font-size:23px;margin-bottom:18px}
+.emp .eyebrow{margin-bottom:9px}
+.emp h3{font-family:"GilroyXB";font-size:18px;line-height:1.22;letter-spacing:-.01em;color:var(--ink)}
+.emp p{margin-top:9px;font-family:"GilroyLt";font-weight:300;font-size:13px;line-height:1.55;
+  color:var(--ink-2);max-width:252px}
+.emp .btn{margin:20px 0 0;width:auto;padding:0 24px}
+.emp .alt{margin-top:14px;background:none;border:0;font-family:"GilroyXB";font-size:12.5px;color:var(--tomato)}
+
+/* ---- 5. yükleme iskeleti --------------------------------- */
+@keyframes sk-shim{to{background-position:-200% 0}}
+/* İskelet çizgisi metin bloğunu taklit eder; 10px yükseklikte r-sm (8) kapsül gibi
+   okunuyor — "pill yok" kuralını görünür tutmak için 4px. Token değil, bilinçli istisna. */
+.sk{background:var(--line);background-image:linear-gradient(90deg,var(--line) 0%,#F4F2EF 50%,var(--line) 100%);
+  background-size:200% 100%;animation:sk-shim 1.3s linear infinite;border-radius:4px}
+.sk.img{border-radius:var(--r-lg)}
+.sk.circ{border-radius:var(--r-circle)}
+@media (prefers-reduced-motion:reduce){.sk{animation:none}}
+.sk-card{background:var(--paper);border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden}
+.sk-card .sk.img{border-radius:0;height:110px}
+.sk-card .bd{padding:11px 11px 13px;display:flex;flex-direction:column;gap:7px}
+.sk-row{display:flex;align-items:center;gap:12px;padding:11px var(--gutter);background:var(--paper);
+  min-height:56px}
+.sk-row+.sk-row{border-top:1px solid var(--line)}
+.sk-row .tx{flex:1;display:flex;flex-direction:column;gap:6px}
+
+/* ---- 6. onay diyaloğu ------------------------------------ */
+.dlg-ov{position:absolute;inset:0;z-index:80;background:rgba(33,30,22,.42);
+  opacity:0;pointer-events:none;transition:opacity .2s var(--ease)}
+.dlg-ov.on{opacity:1;pointer-events:auto}
+.dlg{position:absolute;z-index:81;left:50%;top:50%;width:min(304px,calc(100% - 56px));
+  background:var(--paper);border-radius:var(--r-xl);box-shadow:var(--sh-lg);padding:24px 20px 16px;
+  text-align:center;opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.94);
+  transition:opacity .2s var(--ease),transform .2s var(--ease)}
+.dlg.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.dlg .ic{width:52px;height:52px;margin:0 auto 15px;border-radius:var(--r-md);display:grid;place-items:center;
+  background:var(--tomato-tint);color:var(--tomato);font-size:19px}
+.dlg h4{font-family:"GilroyXB";font-size:17px;line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
+.dlg p{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:13px;line-height:1.5;color:var(--ink-2)}
+.dlg-act{display:flex;gap:9px;margin-top:20px}
+.dlg-act button{flex:1;height:46px;border-radius:var(--r-md);font-family:"GilroyXB";font-size:14px;border:0}
+.dlg-act .ghost{background:var(--paper);border:1px solid var(--line);color:var(--ink)}
+.dlg-act .prim{background:var(--tomato);color:#FFF;box-shadow:0 6px 18px rgba(225,72,39,.26)}
+.dlg-act .prim:active{background:var(--tomato-dark)}
+
+/* ---- 7. paylaş sheet (.bsheet üzerine) -------------------- */
+.shr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:2px 0 6px}
+.shr-t{display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:0;
+  -webkit-tap-highlight-color:transparent}
+.shr-t .ic{width:56px;height:56px;border-radius:var(--r-md);display:grid;place-items:center;
+  background:var(--paper);border:1px solid var(--line);color:var(--ink);font-size:18px}
+.shr-t:active .ic{background:var(--tomato-tint);border-color:rgba(225,72,39,.32);color:var(--tomato)}
+.shr-t span{font-family:"Gilroy";font-weight:500;font-size:10.5px;line-height:1.3;color:var(--ink-2);text-align:center}
+.shr-link{display:flex;align-items:center;gap:11px;margin-top:10px;padding:13px;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-md)}
+.shr-link .ic{width:32px;height:32px;border-radius:var(--r-sm);flex:none;display:grid;place-items:center;
+  background:var(--bg);color:var(--ink-2);font-size:13px}
+.shr-link .u{flex:1;min-width:0;font-family:"GilroyLt";font-weight:300;font-size:12px;color:var(--muted);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shr-link .cp{flex:none;font-family:"GilroyXB";font-size:12px;color:var(--tomato);background:none;border:0}
+
+/* ---- komponent vitrini (yalnız geliştirme — sevkiyatta silinir) ---- */
+.kit-sec{padding:22px var(--gutter) 6px}
+.kit-sec h2{font-family:"GilroyXB";font-size:20px;line-height:1.18;letter-spacing:-.015em;color:var(--ink)}
+.kit-sec p{margin-top:6px;font-family:"GilroyLt";font-weight:300;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.kit-lab{padding:20px var(--gutter) 9px;font-family:"GilroyXB";font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+.kit-box{padding:0 var(--gutter)}
+
+/* ---- komponent setinin ihtiyaç duyduğu ek FA6 glifleri ---- */
+.i-gear:before{content:"\f013"}
+.i-trash:before{content:"\f1f8"}
+.i-arrow-right-from-bracket:before{content:"\f2f5"}
+.i-link:before{content:"\f0c1"}
+.i-comment:before{content:"\f075"}
+.i-envelope:before{content:"\f0e0"}
+.i-inbox:before{content:"\f01c"}
+.i-circle-question:before{content:"\f059"}
+.i-wifi:before{content:"\f1eb"}
+.i-compass:before{content:"\f14e"}
