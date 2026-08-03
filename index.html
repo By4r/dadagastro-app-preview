@@ -128,9 +128,9 @@
     <h3>Tarif bul — elindekiyle</h3>
     <p>Malzemelerini seç, sana uygun tarifleri saniyeler içinde bulalım.</p>
     <div class="ings">
-      <span class="ing"><img src="assets/ing/egg.png" alt="" />Yumurta</span>
-      <span class="ing"><img src="assets/ing/chicken.png" alt="" />Tavuk</span>
-      <span class="ing"><img src="assets/ing/potatoes.png" alt="" />Patates</span>
+      <span class="ing"><img src="assets/ing/egg.webp" alt="" />Yumurta</span>
+      <span class="ing"><img src="assets/ing/chicken.webp" alt="" />Tavuk</span>
+      <span class="ing"><img src="assets/ing/potatoes.webp" alt="" />Patates</span>
       <span class="ing more">+60 malzeme</span>
     </div>
     <button class="btn block" data-open="dolapta"><i class="fs i-carrot"></i> Dolapta Ne Var?</button>
@@ -682,8 +682,11 @@
       <!-- sonuç -->
       <div class="wz-step" data-wzstep="5">
         <span class="eyebrow">Sonuç</span>
-        <h2><b id="wzN">24</b> tarif sana uygun</h2>
-        <p class="wz-lead">Seçimlerine göre tarifleri puanlayıp sıralarız.</p>
+        <button class="wz-result" id="wzGo">
+          <span class="tx"><span class="t"><b id="wzN">24</b> tarif sana uygun</span>
+          <span class="s">Seçimlerine göre tarifleri puanlayıp sıralarız.</span></span>
+          <i class="fs i-chevron-right"></i>
+        </button>
         <div class="wz-picked" id="wzPicked"></div>
         <div class="ggrid" style="margin-top:16px">
           <article class="gcard"><div class="media" style="background-image:url('assets/img/1587.webp')"><span class="rib">Şefin Tercihi</span></div>
@@ -755,10 +758,10 @@
 
         <div class="pane" id="npHazir">
           <div class="menu-list">
-      <article class="menu-c"><div class="mc-h"><h4>Kısa Süreli Ev Yemeği Seçkisi</h4><span class="mc-k">Sebze</span></div><p>Az malzemeyle, uzun uğraşsız; her gün tekrar edilebilecek pratik ev yemekleri.</p><div class="mc-f"><span><i class="fs i-bowl-food"></i> 6 tarif</span><span><i class="fs i-clock"></i> ~210 dk</span><button class="mc-go" data-say="Hazır menü — Kısa Süreli Ev Yemeği Seçkisi">Menüyü Aç <i class="fs i-chevron-right"></i></button></div></article>
-      <article class="menu-c"><div class="mc-h"><h4>Ocak Başında On Beş Dakika</h4><span class="mc-k">Çorba</span></div><p>Ocağı uzun süre meşgul etmeden, gündelik telaşa uyan hafif sofra.</p><div class="mc-f"><span><i class="fs i-bowl-food"></i> 7 tarif</span><span><i class="fs i-clock"></i> ~340 dk</span><button class="mc-go" data-say="Hazır menü — Ocak Başında On Beş Dakika">Menüyü Aç <i class="fs i-chevron-right"></i></button></div></article>
-      <article class="menu-c"><div class="mc-h"><h4>Akşam Telaşına Yetişen Sofra</h4><span class="mc-k">Bakliyat</span></div><p>İşten eve dönüşte yarım saatte masaya gelen, yorulmadan hazırlanan günlük sofra.</p><div class="mc-f"><span><i class="fs i-bowl-food"></i> 4 tarif</span><span><i class="fs i-clock"></i> ~280 dk</span><button class="mc-go" data-say="Hazır menü — Akşam Telaşına Yetişen Sofra">Menüyü Aç <i class="fs i-chevron-right"></i></button></div></article>
-      <article class="menu-c"><div class="mc-h"><h4>Ev Sofrasının Değişmezi</h4><span class="mc-k">Sandviç, Burger ve Dürüm</span></div><p>Her gün tekrarlanabilecek, sade ama doyurucu günlük ev yemeği.</p><div class="mc-f"><span><i class="fs i-bowl-food"></i> 5 tarif</span><span><i class="fs i-clock"></i> ~221 dk</span><button class="mc-go" data-say="Hazır menü — Ev Sofrasının Değişmezi">Menüyü Aç <i class="fs i-chevron-right"></i></button></div></article>
+      <article class="menu-c"><div class="mc-h"><h4>Kısa Süreli Ev Yemeği Seçkisi</h4><span class="mc-k">Sebze</span></div><p>Az malzemeyle, uzun uğraşsız; her gün tekrar edilebilecek pratik ev yemekleri.</p><div class="mc-f"><span><i class="fs i-bowl-food"></i> 6 tarif</span><span><i class="fs i-clock"></i> ~210 dk</span><button class="mc-go" data-menu="Kısa Süreli Ev Yemeği Seçkisi" data-menukat="Hazır menü">Menüyü Aç <i class="fs i-chevron-right"></i></button></div></article>
+      <article class="menu-c"><div class="mc-h"><h4>Ocak Başında On Beş Dakika</h4><span class="mc-k">Çorba</span></div><p>Ocağı uzun süre meşgul etmeden, gündelik telaşa uyan hafif sofra.</p><div class="mc-f"><span><i class="fs i-bowl-food"></i> 7 tarif</span><span><i class="fs i-clock"></i> ~340 dk</span><button class="mc-go" data-menu="Ocak Başında On Beş Dakika" data-menukat="Hazır menü">Menüyü Aç <i class="fs i-chevron-right"></i></button></div></article>
+      <article class="menu-c"><div class="mc-h"><h4>Akşam Telaşına Yetişen Sofra</h4><span class="mc-k">Bakliyat</span></div><p>İşten eve dönüşte yarım saatte masaya gelen, yorulmadan hazırlanan günlük sofra.</p><div class="mc-f"><span><i class="fs i-bowl-food"></i> 4 tarif</span><span><i class="fs i-clock"></i> ~280 dk</span><button class="mc-go" data-menu="Akşam Telaşına Yetişen Sofra" data-menukat="Hazır menü">Menüyü Aç <i class="fs i-chevron-right"></i></button></div></article>
+      <article class="menu-c"><div class="mc-h"><h4>Ev Sofrasının Değişmezi</h4><span class="mc-k">Sandviç, Burger ve Dürüm</span></div><p>Her gün tekrarlanabilecek, sade ama doyurucu günlük ev yemeği.</p><div class="mc-f"><span><i class="fs i-bowl-food"></i> 5 tarif</span><span><i class="fs i-clock"></i> ~221 dk</span><button class="mc-go" data-menu="Ev Sofrasının Değişmezi" data-menukat="Hazır menü">Menüyü Aç <i class="fs i-chevron-right"></i></button></div></article>
           </div>
         </div>
       </div>
@@ -865,7 +868,7 @@
         <button class="mz" data-mz="Bezelye"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Bezelye</span></button>
         <button class="mz" data-mz="Biber"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Biber</span></button>
         <button class="mz" data-mz="Brokoli"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Brokoli</span></button>
-        <button class="mz" data-mz="Domates"><span class="mz-img" style="background-image:url('assets/ing/tomatoes.png')"></span><span class="mz-t">Domates</span></button>
+        <button class="mz" data-mz="Domates"><span class="mz-img" style="background-image:url('assets/ing/tomatoes.webp')"></span><span class="mz-t">Domates</span></button>
         <button class="mz" data-mz="Enginar"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Enginar</span></button>
         <button class="mz" data-mz="Havuç"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Havuç</span></button>
         <button class="mz" data-mz="Ispanak"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Ispanak</span></button>
@@ -876,12 +879,12 @@
         <button class="mz" data-mz="Mantar"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Mantar</span></button>
         <button class="mz" data-mz="Mısır"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Mısır</span></button>
         <button class="mz" data-mz="Pancar"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Pancar</span></button>
-        <button class="mz" data-mz="Patates"><span class="mz-img" style="background-image:url('assets/ing/potatoes.png')"></span><span class="mz-t">Patates</span></button>
+        <button class="mz" data-mz="Patates"><span class="mz-img" style="background-image:url('assets/ing/potatoes.webp')"></span><span class="mz-t">Patates</span></button>
         <button class="mz" data-mz="Patlıcan"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Patlıcan</span></button>
         <button class="mz" data-mz="Pırasa"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Pırasa</span></button>
         <button class="mz" data-mz="Salatalık"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Salatalık</span></button>
-        <button class="mz" data-mz="Sarımsak"><span class="mz-img" style="background-image:url('assets/ing/garlic.png')"></span><span class="mz-t">Sarımsak</span></button>
-        <button class="mz" data-mz="Soğan"><span class="mz-img" style="background-image:url('assets/ing/onion.png')"></span><span class="mz-t">Soğan</span></button>
+        <button class="mz" data-mz="Sarımsak"><span class="mz-img" style="background-image:url('assets/ing/garlic.webp')"></span><span class="mz-t">Sarımsak</span></button>
+        <button class="mz" data-mz="Soğan"><span class="mz-img" style="background-image:url('assets/ing/onion.webp')"></span><span class="mz-t">Soğan</span></button>
         <button class="mz" data-mz="Turp"><span class="mz-img"><i class="fs i-carrot"></i></span><span class="mz-t">Turp</span></button>
         </div></div></div>
       </section>
@@ -927,7 +930,7 @@
         <button class="mz" data-mz="Koyun eti"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Koyun eti</span></button>
         <button class="mz" data-mz="Kuzu eti"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Kuzu eti</span></button>
         <button class="mz" data-mz="Kuşbaşı"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Kuşbaşı</span></button>
-        <button class="mz" data-mz="Kıyma"><span class="mz-img" style="background-image:url('assets/ing/minced-beef.png')"></span><span class="mz-t">Kıyma</span></button>
+        <button class="mz" data-mz="Kıyma"><span class="mz-img" style="background-image:url('assets/ing/minced-beef.webp')"></span><span class="mz-t">Kıyma</span></button>
         <button class="mz" data-mz="Pastırma"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Pastırma</span></button>
         <button class="mz" data-mz="Pirzola"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Pirzola</span></button>
         <button class="mz" data-mz="Sakatat"><span class="mz-img"><i class="fs i-bacon"></i></span><span class="mz-t">Sakatat</span></button>
@@ -946,10 +949,10 @@
         <button class="mz" data-mz="Kaz eti"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Kaz eti</span></button>
         <button class="mz" data-mz="Tavuk but"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk but</span></button>
         <button class="mz" data-mz="Tavuk ciğeri"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk ciğeri</span></button>
-        <button class="mz" data-mz="Tavuk göğsü"><span class="mz-img" style="background-image:url('assets/ing/chicken.png')"></span><span class="mz-t">Tavuk göğsü</span></button>
+        <button class="mz" data-mz="Tavuk göğsü"><span class="mz-img" style="background-image:url('assets/ing/chicken.webp')"></span><span class="mz-t">Tavuk göğsü</span></button>
         <button class="mz" data-mz="Tavuk kanat"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk kanat</span></button>
         <button class="mz" data-mz="Tavuk pirzola"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Tavuk pirzola</span></button>
-        <button class="mz" data-mz="Tavuk yumurtası"><span class="mz-img" style="background-image:url('assets/ing/egg.png')"></span><span class="mz-t">Tavuk yumurtası</span></button>
+        <button class="mz" data-mz="Tavuk yumurtası"><span class="mz-img" style="background-image:url('assets/ing/egg.webp')"></span><span class="mz-t">Tavuk yumurtası</span></button>
         <button class="mz" data-mz="Ördek eti"><span class="mz-img"><i class="fs i-drumstick-bite"></i></span><span class="mz-t">Ördek eti</span></button>
         </div></div></div>
       </section>
@@ -983,7 +986,7 @@
         <button class="acc-h" data-acc><span class="dash"></span><span class="mh-ic"><i class="fs i-cheese"></i></span><b>Süt Ürünleri</b><span class="mh-n">0/18</span><i class="fs i-chevron-right cv"></i></button>
         <div class="acc-b"><div class="acc-in"><div class="mz-grid">
         <button class="mz" data-mz="Ayran"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Ayran</span></button>
-        <button class="mz" data-mz="Beyaz peynir"><span class="mz-img" style="background-image:url('assets/ing/cheese.png')"></span><span class="mz-t">Beyaz peynir</span></button>
+        <button class="mz" data-mz="Beyaz peynir"><span class="mz-img" style="background-image:url('assets/ing/cheese.webp')"></span><span class="mz-t">Beyaz peynir</span></button>
         <button class="mz" data-mz="Bitkisel süt alternatifleri"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Bitkisel süt alternatifleri</span></button>
         <button class="mz" data-mz="Cheddar"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Cheddar</span></button>
         <button class="mz" data-mz="Kaymak"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Kaymak</span></button>
@@ -994,11 +997,11 @@
         <button class="mz" data-mz="Lor peyniri"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Lor peyniri</span></button>
         <button class="mz" data-mz="Mozzarella"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Mozzarella</span></button>
         <button class="mz" data-mz="Parmesan"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Parmesan</span></button>
-        <button class="mz" data-mz="Süt"><span class="mz-img" style="background-image:url('assets/ing/milk.png')"></span><span class="mz-t">Süt</span></button>
+        <button class="mz" data-mz="Süt"><span class="mz-img" style="background-image:url('assets/ing/milk.webp')"></span><span class="mz-t">Süt</span></button>
         <button class="mz" data-mz="Süzme yoğurt"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Süzme yoğurt</span></button>
         <button class="mz" data-mz="Tereyağı"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Tereyağı</span></button>
         <button class="mz" data-mz="Tulum peyniri"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Tulum peyniri</span></button>
-        <button class="mz" data-mz="Yoğurt"><span class="mz-img" style="background-image:url('assets/ing/yogurt.png')"></span><span class="mz-t">Yoğurt</span></button>
+        <button class="mz" data-mz="Yoğurt"><span class="mz-img" style="background-image:url('assets/ing/yogurt.webp')"></span><span class="mz-t">Yoğurt</span></button>
         <button class="mz" data-mz="Çökelek"><span class="mz-img"><i class="fs i-cheese"></i></span><span class="mz-t">Çökelek</span></button>
         </div></div></div>
       </section>
@@ -1027,13 +1030,13 @@
         <button class="mz" data-mz="Kuskus"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Kuskus</span></button>
         <button class="mz" data-mz="Makarna"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Makarna</span></button>
         <button class="mz" data-mz="Maş fasulyesi"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Maş fasulyesi</span></button>
-        <button class="mz" data-mz="Mercimek"><span class="mz-img" style="background-image:url('assets/ing/lentils.png')"></span><span class="mz-t">Mercimek</span></button>
+        <button class="mz" data-mz="Mercimek"><span class="mz-img" style="background-image:url('assets/ing/lentils.webp')"></span><span class="mz-t">Mercimek</span></button>
         <button class="mz" data-mz="Nohut"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Nohut</span></button>
         <button class="mz" data-mz="Noodle"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Noodle</span></button>
         <button class="mz" data-mz="Pirinç"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Pirinç</span></button>
         <button class="mz" data-mz="Soya fasulyesi"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Soya fasulyesi</span></button>
         <button class="mz" data-mz="Susam"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Susam</span></button>
-        <button class="mz" data-mz="Un"><span class="mz-img" style="background-image:url('assets/ing/flour.png')"></span><span class="mz-t">Un</span></button>
+        <button class="mz" data-mz="Un"><span class="mz-img" style="background-image:url('assets/ing/flour.webp')"></span><span class="mz-t">Un</span></button>
         <button class="mz" data-mz="Yer fıstığı"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Yer fıstığı</span></button>
         <button class="mz" data-mz="Yulaf"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Yulaf</span></button>
         <button class="mz" data-mz="Çavdar"><span class="mz-img"><i class="fs i-wheat-awn"></i></span><span class="mz-t">Çavdar</span></button>
@@ -1054,7 +1057,7 @@
         <button class="mz" data-mz="Fesleğen"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Fesleğen</span></button>
         <button class="mz" data-mz="Frenk soğanı"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Frenk soğanı</span></button>
         <button class="mz" data-mz="Hardal"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Hardal</span></button>
-        <button class="mz" data-mz="Karabiber"><span class="mz-img" style="background-image:url('assets/ing/black-pepper.png')"></span><span class="mz-t">Karabiber</span></button>
+        <button class="mz" data-mz="Karabiber"><span class="mz-img" style="background-image:url('assets/ing/black-pepper.webp')"></span><span class="mz-t">Karabiber</span></button>
         <button class="mz" data-mz="Kekik"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Kekik</span></button>
         <button class="mz" data-mz="Ketçap"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Ketçap</span></button>
         <button class="mz" data-mz="Kimyon"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Kimyon</span></button>
@@ -1064,7 +1067,7 @@
         <button class="mz" data-mz="Maydanoz"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Maydanoz</span></button>
         <button class="mz" data-mz="Mayonez"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Mayonez</span></button>
         <button class="mz" data-mz="Muskat"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Muskat</span></button>
-        <button class="mz" data-mz="Nane"><span class="mz-img" style="background-image:url('assets/ing/mint.png')"></span><span class="mz-t">Nane</span></button>
+        <button class="mz" data-mz="Nane"><span class="mz-img" style="background-image:url('assets/ing/mint.webp')"></span><span class="mz-t">Nane</span></button>
         <button class="mz" data-mz="Nar ekşisi"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Nar ekşisi</span></button>
         <button class="mz" data-mz="Pekmez"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Pekmez</span></button>
         <button class="mz" data-mz="Pesto sos"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Pesto sos</span></button>
@@ -1079,7 +1082,7 @@
         <button class="mz" data-mz="Taze kekik"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Taze kekik</span></button>
         <button class="mz" data-mz="Taze nane"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Taze nane</span></button>
         <button class="mz" data-mz="Taze soğan"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Taze soğan</span></button>
-        <button class="mz" data-mz="Tuz"><span class="mz-img" style="background-image:url('assets/ing/salt.png')"></span><span class="mz-t">Tuz</span></button>
+        <button class="mz" data-mz="Tuz"><span class="mz-img" style="background-image:url('assets/ing/salt.webp')"></span><span class="mz-t">Tuz</span></button>
         <button class="mz" data-mz="Yenibahar"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Yenibahar</span></button>
         <button class="mz" data-mz="Zerdeçal"><span class="mz-img"><i class="fs i-mortar-pestle"></i></span><span class="mz-t">Zerdeçal</span></button>
         </div></div></div>
@@ -1204,25 +1207,25 @@
 
   <div class="ig-group">
     <div class="ig-title">Hamur için</div>
-    <div class="ig"><img src="assets/ing/flour.png" alt="" /><span class="txt"><b><i data-base="3">3</i> su bardağı Un</b><span>elenmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
-    <div class="ig"><img src="assets/ing/egg.png" alt="" /><span class="txt"><b><i data-base="1">1</i> adet Yumurta</b><span>oda sıcaklığında</span></span><span class="box"><i class="fs i-check"></i></span></div>
-    <div class="ig"><img src="assets/ing/milk.png" alt="" /><span class="txt"><b><i data-base="1">1</i> su bardağı Su</b><span>ılık</span></span><span class="box"><i class="fs i-check"></i></span></div>
-    <div class="ig"><img src="assets/ing/salt.png" alt="" /><span class="txt"><b><i data-base="1">1</i> çay kaşığı Tuz</b></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/flour.webp" alt="" /><span class="txt"><b><i data-base="3">3</i> su bardağı Un</b><span>elenmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/egg.webp" alt="" /><span class="txt"><b><i data-base="1">1</i> adet Yumurta</b><span>oda sıcaklığında</span></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/milk.webp" alt="" /><span class="txt"><b><i data-base="1">1</i> su bardağı Su</b><span>ılık</span></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/salt.webp" alt="" /><span class="txt"><b><i data-base="1">1</i> çay kaşığı Tuz</b></span><span class="box"><i class="fs i-check"></i></span></div>
   </div>
 
   <div class="ig-group">
     <div class="ig-title">İç harç için</div>
-    <div class="ig"><img src="assets/ing/minced-beef.png" alt="" /><span class="txt"><b><i data-base="250">250</i> g Kıyma</b><span>orta yağlı dana</span></span><span class="box"><i class="fs i-check"></i></span></div>
-    <div class="ig"><img src="assets/ing/onion.png" alt="" /><span class="txt"><b><i data-base="1">1</i> adet Soğan</b><span>rendelenmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
-    <div class="ig"><img src="assets/ing/black-pepper.png" alt="" /><span class="txt"><b><i data-base="1">1</i> çay kaşığı Karabiber</b></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/minced-beef.webp" alt="" /><span class="txt"><b><i data-base="250">250</i> g Kıyma</b><span>orta yağlı dana</span></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/onion.webp" alt="" /><span class="txt"><b><i data-base="1">1</i> adet Soğan</b><span>rendelenmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/black-pepper.webp" alt="" /><span class="txt"><b><i data-base="1">1</i> çay kaşığı Karabiber</b></span><span class="box"><i class="fs i-check"></i></span></div>
   </div>
 
   <div class="ig-group">
     <div class="ig-title">Sos &amp; servis için</div>
-    <div class="ig"><img src="assets/ing/yogurt.png" alt="" /><span class="txt"><b><i data-base="3">3</i> su bardağı Süzme yoğurt</b><span>oda sıcaklığında</span></span><span class="box"><i class="fs i-check"></i></span></div>
-    <div class="ig"><img src="assets/ing/garlic.png" alt="" /><span class="txt"><b><i data-base="2">2</i> diş Sarımsak</b><span>ezilmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
-    <div class="ig"><img src="assets/ing/olive-oil.png" alt="" /><span class="txt"><b><i data-base="60">60</i> g Tereyağı</b></span><span class="box"><i class="fs i-check"></i></span></div>
-    <div class="ig"><img src="assets/ing/mint.png" alt="" /><span class="txt"><b><i data-base="1">1</i> yemek kaşığı Kuru nane</b></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/yogurt.webp" alt="" /><span class="txt"><b><i data-base="3">3</i> su bardağı Süzme yoğurt</b><span>oda sıcaklığında</span></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/garlic.webp" alt="" /><span class="txt"><b><i data-base="2">2</i> diş Sarımsak</b><span>ezilmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/olive-oil.webp" alt="" /><span class="txt"><b><i data-base="60">60</i> g Tereyağı</b></span><span class="box"><i class="fs i-check"></i></span></div>
+    <div class="ig"><img src="assets/ing/mint.webp" alt="" /><span class="txt"><b><i data-base="1">1</i> yemek kaşığı Kuru nane</b></span><span class="box"><i class="fs i-check"></i></span></div>
   </div>
 
   <div class="ig-group" style="margin-top:16px">
@@ -1603,6 +1606,31 @@
   </div>
 </div>
 
+<div class="bsheet" id="traySheet">
+  <div class="bs-grab"></div>
+  <div class="bs-head"><b>Menü Tepsisi</b>
+    <button class="rst" id="trayClear">Tepsiyi temizle</button>
+    <button class="ab-btn" data-bsheet-close aria-label="Kapat"><i class="fs i-xmark"></i></button></div>
+  <div class="bs-body">
+    <p class="tray-lead"><b id="trayN2">0</b> tarif tepside · toplam <b id="trayDk">0</b> dk</p>
+    <div id="trayList"></div>
+    <div class="emp" id="trayEmpty" style="padding:34px 20px">
+      <span class="ic"><i class="fs i-bowl-food"></i></span>
+      <span class="eyebrow">Tepsi boş</span>
+      <h3>Menünde henüz tarif yok</h3>
+      <p>Sıfırdan Kur sekmesinden beğendiğin tarifleri ekle; menün burada birikir.</p>
+    </div>
+    <div class="tray-save">
+      <div class="ft">Menü adı</div>
+      <label class="fr-search"><i class="fs i-pen-to-square"></i>
+        <input type="text" id="trayName" placeholder="ör. Pazar Kahvaltısı" /></label>
+    </div>
+  </div>
+  <div class="bs-foot">
+    <button class="btn" id="traySave">Kaydet</button>
+  </div>
+</div>
+
 <div class="bsheet" id="shrSheet">
   <div class="bs-grab"></div>
   <div class="bs-head"><b>Tarifi paylaş</b>
@@ -1641,23 +1669,23 @@
       <div class="dr-head">Malzemeler — 4 kişilik</div>
       <div class="ig-group">
         <div class="ig-title">Hamur için</div>
-        <div class="ig"><img src="assets/ing/flour.png" alt="" /><span class="txt"><b>3 su bardağı Un</b><span>elenmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
-        <div class="ig"><img src="assets/ing/egg.png" alt="" /><span class="txt"><b>1 adet Yumurta</b></span><span class="box"><i class="fs i-check"></i></span></div>
-        <div class="ig"><img src="assets/ing/milk.png" alt="" /><span class="txt"><b>1 su bardağı Su</b><span>ılık</span></span><span class="box"><i class="fs i-check"></i></span></div>
-        <div class="ig"><img src="assets/ing/salt.png" alt="" /><span class="txt"><b>1 çay kaşığı Tuz</b></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/flour.webp" alt="" /><span class="txt"><b>3 su bardağı Un</b><span>elenmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/egg.webp" alt="" /><span class="txt"><b>1 adet Yumurta</b></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/milk.webp" alt="" /><span class="txt"><b>1 su bardağı Su</b><span>ılık</span></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/salt.webp" alt="" /><span class="txt"><b>1 çay kaşığı Tuz</b></span><span class="box"><i class="fs i-check"></i></span></div>
       </div>
       <div class="ig-group">
         <div class="ig-title">İç harç için</div>
-        <div class="ig"><img src="assets/ing/minced-beef.png" alt="" /><span class="txt"><b>250 g Kıyma</b><span>orta yağlı dana</span></span><span class="box"><i class="fs i-check"></i></span></div>
-        <div class="ig"><img src="assets/ing/onion.png" alt="" /><span class="txt"><b>1 adet Soğan</b><span>rendelenmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
-        <div class="ig"><img src="assets/ing/black-pepper.png" alt="" /><span class="txt"><b>1 çay kaşığı Karabiber</b></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/minced-beef.webp" alt="" /><span class="txt"><b>250 g Kıyma</b><span>orta yağlı dana</span></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/onion.webp" alt="" /><span class="txt"><b>1 adet Soğan</b><span>rendelenmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/black-pepper.webp" alt="" /><span class="txt"><b>1 çay kaşığı Karabiber</b></span><span class="box"><i class="fs i-check"></i></span></div>
       </div>
       <div class="ig-group">
         <div class="ig-title">Sos &amp; servis için</div>
-        <div class="ig"><img src="assets/ing/yogurt.png" alt="" /><span class="txt"><b>3 su bardağı Süzme yoğurt</b></span><span class="box"><i class="fs i-check"></i></span></div>
-        <div class="ig"><img src="assets/ing/garlic.png" alt="" /><span class="txt"><b>2 diş Sarımsak</b><span>ezilmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
-        <div class="ig"><img src="assets/ing/olive-oil.png" alt="" /><span class="txt"><b>60 g Tereyağı</b></span><span class="box"><i class="fs i-check"></i></span></div>
-        <div class="ig"><img src="assets/ing/mint.png" alt="" /><span class="txt"><b>1 yemek kaşığı Kuru nane</b></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/yogurt.webp" alt="" /><span class="txt"><b>3 su bardağı Süzme yoğurt</b></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/garlic.webp" alt="" /><span class="txt"><b>2 diş Sarımsak</b><span>ezilmiş</span></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/olive-oil.webp" alt="" /><span class="txt"><b>60 g Tereyağı</b></span><span class="box"><i class="fs i-check"></i></span></div>
+        <div class="ig"><img src="assets/ing/mint.webp" alt="" /><span class="txt"><b>1 yemek kaşığı Kuru nane</b></span><span class="box"><i class="fs i-check"></i></span></div>
       </div>
     </div>
     <div class="wz-foot scrbar" id="barWizard">

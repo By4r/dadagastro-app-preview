@@ -357,7 +357,26 @@
       if (tray.indexOf(ad2) < 0) { tray.push(ad2); say(ad2 + ' menüye eklendi'); }
       else { tray.splice(tray.indexOf(ad2), 1); say(ad2 + ' menüden çıkarıldı'); }
       n.textContent = tray.indexOf(ad2) > -1 ? 'Menüden Çıkar' : 'Menüye Ekle';
-      trayRender(); npBar();
+      trayRender(); trayList(); npBar();
+      return;
+    }
+
+    /* --- tepsiden çıkar --- */
+    if ((n = t.closest('[data-trayx]'))) {
+      e.preventDefault();
+      var ax = n.dataset.trayx;
+      var ix = tray.indexOf(ax);
+      if (ix > -1) tray.splice(ix, 1);
+      trayRender(); trayList(); trayBtnSync(); npBar();
+      return;
+    }
+    /* --- hazır menüyü aç → Tarifler --- */
+    if ((n = t.closest('[data-menu]'))) {
+      e.preventDefault();
+      layerClose(document.querySelector('.bsheet.on'), el('bsOv'));
+      var kart = n.closest('.menu-c');
+      var kat = kart ? (kart.querySelector('.mc-k') || {}).textContent : '';
+      filtrelereGec([n.dataset.menu].concat(kat ? [kat] : []), n.dataset.menu + ' menüsü açıldı');
       return;
     }
 
@@ -708,8 +727,76 @@
     if (el('barTray')) el('barTray').hidden = !tray.length;
   }
   if (el('trayOpen')) el('trayOpen').addEventListener('click', function () {
-    if (!tray.length) return;
-    say(tray.length + ' tarif tepside — ' + tray[tray.length - 1]);
+    trayList();
+    layerOpen(el('traySheet'), el('bsOv'));
+  });
+
+  /* ---- tepsi sheet'i: içerik, çıkarma, adlandırma, kaydetme ---- */
+  var TRAY_DK = { };
+  all('[data-tray]').forEach(function (btn) {
+    var card = btn.closest('.gcard');
+    var dk = card ? (card.querySelector('.gmeta span') || {}).textContent : '';
+    TRAY_DK[btn.dataset.tray] = {
+      dk: parseInt((dk || '0').replace(/\D/g, ''), 10) || 0,
+      img: card ? (card.querySelector('.media') || {}).style.backgroundImage : '',
+      kat: card ? ((card.querySelector('.rib') || {}).textContent || '') : ''
+    };
+  });
+  function trayList() {
+    var box = el('trayList'); if (!box) return;
+    box.innerHTML = tray.map(function (ad) {
+      var m = TRAY_DK[ad] || {};
+      return '<div class="tray-r"><span class="th" style="background-image:' + (m.img || 'none') + '"></span>' +
+             '<span class="tx"><b>' + ad + '</b><span>' + (m.kat || '') +
+             (m.dk ? ' · ' + m.dk + ' dk' : '') + '</span></span>' +
+             '<button class="rm" data-trayx="' + ad + '" aria-label="Çıkar"><i class="fs i-xmark"></i></button></div>';
+    }).join('');
+    var toplam = tray.reduce(function (a, x) { return a + ((TRAY_DK[x] || {}).dk || 0); }, 0);
+    if (el('trayN2')) el('trayN2').textContent = tray.length;
+    if (el('trayDk')) el('trayDk').textContent = toplam;
+    if (el('trayEmpty')) el('trayEmpty').style.display = tray.length ? 'none' : 'flex';
+    if (el('traySave')) el('traySave').disabled = !tray.length;
+  }
+  function trayBtnSync() {
+    all('[data-tray]').forEach(function (b) {
+      b.textContent = tray.indexOf(b.dataset.tray) > -1 ? 'Menüden Çıkar' : 'Menüye Ekle';
+    });
+  }
+  if (el('trayClear')) el('trayClear').addEventListener('click', function () {
+    if (!tray.length) { say('Tepsi zaten boş'); return; }
+    tray = []; trayRender(); trayList(); trayBtnSync(); npBar(); say('Tepsi temizlendi');
+  });
+  if (el('traySave')) el('traySave').addEventListener('click', function () {
+    if (!tray.length) { say('Önce tepsiye tarif ekle'); return; }
+    var ad = (el('trayName').value || '').trim() || 'Adsız menü';
+    layerClose(el('traySheet'), el('bsOv'));
+    setTimeout(function () { say('"' + ad + '" kaydedildi — ' + tray.length + ' tarif'); }, 300);
+  });
+
+  /* ---- sihirbaz sonucu → Tarifler, seçimler aktif filtre pili olarak ---- */
+  function filtrelereGec(pilller, mesaj) {
+    var box = el('actFlt');
+    if (box) {
+      var clear = el('fltClear');
+      all('.afl[data-flt]', box).forEach(function (x) { x.remove(); });
+      pilller.forEach(function (t) {
+        var sp = document.createElement('span');
+        sp.className = 'afl';
+        sp.dataset.flt = t;
+        sp.innerHTML = t + ' <i class="fs i-xmark"></i>';
+        box.insertBefore(sp, clear);
+      });
+    }
+    var n = Math.max(6, 2057 - pilller.length * 380);
+    if (el('lCount')) el('lCount').textContent = n;
+    popAll();
+    goRoot('tarifler');
+    setTimeout(function () { say(mesaj || (n + ' tarif listelendi')); }, 380);
+  }
+  if (el('wzGo')) el('wzGo').addEventListener('click', function () {
+    var t = [];
+    Object.keys(wzSecim).forEach(function (k) { t = t.concat(wzSecim[k]); });
+    filtrelereGec(t, el('wzN').textContent + ' tarif listelendi');
   });
 
   /* aktif panele göre alt çubuk: sihirbaz mı, tepsi mi */
@@ -781,7 +868,7 @@
 
   /* ================= AÇILIŞ =================
      #/ekran ile gelen link doğrudan o ekranı açar. */
-  frRender(); trayRender(); if (el('wzNext')) wzGoster(1);
+  frRender(); trayRender(); trayList(); if (el('wzNext')) wzGoster(1);
 
   var boot = readHash();
   if (boot && viewOf(boot)) navigate(boot, true);

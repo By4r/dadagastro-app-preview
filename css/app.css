@@ -1,9 +1,9 @@
 /* ============================================================
    FONTLAR — gömülü (offline çalışır)
    ============================================================ */
-@font-face{font-family:"Gilroy";src:url("../assets/fonts/Gilroy-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:"GilroyXB";src:url("../assets/fonts/Gilroy-ExtraBold.otf") format("opentype");font-weight:800;font-style:normal;font-display:swap}
-@font-face{font-family:"GilroyLt";src:url("../assets/fonts/Gilroy-Light.otf") format("opentype");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Gilroy";src:url("../assets/fonts/Gilroy-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"GilroyXB";src:url("../assets/fonts/Gilroy-ExtraBold.woff2") format("woff2");font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:"GilroyLt";src:url("../assets/fonts/Gilroy-Light.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}
 @font-face{font-family:"FA6S";src:url("../assets/fonts/fa-solid-900.woff2") format("woff2");font-weight:900;font-style:normal}
 @font-face{font-family:"FA6R";src:url("../assets/fonts/fa-regular-400.woff2") format("woff2");font-weight:400;font-style:normal}
 
@@ -627,6 +627,10 @@ table.t tr:last-child td{border-bottom:0}
   position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;background:var(--bg);
   -webkit-overflow-scrolling:touch;visibility:hidden;
 }
+/* Kapalı ekranların alt ağacı hiç render edilmiyor — tarayıcı o ekranlardaki
+   arka plan görsellerini de indirmiyor. İlk açılışta ~400KB fark ediyor.
+   Ekran açılırken .on sınıfı geçişten önce geldiği için animasyon bozulmuyor. */
+.view:not(.on){content-visibility:hidden}
 .view::-webkit-scrollbar{width:0}
 .view.on{visibility:visible}
 
@@ -1463,3 +1467,32 @@ table.t tr:last-child td{border-bottom:0}
 .i-wheat-awn:before{content:"\e2cd"}
 .i-mortar-pestle:before{content:"\f5a7"}
 .i-arrow-rotate-left:before{content:"\f0e2"}
+
+/* --- menü tepsisi sheet'i --- */
+.tray-lead{font-family:"GilroyLt";font-weight:300;font-size:12.5px;color:var(--ink-2);padding:2px 0 12px}
+.tray-lead b{font-family:"GilroyXB";color:var(--ink);font-size:14px}
+.tray-r{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}
+.tray-r .th{width:44px;height:44px;flex:none;border-radius:var(--r-md);background-size:cover;
+  background-position:center;background-color:var(--line)}
+.tray-r .tx{flex:1;min-width:0}
+.tray-r .tx b{display:block;font-family:"GilroyXB";font-size:13px;line-height:1.3;color:var(--ink)}
+.tray-r .tx span{display:block;margin-top:3px;font-family:"GilroyLt";font-weight:300;
+  font-size:11px;color:var(--muted)}
+.tray-r .rm{flex:none;width:34px;height:34px;border-radius:var(--r-md);border:1px solid var(--line);
+  background:var(--paper);color:var(--muted);font-size:12px;display:grid;place-items:center}
+.tray-r .rm:active{background:var(--tomato-tint);border-color:rgba(225,72,39,.32);color:var(--tomato)}
+.tray-save{padding:18px 0 4px}
+.tray-save .ft{font-family:"GilroyXB";font-size:10.5px;letter-spacing:.10em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:9px}
+
+/* --- sihirbaz sonucu: tıklanabilir --- */
+.wz-result{display:flex;align-items:center;gap:12px;width:100%;text-align:left;margin-top:4px;
+  padding:16px 15px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--sh-sm);-webkit-tap-highlight-color:transparent}
+.wz-result .tx{flex:1;min-width:0}
+.wz-result .t{display:block;font-family:"GilroyXB";font-size:19px;line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
+.wz-result .t b{color:var(--tomato)}
+.wz-result .s{display:block;margin-top:6px;font-family:"GilroyLt";font-weight:300;font-size:12px;
+  line-height:1.45;color:var(--muted)}
+.wz-result>i{flex:none;color:var(--tomato);font-size:13px}
+.wz-result:active{background:var(--tomato-tint);border-color:rgba(225,72,39,.32)}
