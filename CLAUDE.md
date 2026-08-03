@@ -132,6 +132,54 @@ Raporda şu yedi soruyu yanıtla:
 
 **"Render aldım" yetmez. Bakıp değerlendireceksin.**
 
+## 📏 DİKEY BOŞLUK DOKTRİNİ
+
+Bu hata dört kez çıktı. Ölçek doğru olması yetmiyor — **bağlamda doğru** olması gerekiyor.
+8px ölçektedir, ama iki farklı komponent arasında 8px **yanlıştır**.
+
+### A) Bloklar arası (kardeş komponentler)
+
+Her blok boşluğunu kendinden **öncekiyle olan ilişkisinden** alır. Blok eklerken sor:
+*"bu, üstündekinin PARÇASI mı, KOMŞUSU mu, yoksa BAŞKA BİR BÖLÜM mü?"*
+
+| İlişki | Boşluk | Örnek |
+|---|---|---|
+| Aynı grubun öğeleri | 8 | çip ↔ çip, liste satırı ↔ satır |
+| Etiket ↔ kendi kontrolü | 8 | "Süre" başlığı ↔ süre çipleri |
+| Komşu ama farklı komponent | **16 minimum** | arama alanı ↔ çip rayı |
+| Alt bölüm ↔ alt bölüm | 20–24 | filtre grubu ↔ filtre grubu |
+| Bölüm ↔ bölüm | 30 | kategoriler ↔ öne çıkanlar |
+
+> **SERT KURAL: iki farklı komponent tipi arasında 16px'ten az boşluk YASAK.**
+> Input · çip rayı · kart ızgarası · buton · liste · başlık — hepsi farklı tiptir.
+
+Sebebi: **yakınlık ilişki anlatır.** Arama alanıyla çip rayı 6px aralıkla durursa
+kullanıcı çipleri arama alanının parçası sanır. Değiller.
+
+### B) Komponent İÇİ boşluk (kart, panel, satır)
+
+| Yer | Kural |
+|---|---|
+| Kart dolgusu | Her kenardan eşit. **Alt dolgu üst dolguyla aynı** |
+| Başlık ↔ meta | 8 |
+| Meta ↔ ikincil satır | 8 |
+| Hairline öncesi/sonrası | 10 |
+| Son öğe ↔ CTA butonu | **12 minimum** |
+| CTA ↔ kart alt kenarı | **kart dolgusu kadar** — asla 0 |
+
+> **SERT KURAL: hiçbir öğe kapsayıcısının kenarına yapışmayacak.**
+> Buton kartın içinde yüzer; kenara değmez.
+
+⚠️ `margin-top:auto` tuzağı: kart içerik boyundayken `auto` **0'a düşer**.
+Butonu alta hizalamak için `auto`'yu bir üstteki bloğa ver, butona sabit
+`margin-top` bırak — yoksa buton üstündeki satıra yapışır.
+
+### C) Denetim
+
+`node .tools/vqa.js` bu ikisini otomatik kontrol eder:
+1. **Kardeş blok boşluğu** — ardışık kardeşlerin komponent tipi farklıysa ve boşluk < 16 ise bulgu
+2. **Kapsayıcı iç boşluğu** — ilk/son çocuk ile kapsayıcının içerik kutusu arası, dolgudan azsa bulgu
+
 ## 1. Proje kuralları
 
 - **frontend-design skill ZORUNLU** — her yeni ekran/komponent bu skill ile üretilir. Generic AI estetiğinden kaçınmak için.

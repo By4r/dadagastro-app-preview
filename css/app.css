@@ -796,7 +796,7 @@ table.t tr:last-child td{border-bottom:0}
   font-size:14px;flex:none;position:relative}
 .fbtn .bdg{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--tomato);
   color:#FFF;font-family:"GilroyXB";font-size:10px;display:grid;place-items:center;padding:0 5px;border:2px solid #F9F9F9}
-.lchips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:11px 0 12px}
+.lchips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:11px 0 12px;margin-top:16px}
 .lchips::-webkit-scrollbar{display:none}
 .lchips .chip{flex:none}
 
@@ -837,7 +837,12 @@ table.t tr:last-child td{border-bottom:0}
 .gcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
   overflow:hidden;display:flex;flex-direction:column}
 .gcard .bd{flex:1;display:flex;flex-direction:column}
-.gcard .btn.sm{margin-top:auto}
+/* margin-top:auto tuzağı: kart içerik boyundayken auto 0'a düşüyor ve buton
+   üstündeki puan satırına yapışıyordu. auto'yu bir üstteki bloğa verdik,
+   butonun sabit 12px'i kaldı — hem hizalanıyor hem nefes alıyor. */
+.gcard .gstat{margin-top:auto}
+.gcard .gchef{margin-bottom:10px}
+.gcard .btn.sm{margin-top:12px}
 .gcard .im{position:relative;height:118px;background-size:cover;background-position:center}
 .gcard .im::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,12,0) 55%,rgba(20,18,12,.42))}
 .gcard .tchip{position:absolute;left:8px;bottom:8px;z-index:2;font-family:"GilroyXB";font-size:10px;color:#FFF;
@@ -850,7 +855,7 @@ table.t tr:last-child td{border-bottom:0}
 .gcard .rib{position:absolute;top:8px;left:8px;z-index:2;font-family:"GilroyXB";font-size:9.5px;color:#FFF;
   background:var(--tomato);padding:4px 7px;border-radius:6px;letter-spacing:.02em}
 .gcard .rib.new{background:var(--petrol)}
-.gcard .bd{padding:11px 11px 12px;gap:0}
+.gcard .bd{padding:12px;gap:0}
 .gcard h4{font-size:13px;line-height:1.32;color:var(--ink);
   min-height:34px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 /* porsiyon + maliyet — canlıdaki kart alanları */
@@ -1478,7 +1483,8 @@ table.t tr:last-child td{border-bottom:0}
 /* --- küçük/hayalet buton --- */
 .btn.sm{height:36px;font-size:12px;margin-top:9px;width:100%}
 .btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:none}
-.catchips{padding-bottom:2px;scroll-padding-left:var(--gutter)}
+/* farklı komponent tipi (input ↔ ray): doktrin gereği min 16 */
+.catchips{margin-top:16px;padding-bottom:2px;scroll-padding-left:var(--gutter)}
 .catchips .fopts{display:flex;flex-wrap:nowrap;gap:7px}
 /* kategori çipi ana sayfadaki kategori kartlarıyla tutarlı olsun diye ikonlu */
 /* Çip: pasif de zeminli + kenarlıklı olacak. İkon metinle aynı satırda,
@@ -1597,3 +1603,6 @@ table.t tr:last-child td{border-bottom:0}
 .pn-c .rd i{font-size:9px}
 /* sekme etiketi: "Püf Noktaları" 5 sekmede 78px'e sığsın diye bu sekmede 9px */
 .tab[data-root="vTips"] span{font-size:9px;letter-spacing:0}
+
+/* yemek modu rayı ↔ alt sekme bloğu: farklı komponent, alt bölüm geçişi */
+#npSub{margin-top:20px;display:block}
