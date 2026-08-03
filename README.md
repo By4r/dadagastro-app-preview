@@ -1,20 +1,27 @@
-# DadaGastro — Mobil Uygulama Tasarım Prototipi
+# DadaGastro — Mobil Uygulama Arayüz Prototipi
 
-Onay için hazırlanmış tıklanabilir arayüz prototipi.
+Tıklanabilir HTML prototip. Onay sonrası Flutter'a çevrilecek.
 
-- **Masaüstünde** telefon simülatörü içinde açılır
-- **Telefonda** tam ekran, gerçek uygulama gibi açılır
-- İnternet gerektirmez — fontlar, ikonlar ve görseller dosyaya gömülüdür
+## Yapı
 
-## Denenecekler
+```
+index.html          tüm ekranların markup'ı (tek sayfa, view tabanlı)
+css/app.css         token'lar + tüm komponent stilleri
+js/app.js           router, etkileşimler, pişirme modu, filtreler
+assets/fonts/       Gilroy (3 ağırlık) + FontAwesome 6.5.2 woff2
+assets/img/         yemek fotoğrafları (webp), logo
+assets/ing/         malzeme ikonları (png)
+```
 
-- Tarif kartına dokun → tarif detay ekranı açılır, geri tuşuyla dönülür
-- "Pişirmeye Başla" → pişirme modu (zamanlayıcı gerçekten çalışır)
-- Alt ortadaki buton → malzeme sihirbazı
-- Tarifler sekmesi → filtre çekmecesi
-- Sağ üst hamburger → uygulama menüsü
+## Geliştirme
 
-## Not
+```bash
+python3 -m http.server 8000
+# → http://localhost:8000
+```
 
-Bu bir tasarım prototipidir, gerçek uygulama değildir. Veriler örnektir.
-Onay sonrası Flutter ile üretilecektir.
+`file://` ile açma — fontlar CORS'a takılır. Her zaman sunucu üzerinden aç.
+
+## Deploy
+
+Bu klasörün tamamı GitHub Pages'e gider. `.nojekyll` dosyası şart.
