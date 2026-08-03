@@ -151,6 +151,40 @@ Hiçbir yerde `backdrop-filter` / blur yüzey yok. Tüm yüzeyler düz renk.
 
 Parlak pembe/magenta · parlak mor · saf sarı · turuncu-sarı · fıstık yeşili · açık mavi/cyan.
 
+### ⚠️ FontAwesome alt kümesi — yeni ikon eklerken YENİLE
+
+`assets/fonts/fa-solid-900.woff2` ve `fa-regular-400.woff2` **alt küme**dir:
+yalnız `css/app.css` içinde `.i-*` olarak tanımlı kod noktalarını taşır.
+181 KB → 11 KB. Orijinaller `*-full.woff2` adıyla repoda duruyor, **silme**.
+
+**Yeni bir FA ikonu eklediğinde** `.i-yeni-ikon:before{content:"\fXXX"}` kuralını
+yazdıktan sonra alt kümeyi yenilemezsen ikon **görünmez**. Yenileme komutu:
+
+```bash
+cd deploy
+
+# 1) app.css'te tanımlı tüm kod noktalarını topla
+python3 - <<'EOF' > /tmp/uni.txt
+import io, re
+css = io.open('css/app.css', encoding='utf-8').read()
+cps = re.findall(r'\.i-[a-z0-9-]+:before\{content:"\\([0-9a-f]{4,5})"\}', css)
+print(','.join('U+' + c.upper() for c in sorted(set(cps))))
+EOF
+
+# 2) orijinalden yeniden alt küme çıkar (fonttools + brotli gerekir)
+cd assets/fonts
+for f in fa-solid-900 fa-regular-400; do
+  python3 -m fontTools.subset "$f-full.woff2" \
+    --unicodes="$(cat /tmp/uni.txt)" \
+    --flavor=woff2 --layout-features= --no-hinting --desubroutinize \
+    --output-file="$f.woff2"
+done
+```
+
+**Yenileme sonrası doğrula:** `.tools/faz0.js` ve `.tools/faz1.js` çalıştır, sonra
+her ekranda `document.querySelectorAll('.fs,.fr')` içinde `offsetWidth === 0`
+olan var mı bak — varsa o glif alt kümeye girmemiş demektir.
+
 ### Tipografi — tek aile: **Gilroy**
 
 | Rol | Ağırlık | Boyut | lh | ls |
