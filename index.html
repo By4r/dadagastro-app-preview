@@ -641,10 +641,19 @@
 <!-- ==================== NE PİŞİRSEM (sheet) ==================== -->
 <!-- ==================== NE PİŞİRSEM ==================== -->
 <section class="view sheet" id="vWizard" data-route="ne-pisirsem" data-bar="#barWizard">
-  <header class="vbar"><button class="ab-btn" data-close aria-label="Kapat"><i class="fs i-xmark"></i></button>
+  <header class="vbar overlay mh-bar"><button class="ab-btn" data-close aria-label="Kapat"><i class="fs i-xmark"></i></button>
     <h2>Ne Pişirsem?</h2>
     <button class="ab-btn wz-reset" id="wzReset" aria-label="Sıfırla"><i class="fs i-arrow-rotate-left"></i></button>
   </header>
+
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1494.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Ne Pişirsem?</span>
+    <h2>Bugün ne pişirsem?</h2>
+    <p>Öğün, süre, zorluk ve damak tercihini seç — sana uygun tarifleri süzelim. Kararsızsan Yemek Modu sekmesinden hazır menülere göz at.</p>
+    <div class="mh-step" id="wzHeroStep"><span class="lb">Adım <b id="wzHeroN">1</b> / 4</span><span class="ln"><i id="wzHeroBar" style="width:25%"></i></span></div>
+  </div>
 
   <div data-tabs id="npTabs">
     <div class="segs">
@@ -661,7 +670,6 @@
       <div class="wz-s" data-wzs="4"><span class="n">4</span><span class="t"><b>Damak</b><span>Tercih</span></span></div>
       </div>
     <div class="wz-step on" data-wzstep="1" data-multi="0">
-      <span class="eyebrow">Adım 1 / 4</span>
       <h2>Ne pişirmek istiyorsun?</h2>
       <div class="wz-grid">
         <button class="wz-c" data-wzc><b>Çorba / Başlangıç</b><span>Sıcacık bir giriş</span></button>
@@ -673,7 +681,6 @@
       </div>
     </div>
     <div class="wz-step" data-wzstep="2" data-multi="0">
-      <span class="eyebrow">Adım 2 / 4</span>
       <h2>Ne kadar vaktin var?</h2>
       <div class="wz-grid">
         <button class="wz-c" data-wzc><b>15 dakika</b><span>Çok acelem var</span></button>
@@ -683,7 +690,6 @@
       </div>
     </div>
     <div class="wz-step" data-wzstep="3" data-multi="0">
-      <span class="eyebrow">Adım 3 / 4</span>
       <h2>Hangi zorlukta olsun?</h2>
       <div class="wz-grid">
         <button class="wz-c" data-wzc><b>Çok kolay</b><span>Yeni başlıyorum</span></button>
@@ -693,7 +699,6 @@
       </div>
     </div>
     <div class="wz-step" data-wzstep="4" data-multi="1">
-      <span class="eyebrow">Adım 4 / 4</span>
       <h2>Canın ne çekiyor?</h2>
       <div class="wz-grid">
         <button class="wz-c" data-wzc><b>Hafif & Sağlıklı</b></button>
@@ -869,7 +874,7 @@
       </div>
     </div>
   </div>
-  <div class="view-pad"></div>
+  <div class="vw-pad vw-bar"></div>
 </section>
 
 <!-- ==================== DOLAPTA NE VAR ==================== -->
@@ -1207,7 +1212,7 @@
     <div class="ggrid" id="frGrid"></div></div>
   </div>
 
-  <div class="view-pad"></div>
+  <div class="vw-pad vw-bar"></div>
 </section>
 
 <section class="view pushed" id="vDetail" data-route="tarif-detay" data-parent="ana-sayfa" data-bar="#barDetail">
@@ -1944,11 +1949,20 @@
 <!-- B9 · Tarif Ekle — 5 adımlı sihirbaz. Canlı /tarif-ekle giriş ister;
      alan adları oradan alındı. -->
 <section class="view sheet" id="vAddRec" data-route="tarif-ekle" data-parent="tarifler" data-bar="#barAdd">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-close aria-label="Kapat"><i class="fs i-xmark"></i></button>
     <h2>Tarif Ekle</h2>
     <button class="ab-btn" data-toast="Taslak kaydedildi"><i class="fs i-bookmark"></i></button>
   </header>
+
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1436.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Mutfağım</span>
+    <h2>Kendi tarifini paylaş</h2>
+    <p>Beş adımda tamamla: temel bilgiler, malzemeler, adımlar, görseller ve önizleme. Gönderdikten sonra editör kuyruğuna düşer, genelde 1 iş gününde yayına alınır.</p>
+    <div class="mh-step" id="raHeroStep"><span class="lb">Adım <b id="raHeroN">1</b> / 5</span><span class="ln"><i id="raHeroBar" style="width:20%"></i></span></div>
+  </div>
 
   <div class="wz-steps" id="raSteps" style="padding:16px 16px 0;margin-bottom:20px">
     <button class="wz-s on" data-ras="1"><span class="n">1</span><span class="t"><b>Temel Bilgi</b></span></button>
@@ -3357,19 +3371,21 @@
 
 <!-- E3 · Canlı Liderlik — canlı /liderlik, Sezon 2026 -->
 <section class="view pushed" id="vBoard" data-route="liderlik" data-parent="sefler">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Canlı Liderlik</h2>
     <button class="ab-btn" data-open="onur-listesi" aria-label="Onur Listesi"><i class="fs i-crown"></i></button>
   </header>
 
-  <div class="ar-title" style="padding-top:20px">
-    <span class="eyebrow">Sezon Yarışı · 2026</span>
-    <h1>Aktif sezonun önde gidenleri</h1>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1382.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Sezon Yarışı · 2026</span>
+    <h2>Aktif sezonun önde gidenleri</h2>
+    <p>Sezonun en çok katkı puanı toplayan üyeleri. Sezon puanı yıl sonunda sıfırlanır — yarış her yıl taze başlar.</p>
+    <div class="mh-stat"><span><b>265</b>Yarışan üye</span><span><b>31 Aralık</b>Sezon kapanışı</span><span><b>İlk 10</b>Onur Listesi</span></div>
   </div>
-  <div class="ar-b" style="padding-top:12px">
-    <p>Sezon puanı yıl sonunda sıfırlanır — yarış her yıl taze başlar.</p>
-  </div>
+
 
   <div class="lb-pod">
     <div class="p" data-open="sef-profil"><span class="av" style="background:var(--petrol)">ŞY</span>
@@ -3407,17 +3423,22 @@
 
 <!-- E4 · Onur Listesi — canlıda henüz kapanmış sezon yok, boş durumuyla -->
 <section class="view pushed" id="vHonor" data-route="onur-listesi" data-parent="liderlik">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Onur Listesi</h2>
   </header>
 
-  <div class="ar-title" style="padding-top:20px">
-    <span class="eyebrow">Hall of Fame</span>
-    <h1>Topluluğun kalıcı onur kaydı</h1>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1773.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Hall of Fame</span>
+    <h2>Onur Listesi</h2>
+    <p>Yıl yıl "Yılın Şefi" ve sezon ilk 10'u — topluluğun kalıcı onur kaydı.</p>
+    <div class="mh-stat"><span><b>0</b>Kapanmış sezon</span><span><b>2026</b>İlk sezon</span><span><b>10</b>Kadro</span></div>
   </div>
+
   <div class="ar-b" style="padding-top:12px">
-    <p>Yıl yıl “Yılın Şefi” ve sezon ilk 10'u burada kalır. Canlı liderlikten farkı: bu liste hiç sıfırlanmaz.</p>
+    <p>Canlı liderlikten farkı: <b>bu liste hiç sıfırlanmaz</b> — kapanan her sezonun ilk 10'u kalıcı olarak buraya yazılır.</p>
   </div>
 
   <div class="emp" style="padding-top:34px">
@@ -3556,11 +3577,20 @@
 
 <!-- F3 · Tarif Defterim — canlı /mutfak-defterim (giriş ister) -->
 <section class="view pushed" id="vBook" data-route="defterim" data-parent="hesap" data-bar="#barBook">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Tarif Defterim</h2>
     <button class="ab-btn" data-open="arama" aria-label="Ara"><i class="fs i-magnifying-glass"></i></button>
   </header>
+
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1414.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Mutfağım</span>
+    <h2>Tarif Defterim</h2>
+    <p>Kaydettiğin tarifler koleksiyonlara ayrılır — hafta içi akşam, misafir menüsü, tatlı defteri. Bir tarif birden çok koleksiyonda durabilir.</p>
+    <div class="mh-stat"><span><b>5</b>Koleksiyon</span><span><b>34</b>Kayıtlı tarif</span><span><b>12</b>Denediğin</span></div>
+  </div>
 
   <div class="segs" style="margin-bottom:0"></div>
   <div data-tabs id="bkTabs">
@@ -3611,11 +3641,20 @@
 
 <!-- F4 · Alışveriş Listem -->
 <section class="view pushed" id="vShop" data-route="alisveris" data-parent="hesap" data-bar="#barShop">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Alışveriş Listem</h2>
     <button class="ab-btn" data-dlg="dlgShopClear" aria-label="Temizle"><i class="fs i-trash"></i></button>
   </header>
+
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/2437.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Mutfağım</span>
+    <h2>Alışveriş Listem</h2>
+    <p>Tariften eklediğin malzemeler burada toplanır, reyona göre gruplanır. Aldıklarını işaretle, listeyi tek dokunuşla temizle.</p>
+    <div class="mh-stat"><span><b>18</b>Madde</span><span><b>5</b>Reyon</span><span><b>3</b>Tarifden</span></div>
+  </div>
 
   <div class="sl-bar">
     <span class="tx"><b id="slDone">3</b> / <b id="slAll">11</b> alındı
@@ -3680,10 +3719,19 @@
 
 <!-- F5 · Tariflerim (paylaştıklarım) -->
 <section class="view pushed" id="vMyRec" data-route="tariflerim" data-parent="hesap" data-bar="#barMyRec">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Tariflerim</h2>
   </header>
+
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/2615.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Mutfağım</span>
+    <h2>Paylaştığım Tarifler</h2>
+    <p>Yayına giren, editör kuyruğunda bekleyen ve taslak kalan tariflerin tek yerde. Her tarifin okunma, puan ve yorum sayısı yanında.</p>
+    <div class="mh-stat"><span><b>12</b>Yayında</span><span><b>2</b>İncelemede</span><span><b>3</b>Taslak</span></div>
+  </div>
 
   <div class="pstats" style="margin-top:0">
     <div class="pstat"><b>12</b><span>Yayında</span></div>
@@ -4292,19 +4340,20 @@
 
 <!-- G4 · Gizlilik Politikası -->
 <section class="view pushed" id="vPrivacy" data-route="gizlilik" data-parent="hesap">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Gizlilik Politikası</h2>
   </header>
 
-  <div class="ar-title" style="padding-top:20px">
-    <span class="eyebrow">Yasal metin</span>
-    <h1>Gizlilik Politikası</h1>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1406.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Yasal Metin</span>
+    <h2>Gizlilik Politikası</h2>
+    <p>Hangi veriyi neden topluyoruz, kimlerle paylaşıyoruz, ne kadar saklıyoruz ve nasıl sildirebilirsin — altı başlıkta.</p>
+    <div class="mh-stat"><span><b>6</b>Başlık</span><span><b>6 dk</b>Okuma</span><span><b>19.07.26</b>Son güncelleme</span></div>
   </div>
-  <div class="ar-meta">
-    <span><i class="fs i-calendar-days"></i> Son güncelleme: 19 Temmuz 2026</span>
-    <span><i class="fs i-clock"></i> 6 dk okuma</span>
-  </div>
+
 
   <div class="kit-lab">İçindekiler</div>
   <div class="kit-box" data-acc-single style="padding:0 var(--gutter)">
@@ -4339,19 +4388,20 @@
 
 <!-- G5 · KVKK Aydınlatma Metni — canlı /yasal/kvkk, 6 bölüm -->
 <section class="view pushed" id="vKvkk" data-route="kvkk" data-parent="hesap">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>KVKK Aydınlatma Metni</h2>
   </header>
 
-  <div class="ar-title" style="padding-top:20px">
-    <span class="eyebrow">Yasal metin</span>
-    <h1>KVKK Aydınlatma Metni</h1>
+  <div class="mh-hero">
+    <div class="mh-bg" data-bg="url('assets/img/1598.webp')"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow">Yasal Metin</span>
+    <h2>KVKK Aydınlatma Metni</h2>
+    <p>6698 sayılı kanun kapsamında veri sorumlusu, işleme amaçları, hukuki sebep ve ilgili kişi hakları.</p>
+    <div class="mh-stat"><span><b>6</b>Başlık</span><span><b>6698</b>Sayılı Kanun</span><span><b>19.07.26</b>Son güncelleme</span></div>
   </div>
-  <div class="ar-meta">
-    <span><i class="fs i-calendar-days"></i> Son güncelleme: 19 Temmuz 2026</span>
-    <span><i class="fs i-scale-balanced"></i> 6698 sayılı Kanun</span>
-  </div>
+
 
   <div class="ar-note dark ar-dk">
     <span class="ar-k"><i class="fs i-circle-check"></i> Veri sorumlusu</span>

@@ -314,6 +314,18 @@ Kabul kriterleri:
 | **"Daha Fazla Madde" gerçek** | ✅ Toast değil: kalan 22 madde `<template>`'ten yükleniyor. A–Z harfi ve arama da yüklüyor |
 | Denetim | ✅ `data-say` 0 · `lint-css` temiz · `akis` **19/19** · `hero-kanama` 15/15 · `kontrast` eşik altı yok · `glif` temiz · `vqa` 2 bilinçli istisna |
 
+### ✅ Üçüncü turda tamamlanan (4 Ağustos 2026)
+
+| İş | Durum |
+|---|---|
+| **Hero sayaç satırı tam genişlik** | ✅ İlk sütun sola · son sütun sağa · ortadakiler ortalanmış. 2 ya da 4 sayaçta bozulmuyor, ayraç çizgisi aynı genişlikte |
+| **Hero altı ilk blok 20px** | ✅ `.mh-hero{margin-bottom:20px}` — tek yerde, bütün hero'lu ekranlarda |
+| **Input altı yardım metni** | ✅ input → 10 · yardım metni → sonraki blok 20. `.fr-note` ve `.fm-hint`, prototipteki her yer |
+| **Dolapta ritmi** | ✅ buton çifti → 16 → açıklama → 16 → mod kartları → 16 → mod açıklaması → 16 → input → 10 → yardım metni |
+| **Hero'suz 9 modül ekranı** | ✅ Ne Pişirsem · Tarif Ekle · Tarif Defterim · Alışveriş Listem · Paylaştığım Tarifler · Canlı Liderlik · Onur Listesi · Gizlilik · KVKK. Sihirbazlarda sayaç yerine adım göstergesi |
+| **Hero denetimi** | ✅ 50 ekranın 24'ünde `.mh-hero`, 26'sında gerekçeli başka hero/tasarım — gerekçesiz hero'suz ekran **0** |
+| Denetim | ✅ `vqa` **0 bulgu** (17 kontrol) · `vqa-dogrula` 2/2 · `akis` 19/19 · `hero-kanama` 24/24 · `data-say` 0 |
+
 ### 🔨 Açık iş — sıradaki oturum
 
 | # | İş | Not |

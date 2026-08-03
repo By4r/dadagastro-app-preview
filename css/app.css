@@ -1389,9 +1389,11 @@ table.t tr:last-child td{border-bottom:0}
   font-size:11.5px;color:var(--tomato);background:var(--tomato-tint);
   border:1px solid rgba(225,72,39,.24);border-radius:var(--r-sm);padding:5px 7px 5px 9px}
 .fr-chip i{font-size:9px;opacity:.75}
-.fr-lead{padding:0 var(--gutter);font-family:"GilroyLt";font-weight:300;font-size:12.5px;
-  line-height:1.55;color:var(--ink-2)}
-.fr-qs{padding:14px var(--gutter) 0}
+/* buton çifti → 16 → açıklama metni → 16 → mod kartları:
+   metin blokları komşularından en az 16px uzakta durur (13/1.5, ikincil renk) */
+.fr-lead{margin:16px 0 0;padding:0 var(--gutter);font-family:"GilroyLt";font-weight:300;
+  font-size:13px;line-height:1.5;color:var(--ink-2)}
+.fr-qs{padding:0 var(--gutter);margin-top:20px}          /* alt bölüm ↔ alt bölüm */
 .fr-qs .ft{font-family:"GilroyXB";font-size:10.5px;letter-spacing:.10em;text-transform:uppercase;
   color:var(--muted);margin-bottom:10px}
 .hs-row{padding:12px 0;border-bottom:1px solid var(--line)}
@@ -1401,15 +1403,17 @@ table.t tr:last-child td{border-bottom:0}
 .hs-opt .fopt{font-size:11.5px;padding:7px 11px}
 
 /* --- 185 malzeme --- */
-.fr-mz{margin-top:24px}
-.fr-mzhead{margin-bottom:16px;padding:0 var(--gutter) 12px}
+.fr-mzhead{margin:16px 0 20px;padding:0 var(--gutter)}   /* açıklama → input 16 · yardım metni → sonraki blok 20 */
 .fr-search{display:flex;align-items:center;gap:10px;width:100%;height:46px;padding:0 13px;
   background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md)}
 .fr-search i{color:var(--muted);font-size:13px;flex:none}
 .fr-search input{flex:1;min-width:0;border:0;outline:none;background:none;
   font-family:"Gilroy";font-weight:500;font-size:13px;color:var(--ink)}
 .fr-search input::placeholder{font-family:"GilroyLt";font-weight:300;color:var(--muted)}
-.fr-note{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:11px;color:var(--muted)}
+/* INPUT ALTI YARDIM METNİ — input'a 10px, altındaki bloğa 20px.
+   Prototipteki her yardım metni bu iki değeri kullanır (.fr-note · .fm-hint). */
+.fr-note{margin-top:10px;font-family:"GilroyLt";font-weight:300;font-size:11.5px;line-height:1.5;
+  color:var(--muted)}
 .fr-note b{font-family:"GilroyXB";color:var(--tomato)}
 .mzcat{margin:0 var(--gutter) 12px}
 .mzcat .acc-h{gap:9px}
@@ -1503,7 +1507,7 @@ table.t tr:last-child td{border-bottom:0}
 /* --- hazır menü kartı --- */
 .menu-list{padding:0 var(--gutter)}
 .menu-c{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);
-  box-shadow:var(--sh-sm);padding:15px 14px;margin-bottom:10px}
+  box-shadow:var(--sh-sm);padding:15px 14px;margin-bottom:12px}   /* 10 ölçek dışıydı */
 .mc-h{display:flex;align-items:flex-start;gap:10px}
 .mc-h h4{flex:1;font-size:14.5px;line-height:1.28;color:var(--ink)}
 .mc-k{flex:none;font-family:"GilroyXB";font-size:9.5px;letter-spacing:.04em;color:var(--tomato);
@@ -1687,7 +1691,9 @@ table.t tr:last-child td{border-bottom:0}
   font-family:"Gilroy";font-weight:500;font-size:13.5px;color:var(--ink);outline:0;
   -webkit-appearance:none;appearance:none}
 .fm-in{height:48px;padding:0 13px}
-.fm-ta{padding:12px 13px;line-height:1.55;resize:none;font-family:"GilroyLt";font-weight:300}
+/* display:block — inline-block textarea taban çizgisi boşluğu bırakıyor,
+   altındaki yardım metni 10px yerine 16px aşağı düşüyordu */
+.fm-ta{display:block;padding:12px 13px;line-height:1.55;resize:none;font-family:"GilroyLt";font-weight:300}
 .fm-in::placeholder,.fm-ta::placeholder{font-family:"GilroyLt";font-weight:300;color:#ABA79F}
 .fm-in:focus,.fm-ta:focus{border-color:rgba(225,72,39,.42)}
 .fm-ic{position:relative;display:block}
@@ -1695,7 +1701,7 @@ table.t tr:last-child td{border-bottom:0}
 .fm-ic .fm-in{padding-left:36px}
 .fm-ic .fm-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:36px;height:36px;
   border-radius:var(--r-md);display:grid;place-items:center;color:var(--muted);font-size:13px}
-.fm-f .fm-hint{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:11.5px;line-height:1.5;color:var(--muted)}
+.fm-f .fm-hint{margin-top:10px;font-family:"GilroyLt";font-weight:300;font-size:11.5px;line-height:1.5;color:var(--muted)}
 .fm-f .fm-row{display:flex;gap:10px}
 .fm-f .fm-row>*{flex:1;min-width:0}
 .fm-f .fopts{display:flex;flex-wrap:wrap;gap:8px}
@@ -2283,7 +2289,9 @@ table.t tr:last-child td{border-bottom:0}
 .sl-bar{display:flex;align-items:center;gap:12px;margin:16px var(--gutter) 0;padding:14px 16px;
   background:var(--ink);border-radius:var(--r-lg)}
 .sl-bar .tx{flex:1;min-width:0}
-.sl-bar b{display:block;font-family:"GilroyXB";font-size:15px;color:#FFF}
+/* display:block DEĞİL — "3 / 11 alındı" tek satır; blok yapınca sayı, bölü
+   işareti ve etiket alt alta düşüyordu (kapsayıcı kuralı iç yapıyı eziyordu) */
+.sl-bar b{font-family:"GilroyXB";font-size:15px;color:#FFF}
 .sl-bar span{display:block;margin-top:6px;font-family:"GilroyLt";font-weight:300;font-size:11.5px;
   color:rgba(255,255,255,.62)}
 .sl-bar .tr{display:block;height:5px;border-radius:3px;background:rgba(255,255,255,.18);
@@ -2405,8 +2413,11 @@ table.t tr:last-child td{border-bottom:0}
    ============================================================ */
 /* padding-top 104 = status bar 44 + app bar 54 + 6 — ana sayfa .hero'suyla
    birebir aynı değer, ölçek dışı ama sistem ölçüsünden türüyor */
+/* margin-bottom 20 = "hero'dan sonraki ilk blok 20px" kuralı, TEK yerde.
+   Kardeş margin'i çöktüğü için sonraki blok daha büyük bir üst boşluk
+   istiyorsa (ör. .sec 30) o kazanır; 20 tabandır. Ekran ekran yama yok. */
 .mh-hero{position:relative;overflow:hidden;isolation:isolate;background:var(--ink);
-  margin:0;border-radius:0;padding:104px var(--gutter) 24px}
+  margin:0 0 20px;border-radius:0;padding:104px var(--gutter) 24px}
 .mh-bg{position:absolute;inset:0;background-size:cover;background-position:center 42%;z-index:-3}
 /* ana sayfadaki .hero-veil reçetesinin AYNISI — üç katman birebir.
    Tek fark en üstteki app bar perdesi: başlık ve ikonlar artık fotoğrafın
@@ -2425,9 +2436,29 @@ table.t tr:last-child td{border-bottom:0}
 .mh-hero h2{font-size:22px;line-height:1.16;letter-spacing:-.02em;color:#FFF}
 .mh-hero p{margin-top:9px;font-family:"GilroyLt";font-weight:300;font-size:12.5px;line-height:1.55;
   color:var(--on-dark);opacity:.82}
+/* SAYAÇ SATIRI DAİMA TAM GENİŞLİĞE YAYILIR — asla sola kümelenmez.
+   Sütunlar eşit (flex:1 1 0), ilk sütun sola, son sütun sağa, ortadakiler
+   ortalanmış. 2 sayaçta da 4 sayaçta da aynı davranır; tek sayaçta sola
+   yaslanır. Üstündeki ayraç çizgisi de aynı genişlikte (border-top). */
 .mh-stat{display:flex;gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.16)}
-.mh-stat span{flex:1;min-width:0;font-family:"GilroyLt";font-weight:300;font-size:10.5px;line-height:1.35;
-  color:var(--on-dark);opacity:.72}
+.mh-stat span{flex:1 1 0;min-width:0;text-align:center;font-family:"GilroyLt";font-weight:300;
+  font-size:10.5px;line-height:1.35;color:var(--on-dark);opacity:.72}
+.mh-stat span:first-child{text-align:left}
+.mh-stat span:last-child{text-align:right}
+.mh-stat span:only-child{text-align:left}
+
+/* sihirbaz hero'sunda sayaç yerine ADIM göstergesi — aynı ayraç, aynı hiza,
+   çubuk kalan genişliği doldurur (sayaç satırı gibi tam genişlik) */
+.mh-step{display:flex;align-items:center;gap:12px;margin-top:18px;padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.16)}
+.mh-step .lb{flex:none;font-family:"GilroyXB";font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--on-dark)}
+.mh-step .lb b{color:#FFB9A5}
+.mh-step .ln{display:block;flex:1;min-width:0;height:4px;border-radius:2px;
+  background:rgba(255,255,255,.22);overflow:hidden}
+.mh-step .ln i{display:block;height:100%;border-radius:2px;background:var(--tomato);
+  transition:width .28s var(--ease)}
+.mh-step[hidden]{display:none}
 .mh-stat span b{display:block;font-family:"GilroyXB";font-weight:800;font-size:18px;color:#FFF;
   letter-spacing:-.02em;margin-bottom:5px;opacity:1}
 
@@ -2468,8 +2499,8 @@ table.t tr:last-child td{border-bottom:0}
 /* aktif modun açıklaması — her mod kendi metnini taşır */
 .fr-exd{display:none}
 .fr-exd.on{display:block}
-.fr-exd>p{margin:16px var(--gutter) 0;font-family:"GilroyLt";font-weight:300;font-size:12.5px;
-  line-height:1.6;color:var(--ink-2)}
+.fr-exd>p{margin:16px var(--gutter) 0;font-family:"GilroyLt";font-weight:300;font-size:13px;
+  line-height:1.5;color:var(--ink-2)}
 
 /* arama alanındaki mikrofon */
 .fr-mic{flex:none;width:34px;height:34px;border-radius:var(--r-md);display:grid;place-items:center;

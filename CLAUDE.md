@@ -148,20 +148,25 @@ Hepsi aynı griyse ekran tek bir hamur gibi okunur.
 
 ```bash
 node .tools/lint-css.js      # sınıf adı + öksüz sınıf denetimi
-node .tools/vqa.js           # 15 görsel kontrol, tüm ekranlar (rota otomatik keşfedilir)
+node .tools/vqa.js           # 17 görsel kontrol, tüm ekranlar (rota otomatik keşfedilir)
+node .tools/vqa-dogrula.js   # 16 ve 17 kasten hata enjekte edilince yakalıyor mu
+node .tools/hero-denetim.js  # hero'su olması gereken ama olmayan ekran var mı
+node .tools/hero-kanama.js   # tam kanama · 0px şeffaf / 200px opak app bar
 node .tools/faz0.js          # rota · yığın · alt çubuk · borç sayacı
 node .tools/faz1.js          # kaldırılan modül izi · bölüm sırası · sekme
 node .tools/akis.js          # 16 uçtan uca kullanıcı akışı
 node .tools/carpi.js         # kapat/sil butonlarının eylemi var mı
 ```
 
-`vqa.js` 15 kontrol yapar. Son ikisi bu turda eklendi:
+`vqa.js` **17 kontrol** yapar. Son ikisi bu turda eklendi:
 
 | # | Kontrol |
 |---|---|
 | 1–13 | satır yüksekliği · taşma · yapışıklık · ray hizası · boşluk ölçeği · buton hizası · ritim · görsel çıpa · boş alan · segmented control · çip stili · kardeş boşluğu · kapsayıcı iç boşluğu |
-| **14** | **Kardeş kutuları geometrik olarak çakışıyor mu** |
-| **15** | **Metin zeminine göre okunuyor mu** (kontrast < 2,2:1 → bulgu) |
+| 14 | Kardeş kutuları geometrik olarak çakışıyor mu |
+| 15 | Metin zeminine göre okunuyor mu (kontrast < 2,2:1 → bulgu) |
+| **16** | **Hero sayaç satırı tam genişliğe yayılıyor mu** (hero genişliğinin %90'ı) |
+| **17** | **Hero'dan sonraki ilk blok en az 20px aşağıda mı** |
 
 15. kontrol yazılır yazılmaz iki gerçek hata yakaladı: püf detaydaki görünmez
 yazar alt metni (1,21:1) ve porsiyon sayacının renksiz `+/−` butonları (1,21:1).
@@ -216,11 +221,54 @@ kullanıcı çipleri arama alanının parçası sanır. Değiller.
 Butonu alta hizalamak için `auto`'yu bir üstteki bloğa ver, butona sabit
 `margin-top` bırak — yoksa buton üstündeki satıra yapışır.
 
-### C) Denetim
+### C) Hero ve metin blokları — sabit değerler
 
-`node .tools/vqa.js` bu ikisini otomatik kontrol eder:
+| Yer | Boşluk |
+|---|---|
+| **Hero'dan sonraki ilk blok** | **20 minimum** — hero'nun alt kenarına hiçbir şey yapışmaz |
+| **Input → altındaki yardım metni** | **10** |
+| **Yardım metni → sonraki blok** | **20** |
+| **Metin bloğu ↔ komşu bileşen** | **16 taban** (buton çifti → açıklama → kartlar → açıklama → input) |
+
+Açıklama metinleri **ikincil renkte (`--ink-2`), 13px / 1.5 satır yüksekliği**.
+
+Boşluk **tek yerde** verilir: hero'nun kendi `margin-bottom`'unda, yardım metninin
+kendi `margin-top`'unda. Ekran ekran yama yasak — bir ekranda bozuksa hepsinde bozuktur.
+
+### D) HERO SAYAÇ SATIRI TAM GENİŞLİĞE YAYILIR
+
+`.mh-stat` asla sola kümelenmez. Sütunlar eşit (`flex:1 1 0`), **ilk sütun sola,
+son sütun sağa, ortadakiler ortalanmış**. 2 sayaçta da 4 sayaçta da aynı davranır.
+Üstündeki ince ayraç çizgisi de aynı genişlikte. Sihirbazlardaki adım göstergesi
+(`.mh-step`) de aynı kurala tabi — çubuk kalan genişliği doldurur.
+
+### E) BİR MODÜL EKRANI AÇILIYORSA HERO'SU VARDIR
+
+**Düz beyaz başlık şeridiyle açılan modül ekranı = eksik iş.** Modül girişi olan
+her ekran `.mh-hero` alır — kök sekme, itilen ekran, modal sihirbaz fark etmez.
+Sihirbazda sayaç yerine **adım göstergesi** (`ADIM 1 / 4` + ilerleme çubuğu) durur;
+görsel, overlay ve app bar davranışı diğerleriyle **birebir aynıdır**.
+
+Hero'suz açılması doğru olan ekranlar `.tools/hero-denetim.js` içindeki `MUAF`
+tablosunda **gerekçesiyle** yazılıdır (kendi kapak görseli olanlar, tam ekran
+oynatıcı/pişirme modu, arama, form modalları). Tabloda olmayan hero'suz ekran
+kırmızı döner.
+
+### F) Denetim
+
+`node .tools/vqa.js` **17 kontrol** yapar; boşluklarla ilgili dördü:
 1. **Kardeş blok boşluğu** — ardışık kardeşlerin komponent tipi farklıysa ve boşluk < 16 ise bulgu
 2. **Kapsayıcı iç boşluğu** — ilk/son çocuk ile kapsayıcının içerik kutusu arası, dolgudan azsa bulgu
+3. **Hero sayaç satırı** — genişliği hero genişliğinin %90'ından azsa ya da son sütun sağ kenara 8px'ten uzaksa bulgu
+4. **Hero altı ilk blok** — boşluk 20px'ten azsa bulgu
+
+```bash
+node .tools/vqa-dogrula.js   # 3 ve 4 gerçekten yakalıyor mu — kasten hata enjekte eder
+node .tools/hero-denetim.js  # hero'su olması gereken ama olmayan ekran var mı
+```
+
+> Yeni bir kontrol yazdığında **kasten hata enjekte edip yakaladığını doğrula.**
+> Yakalamayan kontrol, olmayan kontroldür.
 
 ## 1. Proje kuralları
 

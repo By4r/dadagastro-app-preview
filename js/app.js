@@ -345,7 +345,12 @@
       var pane = el(n.dataset.pane);
       if (pane) pane.classList.add('on');
       if (el('frMode') && FR_MOD[n.dataset.pane]) el('frMode').textContent = FR_MOD[n.dataset.pane];
-      if (scope.id === 'npTabs') npBar();
+      /* adım göstergesi yalnız sihirbaz panelinde anlamlı — Yemek Modu'nda gizlenir */
+      if (scope.id === 'npTabs') {
+        npBar();
+        var hs = el('wzHeroStep');
+        if (hs) hs.hidden = n.dataset.pane !== 'npAra';
+      }
       return;
     }
 
@@ -816,7 +821,20 @@
 
   /* ================= NE PİŞİRSEM ================= */
   var wzAdim = 1, wzSecim = {};
+
+  /* Sihirbaz hero'sundaki ADIM göstergesi — sayaç satırının yerini tutar,
+     aynı ayraç ve aynı hizada. Ne Pişirsem ve Tarif Ekle aynı fonksiyonu
+     kullanır; ekrana özel kopya yazılmaz. */
+  function heroAdim(onek, k, toplam) {
+    var n = el(onek + 'HeroN'), bar = el(onek + 'HeroBar');
+    if (!n || !bar) return;
+    var g = Math.max(1, Math.min(k, toplam));
+    n.textContent = g;
+    bar.style.width = Math.round(g * 100 / toplam) + '%';
+  }
+
   function wzGoster(k) {
+    heroAdim('wz', k, 4);
     wzAdim = k;
     all('#npAra .wz-step').forEach(function (st) {
       st.classList.toggle('on', +st.dataset.wzstep === k);
@@ -1100,6 +1118,7 @@
   /* ================= TARİF EKLE (B9) ================= */
   var raAdim = 1, RA_SON = 5;
   function raGoster(k) {
+    heroAdim('ra', k, RA_SON);
     raAdim = k;
     all('#vAddRec .ra-step').forEach(function (st) {
       st.classList.toggle('on', +st.dataset.rastep === k);

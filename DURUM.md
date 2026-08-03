@@ -12,24 +12,36 @@ Geliştirme: `python3 -m http.server 8000` → `http://localhost:8000`
 
 ## 0. DEVİR — bir sonraki oturum buradan başlasın
 
-**Son tur (3 Ağustos 2026, ikinci tur) ne değişti:**
+**Son tur (4 Ağustos 2026, üçüncü tur) ne değişti — beş madde:**
 
-1. **Modül hero'ları TAM KANAMA oldu, app bar hero'nun üstünde yüzüyor.**
-   14 ekranda `.mh-hero` kart olmaktan çıktı: `margin:0` · `border-radius:0` ·
-   `padding-top:104px`. Görsel status bar'ın ve app bar'ın arkasından başlıyor,
-   alt kenar keskin. App bar `.vbar.overlay.mh-bar` — tepedeyken zemin şeffaf,
-   başlık ve ikon `--on-dark`, ikon butonu koyu-şeffaf **düz** zemin (cam yok);
-   `scrollTop > 4` olunca **anında** opak `#F9F9F9` + `--ink` başlık. Mekanizma
-   yeniden yazılmadı, tarif detayın `bindBar()`'ı kullanıldı.
-2. **Mutfak Ansiklopedisi madde detayı gerçekten çalışıyor.** 43 madde,
-   hepsinin içeriği canlıdan çıkarıldı. Her liste satırı `data-ans="<slug>"`
-   taşıyor ve **kendi** maddesini açıyor; "hepsi Domates" hatası bitti.
-   Geri yığını madde düzeyinde: madde → ilgili madde → geri = **bir önceki madde**.
-3. **Mükerrer hero temizlendi:** `hakkimizda` ekranının kendi `.ar-hero`'su
-   varken ortasına ikinci bir `mh-hero` basılmıştı (aynı başlık, aynı sayaçlar).
-4. **Router düzeltmesi:** `pop()` `.on` sınıfını 380 ms sonra sildiği için, geri
-   gelip aynı ekranı hemen tekrar açmak sessizce düşüyordu. `push()` artık
-   `.on`'a değil **yığına** bakıyor.
+1. **Hero sayaç satırı tam genişliğe yayıldı.** Sayaçlar sola kümelenip sağda
+   kocaman boşluk bırakıyordu. Sütunlar eşit (`flex:1 1 0`), **ilk sola · son
+   sağa · ortadakiler ortalanmış**. 2 ya da 4 sayaçta da bozulmuyor; ayraç
+   çizgisi de aynı genişlikte. Kural bütün hero'larda aynı.
+2. **Hero'dan sonraki ilk blok 20px aşağıda.** Tek yerde verildi:
+   `.mh-hero{margin-bottom:20px}`. Kardeş margin'i çöktüğü için daha büyük
+   isteyen blok (ör. `.sec` 30) kazanır, 20 tabandır. Ekran ekran yama yok.
+3. **Input altı yardım metni:** input → **10**, yardım metni → sonraki blok
+   **20**. Prototipteki her yardım metni (`.fr-note` · `.fm-hint`) aynı.
+4. **Dolapta ritmi:** buton çifti → 16 → açıklama → 16 → mod kartları → 16 →
+   mod açıklaması → 16 → input → 10 → yardım metni → 20 → kategoriler.
+   Açıklama metinleri `--ink-2`, 13/1.5.
+5. **Hero'su olmayan 9 modül ekranına hero eklendi** — Ne Pişirsem · Tarif Ekle ·
+   Tarif Defterim · Alışveriş Listem · Paylaştığım Tarifler · Canlı Liderlik ·
+   Onur Listesi · Gizlilik · KVKK. Sihirbazlarda sayaç yerine **adım göstergesi**
+   (`ADIM 1 / 4` + ilerleme çubuğu) var; görsel, overlay ve app bar davranışı
+   diğerleriyle birebir aynı.
+
+**Yol boyunca çıkan gerçek hatalar:**
+
+| Hata | Düzeltme |
+|---|---|
+| `ne-pisirsem` ve `dolapta` `.view-pad` kullanıyordu | Yüksekliği yalnız `.view.root`'ta tanımlı — 0'a düşüyor, son blok alt eylem çubuğunun altında kalıyordu. `.vw-pad vw-bar` verildi |
+| `.sl-bar b{display:block}` | "3 / 11 alındı" alt alta düşüyordu; kapsayıcı kuralı iç yapıyı eziyordu |
+| `.fm-ta` inline-block | Taban çizgisi boşluğu yüzünden altındaki yardım metni 10 yerine 16px aşağıdaydı |
+| `.menu-c{margin-bottom:10px}` | 10 ölçek dışı — 12 yapıldı |
+| `.fr-mz` CSS'te vardı, HTML'de yoktu | Ölü kural; boşluk `.fr-mzhead`'e taşındı |
+| `liderlik · onur-listesi · gizlilik · kvkk` | Hero eklenince `.ar-title` blokları mükerrer başlık oluyordu — silindi |
 
 ### 🔨 AÇIK İŞ — sıradaki oturumun işi
 
@@ -99,7 +111,7 @@ curl -s "https://by4r.github.io/dadagastro-app-preview/index.html?cb=$(date +%s)
 cd deploy && python3 -m http.server 8000 &     # araçlar localhost:8000 bekler
 
 node .tools/lint-css.js        # sınıf adı · öksüz sınıf · önek kapsamı
-node .tools/vqa.js             # 15 görsel kontrol × 50 ekran (rota otomatik)
+node .tools/vqa.js             # 17 görsel kontrol × 50 ekran (rota otomatik)
 node .tools/vqa.js dolapta     # tek ekran
 node .tools/akis.js            # 19 uçtan uca akış
 node .tools/akis.js ansiklopedi modul-hero       # tek akış
@@ -113,6 +125,9 @@ node .tools/canli-hero.js      # CANLI modül hero'larını ölçer (referans)
 # bu turda eklenenler
 node .tools/hero-kanama.js     # modül hero'ları tam kanama mı, app bar 0px'te şeffaf
                                # 200px'te opak mı — ikisinin de görüntüsü outputs/hero/
+node .tools/vqa-dogrula.js     # vqa 16 ve 17 kasten hata enjekte edilince yakalıyor mu
+node .tools/hero-denetim.js    # hero'su olması gereken ama olmayan ekran var mı
+                               # (hero'suz açılması doğru olanlar MUAF tablosunda, gerekçeli)
 node .tools/kontrast.js        # hero metinlerinin fotoğraf üstündeki kontrastı;
                                # metni saydamlaştırıp ARKASINDAKİ pikseli ölçer
 node .tools/glif.js            # alt kümeye girmemiş FA glifi var mı (50 ekran + 43 madde)
@@ -120,8 +135,11 @@ node .tools/ans-ss.js <slug…>  # ansiklopedi maddesinin tam sayfa render'ı
 ```
 
 **Kabul çizgisi:** `data-say` = 0 · `lint-css` temiz · `akis` 19/19 ·
-`hero-kanama` 15/15 · `kontrast` eşik altı yok · `glif` temiz ·
-`vqa` yalnız 2 bilinçli istisna (Ne Pişirsem 240px, § 7).
+`vqa` **0 bulgu** · `vqa-dogrula` 2/2 · `hero-kanama` 24/24 ·
+`hero-denetim` gerekçesiz hero'suz ekran yok · `kontrast` eşik altı yok · `glif` temiz.
+
+> "Ne Pişirsem sonunda 240px boşluk" istisnası **kapandı** — ekran hero aldı,
+> boşluk kendiliğinden doldu. Artık bilinçli istisna kalmadı.
 
 ---
 
@@ -148,6 +166,7 @@ node .tools/ans-ss.js <slug…>  # ansiklopedi maddesinin tam sayfa render'ı
 | **R2** | **Dolapta iki katmanlı yapıya döndü** — birincil ikili toggle + dört mod kartı, mod başına ayrı state, 75 gerçek malzeme fotoğrafı | ✅ |
 | **R3** | **Modül hero'ları tam kanama** — 14 ekran + ansiklopedi madde detayı; app bar hero'nun üstünde yüzüyor, scroll'da anında opaklaşıyor | ✅ |
 | **R4** | **Mutfak Ansiklopedisi madde detayı** — 43 madde, içerik canlıdan; her satır kendi maddesini açıyor, madde düzeyinde geri yığını | ✅ |
+| **R5** | **Boşluk ve tutarlılık** — hero sayaç satırı tam genişlik · hero altı 20px · input/yardım metni 10-20 · Dolapta ritmi · hero'suz kalan 9 modül ekranı hero aldı | ✅ |
 
 ---
 
@@ -164,6 +183,9 @@ node .tools/ans-ss.js <slug…>  # ansiklopedi maddesinin tam sayfa render'ı
 | `js/ansiklopedi.js` | 219 KB | gzip **61 KB** — 43 maddenin tam metni, § 7 |
 | `assets/ans/` | 1,5 MB · 178 dosya | Madde kapağı + küçük görsel + tarif kartı fotoğrafı; hepsi ekran açılınca iniyor |
 | Uçtan uca akış | **19 / 19** | `ansiklopedi` akışı eklendi |
+| `.mh-hero` taşıyan ekran | **24** | 23 modül + ansiklopedi madde detayı |
+| Hero'suz ama gerekçeli ekran | **26** | `hero-denetim.js` → `MUAF` tablosu; gerekçesiz kalan **0** |
+| `vqa` bulgusu | **0** | Ne Pişirsem 240px istisnası kapandı (ekran hero aldı) |
 
 **Borcun anlamı:** `data-say` = "bu butonun ekranı henüz yok". `data-toast` = işlem
 gerçekten oldu, ekran gerekmiyor. İkisi de toast gösterir; ayrım kabul testi içindir.
@@ -353,6 +375,17 @@ Ansiklopedi madde detayı da aynı bileşeni `.ans-hero` değiştiricisiyle kull
 > `hakkimizda` bu listede **yok**: ekranın kendi `.ar-hero`'su var, ortasına
 > basılan `mh-hero` aynı başlığı ve aynı sayaçları tekrarlıyordu — silindi.
 
+**Sayaç satırı tam genişliğe yayılır** — asla sola kümelenmez. Sütunlar eşit
+(`flex:1 1 0`), **ilk sütun sola · son sütun sağa · ortadakiler ortalanmış**;
+2 ya da 4 sayaçta da aynı davranır, ayraç çizgisi de aynı genişlikte.
+Sihirbaz ekranlarında sayaç yerine **adım göstergesi** (`.mh-step`) durur:
+`ADIM 1 / 4` + kalan genişliği dolduran ilerleme çubuğu. `wzGoster()` ve
+`raGoster()` ortak `heroAdim()` fonksiyonunu çağırır.
+
+**Hero'dan sonraki ilk blok 20px aşağıdadır** — `.mh-hero{margin-bottom:20px}`,
+tek yerde. Kardeş margin'i çöktüğü için daha büyük isteyen blok (ör. `.sec` 30)
+kazanır; 20 tabandır.
+
 Ölçülen kontrast (`node .tools/kontrast.js`, piksel örneklemesiyle, tahmin
 değil — metin saydamlaştırılıp **arkasındaki** piksel okunuyor, en kötü nokta
 alınıyor): app bar başlığı **8,1–16,5:1** · eyebrow **7,3–9,6:1** · başlık
@@ -469,7 +502,7 @@ Bunlar sahte değil — akış testleri doğruluyor:
 | Açık | Not |
 |---|---|
 | **DOM 8.866 düğüm** | Eşik 6.000'di. Tek sayfada 50 ekran duruyor. Flutter'a geçişte konu kendiliğinden kapanıyor (`IndexedStack` + lazy route). HTML'de kalınacaksa gizli ekranların içeriği `<template>`'e alınmalı |
-| Ne Pişirsem adımında 240px boşluk | **Bilinçli.** Karar ekranı; altına içerik doldurmak seçimle yarışır. `vqa` bunu bulgu gösteriyor — kabul edilmiş istisna, kalan tek bulgu bu (2 sekme kombinasyonunda) |
+| ~~Ne Pişirsem adımında 240px boşluk~~ | **Kapandı** — ekran tam kanama hero aldı, boşluk doldu. `vqa` artık 0 bulgu veriyor |
 | Malzeme fotoğrafı 75/185 (%41) | **Canlının kendisi 77/185 (%42)** — parite sağlandı. Kalan 110 malzemenin canlıda da fotoğrafı yok (Enginar, Karnabahar, Mısır, Erik…), jenerik kategori ikonu gösteriliyor |
 | Şef ve tarif adları kısmen uydurma | Canlıdaki gerçek şefler (Rüya, Burcu, Ece, Şahnur Yetkiner…) ve liderlik tablosu aktarıldı; tarif adları ve bazı avatar baş harfleri temsilî |
 | Dünya mutfağı sayıları | İlk 8'i canlıdan (Türk 1204, İtalyan 92…). Kalan 42'nin sayısı canlıda listelenmiyor, bölgesel dağılım temsilî |
@@ -504,6 +537,11 @@ Bunlar sahte değil — akış testleri doğruluyor:
 | `push()` `.on`'a bakıyordu | `pop()` sınıfı 380 ms sonra siliyor; o aralıkta aynı ekranı açmak sessizce düşüyordu. Ölçüt **yığın** olmalı |
 | Kontrast ölçümünde "zemin" diye metnin kendi glifi örneklendi | Metni `visibility:hidden` yapmak perdeyi de siliyordu. Doğrusu: `color:transparent` — katmanlar kalsın, **glifin arkasındaki** piksel okunsun |
 | `rgb()` ↔ `rgba(…,1)` metin karşılaştırması | Geçiş bitmemişse tarayıcı ikinci biçimi döndürüyor; test yanlış kırmızı veriyordu. Renk **sayıya çevrilip** karşılaştırılır |
+| `.sl-bar b{display:block}` | "3 / 11 alındı" alt alta düştü. **Kapsayıcı kuralı iç yapıyı ezmesin** — bu hatanın altıncı çıkışı |
+| `.fm-ta` inline-block kaldı | Taban çizgisi boşluğu altındaki yardım metnini 10 yerine 16px aşağı itti. Yapısal öğeye `display` **açıkça** ver |
+| `.view-pad` kök olmayan ekranda | Yüksekliği yalnız `.view.root`'ta tanımlı, 0'a düşüyor; son blok alt eylem çubuğunun altında kalıyordu. İtilen/modal ekranda `.vw-pad vw-bar` |
+| `.fr-mz` CSS'te vardı, HTML'de yoktu | Ölü kural boşluğu vermiyordu ama "verdim" sanılıyordu. `lint-css` **HTML'de olup CSS'te olmayanı** yakalıyor, tersini değil |
+| Yeni vqa kontrolü yazıldı ama denenmedi | **Kasten hata enjekte edip yakaladığını doğrula** — `vqa-dogrula.js`. Yakalamayan kontrol, olmayan kontroldür |
 
 **Ortak ders:** bu hataların hiçbiri koddan görünmüyordu, hepsi render'a bakınca çıktı.
 Araçlar bunun için var — ama araç da gözün yerine geçmiyor.
