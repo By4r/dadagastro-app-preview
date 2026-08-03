@@ -157,7 +157,11 @@
   /* ================= İTİLEN EKRAN / MODAL ================= */
   function push(route, silent, instant) {
     var v = viewOf(route);
-    if (!v || v.classList.contains('on')) return;
+    /* Eskiden koşul `.on` idi: pop() sınıfı 380 ms sonra sildiği için o aralıkta
+       aynı ekranı yeniden açmak sessizce düşüyordu (geri → hemen tekrar aç =
+       ölü dokunuş). Ölçüt artık YIĞIN; kalmış `.on` varsa temizlenip itiliyor. */
+    if (!v || isRoot(v) || stack.indexOf(v.id) > -1) return;
+    v.classList.remove('on', 'in');
     bgUyan(v);
     var below = topEl();
     v.scrollTop = 0;
@@ -1552,10 +1556,198 @@
     pop();
   });
 
+  /* ================= MUTFAK ANSİKLOPEDİSİ — MADDE DETAYI =================
+     ŞABLON EKRAN ≠ BİTMİŞ EKRAN: eskiden 24 satırın hepsi aynı "Domates"i
+     açıyordu. Artık her satır data-ans="<slug>" taşıyor, ekran window.ANS
+     kaydından doldurulur (js/ansiklopedi.js — canlıdan çıkarıldı).
+
+     GERİ YIĞINI: madde → ilgili madde → geri, listeye değil BİR ÖNCEKİ
+     MADDEye döner. Router aynı ekranı iki kez itemediği için yığın slug
+     düzeyinde tutuluyor; ekran yerinde yeniden doldurulur.                */
+  var ANS = window.ANS || {};
+  var ansYigin = [];
+
+  function ansKac(s) { return String(s).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+  }); }
+
+  function ansGovde(bolumler) {
+    return bolumler.map(function (b) {
+      var ic = b[1].map(function (p) {
+        return p[0] === 'p' ? '<p>' + p[1] + '</p>'
+          : '<ul>' + p[1].map(function (li) { return '<li>' + li + '</li>'; }).join('') + '</ul>';
+      }).join('');
+      return '<h3>' + ansKac(b[0]) + '</h3>' + ic;
+    }).join('');
+  }
+
+  function ansKunye(y) {
+    return '<div class="ans-ky">' + y.map(function (r) {
+      /* canlıda etiket parantez içinde uyarı taşıyabiliyor
+         ("Saklama (bütün tane …)") — parantezli kısım değerin altına iner */
+      var m = /^([^(]+)\s*\((.+)\)\s*$/.exec(r[1]);
+      return '<div class="ans-kr"><span class="ic"><i class="fs ' + r[0] + '"></i></span>' +
+        '<span class="tx"><span>' + ansKac(m ? m[1].trim() : r[1]) + '</span>' +
+        '<b>' + ansKac(r[2]) + '</b>' + (m ? '<i>' + ansKac(m[2]) + '</i>' : '') + '</span></div>';
+    }).join('') + '</div>';
+  }
+
+  function ansTarifKart(t) {
+    var bt = '';
+    for (var i = 0; i < 3; i++) bt += i < t.b ? '<b>₺</b>' : '<span>₺</span>';
+    return '<a class="gcard" data-open="tarif-detay">' +
+      '<div class="im" style="background-image:url(\'assets/ans/r' + t.g + '.webp\')">' +
+      (t.d ? '<span class="tchip"><i class="fs i-clock"></i> ' + ansKac(t.d) + '</span>' : '') + '</div>' +
+      '<div class="bd"><h4>' + ansKac(t.a) + '</h4>' +
+      '<div class="gsub"><span>' + ansKac(t.p || t.k) + '</span><span class="pr">' + bt + '</span></div>' +
+      '<div class="gchef"><span class="av" style="background:var(--ink)">' +
+      ansKac((t.s || '?').trim().charAt(0)) + '</span><b>' + ansKac(t.s) + '</b></div>' +
+      '<div class="gstat"><span class="rate"><i class="fs i-star"></i> ' + ansKac(t.r || '—') + '</span>' +
+      '<span class="dif">' + ansKac(t.z) + '</span></div></div></a>';
+  }
+
+  function ansBoya(slug) {
+    var d = ANS[slug];
+    if (!d) return false;
+    el('ansTitle').textContent = d.a;
+    el('ansAd').textContent = d.a;
+    el('ansKat').textContent = d.k;
+    el('ansLt').textContent = d.l || '';
+    el('ansTg').innerHTML = d.e ? '<i class="fs i-leaf"></i> ' + ansKac(d.e) : '';
+    el('ansBg').style.backgroundImage = "url('assets/ans/" + slug + ".webp')";
+
+    var b = d.b || [], p = [];
+    p.push('<p class="ans-lead">' + ansKac(d.o) + '</p>');
+    if (d.y && d.y.length) p.push(ansKunye(d.y));
+    if (b.length) p.push('<div class="ar-b" style="margin-top:24px">' + ansGovde(b.slice(0, 2)) + '</div>');
+
+    /* kısa bilgi — tint kutu, gövdenin ortasında ritmi kırar */
+    if (d.q && d.q.length) {
+      p.push('<div class="ar-note"><span class="ar-k"><i class="fs i-lightbulb"></i> Kısa bilgi</span>' +
+        d.q.map(function (x) {
+          return '<div class="ans-qr"><span class="ic"><i class="fs ' + x[0] + '"></i></span>' +
+            '<span class="tx"><b>' + ansKac(x[1]) + '</b><span>' + ansKac(x[2]) + '</span></span></div>';
+        }).join('') + '</div>');
+    }
+    if (b.length > 2) p.push('<div class="ar-b" style="margin-top:24px">' + ansGovde(b.slice(2, 5)) + '</div>');
+
+    /* besin değeri — koyu panel */
+    if (d.n && d.n[1].length) {
+      p.push('<div class="ans-nt"><span class="ar-k"><i class="fs i-fire"></i> Besin değeri</span>' +
+        (d.n[0] ? '<span class="ans-nb">' + ansKac(d.n[0]) + '</span>' : '') +
+        '<div class="ans-ng">' + d.n[1].map(function (r) {
+          return '<span><b>' + ansKac(r[1]) + '</b>' + ansKac(r[0]) + '</span>';
+        }).join('') + '</div></div>');
+    }
+    if (b.length > 5) p.push('<div class="ar-b" style="margin-top:24px">' + ansGovde(b.slice(5)) + '</div>');
+
+    /* SSS — ortak .acc akordeonu, tek seferde biri açık */
+    if (d.s && d.s.length) {
+      p.push('<div class="sec"><div class="sec-head"><div><span class="eyebrow">Merak edilenler</span>' +
+        '<h2>Sıkça sorulanlar</h2></div></div>' +
+        '<div data-acc-single style="padding:0 var(--gutter)">' + d.s.map(function (x) {
+          return '<div class="acc"><button class="acc-h" data-acc><span class="dash"></span><b>' +
+            ansKac(x[0]) + '</b><i class="fs i-chevron-right cv"></i></button>' +
+            '<div class="acc-b"><div class="acc-in"><p>' + x[1] + '</p></div></div></div>';
+        }).join('') + '</div></div>');
+    }
+
+    /* ilgili tarifler — canlıdaki "Mutfakta / <madde>li tarifler" */
+    if (d.t && d.t.length) {
+      p.push('<div class="sec"><div class="sec-head"><div><span class="eyebrow">Mutfakta</span>' +
+        '<h2>' + ansKac(d.tb || 'İlgili tarifler') + '</h2></div>' +
+        '<a class="see-all" data-open="kategori">Tamamını Gör <i class="fs i-arrow-right"></i></a></div>' +
+        '<div class="rail ans-tr">' + d.t.map(ansTarifKart).join('') + '</div></div>');
+    }
+
+    /* ilgili maddeler — her kart yeni bir maddeye iter */
+    if (d.i && d.i.length) {
+      p.push('<div class="sec"><div class="sec-head"><div><span class="eyebrow">Ansiklopedi</span>' +
+        '<h2>İlgili maddeler</h2></div>' +
+        '<a class="see-all" data-open="ansiklopedi">Tüm Maddeler <i class="fs i-arrow-right"></i></a></div>' +
+        '<div class="rail ans-rr">' + d.i.map(function (s) {
+          var r = ANS[s]; if (!r) return '';
+          return '<a class="ans-rc" data-ans="' + s + '">' +
+            '<span class="im" style="background-image:url(\'assets/ans/' + s + '-t.webp\')"></span>' +
+            '<span class="bd"><span class="k">' + ansKac(r.k) + '</span><h4>' + ansKac(r.a) + '</h4>' +
+            '<p>' + ansKac(r.o) + '</p></span></a>';
+        }).join('') + '</div></div>');
+    }
+
+    var kutu = el('ansGovde');
+    kutu.innerHTML = p.join('');
+    kutu.classList.remove('ans-in');
+    void kutu.offsetWidth;                       // animasyonu yeniden tetikle
+    kutu.classList.add('ans-in');
+
+    /* alt eylem çubuğu maddeye göre: tarifi varsa tariflere, yoksa listeye */
+    var bar = el('barArt2');
+    if (bar) {
+      var btn = bar.querySelector('.btn');
+      if (d.t && d.t.length) {
+        btn.innerHTML = '<i class="fs i-bowl-food"></i> ' + ansKac(d.a) + 'li Tarifler';
+        btn.dataset.open = 'kategori';
+      } else {
+        btn.innerHTML = '<i class="fs i-seedling"></i> Tüm Maddeler';
+        btn.dataset.open = 'ansiklopedi';
+      }
+    }
+    el('vEncDet').scrollTop = 0;
+    return true;
+  }
+
+  function ansAc(slug) {
+    if (!ANS[slug]) { say('Bu maddenin içeriği henüz yok'); return; }
+    /* ölçüt yığın: topEl() geçiş animasyonu sırasında yanıltıyor */
+    var acik = stack.indexOf('vEncDet') > -1;
+    if (acik) ansYigin.push(slug);   // madde → ilgili madde, yığın büyür
+    else ansYigin = [slug];          // listeden giriş, yığın sıfırlanır
+    ansBoya(slug);
+    if (!acik) open('ansiklopedi-detay');
+  }
+
+  document.addEventListener('click', function (e) {
+    var n = e.target.closest('[data-ans]');
+    if (n) { e.preventDefault(); ansAc(n.dataset.ans); return; }
+    if (e.target.closest('[data-ans-back]')) {
+      e.preventDefault();
+      if (ansYigin.length > 1) { ansYigin.pop(); ansBoya(ansYigin[ansYigin.length - 1]); }
+      else pop();
+    }
+  });
+
+  /* "Daha Fazla Madde" gerçekten yüklesin — kalan maddeler <template>'de bekliyor
+     (43 satırın hepsi açılışta DOM'da dursa düğüm sayısı boşuna şişiyor) */
+  function encHepsi() {
+    var t = el('encMore');
+    if (!t) return false;
+    el('encList').appendChild(t.content.cloneNode(true));
+    t.remove();
+    var lm = document.querySelector('#vEnc .loadmore');
+    if (lm) lm.remove();
+    return true;
+  }
+  var encMore = el('encMoreBtn');
+  if (encMore) {
+    encMore.addEventListener('click', function () {
+      if (encHepsi()) say('Kalan maddeler yüklendi');
+    });
+    /* A–Z harfine ya da aramaya dokunulduğunda da yüklensin: yoksa "K" harfi
+       yüklenmemiş bir başlığı arıyor ve dokunuş boşa gidiyor (yakalama fazı,
+       ana delegasyondan önce çalışsın diye) */
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('#vEnc [data-az]')) encHepsi();
+    }, true);
+    var encInp = document.querySelector('[data-filter="encList"]');
+    if (encInp) encInp.addEventListener('focus', encHepsi);
+  }
+
   /* ================= AÇILIŞ =================
      #/ekran ile gelen link doğrudan o ekranı açar. */
   frKatmanGoster('dolap'); trayRender(); trayList(); if (el('wzNext')) wzGoster(1);
   if (el('raNext')) raGoster(1);
+  /* #/ansiklopedi-detay derin linki slug taşımıyor — ekran boş açılmasın */
+  if (el('vEncDet')) { ansYigin = [Object.keys(ANS)[0]]; ansBoya(ansYigin[0]); }
 
   var boot = readHash();
   if (boot && viewOf(boot)) navigate(boot, true);

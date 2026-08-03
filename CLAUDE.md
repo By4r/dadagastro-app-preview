@@ -462,14 +462,21 @@ tanımı bulunsun ki iç markup sapsa bile ekran bozulmasın.
 
 ### ⚠️ ŞABLON EKRAN ≠ BİTMİŞ EKRAN
 
-`ansiklopedi-detay`, `sozluk-detay`, `puf-detay` ekranları var ve açılıyor —
-ama liste satırlarının **hepsi aynı içeriği** açıyor (24 ansiklopedi satırı hep
-"Domates"). Ekranın var olması yeterli değil; **liste satırı kendi içeriğini
-açmıyorsa iş bitmemiştir.**
+`sozluk-detay` ve `puf-detay` ekranları var ve açılıyor — ama liste
+satırlarının **hepsi aynı içeriği** açıyor (18 sözlük satırı hep "Al Dente").
+Ekranın var olması yeterli değil; **liste satırı kendi içeriğini açmıyorsa
+iş bitmemiştir.**
 
-Detay ekranı yaparken listeyi de bağla: satır bir anahtar taşısın
-(`data-ans="domates"`), JS şablonu o anahtarla doldursun. Tek örnek içerikle
-"detay ekranı bitti" denmez — envanterde 🔨 kalır.
+`ansiklopedi-detay` bu hattı kurdu, örnek alınacak yer orası: satır bir anahtar
+taşır (`data-ans="karabiber"`), `ansBoya(slug)` şablonu o anahtarla doldurur,
+içerik canlıdan çıkarılıp `js/ansiklopedi.js`'e (`window.ANS`) yazılır.
+Üç araç sırayla: `canli-ansiklopedi.py` → `ansiklopedi-gorsel.py` →
+`ansiklopedi-js.py`. Tek örnek içerikle "detay ekranı bitti" denmez —
+envanterde 🔨 kalır.
+
+**Geri yığını da içerik düzeyinde olmalı:** router aynı ekranı iki kez itemez,
+o yüzden madde → ilgili madde → geri, listeye değil bir önceki maddeye döner
+(`ansYigin` slug yığını).
 
 ### ⚠️ Kapat/sil butonu toast'la geçiştirilmez
 

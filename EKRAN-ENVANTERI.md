@@ -123,11 +123,11 @@ Tarif kartı alanları: süre · zorluk · porsiyon · şef adı · puan · yoru
 | # | Ekran | Durum | Kaynak / ölçü |
 |---|---|---|---|
 | C1 | Püf Noktaları listesi | ✅ | `/puf-noktalari` — 591 madde · 11 kategori · sıralama: En Yeni / En Çok Okunan |
-| C2 | Püf Noktası detay | 🔨 | Okunma sayısı · kategori etiketi  · Aynı sorun: bütün kartlar hep aynı püf noktasını açıyor |
+| C2 | Püf Noktası detay | 🔨 | Okunma sayısı · kategori etiketi  · **Aynı sorun sürüyor:** bütün kartlar aynı püf noktasını açıyor. Ansiklopedideki hat (canlıdan çıkar → `window.PUF` → `data-puf`) aynen tekrarlanır |
 | C3 | Mutfak Ansiklopedisi listesi | ✅ | `/mutfak-ansiklopedisi` — 1.200 madde · 26 kategori · A–Z harf dizini |
-| C4 | Ansiklopedi madde detay | 🔨 | Nedir · ne işe yarar · faydaları · ilgili tarifler  · **Ekran var ama TEK ŞABLON** — 24 satırın hepsi aynı içeriği (Domates) açıyor. Satır başına içerik gerekiyor |
+| C4 | Ansiklopedi madde detay | ✅ | **43 madde, hepsi ayrı içerik** — canlı `/mutfak-ansiklopedisi/<slug>` sayfalarından çıkarıldı. Kategori · etiket · latin ad · 4 satır künye · özet · 6–9 bölüm gövde · SSS akordeonu · besin değeri · kısa bilgi · ilgili tarifler · ilgili maddeler. Her liste satırı `data-ans` ile kendi maddesini açıyor; ilgili maddeden geri = bir önceki madde |
 | C5 | **Mutfak Sözlüğü listesi** | ✅ | `/mutfak-sozlugu` — 765 terim · 20 kategori · A–Z. **Ansiklopediden ayrı ekran** |
-| C6 | Sözlük terim detay | 🔨 | Tanım · örnek kullanım · ilgili tarifler  · Aynı sorun: 18 satır hep "Al Dente" |
+| C6 | Sözlük terim detay | 🔨 | Tanım · örnek kullanım · ilgili tarifler  · **Aynı sorun sürüyor:** 18 satır hep "Al Dente". Ansiklopedideki hat (`window.SOZ` → `data-soz`) aynen tekrarlanır |
 | C7 | **Ölçü Birimleri** | ✅ | `/olcu-birimleri` — 4 sekme: Dönüştürücü · Dönüşüm Tabloları · Standart Ölçüler · Fırın Rehberi. 90+ malzeme. **Gerçekten çevirsin** |
 | C8 | **Sofra Düzeni listesi** | ✅ | `/sofra-duzeni` — 11 kategori · 61 ipucu |
 | C9 | Sofra Düzeni rehber detay | ✅ | Açıklama + pratik ipuçları |
@@ -304,11 +304,20 @@ Kabul kriterleri:
 | `data-say` borç sayacı | ✅ **0** |
 | Uçtan uca akış | ✅ **18/18** (`dolapta-katman` ve `modul-hero` eklendi) |
 
+### ✅ İkinci turda tamamlanan (3 Ağustos 2026)
+
+| İş | Durum |
+|---|---|
+| **Modül hero'ları tam kanama** | ✅ 14 ekran + ansiklopedi madde detayı. `margin:0` · `border-radius:0` · görsel status bar'ın arkasından. App bar `.vbar.overlay.mh-bar` ile hero'nun üstünde yüzüyor: 0px'te şeffaf + `--on-dark`, 200px'te anında opak `#F9F9F9`. Fade yok, cam yok. Ayrı beyaz şerit kalmadı |
+| **Mükerrer hero silindi** | ✅ `hakkimizda` ekranının kendi `.ar-hero`'su varken ortasına ikinci hero basılmıştı |
+| **Ansiklopedi madde detayı** | ✅ 43 madde, içerik canlıdan. Her satır kendi maddesini açıyor, ilgili maddeden geri = bir önceki madde |
+| **"Daha Fazla Madde" gerçek** | ✅ Toast değil: kalan 22 madde `<template>`'ten yükleniyor. A–Z harfi ve arama da yüklüyor |
+| Denetim | ✅ `data-say` 0 · `lint-css` temiz · `akis` **19/19** · `hero-kanama` 15/15 · `kontrast` eşik altı yok · `glif` temiz · `vqa` 2 bilinçli istisna |
+
 ### 🔨 Açık iş — sıradaki oturum
 
 | # | İş | Not |
 |---|---|---|
-| **A** | **Modül hero'ları tam kanama olacak** | Şu an kart: `margin` + `border-radius` var. Ayrıca **app bar hero'nun üstünde yüzmeli** (`.vbar.overlay`, scroll'da solid). Ana sayfada kalıp hazır |
-| **B** | **Detay ekranlarının içeriklendirilmesi** | `ansiklopedi-detay` · `sozluk-detay` · `puf-detay` ekranları VAR ama tek şablon; her liste satırı aynı içeriği açıyor |
+| **A** | **Sözlük ve püf detaylarının içeriklendirilmesi** | `sozluk-detay` · `puf-detay` VAR ama tek şablon. Ansiklopedide kurulan hat hazır: `canli-ansiklopedi.py` → `ansiklopedi-gorsel.py` → `ansiklopedi-js.py` → `data-ans`/`ansBoya`. Sözlük için `window.SOZ` + `data-soz`, püf için `window.PUF` + `data-puf` |
 
 Ayrıntı, dosya haritası ve komutlar: **`DURUM.md` § 0 (DEVİR)**.

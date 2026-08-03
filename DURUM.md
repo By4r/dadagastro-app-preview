@@ -12,53 +12,58 @@ Geliştirme: `python3 -m http.server 8000` → `http://localhost:8000`
 
 ## 0. DEVİR — bir sonraki oturum buradan başlasın
 
-**Son tur (3 Ağustos 2026) ne değişti:**
+**Son tur (3 Ağustos 2026, ikinci tur) ne değişti:**
 
-1. **Dolapta Ne Var iki katmanlı yapıya döndü.** Tek şeritli 5 sekme silindi.
-   Birincil ikili toggle (`Dolaptakiler | Hariç Tuttuklarım`) + Hariç seçiliyken
-   altında dört mod kartı. Her modun kendi açıklaması, kendi arama placeholder'ı
-   ve **kendi seçim durumu** var. Hassasiyetim Var'ın 11 maddesi ve iki durumu
-   (Kesinlikle gösterme / Uyararak göster) korundu.
-2. **Malzeme fotoğrafları 15 → 75/185 (%41).** Canlıdan indirildi, 96px WebP,
-   toplam 102 KB. Canlının kendisi 77/185 (%42) — parite sağlandı.
-3. **15 modül ekranına görselli hero eklendi** (`.mh-` bileşeni). Sayaçlar
-   canlıdan; canlıda sayaç olmayan 4 modülde sayaç satırı hiç basılmıyor.
+1. **Modül hero'ları TAM KANAMA oldu, app bar hero'nun üstünde yüzüyor.**
+   14 ekranda `.mh-hero` kart olmaktan çıktı: `margin:0` · `border-radius:0` ·
+   `padding-top:104px`. Görsel status bar'ın ve app bar'ın arkasından başlıyor,
+   alt kenar keskin. App bar `.vbar.overlay.mh-bar` — tepedeyken zemin şeffaf,
+   başlık ve ikon `--on-dark`, ikon butonu koyu-şeffaf **düz** zemin (cam yok);
+   `scrollTop > 4` olunca **anında** opak `#F9F9F9` + `--ink` başlık. Mekanizma
+   yeniden yazılmadı, tarif detayın `bindBar()`'ı kullanıldı.
+2. **Mutfak Ansiklopedisi madde detayı gerçekten çalışıyor.** 43 madde,
+   hepsinin içeriği canlıdan çıkarıldı. Her liste satırı `data-ans="<slug>"`
+   taşıyor ve **kendi** maddesini açıyor; "hepsi Domates" hatası bitti.
+   Geri yığını madde düzeyinde: madde → ilgili madde → geri = **bir önceki madde**.
+3. **Mükerrer hero temizlendi:** `hakkimizda` ekranının kendi `.ar-hero`'su
+   varken ortasına ikinci bir `mh-hero` basılmıştı (aynı başlık, aynı sayaçlar).
+4. **Router düzeltmesi:** `pop()` `.on` sınıfını 380 ms sonra sildiği için, geri
+   gelip aynı ekranı hemen tekrar açmak sessizce düşüyordu. `push()` artık
+   `.on`'a değil **yığına** bakıyor.
 
 ### 🔨 AÇIK İŞ — sıradaki oturumun işi
 
-**(a) Modül hero'ları hâlâ KART formatında.**
-`.mh-hero` şu an `margin:16px var(--gutter) 0` + `border-radius:var(--r-xl)`
-ile kart gibi duruyor. Yapılmadı:
-- **tam kanama** (full-bleed) — kenardan kenara, radius yok
-- **app bar hero'nun ÜSTÜNDE yüzsün** — `.vbar.overlay` ile, scroll'da solidleşerek
+**Sözlük ve Püf Noktası detayları hâlâ TEK ŞABLON.**
+`sozluk-detay` 18 satırda hep "Al Dente", `puf-detay` hep "Pilav neden tane
+tane olmaz?" açıyor. Ansiklopedide kurulan hat **aynen tekrarlanabilir**:
 
-Ana sayfa hero'su zaten böyle çalışıyor; kalıp orada hazır (`#vHome` →
-`.vbar.overlay` + `.hero`). Modül ekranlarına taşınacak.
-Dokunulacak yerler: `deploy/css/app.css` içindeki `.mh-hero` bloğu (`margin`,
-`border-radius`, `padding-top`) · her modül ekranının `<header class="vbar">`
-satırına `overlay` sınıfı · `.tools/mhero.py` içindeki `hero_html()`.
+| Adım | Ansiklopedideki karşılığı |
+|---|---|
+| Canlıdan içerik çıkar | `.tools/canli-ansiklopedi.py <slug…>` → `ansiklopedi-veri.json` |
+| Görselleri indir + WebP | `.tools/ansiklopedi-gorsel.py` → `deploy/assets/ans/` |
+| Veri dosyasını üret | `.tools/ansiklopedi-js.py` → `deploy/js/ansiklopedi.js` (`window.ANS`) |
+| Ekranı şablona çevir | `#vEncDet` iskelet, `ansBoya(slug)` dolduruyor |
+| Liste satırını bağla | `data-ans="<slug>"` + `ansAc()` |
+| Testle | `node .tools/akis.js ansiklopedi` |
 
-**(b) Ansiklopedi/Sözlük/Püf detayları TEK ŞABLON.**
-Ekranlar var ve çalışıyor (`ansiklopedi-detay` · `sozluk-detay` · `puf-detay`)
-ama **liste satırlarının hepsi aynı tek içeriği açıyor**:
-ansiklopedide 24 satır → hep "Domates", sözlükte 18 satır → hep "Al Dente",
-püf noktalarında → hep "Pilav neden tane tane olmaz?".
-Yapılacak: satır başına içerik + `data-open` yerine içerik anahtarı taşıyan
-bir mekanizma (ör. `data-ans="domates"` → JS detayı doldurur).
-Dokunulacak yerler: `deploy/index.html` içindeki `#vEnc` / `#vGloss` / `#vTips`
-liste blokları ve `#vEncDet` / `#vGlossDet` / `#vTipDet` şablon ekranları ·
-doldurma mantığı için `deploy/js/app.js`.
+Sözlük için `window.SOZ` + `data-soz`, püf için `window.PUF` + `data-puf`
+aynı kalıpla yazılır. Canlı kaynaklar: `/mutfak-sozlugu/<slug>` ·
+`/puf-noktalari/<slug>`.
 
 ### Dosya haritası — hangi iş nerede
 
 | İş | Dosya / yer |
 |---|---|
-| **Modül hero bileşeni (CSS)** | `deploy/css/app.css` → `.mh-hero`, `.mh-bg`, `.mh-veil`, `.mh-grain`, `.mh-eyebrow`, `.mh-stat` (dosya sonuna yakın, "MODÜL HERO" yorum bloğu) |
-| **Modül hero verisi + üretici** | `.tools/mhero.py` → `HERO` sözlüğü (rota → görsel, eyebrow, başlık, alt başlık, sayaçlar) ve `hero_html()`. Değiştirip `python3 .tools/mhero.py` çalıştır |
+| **Modül hero bileşeni (CSS)** | `deploy/css/app.css` → `.mh-hero`, `.mh-bg`, `.mh-veil`, `.mh-grain`, `.mh-eyebrow`, `.mh-stat` (dosya sonuna yakın, "MODÜL HERO" yorum bloğu). **Tam kanama:** `margin:0 · border-radius:0 · padding:104px var(--gutter) 24px` |
+| **Hero üstünde yüzen app bar** | `deploy/css/app.css` → `.vbar.overlay.mh-bar:not(.solid)` kuralları ("UYGULAMA KABUĞU DÜZELTMELERİ" bloğunun sonu) |
+| **Modül hero verisi + üretici** | `.tools/mhero.py` → `HERO` sözlüğü (rota → görsel, eyebrow, başlık, alt başlık, sayaçlar). `hero_html()` panelı, `uygula()` ayrıca ekranın `<header class="vbar">` satırına `overlay mh-bar` basar. Çalıştır: `python3 .tools/mhero.py` (idempotent) |
 | **Ana sayfa hero'su (tam kanama örneği)** | `deploy/css/app.css` → `.hero`, `.hero-bg`, `.hero-veil`, `.hero-grain` |
-| **Ansiklopedi listesi** | `deploy/index.html` → `<section id="vEnc" data-route="ansiklopedi">`, satırlar `#encList` içinde. **Part dosyası yok — index.html tek dosya** |
-| **Ansiklopedi detay şablonu** | `deploy/index.html` → `<section id="vEncDet" data-route="ansiklopedi-detay">` |
-| **Sözlük listesi / detayı** | `#vGloss` / `#vGlossDet` (aynı dosya) |
+| **Ansiklopedi madde içerikleri** | `deploy/js/ansiklopedi.js` → `window.ANS` (43 madde). **Elle düzenleme yok**, üreteçle: `canli-ansiklopedi.py` → `ansiklopedi-js.py` |
+| **Ansiklopedi görselleri** | `deploy/assets/ans/` → `<slug>.webp` 390×300 hero · `<slug>-t.webp` 132×132 ilgili madde kartı · `r<mediaId>.webp` 260×196 tarif kartı. Üretici `.tools/ansiklopedi-gorsel.py` |
+| **Ansiklopedi ekran mantığı** | `deploy/js/app.js` → "MUTFAK ANSİKLOPEDİSİ" bloğu: `ansBoya(slug)` ekranı doldurur, `ansAc(slug)` açar, `ansYigin` madde geri yığını, `encHepsi()` kalan maddeleri `<template>`'ten yükler |
+| **Ansiklopedi listesi** | `deploy/index.html` → `<section id="vEnc" data-route="ansiklopedi">`, satırlar `#encList`, kalan maddeler `<template id="encMore">`. Satırlar `.tools/ansiklopedi-liste.html`'den geliyor. **Part dosyası yok — index.html tek dosya** |
+| **Ansiklopedi detay şablonu** | `deploy/index.html` → `<section id="vEncDet" data-route="ansiklopedi-detay">` — sadece iskelet, gövde `#ansGovde` içine JS basıyor |
+| **Sözlük listesi / detayı** | `#vGloss` / `#vGlossDet` (aynı dosya) — **hâlâ tek şablon, açık iş** |
 | **Scroll'da app bar opaklaşma** | `deploy/js/app.js` → **`bindBar(view)` fonksiyonu**. `.vbar.overlay` taşıyan bara `scrollTop > 4` olunca `.solid` ekler, durum çubuğu rengini `screen.classList` ile çevirir. Her `.view` için açılışta bağlanır |
 | **Dolapta iki katmanlı mantık** | `deploy/js/app.js` → "DOLAPTA NE VAR" bloğu: `frState` (mod başına seçim), `frKatmanGoster()`, `frModGoster()`, `frBoya()`, `frRender()` |
 | **Malzeme → fotoğraf eşlemesi** | `.tools/malzeme-esleme.json` (malzeme adı → dosya adı), görseller `deploy/assets/ing/tmdb-*.webp` |
@@ -71,7 +76,10 @@ Python araçları dosyayı yerinde düzenler:
 | Komut | Ne yapar |
 |---|---|
 | `python3 .tools/insert.py <fragman.html>` | Yeni ekran bölümlerini `index.html`'e sokar (aynı id varsa değiştirir — tekrar çalıştırmak güvenli) |
-| `python3 .tools/mhero.py` | `HERO` sözlüğünden modül hero'larını üretip yerine koyar |
+| `python3 .tools/mhero.py` | `HERO` sözlüğünden modül hero'larını üretip yerine koyar + `<header class="vbar">` satırlarına `overlay mh-bar` basar |
+| `python3 .tools/canli-ansiklopedi.py <slug…>` | Canlı madde sayfalarını okur → `.tools/ansiklopedi-veri.json`. İlgili maddeleri bir seviye kovalar, hiçbir "ilgili" bağlantısı kapsam dışı kalmaz |
+| `python3 .tools/ansiklopedi-gorsel.py` | JSON'daki canlı görselleri indirir, kırpar, WebP'ye çevirir → `deploy/assets/ans/` |
+| `python3 .tools/ansiklopedi-js.py` | JSON → `deploy/js/ansiklopedi.js` + `#encList` satırları (`.tools/ansiklopedi-liste.html`) |
 
 **Deploy:** `deploy/` klasörünün kendisi bir git deposu ve GitHub Pages kaynağı.
 
@@ -93,17 +101,26 @@ cd deploy && python3 -m http.server 8000 &     # araçlar localhost:8000 bekler
 node .tools/lint-css.js        # sınıf adı · öksüz sınıf · önek kapsamı
 node .tools/vqa.js             # 15 görsel kontrol × 50 ekran (rota otomatik)
 node .tools/vqa.js dolapta     # tek ekran
-node .tools/akis.js            # 18 uçtan uca akış
-node .tools/akis.js dolapta-katman modul-hero    # tek akış
+node .tools/akis.js            # 19 uçtan uca akış
+node .tools/akis.js ansiklopedi modul-hero       # tek akış
 node .tools/faz0.js            # derin link · yığın · alt çubuk · data-say
 node .tools/faz1.js            # kaldırılan modül izi
 node .tools/carpi.js           # kapat/sil butonlarının eylemi var mı
 node .tools/cap.js <rota>      # tam sayfa render → deploy/outputs/<rota>.png
 node .tools/cap.js "olcu-birimleri#unTb"   # sekmeli ekranda pane seçerek
 node .tools/canli-hero.js      # CANLI modül hero'larını ölçer (referans)
+
+# bu turda eklenenler
+node .tools/hero-kanama.js     # modül hero'ları tam kanama mı, app bar 0px'te şeffaf
+                               # 200px'te opak mı — ikisinin de görüntüsü outputs/hero/
+node .tools/kontrast.js        # hero metinlerinin fotoğraf üstündeki kontrastı;
+                               # metni saydamlaştırıp ARKASINDAKİ pikseli ölçer
+node .tools/glif.js            # alt kümeye girmemiş FA glifi var mı (50 ekran + 43 madde)
+node .tools/ans-ss.js <slug…>  # ansiklopedi maddesinin tam sayfa render'ı
 ```
 
-**Kabul çizgisi:** `data-say` = 0 · `lint-css` temiz · `akis` 18/18 ·
+**Kabul çizgisi:** `data-say` = 0 · `lint-css` temiz · `akis` 19/19 ·
+`hero-kanama` 15/15 · `kontrast` eşik altı yok · `glif` temiz ·
 `vqa` yalnız 2 bilinçli istisna (Ne Pişirsem 240px, § 7).
 
 ---
@@ -129,6 +146,8 @@ node .tools/canli-hero.js      # CANLI modül hero'larını ölçer (referans)
 | **10** | Mutfağa Giriş — **kapsam dışı bırakıldı**, gerekçe § 4.9 | ⛔ |
 | **R1** | **Modül hero'ları** — 15 ekran tek `.mh-` bileşeniyle görselli + sayaçlı, veri canlıdan ölçüldü | ✅ |
 | **R2** | **Dolapta iki katmanlı yapıya döndü** — birincil ikili toggle + dört mod kartı, mod başına ayrı state, 75 gerçek malzeme fotoğrafı | ✅ |
+| **R3** | **Modül hero'ları tam kanama** — 14 ekran + ansiklopedi madde detayı; app bar hero'nun üstünde yüzüyor, scroll'da anında opaklaşıyor | ✅ |
+| **R4** | **Mutfak Ansiklopedisi madde detayı** — 43 madde, içerik canlıdan; her satır kendi maddesini açıyor, madde düzeyinde geri yığını | ✅ |
 
 ---
 
@@ -137,13 +156,14 @@ node .tools/canli-hero.js      # CANLI modül hero'larını ölçer (referans)
 | | Değer | Not |
 |---|---|---|
 | Ekran | **50** | `data-route` taşıyan bölüm sayısı |
+| Ansiklopedi maddesi | **43** | Hepsi ayrı içerik; içerik + görsel canlıdan |
 | `data-say` (**borç**) | **0** | 97'den indi — hedefe ulaşıldı |
-| `data-toast` (gerçek geri bildirim) | 87 | "Bağlantı kopyalandı" gibi; borç değil |
-| `data-open` (çalışan gezinme) | 420 | |
-| DOM düğümü (açılış) | 8.866 | Eşik 6.000'i aştı — § 7 |
-| `index.html` / `app.css` / `app.js` | 348 / 148 / 64 KB | gzip: **61 / 28 / 18 KB** |
-| İlk açılış (gzip'li metin + font + ana sayfa görselleri) | ~800 KB | 12 ekranlıyken 741 KB'ydi |
-| FCP (yerel) | 60 ms | |
+| `data-toast` (gerçek geri bildirim) | 69 | "Bağlantı kopyalandı" gibi; borç değil |
+| DOM düğümü (açılış) | 8.984 | Eşik 6.000'i aştı — § 7 |
+| `index.html` / `app.css` / `app.js` | 355 / 161 / 77 KB | gzip: **62 / 32 / 22 KB** |
+| `js/ansiklopedi.js` | 219 KB | gzip **61 KB** — 43 maddenin tam metni, § 7 |
+| `assets/ans/` | 1,5 MB · 178 dosya | Madde kapağı + küçük görsel + tarif kartı fotoğrafı; hepsi ekran açılınca iniyor |
+| Uçtan uca akış | **19 / 19** | `ansiklopedi` akışı eklendi |
 
 **Borcun anlamı:** `data-say` = "bu butonun ekranı henüz yok". `data-toast` = işlem
 gerçekten oldu, ekran gerekmiyor. İkisi de toast gösterir; ayrım kabul testi içindir.
@@ -300,21 +320,89 @@ girdi; `.sub` yazılmayınca metin `body` rengini miras alıp beyaz kartta gör�
 **Dış sınıfı alıp içini uydurmak da kopya sayılır.** Komponent artık kendini savunuyor:
 `flex:none` (buton), `min-width:0` (metin), ellipsis ve renk ata seçicide tanımlı.
 
-### 4.11 Modül hero'su — tek bileşen (`.mh-`)
+### 4.11 Modül hero'su — tek bileşen (`.mh-`), TAM KANAMA
 
 Canlıdaki modül giriş sayfalarının hero'su **ölçülerek** alındı
-(`node .tools/canli-hero.js`). Formül ana sayfa hero'suyla aynı katman düzeni:
-fotoğraf → perde → grain. Yükseklik kısaltıldı (modül girişi, kapak değil).
+(`node .tools/canli-hero.js`). Perde reçetesi ana sayfa hero'sunun **aynısı**:
+fotoğraf → perde (3 katman) → grain. Modülde tek fark en üstteki app bar
+perdesi: ilk 98 px (status bar + app bar) ek koyulaşma alır, 152 px'te biter.
 
-15 ekran aynı bileşeni parametreyle kullanır — veri tek yerde:
+**Kart değil, tam kanama:** `margin:0` · `border-radius:0` ·
+`padding:104px var(--gutter) 24px`. 104 = status bar 44 + app bar 54 + 6 —
+ölçek dışı ama sistem ölçüsünden türüyor, ana sayfa `.hero`'suyla birebir aynı.
+Görsel **status bar'ın arkasından** başlar, alt kenar keskindir; yumuşak geçiş
+ya da alt radius yok. Görsel tam kanar, **metin gutter'lı** (16 px) — sayaç
+üstündeki ince ayraç da 16 hizasında.
+
+**App bar hero'nun İÇİNDE bir katmandır**, ayrı beyaz şerit yoktur:
+`<header class="vbar overlay mh-bar">`. Tepedeyken zemin şeffaf, başlık ve
+ikon `--on-dark`, ikon butonu **koyu-şeffaf düz zemin** (`rgba(14,12,8,.30)`) —
+beyaz %18 açık fotoğrafta kayboluyordu, cam/blur yasak. `scrollTop > 4`'te
+`bindBar()` `.solid` ekler ve kuralların hepsi düşer: opak `#F9F9F9`, `--ink`
+başlık, normal beyaz buton. **Fade ya da opacity rampası yok** — eşikte anında.
+
+14 ekran aynı bileşeni parametreyle kullanır — veri tek yerde:
 `.tools/mhero.py` içindeki `HERO` sözlüğü. Yeni modül eklerken oraya satır yaz,
-`python3 .tools/mhero.py` çalıştır.
+`python3 .tools/mhero.py` çalıştır; araç hero'yu da bar sınıflarını da basar.
+Ansiklopedi madde detayı da aynı bileşeni `.ans-hero` değiştiricisiyle kullanır.
 
 > **Sayaç satırı yalnız canlıda sayaç olan modüllerde var.** Canlıda yoksa
 > `.mh-stat` hiç basılmaz — boş kutu bırakılmaz. Sayaçsız olanlar:
 > `olcu-birimleri` · `dolapta` · `route` · `sss` (dördü de canlıda sayaçsız).
 
-Ölçülen kontrast (piksel örneklemesiyle, tahmin değil): alt başlık **7,9–8,4:1**.
+> `hakkimizda` bu listede **yok**: ekranın kendi `.ar-hero`'su var, ortasına
+> basılan `mh-hero` aynı başlığı ve aynı sayaçları tekrarlıyordu — silindi.
+
+Ölçülen kontrast (`node .tools/kontrast.js`, piksel örneklemesiyle, tahmin
+değil — metin saydamlaştırılıp **arkasındaki** piksel okunuyor, en kötü nokta
+alınıyor): app bar başlığı **8,1–16,5:1** · eyebrow **7,3–9,6:1** · başlık
+**4,3–12,1:1** · alt başlık **5,0–12,5:1** · sayaç **14,3–17,2:1**.
+Ana sayfanın kendi hero'su aynı bantta (başlık 10,7 · alt başlık 5,6) —
+modül hero'ları onaylanmış hero'dan geri kalmıyor.
+
+### 4.11b Ansiklopedi madde detayı — içerik canlıdan, şablon tek
+
+**ŞABLON EKRAN ≠ BİTMİŞ EKRAN.** Ekran vardı, açılıyordu, ama 24 satırın hepsi
+"Domates"i açıyordu. Artık 43 maddenin her biri kendi içeriğini açıyor.
+
+**İçerik uydurulmadı**, canlı `/mutfak-ansiklopedisi/<slug>` sayfalarından
+çıkarıldı (`.tools/canli-ansiklopedi.py`). Taşınan alanlar: kategori çipi ·
+etiket rozeti · ad · latin ad · 4 satırlık künye · özet · 6–9 bölümlük gövde
+(başlık + paragraf + madde listesi) · SSS · besin değeri · kısa bilgi ·
+ilgili tarifler · ilgili maddeler.
+
+**Kapsam:** 18 madde prototipin A–D listesinden, kalan 25 onların "ilgili
+maddeler" bağlantılarından geldi. Araç ilgilileri **bir seviye kovalıyor**, o
+yüzden hiçbir "ilgili madde" kartı kapsam dışına düşmüyor — 43 maddenin
+tamamının ilgilisi yine 43'ün içinde. Liste A–D'yi açık gösterir, kalan 22
+satır `<template id="encMore">` içinde bekler; "Daha Fazla Madde", A–Z harfi
+ya da arama alanına odaklanmak gerçekten yükler.
+
+**İki liste satırı canlıya göre düzeltildi:** `Arpacık Soğan` → **Arpacık
+Soğanı**, `Domates` → **Salkım Domates**. Canlıda "Domates" diye tek bir madde
+yok; Domatesler kategorisinde 13 ayrı madde var. Uydurma içerik yazmak yerine
+satır gerçek maddeye çevrildi.
+
+**Geri yığını madde düzeyinde.** Router aynı ekranı iki kez itemediği için
+`ansYigin` slug yığını tutuluyor: madde → ilgili madde → **geri = bir önceki
+madde**, listeye düşmüyor. Yığın tükenince normal `pop()` çalışır.
+
+**Yeni komponent az:** hero `.mh-hero` · gövde `.ar-b` · vurgu kutusu
+`.ar-note` · akordeon `.acc` · tarif kartı `.gcard` · bölüm başlığı `.sec-head`
+yeniden kullanıldı. Yalnız `.ans-lt` (latin) · `.ans-tg` (etiket rozeti) ·
+`.ans-ky` (künye) · `.ans-nt` (besin paneli) · `.ans-rc` (ilgili madde kartı)
+yeni yazıldı.
+
+**Bölüm ritmi bilinçli:** koyu hero → açık zemin özet → beyaz künye kartı →
+gövde → tint kısa bilgi → gövde → koyu besin paneli → gövde → beyaz akordeon →
+tarif rayı → ilgili madde rayı. Arka arkaya aynı zemin gelmiyor.
+
+> Canlıda **yeşil** `.tbadge` var; bizde yeşil onay/tamamlandı durum rengi
+> olduğu için etiket rozeti hero'da nötr saydam beyaza çevrildi (§ 4.2).
+
+> Üç tarif kartı ızgarada 2+1 dizilip sağda delik bırakıyordu — yatay raya
+> alındı (`.ans-tr`). Besin değeri sabit 3 kolonda iki değerli maddede boşluk
+> bırakıyordu — esnek sarmaya çevrildi.
 
 ### 4.12 Görsel yükleme
 
@@ -388,8 +476,10 @@ Bunlar sahte değil — akış testleri doğruluyor:
 | Harita yok | Dada Route'ta harita yerine **dikey güzergâh şeridi** var (mobil-yerel, dış servise bağımlı değil). "Haritada gör" cihaz haritasına devreder |
 | Sponsorluk paket fiyatları | Canlıda da yazmıyor ("sabit ücret" / "komisyon bazlı" olarak geçiyor) |
 | Mutfağa Giriş | § 4.9 — canlıda 404, kaldırıldı |
-| **Modül hero'ları kart formatında** | Tam kanama + app bar'ın hero üstünde yüzmesi yapılmadı — § 0 (a) |
-| **Detay ekranları tek şablon** | Ansiklopedi/Sözlük/Püf listelerinin bütün satırları aynı içeriği açıyor — § 0 (b) |
+| **Sözlük ve püf detayı tek şablon** | `sozluk-detay` 18 satırda hep "Al Dente", `puf-detay` hep aynı püf noktası. Ansiklopedideki hat aynen tekrarlanabilir — § 0 |
+| **`js/ansiklopedi.js` 219 KB (gzip 61)** | 43 maddenin tam metni. Ayrı dosya, gövdenin sonunda; ilk boyamayı geciktirmiyor ama küçük değil. 1.200 maddeye çıkılacaksa veri API'den gelmeli, pakete gömülmemeli |
+| **Ansiklopedi 43 / 1.200 madde** | Canlıda 1.200 madde var. Prototip listesi A–Z'yi temsilen 43 madde gösteriyor; sayaç canlıdaki 1.200'ü yazıyor. Kalan maddeler `canli-ansiklopedi.py`'ye slug verilerek eklenebilir |
+| **`acuka` kapağı canlıda şablon** | Canlıdaki görsel "Görsel yakında" yazılı şablon — hero'nun altından okunuyordu, pakette hazır meze fotoğrafıyla değiştirildi (`ansiklopedi-gorsel.py` → `yedek`). Diğer 42 kapak canlının gerçek fotoğrafı |
 
 ---
 
@@ -409,6 +499,11 @@ Bunlar sahte değil — akış testleri doğruluyor:
 | Kart köşesindeki sil butonu yalnız toast gösteriyordu | Fotoğraf, malzeme satırı ve adım silme "çalışmıyor" görünüyordu. `data-rm` ile gerçekten siliyor, `data-add` gerçekten ekliyor. `carpi.js` eylemsiz kapat/sil butonu bırakılmasını engelliyor |
 | `margin-top:auto` 0'a düştü | Auto'yu bir üstteki bloğa ver |
 | Boşluk dolguyla verildi | Kardeş boşluğu **margin** ile (§ 4.7) |
+| `.ans-rc .im` `<span>` yazıldı, `height` yutuldu | Aynı ders ikinci kez: **yapısal öğeye `display` açıkça ver.** Kart görselleri boş çıkmıştı |
+| `hakkimizda`'ya ikinci hero basıldı | Üretici (`mhero.py`) ekranda **zaten hero olup olmadığına bakmıyordu**. Panel yerleştiren araç körlemesine basmasın |
+| `push()` `.on`'a bakıyordu | `pop()` sınıfı 380 ms sonra siliyor; o aralıkta aynı ekranı açmak sessizce düşüyordu. Ölçüt **yığın** olmalı |
+| Kontrast ölçümünde "zemin" diye metnin kendi glifi örneklendi | Metni `visibility:hidden` yapmak perdeyi de siliyordu. Doğrusu: `color:transparent` — katmanlar kalsın, **glifin arkasındaki** piksel okunsun |
+| `rgb()` ↔ `rgba(…,1)` metin karşılaştırması | Geçiş bitmemişse tarayıcı ikinci biçimi döndürüyor; test yanlış kırmızı veriyordu. Renk **sayıya çevrilip** karşılaştırılır |
 
 **Ortak ders:** bu hataların hiçbiri koddan görünmüyordu, hepsi render'a bakınca çıktı.
 Araçlar bunun için var — ama araç da gözün yerine geçmiyor.
@@ -419,7 +514,9 @@ Araçlar bunun için var — ama araç da gözün yerine geçmiyor.
 
 Prototip tarafında iş kalmadı. Sonraki adım **patron onayı**, ardından:
 
-0. **Önce § 0'daki iki açık iş** — hero tam kanama · detay şablonlarının içeriklendirilmesi
+0. **Önce § 0'daki açık iş** — sözlük ve püf detaylarının içeriklendirilmesi
+   (ansiklopedideki hat hazır, aynı üç araçla tekrarlanır)
 1. Flutter'a çevirme (bkz. `CLAUDE.md` § 7) — token'lar ve ölçüler birebir taşınabilir hâlde
-2. Gerçek içerik aktarımı: canlıdaki 2.057 tarif, 591 püf noktası, 1.200 ansiklopedi maddesi
+2. Gerçek içerik aktarımı: canlıdaki 2.057 tarif, 591 püf noktası, 1.200 ansiklopedi maddesi.
+   **Ansiklopedi 43 maddeyle örneklendi**; kalanı pakete gömülmez, API'den gelir
 3. Mutfağa Giriş — canlıda yayına girerse

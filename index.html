@@ -483,11 +483,10 @@
      Mutfak Sırları'nın 5 modülü buranın çocuğu DEĞİL — ana sayfa bölümünde
      ve drawer'daki kendi grubunda yaşıyorlar. -->
 <section class="view root" id="vTips" data-route="puf-noktalari">
-  <header class="vbar"><h2>Püf Noktaları</h2>
+  <header class="vbar overlay mh-bar"><h2>Püf Noktaları</h2>
     <button class="ab-btn" data-drawer="1" aria-label="Menü"><i class="fs i-bars"></i></button>
   </header>
 
-  <section class="sec">
   <div class="mh-hero">
     <div class="mh-bg" data-bg="url('assets/img/1561.webp')"></div>
     <div class="mh-veil"></div><div class="mh-grain"></div>
@@ -496,7 +495,6 @@
     <p>Pilav neden tane tane olur, hamur neden kabarmaz, et neden sertleşir? Şeflerden ve toplulukta denenmiş 591 püf noktası — kategorilere ayrılmış, tek tek açıklanmış.</p>
     <div class="mh-stat"><span><b>591</b>Püf noktası</span><span><b>11</b>Kategori</span><span><b>3,9B</b>Toplam okunma</span></div>
   </div>
-  </section>
 
   <section class="sec">
     <a class="mk-feat" data-open="puf-detay">
@@ -876,7 +874,7 @@
 
 <!-- ==================== DOLAPTA NE VAR ==================== -->
 <section class="view pushed" id="vFridge" data-route="dolapta" data-parent="ana-sayfa" data-bar="#barFridge">
-  <header class="vbar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+  <header class="vbar overlay mh-bar"><button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Dolapta Ne Var?</h2>
     <button class="ab-btn" id="frClear" aria-label="Dolabı sıfırla"><i class="fs i-arrow-rotate-left"></i></button>
   </header>
@@ -1562,19 +1560,12 @@
 <!-- B4+B6 · Kategori dizini — canlıda dünya mutfaklarının ayrı sayfası yok,
      aynı dizinin ikinci sekmesi olarak duruyor -->
 <section class="view pushed" id="vCats" data-route="kategoriler" data-parent="tarifler">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Kategoriler</h2>
     <button class="ab-btn" data-open="arama" aria-label="Ara"><i class="fs i-magnifying-glass"></i></button>
   </header>
 
-  <div data-tabs id="catTabs">
-  <div class="segs">
-    <button class="seg on" data-pane="cpKat">Kategoriler <span class="sg-n">33</span></button>
-    <button class="seg" data-pane="cpMut">Dünya Mutfakları <span class="sg-n">50</span></button>
-  </div>
-
-  <div class="pane on" id="cpKat">
   <div class="mh-hero">
     <div class="mh-bg" data-bg="url('assets/img/1425.webp')"></div>
     <div class="mh-veil"></div><div class="mh-grain"></div>
@@ -1583,6 +1574,13 @@
     <p>Kategoriye, mutfağa, süreye ve beslenme tercihine göre daralt — aradığın sofrayı bul.</p>
     <div class="mh-stat"><span><b>2.057</b>Denenmiş tarif</span><span><b>33</b>Kategori</span><span><b>50</b>Dünya mutfağı</span></div>
   </div>
+  <div data-tabs id="catTabs">
+  <div class="segs">
+    <button class="seg on" data-pane="cpKat">Kategoriler <span class="sg-n">33</span></button>
+    <button class="seg" data-pane="cpMut">Dünya Mutfakları <span class="sg-n">50</span></button>
+  </div>
+
+  <div class="pane on" id="cpKat">
     <div class="kit-lab">Tüm kategoriler</div>
     <div class="kt-grid">
       <a class="kt-t" data-open="kategori"><span class="im" data-bg="url('assets/img/1970.webp')"></span><span class="tx"><b>Sebze</b><span>215 tarif</span></span></a>
@@ -2188,7 +2186,7 @@
 
 <!-- C3 · Mutfak Ansiklopedisi listesi — canlı: 1.200 madde · 26 kategori · A–Z -->
 <section class="view pushed" id="vEnc" data-route="ansiklopedi" data-parent="ana-sayfa">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Mutfak Ansiklopedisi</h2>
   </header>
@@ -2230,120 +2228,114 @@
 
   <div class="azb" style="margin-top:16px"><div class="azb-rail">
     <button class="azl" data-az="A">A</button><button class="azl" data-az="B">B</button><button class="azl" data-az="C">C</button>
-    <button class="azl" data-az="Ç">Ç</button><button class="azl" data-az="D">D</button><button class="azl off" data-az="E">E</button>
-    <button class="azl off" data-az="F">F</button><button class="azl off" data-az="G">G</button><button class="azl off" data-az="Ğ">Ğ</button>
-    <button class="azl off" data-az="H">H</button><button class="azl off" data-az="I">I</button><button class="azl off" data-az="İ">İ</button>
-    <button class="azl off" data-az="J">J</button><button class="azl off" data-az="K">K</button><button class="azl off" data-az="L">L</button>
-    <button class="azl off" data-az="M">M</button><button class="azl off" data-az="N">N</button><button class="azl off" data-az="O">O</button>
-    <button class="azl off" data-az="Ö">Ö</button><button class="azl off" data-az="P">P</button><button class="azl off" data-az="R">R</button>
-    <button class="azl off" data-az="S">S</button><button class="azl off" data-az="Ş">Ş</button><button class="azl off" data-az="T">T</button>
+    <button class="azl" data-az="Ç">Ç</button><button class="azl" data-az="D">D</button><button class="azl" data-az="E">E</button>
+    <button class="azl" data-az="F">F</button><button class="azl off" data-az="G">G</button><button class="azl off" data-az="Ğ">Ğ</button>
+    <button class="azl off" data-az="H">H</button><button class="azl" data-az="I">I</button><button class="azl off" data-az="İ">İ</button>
+    <button class="azl off" data-az="J">J</button><button class="azl" data-az="K">K</button><button class="azl" data-az="L">L</button>
+    <button class="azl" data-az="M">M</button><button class="azl" data-az="N">N</button><button class="azl off" data-az="O">O</button>
+    <button class="azl off" data-az="Ö">Ö</button><button class="azl" data-az="P">P</button><button class="azl off" data-az="R">R</button>
+    <button class="azl" data-az="S">S</button><button class="azl off" data-az="Ş">Ş</button><button class="azl" data-az="T">T</button>
     <button class="azl off" data-az="U">U</button><button class="azl off" data-az="Ü">Ü</button><button class="azl off" data-az="V">V</button>
-    <button class="azl off" data-az="Y">Y</button><button class="azl off" data-az="Z">Z</button></div></div>
+    <button class="azl off" data-az="Y">Y</button><button class="azl" data-az="Z">Z</button></div></div>
 
   <div id="encList">
     <div class="azh" data-azh="A">A</div>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Acuka</b><span>Ceviz, biber salçası ve baharatla yapılan Antakya mezesi</span></span><span class="lr-k">Baharatlar</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Anason</b><span>Rakı ve pastacılıkta kullanılan tatlımsı tohum</span></span><span class="lr-k">Baharatlar</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Ancho Biberi</b><span>Kurutulmuş poblano; yumuşak, tütsülü acılık</span></span><span class="lr-k">Baharatlar</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-apple-whole"></i></span><span class="tx"><b>Avokado</b><span>Yağlı ve kremsi tropik meyve, olgunlukta ezilir</span></span><span class="lr-k">Meyveler</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Arpacık Soğan</b><span>Küçük, tatlı soğan çeşidi; yahni ve turşuda</span></span><span class="lr-k">Sebzeler</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="acuka"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Acuka</b><span>Türk mutfağının acılı biber-ceviz ezmesi</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="anason"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Anason</b><span>Tatlımsı aromalı tohum</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="ancho-biberi"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Ancho Biberi</b><span>Kurutulmuş olgun poblano biberi</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="antep-fistigi"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Antep Fıstığı</b><span>Yeşil kuruyemiş</span></span><span class="lr-k">Kuruyemiş</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="armut"><span class="ic"><i class="fs i-apple-whole"></i></span><span class="tx"><b>Armut</b><span>Sonbahar meyvesi</span></span><span class="lr-k">Meyve</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="arpacik-sogani"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Arpacık Soğanı</b><span>Küçük yumuşak soğan</span></span><span class="lr-k">Sebze</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="avokado"><span class="ic"><i class="fs i-apple-whole"></i></span><span class="tx"><b>Avokado</b><span>Sağlıklı yağ</span></span><span class="lr-k">Meyve</span><i class="fs i-chevron-right go"></i></button>
     <div class="azh" data-azh="B">B</div>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Badem</b><span>Tatlı ve tuzlu tarafta çalışan sert kabuklu</span></span><span class="lr-k">Kuruyemişler</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Bakla</b><span>Taze ya da kuru baklagil; zeytinyağlının klasiği</span></span><span class="lr-k">Bakliyatlar</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Barbunya</b><span>Benekli, etli kuru fasulye</span></span><span class="lr-k">Bakliyatlar</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Beyaz Biber</b><span>Kabuğu alınmış karabiber; açık soslarda leke bırakmaz</span></span><span class="lr-k">Baharatlar</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Brokoli</b><span>Turpgiller; buharda 4 dakikada diri kalır</span></span><span class="lr-k">Sebzeler</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="badem"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Badem</b><span>E vitamini deposu</span></span><span class="lr-k">Kuruyemiş</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="bakla"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Bakla</b><span>İlkbahar sebzesi</span></span><span class="lr-k">Bakliyat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="barbunya"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Barbunya</b><span>Bitkisel protein</span></span><span class="lr-k">Bakliyat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="beyaz-biber"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Beyaz Biber</b><span>Görünmez Baharat</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="beyaz-peynir"><span class="ic"><i class="fs i-cheese"></i></span><span class="tx"><b>Beyaz Peynir</b><span>Kahvaltı klasiği</span></span><span class="lr-k">Peynir</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="brokoli"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Brokoli</b><span>C vitamini deposu</span></span><span class="lr-k">Sebze</span><i class="fs i-chevron-right go"></i></button>
     <div class="azh" data-azh="C">C</div>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Ceviz</b><span>İç ceviz; tatlı, meze ve salatanın yağlı notası</span></span><span class="lr-k">Kuruyemişler</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-cheese"></i></span><span class="tx"><b>Cheddar</b><span>Olgunlaştıkça keskinleşen İngiliz peyniri</span></span><span class="lr-k">Peynirler</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="ceviz"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Ceviz</b><span>Omega-3 kaynağı</span></span><span class="lr-k">Kuruyemiş</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="cheddar"><span class="ic"><i class="fs i-cheese"></i></span><span class="tx"><b>Cheddar</b><span>Yoğun aromalı</span></span><span class="lr-k">Peynir</span><i class="fs i-chevron-right go"></i></button>
     <div class="azh" data-azh="Ç">Ç</div>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Çemen</b><span>Pastırmanın baharat harcı; boy tohumu esaslı</span></span><span class="lr-k">Baharatlar</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-apple-whole"></i></span><span class="tx"><b>Çilek</b><span>İlkbahar meyvesi; reçel ve tatlıda</span></span><span class="lr-k">Meyveler</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Çörek Otu</b><span>Ekmek ve peynirin siyah tohumu</span></span><span class="lr-k">Baharatlar</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="cemen"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Çemen</b><span>Çemen otu tohumlu baharat harcı</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="ceri-domates"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Çeri Domates</b><span>Tatlı ve sulu</span></span><span class="lr-k">Domates</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="cilek"><span class="ic"><i class="fs i-apple-whole"></i></span><span class="tx"><b>Çilek</b><span>C vitamini deposu</span></span><span class="lr-k">Meyve</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="corek-otu"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Çörek Otu</b><span>Simit Süsü</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
     <div class="azh" data-azh="D">D</div>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Defne Yaprağı</b><span>Haşlama ve sosların arka plan kokusu</span></span><span class="lr-k">Otlar</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Dereotu</b><span>Zeytinyağlının vazgeçilmezi; ısıyla uçar, sona ekle</span></span><span class="lr-k">Otlar</span><i class="fs i-chevron-right go"></i></button>
-    <button class="lrow lr-two ic-lead" data-open="ansiklopedi-detay"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Domates</b><span>Sos, salata, dolma — mutfağın en çok geçen malzemesi</span></span><span class="lr-k">Domatesler</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="defne-yapragi"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Defne Yaprağı</b><span>Yemeklerin Klasiği</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="dereotu"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Dereotu</b><span>İnce, tüylü yeşillik</span></span><span class="lr-k">Ot</span><i class="fs i-chevron-right go"></i></button>
   </div>
 
-  <div class="loadmore"><button class="btn ghost block" data-toast="40 madde daha yüklendi">Daha Fazla Madde <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button></div>
+  <template id="encMore">
+    <div class="azh" data-azh="E">E</div>
+    <button class="lrow lr-two ic-lead" data-ans="elma"><span class="ic"><i class="fs i-apple-whole"></i></span><span class="tx"><b>Elma</b><span>Lif kaynağı</span></span><span class="lr-k">Meyve</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="enginar"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Enginar</b><span>Lif kaynağı</span></span><span class="lr-k">Sebze</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="F">F</div>
+    <button class="lrow lr-two ic-lead" data-ans="feslegen"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Fesleğen</b><span>İtalyan mutfağının imzası</span></span><span class="lr-k">Ot</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="findik"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Fındık</b><span>E vitamini deposu</span></span><span class="lr-k">Kuruyemiş</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="I">I</div>
+    <button class="lrow lr-two ic-lead" data-ans="ispanak"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Ispanak</b><span>Demir kaynağı</span></span><span class="lr-k">Sebze</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="K">K</div>
+    <button class="lrow lr-two ic-lead" data-ans="kabak"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Kabak</b><span>Yaz sebzesi</span></span><span class="lr-k">Sebze</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="karabiber"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Karabiber</b><span>Baharatların kralı</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="kasar-peyniri"><span class="ic"><i class="fs i-cheese"></i></span><span class="tx"><b>Kaşar Peyniri</b><span>Eritmelik sert peynir</span></span><span class="lr-k">Peynir</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="kinoa"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Kinoa</b><span>Tam protein</span></span><span class="lr-k">Bakliyat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="kirmizi-mercimek"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Kırmızı Mercimek</b><span>Hızlı pişen bakliyat</span></span><span class="lr-k">Bakliyat</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="kurutulmus-domates"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Kurutulmuş Domates</b><span>Yoğun aroma</span></span><span class="lr-k">Domates</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="L">L</div>
+    <button class="lrow lr-two ic-lead" data-ans="lor-peyniri"><span class="ic"><i class="fs i-cheese"></i></span><span class="tx"><b>Lor Peyniri</b><span>Hafif ve proteinli</span></span><span class="lr-k">Peynir</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="M">M</div>
+    <button class="lrow lr-two ic-lead" data-ans="maydanoz"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Maydanoz</b><span>Vitamin K deposu</span></span><span class="lr-k">Ot</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="N">N</div>
+    <button class="lrow lr-two ic-lead" data-ans="nane"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Nane</b><span>Serinletici aroma</span></span><span class="lr-k">Ot</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="nohut"><span class="ic"><i class="fs i-seedling"></i></span><span class="tx"><b>Nohut</b><span>Bitkisel protein</span></span><span class="lr-k">Bakliyat</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="P">P</div>
+    <button class="lrow lr-two ic-lead" data-ans="pembe-domates"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Pembe Domates</b><span>Etli sofralık domates</span></span><span class="lr-k">Domates</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="pirasa"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Pırasa</b><span>Kış sebzesi</span></span><span class="lr-k">Sebze</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="pul-biber"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Pul Biber</b><span>Acı-tatlı katman</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="S">S</div>
+    <button class="lrow lr-two ic-lead" data-ans="salkim-domates"><span class="ic"><i class="fs i-carrot"></i></span><span class="tx"><b>Salkım Domates</b><span>Dalında olgunlaşan domates</span></span><span class="lr-k">Domates</span><i class="fs i-chevron-right go"></i></button>
+    <button class="lrow lr-two ic-lead" data-ans="sumak"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Sumak</b><span>Ekşi baharat</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="T">T</div>
+    <button class="lrow lr-two ic-lead" data-ans="tulum-peyniri"><span class="ic"><i class="fs i-cheese"></i></span><span class="tx"><b>Tulum Peyniri</b><span>Yöresel lezzet</span></span><span class="lr-k">Peynir</span><i class="fs i-chevron-right go"></i></button>
+    <div class="azh" data-azh="Z">Z</div>
+    <button class="lrow lr-two ic-lead" data-ans="zencefil"><span class="ic"><i class="fs i-mortar-pestle"></i></span><span class="tx"><b>Zencefil</b><span>Aromatik kök</span></span><span class="lr-k">Baharat</span><i class="fs i-chevron-right go"></i></button>
+  </template>
+  <div class="loadmore"><button class="btn ghost block" id="encMoreBtn">Daha Fazla Madde <i class="fs i-chevron-right" style="transform:rotate(90deg)"></i></button></div>
   <div class="vw-pad"></div>
 </section>
 
 
 <!-- C4 · Ansiklopedi madde detay -->
 <section class="view pushed" id="vEncDet" data-route="ansiklopedi-detay" data-parent="ansiklopedi" data-bar="#barArt2">
-  <header class="vbar overlay">
-    <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
-    <span class="vtitle">Domates</span>
+  <header class="vbar overlay mh-bar">
+    <button class="ab-btn" data-ans-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
+    <span class="vtitle" id="ansTitle">Madde</span>
     <button class="ab-btn save" aria-label="Kaydet"><i class="fr i-heart"></i></button>
     <button class="ab-btn" data-bsheet="shrSheet" aria-label="Paylaş"><i class="fs i-share-nodes"></i></button>
   </header>
 
-  <div class="ar-hero" data-bg="url('assets/img/1738.webp')"><span class="ar-k">Domatesler</span></div>
-  <div class="ar-title"><h1>Domates</h1></div>
-  <div class="ar-meta">
-    <span><i class="fs i-eye"></i> 412.900 okunma</span>
-    <span><i class="fs i-bowl-food"></i> 215 tarifte geçiyor</span>
-    <span><i class="fs i-seedling"></i> Mevsimi: Temmuz–Eylül</span>
+  <!-- Hero · künye · gövde · SSS · tarifler · ilgili maddeler:
+       hepsi window.ANS[slug] kaydından doldurulur (js/ansiklopedi.js).
+       Kaynak canlı /mutfak-ansiklopedisi/<slug> sayfaları. -->
+  <div class="mh-hero ans-hero">
+    <div class="mh-bg" id="ansBg"></div>
+    <div class="mh-veil"></div><div class="mh-grain"></div>
+    <span class="mh-eyebrow" id="ansKat">Kategori</span>
+    <h2 id="ansAd">Madde</h2>
+    <span class="ans-lt" id="ansLt"></span>
+    <span class="ans-tg" id="ansTg"></span>
   </div>
 
-  <div style="height:24px"></div>
-  <div class="ar-b">
-    <h3>Nedir?</h3>
-    <p>Patlıcangillerden, botanik olarak meyve sayılan ama mutfakta sebze gibi kullanılan bir bitkidir. Türkiye mutfağında sos, salata, dolma ve kavurmanın omurgasını kurar.</p>
-    <h3>Ne işe yarar?</h3>
-    <p>Yemeğe asit, tatlılık ve <b>umami</b> aynı anda verir. Pişirdikçe suyunu bırakır, şekeri yoğunlaşır; bu yüzden salça ve konsantre soslarda tat taşıyıcı olarak kullanılır.</p>
-    <ul>
-      <li><b>Salatalık domates</b> — diri, az sulu; kesince dağılmaz.</li>
-      <li><b>Sos domatesi</b> — etli, az çekirdekli; uzun pişirmeye dayanır.</li>
-      <li><b>Kiraz domates</b> — kabuğu ince, şekeri yüksek; fırında patlatılır.</li>
-    </ul>
-    <h3>Faydaları</h3>
-    <p>Likopen, C vitamini ve potasyum bakımından zengindir. Likopen <b>ısıyla ve yağla birlikte</b> daha iyi emilir — zeytinyağında kavrulmuş domates, çiğ domatesten daha çok likopen verir.</p>
-    <h3>Nasıl seçilir ve saklanır?</h3>
-    <p>Sapı yeşil ve diri olanı seç; ele ağır gelmeli. <b>Buzdolabında saklama</b> — soğuk aromayı öldürür, unlu bir doku bırakır. Tezgâhta, sap tarafı aşağıda ve tek sıra halinde dursun.</p>
-  </div>
-
-  <div class="ar-note">
-    <span class="ar-k"><i class="fs i-lightbulb"></i> Mutfak notu</span>
-    <p>Kabuğunu kolay soymak için tepesine çarpı çiz, 30 saniye kaynar suya at, buzlu suya al. Kabuk kendiliğinden ayrılır.</p>
-  </div>
-
-  <div class="sec">
-    <div class="sec-head"><div><span class="eyebrow">Nerede kullanılır</span><h2>Domatesli tarifler</h2></div>
-      <a class="see-all" data-open="kategori">215 tarif <i class="fs i-arrow-right"></i></a></div>
-    <div class="ggrid" style="padding-top:0">
-      <a class="gcard" data-open="tarif-detay">
-        <div class="im" data-bg="url('assets/img/1738.webp')"><span class="tchip"><i class="fs i-clock"></i> 25 dk</span></div>
-        <div class="bd"><h4>Domates Sosu — Temel</h4><div class="gsub"><span>6 kişilik</span><span class="pr"><b>₺</b><span>₺</span><span>₺</span></span></div>
-          <div class="gchef"><span class="av" style="background:var(--tomato)">AB</span><b>Arda Bozkurt</b></div>
-          <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,9</span><span class="dif">Çok Kolay</span></div></div>
-      </a>
-      <a class="gcard" data-open="tarif-detay">
-        <div class="im" data-bg="url('assets/img/1970.webp')"><span class="tchip"><i class="fs i-clock"></i> 15 dk</span></div>
-        <div class="bd"><h4>Çoban Salata</h4><div class="gsub"><span>4 kişilik</span><span class="pr"><b>₺</b><span>₺</span><span>₺</span></span></div>
-          <div class="gchef"><span class="av" style="background:var(--ink)">AT</span><b>Ayşe Tülin</b></div>
-          <div class="gstat"><span class="rate"><i class="fs i-star"></i> 4,7</span><span class="dif">Çok Kolay</span></div></div>
-      </a>
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="sec-head"><div><span class="eyebrow">İlgili maddeler</span><h2>Yanına ne gider?</h2></div></div>
-    <div class="rail">
-      <span class="chip" data-open="ansiklopedi-detay">Sarımsak</span><span class="chip" data-open="ansiklopedi-detay">Fesleğen</span>
-      <span class="chip" data-open="ansiklopedi-detay">Zeytinyağı</span><span class="chip" data-open="ansiklopedi-detay">Beyaz Peynir</span>
-      <span class="chip" data-open="ansiklopedi-detay">Kekik</span><span class="chip" data-open="ansiklopedi-detay">Soğan</span>
-    </div>
-  </div>
+  <div id="ansGovde"></div>
   <div class="vw-pad vw-bar"></div>
 </section>
 
 
 <!-- C5 · Mutfak Sözlüğü — canlı: 765 terim · 20 kategori. Ansiklopediden AYRI ekran -->
 <section class="view pushed" id="vGloss" data-route="sozluk" data-parent="ana-sayfa">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Mutfak Sözlüğü</h2>
   </header>
@@ -2471,7 +2463,7 @@
 
 <!-- C7 · Ölçü Birimleri — canlı 4 sekme. Dönüştürücü gerçekten çeviriyor. -->
 <section class="view pushed" id="vUnits" data-route="olcu-birimleri" data-parent="ana-sayfa">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Ölçü Birimleri</h2>
   </header>
@@ -2618,7 +2610,7 @@
 
 <!-- C8 · Sofra Düzeni listesi — canlı: 11 kategori · 61 ipucu -->
 <section class="view pushed" id="vTable" data-route="sofra-duzeni" data-parent="ana-sayfa">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Sofra Düzeni</h2>
   </header>
@@ -2729,7 +2721,7 @@
 
 <!-- C10 · Video Mutfağı listesi — canlı: 33 video · 4 seri · 4,4Mn izlenme -->
 <section class="view pushed" id="vVideo" data-route="video-mutfagi" data-parent="ana-sayfa">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Video Mutfağı</h2>
     <button class="ab-btn" data-open="arama" aria-label="Ara"><i class="fs i-magnifying-glass"></i></button>
@@ -2913,7 +2905,7 @@
 
 <!-- C12 · Video serileri listesi -->
 <section class="view pushed" id="vSeries" data-route="video-seriler" data-parent="video-mutfagi">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Video Serileri</h2>
   </header>
@@ -3025,7 +3017,7 @@
 
 <!-- D1 · Rota planlayıcı — canlı /yol-guzergahim -->
 <section class="view pushed" id="vRoute" data-route="route" data-parent="ana-sayfa" data-bar="#barRoute">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Dada Route</h2>
   </header>
@@ -3228,7 +3220,7 @@
 
 <!-- E1 · Şefler — canlı /sefler: 265 üye · 2.057 tarif · 3,9 ortalama puan -->
 <section class="view pushed" id="vChefs" data-route="sefler" data-parent="ana-sayfa">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Şefler</h2>
   </header>
@@ -3456,7 +3448,7 @@
 
 <!-- E5 · Rozetlerim -->
 <section class="view pushed" id="vBadges" data-route="rozetlerim" data-parent="hesap">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Rozetlerim</h2>
   </header>
@@ -4131,16 +4123,7 @@
       Sponsorlu içerik her zaman “Sponsorlu” etiketiyle işaretlenir — gizli reklam yapmayız.</p>
   </div>
 
-  <div class="mh-hero">
-    <div class="mh-bg" data-bg="url('assets/img/1414.webp')"></div>
-    <div class="mh-veil"></div><div class="mh-grain"></div>
-    <span class="mh-eyebrow">Hakkımızda</span>
-    <h2>Yaşasın Yemek Yemek!</h2>
-    <p>2019’da bir mutfak defterini dijitale taşımakla başladık. Bugün her tarif en az bir kişi tarafından pişirilmiş, puanlanmış ve yorumlanmış.</p>
-    <div class="mh-stat"><span><b>2019</b>Kuruluş yılı</span><span><b>2,1B</b>Denenmiş tarif</span><span><b>266</b>Kayıtlı üye</span></div>
-  </div>
-
-  <div class="sec">
+    <div class="sec">
     <div class="sec-head"><div><span class="eyebrow">Mutfağın arkasındakiler</span><h2>Ekip</h2></div>
       <a class="see-all" data-open="sefler">Şefler <i class="fs i-arrow-right"></i></a></div>
     <button class="lrow av-lead" data-open="sef-profil"><span class="av" style="background:var(--tomato)">ŞY</span>
@@ -4173,7 +4156,7 @@
 
 <!-- G2 · SSS — canlı /sss: 5 kategori, 16 soru -->
 <section class="view pushed" id="vFaq" data-route="sss" data-parent="hesap">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>Sık Sorulan Sorular</h2>
   </header>
@@ -4258,7 +4241,7 @@
 
 <!-- G3 · İletişim -->
 <section class="view pushed" id="vContact" data-route="iletisim" data-parent="hesap" data-bar="#barContact">
-  <header class="vbar">
+  <header class="vbar overlay mh-bar">
     <button class="ab-btn" data-back aria-label="Geri"><i class="fs i-chevron-left"></i></button>
     <h2>İletişim</h2>
   </header>
@@ -4816,6 +4799,7 @@
   </div>
 </div>
 
+<script src="js/ansiklopedi.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

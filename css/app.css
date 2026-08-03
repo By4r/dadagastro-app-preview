@@ -980,7 +980,7 @@ table.t tr:last-child td{border-bottom:0}
 .psaved .ph{height:104px;border-radius:var(--r-md);background-size:cover;background-position:center}
 .psaved b{display:block;font-family:"Gilroy";font-weight:500;font-size:11px;color:var(--ink-2);margin-top:7px;line-height:1.3}
 
-.vbar.overlay:not(.solid) h2{color:#FFF}
+.vbar.overlay:not(.solid) h2{color:var(--on-dark)}
 .vbar.overlay:not(.solid) .ab-btn{background:rgba(255,255,255,.18);color:#FFF;box-shadow:none}
 
 /* ============================================================
@@ -1055,7 +1055,7 @@ table.t tr:last-child td{border-bottom:0}
   .statusbar b,.statusbar .sb-r{display:none}
   .vbar{top:max(20px, env(safe-area-inset-top));margin-top:max(20px, env(safe-area-inset-top))}
   .vbar.overlay{margin-bottom:calc((max(20px, env(safe-area-inset-top)) + var(--appbar-h)) * -1)}
-  .hero{padding-top:calc(max(20px, env(safe-area-inset-top)) + var(--appbar-h) + 6px)}
+  .hero,.mh-hero{padding-top:calc(max(20px, env(safe-area-inset-top)) + var(--appbar-h) + 6px)}
   .rd-hero{height:330px}
   .lsearch,.filterbar,.rdtabs{top:calc(max(20px, env(safe-area-inset-top)) + var(--appbar-h))}
   .wz-bar{top:max(20px, env(safe-area-inset-top));margin-top:max(20px, env(safe-area-inset-top))}
@@ -1086,6 +1086,16 @@ table.t tr:last-child td{border-bottom:0}
 .vbar.overlay:not(.solid) .ab-brand .lm{display:none}
 .vbar.overlay:not(.solid) .ab-brand .lw{display:block}
 .ab-brand{display:flex;align-items:center;gap:8px;margin-right:auto}
+
+/* .mh-bar — modül hero'sunun ÜSTÜNDE yüzen app bar (ayrı beyaz şerit YOK).
+   Tepedeyken: zemin şeffaf, başlık ve ikon --on-dark, ikon butonu koyu-şeffaf
+   DÜZ zemin (cam/blur değil) — beyaz %18 açık fotoğrafta kayboluyordu.
+   scroll > 4px → bindBar bara .solid ekler, aşağıdaki kuralların hepsi düşer:
+   bar opak #F9F9F9, başlık --ink, buton normal beyaz zemin. Fade/rampa yok. */
+.vbar.overlay.mh-bar:not(.solid) h2{color:var(--on-dark)}
+.vbar.overlay.mh-bar:not(.solid) .ab-btn,
+.vbar.overlay.mh-bar:not(.solid) .save{background:rgba(14,12,8,.30);color:var(--on-dark);box-shadow:none}
+.vbar.overlay.mh-bar:not(.solid) .save.on{background:var(--tomato);color:#FFF}
 
 /* sabit çubuklar EKRAN katmanında — Safari'de transform'lu ata içinde position:fixed bozuluyor */
 .actionbar,.cook-nav,.wz-foot{
@@ -1337,6 +1347,13 @@ table.t tr:last-child td{border-bottom:0}
 .i-circle-question:before{content:"\f059"}
 .i-wifi:before{content:"\f1eb"}
 .i-compass:before{content:"\f14e"}
+
+/* ---- Ansiklopedi künyesi + kısa bilgi kutusunun glifleri ----
+   YENİ GLİF EKLEDİYSEN alt kümeyi yenile (CLAUDE.md § FontAwesome), yoksa görünmez */
+.i-box-archive:before{content:"\f187"}
+.i-leaf:before{content:"\f06c"}
+.i-snowflake:before{content:"\f2dc"}
+.i-jar:before{content:"\e516"}
 
 /* ---- Faz 1'in ihtiyaç duyduğu ek FA6 glifleri ---- */
 .i-lightbulb:before{content:"\f0eb"}
@@ -2368,7 +2385,15 @@ table.t tr:last-child td{border-bottom:0}
    katman düzeni: fotoğraf → perde → grain. Yeni overlay uydurulmadı,
    yalnız yükseklik kısaltıldı (modül girişi, kapak değil).
 
+   TAM KANAMA — ana sayfadaki .hero ile aynı davranış:
+   · sol/sağ kenara sıfır, üst köşe yarıçapı 0, alt kenar keskin
+   · görsel status bar'ın ve app bar'ın ARKASINDAN başlar
+   · app bar hero'nun İÇİNDE yüzer: <header class="vbar overlay mh-bar">
+     tepedeyken şeffaf + --on-dark, scroll > 4px olunca anında opak
+     (mekanizma js/app.js → bindBar; yeni bir şey yazılmadı)
+
    Kullanım — her ekran aynı iskeleti parametreyle doldurur:
+     <header class="vbar overlay mh-bar">…</header>
      <div class="mh-hero">
        <div class="mh-bg" data-bg="url('assets/img/1561.webp')"></div>
        <div class="mh-veil"></div><div class="mh-grain"></div>
@@ -2378,16 +2403,20 @@ table.t tr:last-child td{border-bottom:0}
        <div class="mh-stat"><span><b>591</b>Püf noktası</span>…</div>   ← canlıda sayaç yoksa HİÇ konmaz
      </div>
    ============================================================ */
+/* padding-top 104 = status bar 44 + app bar 54 + 6 — ana sayfa .hero'suyla
+   birebir aynı değer, ölçek dışı ama sistem ölçüsünden türüyor */
 .mh-hero{position:relative;overflow:hidden;isolation:isolate;background:var(--ink);
-  margin:16px var(--gutter) 0;border-radius:var(--r-xl);padding:22px 18px}
+  margin:0;border-radius:0;padding:104px var(--gutter) 24px}
 .mh-bg{position:absolute;inset:0;background-size:cover;background-position:center 42%;z-index:-3}
-/* ana sayfadaki .hero-veil reçetesinin modül varyantı: aynı üç katman,
-   metin bloğu daha kısa olduğu için dikey geçiş biraz sıkılaştırıldı */
+/* ana sayfadaki .hero-veil reçetesinin AYNISI — üç katman birebir.
+   Tek fark en üstteki app bar perdesi: başlık ve ikonlar artık fotoğrafın
+   üstünde durduğu için ilk 98px (status bar + app bar) ek koyulaşma alır. */
 .mh-veil{position:absolute;inset:0;z-index:-2;
   background:
-    radial-gradient(120% 120% at 100% 100%, rgba(225,72,39,.28) 0%, rgba(225,72,39,.11) 26%, rgba(225,72,39,0) 56%),
-    linear-gradient(90deg,  rgba(28,25,18,.93) 0%, rgba(31,28,20,.84) 40%, rgba(33,30,22,.62) 74%, rgba(33,30,22,.50) 100%),
-    linear-gradient(180deg, rgba(33,30,22,.42) 0%, rgba(20,18,12,.26) 46%, rgba(20,18,12,.70) 100%)}
+    linear-gradient(180deg, rgba(18,16,11,.44) 0, rgba(18,16,11,.16) 98px, rgba(18,16,11,0) 152px),
+    radial-gradient(120% 120% at 100% 100%, rgba(225,72,39,.30) 0%, rgba(225,72,39,.12) 26%, rgba(225,72,39,0) 56%),
+    linear-gradient(90deg,  rgba(28,25,18,.92) 0%, rgba(31,28,20,.80) 38%, rgba(33,30,22,.55) 70%, rgba(33,30,22,.42) 100%),
+    linear-gradient(180deg, rgba(33,30,22,.45) 0%, rgba(20,18,12,.20) 45%, rgba(20,18,12,.72) 100%)}
 .mh-grain{position:absolute;inset:0;z-index:-1;opacity:.5;mix-blend-mode:overlay;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E")}
 .mh-eyebrow{display:inline-flex;align-items:center;gap:7px;font-family:"GilroyXB";font-size:10px;
@@ -2454,3 +2483,96 @@ table.t tr:last-child td{border-bottom:0}
 .mz-grid{grid-template-columns:repeat(3,1fr);gap:9px}
 .mz{padding:9px 5px 8px}
 .mz-t{font-size:10.5px;margin-top:7px}
+
+
+/* ============================================================
+   .ans-  MUTFAK ANSİKLOPEDİSİ · MADDE DETAYI
+   Canlı /mutfak-ansiklopedisi/<slug> sayfasının mobil karşılığı.
+   Ekran ŞABLON: içerik window.ANS[slug] kaydından doldurulur, her liste
+   satırı kendi maddesini açar. Ortak komponentler yeniden kullanıldı —
+   hero .mh-hero · gövde .ar-b · vurgu kutusu .ar-note · akordeon .acc ·
+   tarif kartı .gcard · bölüm başlığı .sec-head. Yenisi yalnız aşağıdakiler.
+
+   Bölüm ritmi bilinçli: koyu hero → açık zemin özet → beyaz künye kartı →
+   gövde → tint kısa bilgi → gövde → koyu besin paneli → gövde → beyaz
+   akordeon → tarif rayı → ilgili madde rayı. Arka arkaya aynı zemin yok.
+   ============================================================ */
+.ans-hero h2{font-size:28px;line-height:1.10;letter-spacing:-.03em}
+/* latin ad — canlıdaki .latin; maddede yoksa hiç basılmaz (boş satır kalmasın) */
+.ans-lt{display:block;margin-top:7px;font-family:"GilroyLt";font-weight:300;font-style:italic;
+  font-size:13px;color:var(--on-dark);opacity:.72}
+.ans-lt:empty{display:none}
+/* canlıdaki yeşil .tbadge — yeşil bizde durum rengi, hero'da nötr saydam beyaz */
+.ans-tg{display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding:8px 12px;
+  border-radius:var(--r-sm);background:rgba(255,255,255,.15);
+  font-family:"GilroyXB";font-size:11px;line-height:1.25;color:var(--on-dark)}
+.ans-tg:empty{display:none}
+.ans-tg i{font-size:11px;color:#FFB9A5}
+
+/* özet — hero'nun hemen altı, gövdeye giriş */
+.ans-lead{margin:20px var(--gutter) 0;font-family:"GilroyLt";font-weight:300;font-size:14.5px;
+  line-height:1.62;color:var(--ink-2)}
+
+/* künye kartı — canlıdaki .kc-card (Kategori · Mevsim · Kalori · Saklama) */
+.ans-ky{margin:20px var(--gutter) 0;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--r-lg);box-shadow:var(--sh-sm);padding:12px}
+.ans-kr{display:flex;align-items:flex-start;gap:12px;padding:10px 0}
+.ans-kr+.ans-kr{border-top:1px solid var(--line)}
+.ans-kr:first-child{padding-top:0}
+.ans-kr:last-child{padding-bottom:0}
+.ans-kr>.ic{flex:none;width:32px;height:32px;border-radius:var(--r-md);display:grid;place-items:center;
+  background:var(--tomato-tint);color:var(--tomato);font-size:13px}
+.ans-kr>.tx{flex:1;min-width:0;display:block}
+.ans-kr>.tx>span{display:block;font-family:"GilroyLt";font-weight:300;font-size:11px;
+  letter-spacing:.02em;color:var(--muted)}
+.ans-kr>.tx>b{display:block;margin-top:4px;font-family:"GilroyXB";font-size:13.5px;line-height:1.35;
+  color:var(--ink)}
+.ans-kr>.tx>i{display:block;margin-top:4px;font-style:normal;font-family:"GilroyLt";font-weight:300;
+  font-size:11px;line-height:1.45;color:var(--muted)}
+
+/* kısa bilgi — .ar-note tint kutusunun satırlı varyantı */
+.ans-qr{display:flex;align-items:flex-start;gap:10px;margin-top:12px}
+.ans-qr>.ic{flex:none;width:28px;height:28px;border-radius:var(--r-md);display:grid;place-items:center;
+  background:#FFF;color:var(--tomato);font-size:12px}
+.ans-qr>.tx{flex:1;min-width:0;display:block}
+.ans-qr>.tx>b{display:block;font-family:"GilroyXB";font-size:13px;line-height:1.3;color:var(--ink)}
+.ans-qr>.tx>span{display:block;margin-top:4px;font-family:"GilroyLt";font-weight:300;font-size:12px;
+  line-height:1.45;color:var(--ink-2)}
+
+/* besin değeri — koyu panel, ritmi kırar */
+.ans-nt{margin:24px var(--gutter) 0;padding:16px;background:var(--ink);border-radius:var(--r-lg)}
+.ans-nt .ar-k{display:inline-flex;align-items:center;gap:7px;font-family:"GilroyXB";font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:#FF8763}
+.ans-nb{display:block;margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:11.5px;
+  line-height:1.45;color:var(--on-dark);opacity:.62}
+/* ızgara değil esnek: maddeye göre 2–6 değer geliyor, sabit 3 kolonda
+   iki değerli maddede sağda kocaman boşluk kalıyordu */
+.ans-ng{display:flex;flex-wrap:wrap;gap:16px 12px;margin-top:16px;padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.16)}
+.ans-ng span{flex:1 1 26%;min-width:0;font-family:"GilroyLt";font-weight:300;font-size:10.5px;
+  line-height:1.35;color:var(--on-dark);opacity:.72}
+.ans-ng span b{display:block;font-family:"GilroyXB";font-weight:800;font-size:16px;color:#FFF;
+  letter-spacing:-.02em;margin-bottom:5px;opacity:1}
+
+/* ilgili tarifler — üç kart yan yana sığmaz, ray olur (ızgarada tek kart boşta kalıyordu) */
+.ans-tr{padding-top:0}
+.ans-tr .gcard{width:236px}
+
+/* ilgili maddeler — canlıdaki .disc-card */
+.ans-rr{padding-top:0}
+.ans-rc{width:186px;display:block;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--r-lg);box-shadow:var(--sh-sm);overflow:hidden}
+/* .im ve .bd <span> — inline öğede height yutuluyor, display açıkça veriliyor */
+.ans-rc .im{display:block;height:104px;background-size:cover;background-position:center;
+  background-color:var(--line)}
+.ans-rc .bd{display:block;padding:12px}
+.ans-rc .k{display:block;font-family:"GilroyXB";font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--tomato)}
+.ans-rc h4{margin-top:7px;font-size:14.5px;line-height:1.3;color:var(--ink)}
+.ans-rc p{margin-top:8px;font-family:"GilroyLt";font-weight:300;font-size:11.5px;line-height:1.45;
+  color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* madde değişince içerik kısa bir belirmeyle gelir — ilgili maddeden ilgili
+   maddeye geçerken ekran yerinde duruyor, değiştiği anlaşılsın */
+.ans-in{animation:ansIn .26s var(--ease) both}
+@keyframes ansIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
