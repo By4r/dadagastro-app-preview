@@ -356,10 +356,36 @@ Kapsayıcıda `.x span{display:block}` gibi bir kural varsa avatarın `display:g
 baş harfler dairenin dışına kaçıyor. Her kapsayıcıda avatar kuralını **açıkça** sabitle.
 Bu bug tek projede 5 farklı yerde çıktı.
 
-### ⚠️ Sınıf adı çakışması
+### ⚠️ SINIF ADI SÖZLEŞMESİ — çakışma dört kez çıktı, beşinci olmayacak
 
-`.sec` gibi genel adlar bölüm aralığı kurallarıyla çakışıyor. Komponent sınıflarına **önek ver**
-(`pa-prim`, `gcard`, `rd-hero` gibi).
+Çakışan dördü: `.sec` (bölüm aralığı) · `.ig-group` (malzeme grubu) · `.gmeta` ·
+`.in` (**router durum sınıfı** — `.view.pushed.in`). Dördü de **yeni bir komponentin,
+zaten anlamı olan bir adı ikinci kez kullanması**yla oldu.
+
+**Kural:** yeni bir komponent sınıfı CSS'te **tek başına seçici** olarak yazılacaksa
+**2–3 harfli komponent öneki** taşır.
+
+| | |
+|---|---|
+| ✅ Doğru | `.sr-head` `.ra-st` `.fm-in` `.kt-grid` `.rv-bars` `.ar-note` |
+| 🚫 Yasak | `.in` `.x` `.bd` `.row` `.card` `.form` `.chk` — tek/iki harfli ya da genel ad |
+| 🚫 Yasak | Router/durum sözlüğü: `on · in · behind · top · done · off · solid · show · run · one · stacked · fin · new` |
+| ✅ Serbest | Önekli bir atanın **altında** scope'lanmış yardımcı ad: `.ra-st .hd`, `.lrow .tx` |
+
+Önek komponentin kısaltmasıdır: `sr-` arama · `ra-` tarif ekle · `fm-` form ·
+`kt-` kategori kutucuğu · `rv-` yorumlar · `rw-` yorum yaz · `ar-` makale ·
+`cv-` dönüştürücü · `sd-` sofra düzeni · `vw-` ekran iskeleti.
+
+**Denetim zorunlu:**
+
+```bash
+node .tools/lint-css.js          # yeni tek başına seçicileri denetler
+node .tools/lint-css.js --kaydet # onaylanan sınıfları grandfathered listeye al
+```
+
+Mevcut 347 sınıf (`.btn` `.chip` `.lrow` `.sec` …) **onaylanmış tasarım sistemidir**,
+grandfathered listede duruyor — dokunulmuyor. Denetim yalnız **yeni** eklenenleri yakalar.
+Kırmızı dönerse commit etme, önce öneki ver.
 
 ### ⚠️ Yatay ray hizalaması
 
